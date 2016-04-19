@@ -1,0 +1,17 @@
+ul {
+  padding: 0;
+}
+li {
+  padding: 15px ;
+  display: inline-block;
+}
+body > li {
+  width: 100%;
+}
+body {
+  padding: 15px;
+  text-align: center;
+}
+#map {
+  height: 500px;
+}
