@@ -1,0 +1,24 @@
+.cf:after,
+.cf:before {
+  content: '';
+  display: table;
+}
+.cf:after {
+  clear: both;
+}
+.cf {
+  zoom: 1;
+}
+.fl-l {
+  float: left;
+}
+body {
+  overflow: hidden;
+}
+.app {
+  font-size: 0;
+  height: 100vh;
+}
+#map {
+  height: 100vh;
+}

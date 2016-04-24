@@ -1,0 +1,16 @@
+.ponch__link_icon-b:before {
+  content: '';
+  background: url(../img/ponch-icon.png);
+  display: inline-block;
+  vertical-align: bottom;
+  width: 10px;
+  height: 10px;
+}
+.ponch__link_icon-b:before {
+  content: '';
+  background: url(../img/ponch-edit.png);
+  display: inline-block;
+  vertical-align: bottom;
+  width: 10px;
+  height: 10px;
+}

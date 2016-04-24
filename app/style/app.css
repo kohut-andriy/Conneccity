@@ -1,17 +1,59 @@
-ul {
-  padding: 0;
+.cf:after,
+.cf:before {
+  content: '';
+  display: table;
 }
-li {
-  padding: 15px ;
-  display: inline-block;
+.cf:after {
+  clear: both;
 }
-body > li {
-  width: 100%;
+.cf {
+  zoom: 1;
+}
+.fl-l {
+  float: left;
 }
 body {
-  padding: 15px;
-  text-align: center;
+  overflow: hidden;
+}
+.app {
+  font-size: 0;
+  height: 100vh;
 }
 #map {
-  height: 500px;
+  height: 100vh;
+}
+.ponch__link_icon-b:before {
+  content: '';
+  background: url(../img/ponch-icon.png);
+  display: inline-block;
+  vertical-align: bottom;
+  width: 10px;
+  height: 10px;
+}
+.ponch__link_icon-b:before {
+  content: '';
+  background: url(../img/ponch-edit.png);
+  display: inline-block;
+  vertical-align: bottom;
+  width: 10px;
+  height: 10px;
+}
+.main {
+  width: 70%;
+  display: inline-block;
+}
+.menu {
+  width: 30%;
+  display: inline-block;
+}
+.menu__header {
+  display: block;
+  font-size: 10px;
+}
+.menu__footer {
+  display: block;
+  font-size: 10px;
+}
+.menu__list {
+  font-size: 10pt;
 }
