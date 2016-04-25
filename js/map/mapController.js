@@ -1,6 +1,33 @@
-mapModule.controller('mapCreateController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+mapModule.controller('mapCreateController', ['$scope', '$http', '$location','mapCreate','getMapInfo', function ($scope, $http, $location,mapCreate,getMapInfo) {
 
-  var map = new google.maps.Map(document.getElementById('map'), {
+
+  /*getMapInfo.get().then(function (data) {
+    console.log(data.data);
+    mapCreate.setData(data.data,"img/pin.png");
+  });*/
+
+  $scope.data = [{latitude: 45.3, longitude: 45, id: 2}, {latitude: 45.7, longitude: 45, id:3}, {latitude: 45, longitude: 45, id:5}];
+  mapCreate.setData($scope.data);
+    /*getMapInfo.getInfo(function (data) {
+      mapCreate.setData(data,"img/pin.png");
+    });*
+
+/*  google.maps.event.addListenerOnce(mapCreate.map, 'idle', function(){
+    var marker = new google.maps.Marker({
+      /!*  id: data[markerInfo].id,*!/
+      position: new google.maps.LatLng(45, 45),
+      icon: {url: "img/pin.png", size: new google.maps.Size(50, 50)}
+      /!* data: data[markerInfo]*!/
+    });
+    console.log("adding");
+    marker.setMap(mapCreate.map);
+  });*/
+
+
+    
+
+
+ /* var map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 45,
       lng: 45
@@ -26,11 +53,11 @@ mapModule.controller('mapCreateController', ['$scope', '$http', '$location', fun
   };
 
 
-  $scope.data = /*[];*/[{latitude: 35, longitude: 45}, {latitude: 45, longitude: 45}, {latitude: 44, longitude: 45}];
+  $scope.data = /!*[];*!/[{latitude: 35, longitude: 45}, {latitude: 45, longitude: 45}, {latitude: 44, longitude: 45}];
 
-  /*$http(req).success(({events, meetings, users}) => {
+  /!*$http(req).success(({events, meetings, users}) => {
 
-   $scope.data = $scope.data.concat(events, meetings, users);*/
+   $scope.data = $scope.data.concat(events, meetings, users);*!/
 
   for (let el in $scope.data) {
     if ($scope.data[el]) {
@@ -76,7 +103,7 @@ mapModule.controller('mapCreateController', ['$scope', '$http', '$location', fun
 
       };
 
-      /* let currentElem = $scope.data[el];
+      /!* let currentElem = $scope.data[el];
 
        marker.addListener('click', function () {
        $scope.$apply(function () {
@@ -85,7 +112,7 @@ mapModule.controller('mapCreateController', ['$scope', '$http', '$location', fun
        });
 
        mc.addMarker(marker);
-       */
+       *!/
 
 
     }
@@ -97,6 +124,6 @@ mapModule.controller('mapCreateController', ['$scope', '$http', '$location', fun
     function (cluster) {
       console.log(cluster.getMarkers());
     });
-
+*/
 
 }]);

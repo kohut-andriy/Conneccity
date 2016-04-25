@@ -19,7 +19,6 @@
 // menu
 
   //= menu/menuModule.js
-  //= menu/menuDirective.js
   //= menu/menuController.js
   //= menu/menuServices.js
 

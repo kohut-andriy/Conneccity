@@ -1,7 +1,7 @@
 'use strict';
 
 var GOOGLE_IP = "http://169.254.119.203:8080/";
-var ACCESS_TOKEN = "04050fbe-575c-416a-8e8b-6d16c4403451";
+var ACCESS_TOKEN = "f899930b-2aa2-4f85-a7c3-12680559ae4b";
 
 var app = angular.module('conneccityApp',
   [

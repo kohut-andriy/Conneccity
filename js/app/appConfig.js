@@ -14,8 +14,21 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider', function
       controller: 'signUpController'
     })
     .state('app',{
-      url: "/",
-      templateUrl: "views/app.html"
+      url: '/',
+      views: {
+        '': { templateUrl: 'views/app.html' },
+        'content@app' : {
+          template: '<conneccity-map></conneccity-map>'
+        }
+      }
+    })
+    .state('app.map',{
+      url: "map/:id",
+      views : {
+        "content" : {
+          template: '<p>wp</p>'
+        }
+      }
     });
 
   $urlRouterProvider.otherwise("/");
