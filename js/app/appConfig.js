@@ -1,7 +1,5 @@
 app.config(['$stateProvider', '$urlRouterProvider','$locationProvider', function ($stateProvider, $urlRouterProvider,$locationProvider) {
-
-
-
+  
   $stateProvider
     .state('authorization', {
       url: "/signIn",
@@ -16,7 +14,15 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider', function
     .state('app',{
       url: '/',
       views: {
-        '': { templateUrl: 'views/app.html' },
+        '': {
+          templateUrl: 'views/app.html',
+          controller: function () {
+            /*setNormalHeight();
+            console.log('hello');
+            window.addEventListener("resize", setNormalHeight);
+            window.addEventListener("load", setNormalHeight);*/
+          }
+        },
         'content@app' : {
           template: '<conneccity-map></conneccity-map>'
         }

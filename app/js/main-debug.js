@@ -3,7 +3,7 @@
 'use strict';
 
 var GOOGLE_IP = "http://169.254.119.203:8080/";
-var ACCESS_TOKEN = "f899930b-2aa2-4f85-a7c3-12680559ae4b";
+var ACCESS_TOKEN = "a88079ca-7f51-4b56-b709-1480ee1ac5f0";
 
 var app = angular.module('conneccityApp', ['ngResource', 'ui.router', 'signIn', 'signUp', 'menu', 'conneccityMap']);
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -19,7 +19,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
   }).state('app', {
     url: '/',
     views: {
-      '': { templateUrl: 'views/app.html' },
+      '': {
+        templateUrl: 'views/app.html',
+        controller: function controller() {
+          /*setNormalHeight();
+          console.log('hello');
+          window.addEventListener("resize", setNormalHeight);
+          window.addEventListener("load", setNormalHeight);*/
+        }
+      },
       'content@app': {
         template: '<conneccity-map></conneccity-map>'
       }
@@ -139,132 +147,24 @@ mapModule.directive('conneccityMap', function () {
     controller: "mapCreateController"
   };
 });
-mapModule.controller('mapCreateController', ['$scope', '$http', '$location', 'mapCreate', 'getMapInfo', function ($scope, $http, $location, mapCreate, getMapInfo) {
+mapModule.controller('mapCreateController', ['mapCreate', 'getMapInfo', function (mapCreate, getMapInfo) {
 
-  /*getMapInfo.get().then(function (data) {
-    console.log(data.data);
-    mapCreate.setData(data.data,"img/pin.png");
-  });*/
+  // online
 
-  $scope.data = [{ latitude: 45.3, longitude: 45, id: 2 }, { latitude: 45.7, longitude: 45, id: 3 }, { latitude: 45, longitude: 45, id: 5 }];
-  mapCreate.setData($scope.data);
-  /*getMapInfo.getInfo(function (data) {
-    mapCreate.setData(data,"img/pin.png");
-  });*
-  /*  google.maps.event.addListenerOnce(mapCreate.map, 'idle', function(){
-  var marker = new google.maps.Marker({
-    /!*  id: data[markerInfo].id,*!/
-    position: new google.maps.LatLng(45, 45),
-    icon: {url: "img/pin.png", size: new google.maps.Size(50, 50)}
-    /!* data: data[markerInfo]*!/
-  });
-  console.log("adding");
-  marker.setMap(mapCreate.map);
-  });*/
+  /*  getMapInfo.get().then(function (data) {
+      console.log(data.data);
+      mapCreate.setData(data.data);
+    });
+    */
+  // offline
+  /* var data = [{latitude: 45.3, longitude: 45, id: 2}, {latitude: 45.7, longitude: 45, id:3}, {latitude: 45, longitude: 45, id:5}];
+    mapCreate.setData(data);*/
 
-  /* var map = new google.maps.Map(document.getElementById('map'), {
-     center: {
-       lat: 45,
-       lng: 45
-     },
-     zoom: 8,
-     disableDefaultUI: true,
-     minZoom: 2
-   });
-  
-   var clusterStyling = [{
-     url: "img/cluster.png",
-     height: 28,
-     width: 28
-   }];
-   var mc = new MarkerClusterer(map, [], {gridSize: 50, zoomOnClick: false, styles: clusterStyling});
-  
-   var req = {
-     method: "GET", url: GOOGLE_IP + "/map",
-     headers: {
-       "Authorization": "Bearer " + ACCESS_TOKEN,
-       "Content-Type": "application/json"
-     }
-   };
-  
-  
-   $scope.data = /!*[];*!/[{latitude: 35, longitude: 45}, {latitude: 45, longitude: 45}, {latitude: 44, longitude: 45}];
-  
-   /!*$http(req).success(({events, meetings, users}) => {
-  
-    $scope.data = $scope.data.concat(events, meetings, users);*!/
-  
-   for (let el in $scope.data) {
-     if ($scope.data[el]) {
-       console.log($scope.data[el].latitude + " " + $scope.data[el].longitude);
-  
-  
-       let canvas, context;
-  
-       canvas = document.createElement("canvas");
-  
-       context = canvas.getContext("2d");
-  
-       let img1 = new Image();
-       img1.src = 'img/pin.png';
-       img1.onload = function () {
-         context.drawImage(img1, 0, 0, 25, 25);
-         //  context.drawImage(img2, 0, 0, 25, 25);
-  
-  
-       };
-  
-       let img2 = new Image();
-       img2.src = 'img/cluster.png';
-       img2.onload = function () {
-         context.drawImage(img2, 0, 0, 25, 25);
-         context.drawImage(img1, 0, 0, 25, 25);
-         let marker = new google.maps.Marker({
-           map: map,
-           id: $scope.data[el].id,
-           position: {lat: $scope.data[el].latitude, lng: $scope.data[el].longitude},
-           icon: {url: canvas.toDataURL(), size: new google.maps.Size(25, 25)}//,
-           // data: $scope.data[el]
-         });
-  
-         marker.addListener('click', function () {
-  
-           $scope.$apply(function () {
-             alert($scope.data[2].longitude);
-             //$location.path($location.path() + (currentElem.surname ? '/users' : currentElem.member ? '/meetings' : '/events') + "/" + currentElem.id);
-           });
-         });
-  
-  
-       };
-  
-       /!* let currentElem = $scope.data[el];
-  
-        marker.addListener('click', function () {
-        $scope.$apply(function () {
-        $location.path($location.path() + (currentElem.surname ? '/users' : currentElem.member ? '/meetings' : '/events') + "/" + currentElem.id);
-        });
-        });
-  
-        mc.addMarker(marker);
-        *!/
-  
-  
-     }
-   }
-  
-   // });
-  
-   google.maps.event.addListener(mc, 'clusterclick',
-     function (cluster) {
-       console.log(cluster.getMarkers());
-     });
-  */
 }]);
 mapModule.service('mapCreate', ['markerFactory', function (markerFactory) {
   var self = this;
 
-  self.map = self.map = new google.maps.Map(document.getElementById('map'), {
+  self.map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 45,
       lng: 45
@@ -282,14 +182,20 @@ mapModule.service('mapCreate', ['markerFactory', function (markerFactory) {
     }]
   });
 
-  self.setData = function (data) {
-    //{ events: e = [], meetings: m = [], users: u = []}) {
+  self.setData = function (_ref) {
+    var _ref$events = _ref.events;
+    var e = _ref$events === undefined ? [] : _ref$events;
+    var _ref$meetings = _ref.meetings;
+    var m = _ref$meetings === undefined ? [] : _ref$meetings;
+    var _ref$users = _ref.users;
+    var u = _ref$users === undefined ? [] : _ref$users;
+    //(data) {
     console.log("data set");
-    //var data = [].concat(e,m,u);
-    /*  self.all = data;
-     self.meetings = m;
-     self.events = e;
-     self.users = u;*/
+    var data = [].concat(e, m, u);
+    self.all = data;
+    self.meetings = m;
+    self.events = e;
+    self.users = u;
     console.log(data);
     self.setMarkers(data);
   };
@@ -297,34 +203,29 @@ mapModule.service('mapCreate', ['markerFactory', function (markerFactory) {
   self.setMarkers = function (data) {
 
     for (var markerInfo in data) {
-      markerFactory.get("img/pin.png", "img/cluster.png", data[markerInfo], self.map);
+      markerFactory.get("img/pin.png", "img/cluster.png", data[markerInfo], self.markerCluster);
     }
   };
-
-  /*  this.setMarkers = function () {
-   for(let markerInfo in this.data) {
-       }
-   }*/
 }]);
 
 mapModule.factory('markerFactory', ['$state', function ($state) {
 
-  var createMarker = function createMarker(img, data, map) {
+  var createMarker = function createMarker(img, data, cluster) {
     console.log("creting");
     var marker = new google.maps.Marker({
-      map: map,
-      // id: data.id,
+      id: data.id,
       position: new google.maps.LatLng(data.latitude, data.longitude),
-      icon: { url: img, size: new google.maps.Size(25, 25) }
-      // data: data
+      icon: { url: img, size: new google.maps.Size(25, 25) },
+      data: data
     });
 
     marker.addListener('click', function () {
       $state.go('app.map', { id: data.id });
     });
+    cluster.addMarker(marker);
   };
 
-  var drawIcon = function drawIcon(img, bg, data, map) {
+  var generateMarker = function generateMarker(img, bg, data, cluster) {
 
     var canvas = void 0;
     var context = void 0;
@@ -343,7 +244,7 @@ mapModule.factory('markerFactory', ['$state', function ($state) {
         context.drawImage(img2, 0, 0, 25, 25);
         context.drawImage(img1, 0, 0, 25, 25);
 
-        createMarker(canvas.toDataURL(), data, map);
+        createMarker(canvas.toDataURL(), data, cluster);
       }
     }
 
@@ -357,7 +258,7 @@ mapModule.factory('markerFactory', ['$state', function ($state) {
   };
 
   return {
-    get: drawIcon
+    get: generateMarker
   };
 }]);
 
@@ -390,7 +291,61 @@ mapModule.factory('getMapInfo', ['$resource', '$http', function ($resource, $htt
    });*/
 }]);
 
+// map.controls
+
+var controlsModule = angular.module('conneccityMapControls', ['markerFactory']);
+
+// map.controls.resize
+
+// map.controls.filer
+
+// map.controls.mapCurrentPosition
+
+// map.controls.Cards
+
+// map.controls.cards.user
+
+// map.controls.cards.event
+
+// map.controls.cards.meeting
+
 // refactoring
+
+function setNormalHeight() {
+  var windowHeight, headerHeight, footerHeight;
+  var header, footer, content;
+
+  console.log("draw");
+
+  header = document.getElementsByClassName('menu__header')[0];
+  footer = document.getElementsByClassName('menu__footer')[0];
+  content = document.getElementsByClassName('menu__navigation')[0];
+
+  windowHeight = window.innerHeight;
+
+  if (header) {
+    headerHeight = header.clientHeight;
+  }
+
+  if (footer) {
+    footerHeight = footer.clientHeight;
+  }
+
+  if (content) {
+    content.style.height = windowHeight - headerHeight - footerHeight + "px";
+  }
+
+  //console.log(windowHeight+" "+headerHeight+" "+ footerHeight+" ");
+}
+
+window.load = function () {
+
+  jQuery('#customScrollBar').nanoScroller();
+  console.log('scr');
+};
+
+/*window.addEventListener("resize", setNormalHeight);
+window.addEventListener("load", setNormalHeight);*/
 
 app.controller('meetingController', ['$scope', '$http', "$routeParams", function ($scope, $http, $routeParams) {
   $http.get(GOOGLE_IP + "/meetings/" + $routeParams.meetingId, {
@@ -428,57 +383,57 @@ app.controller('mapController', ['$scope', '$http', '$window', function ($scope,
 
 /*app.factory('blendImage', function () {
 
-  function createMarker(width, height, radius) {
+ function createMarker(width, height, radius) {
 
-    var canvas, context;
+ var canvas, context;
 
-    canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
+ canvas = document.createElement("canvas");
+ canvas.width = width;
+ canvas.height = height;
 
-    context = canvas.getContext("2d");
+ context = canvas.getContext("2d");
 
-    context.clearRect(0, 0, width, height);
+ context.clearRect(0, 0, width, height);
 
-    context.fillStyle = "rgba(255,255,0,1)";
+ context.fillStyle = "rgba(255,255,0,1)";
 
-    context.strokeStyle = "rgba(0,0,0,1)";
+ context.strokeStyle = "rgba(0,0,0,1)";
 
-    context.beginPath();
-    context.moveTo(radius, 0);
-    context.lineTo(width - radius, 0);
-    context.quadraticCurveTo(width, 0, width, radius);
-    context.lineTo(width, height - radius);
-    context.quadraticCurveTo(width, height, width - radius, height);
-    context.lineTo(radius, height);
-    context.quadraticCurveTo(0, height, 0, height - radius);
-    context.lineTo(0, radius);
-    context.quadraticCurveTo(0, 0, radius, 0);
-    context.closePath();
+ context.beginPath();
+ context.moveTo(radius, 0);
+ context.lineTo(width - radius, 0);
+ context.quadraticCurveTo(width, 0, width, radius);
+ context.lineTo(width, height - radius);
+ context.quadraticCurveTo(width, height, width - radius, height);
+ context.lineTo(radius, height);
+ context.quadraticCurveTo(0, height, 0, height - radius);
+ context.lineTo(0, radius);
+ context.quadraticCurveTo(0, 0, radius, 0);
+ context.closePath();
 
 
-    var img1 = new Image();
-    img1.src = 'img/pin.png';
-    img1.onload = function () {
-      context.drawImage(img1, 0, 0, 25, 25);
-      context.drawImage(img2, 0, 0, 25, 25);
+ var img1 = new Image();
+ img1.src = 'img/pin.png';
+ img1.onload = function () {
+ context.drawImage(img1, 0, 0, 25, 25);
+ context.drawImage(img2, 0, 0, 25, 25);
 
-    };
+ };
 
-    var img2 = new Image();
-    img2.src = 'img/cluster.png';
-    img2.onload = function () {
-      context.drawImage(img2, 0, 0, 25, 25);
-      context.drawImage(img1, 0, 0, 25, 25);
-    };
+ var img2 = new Image();
+ img2.src = 'img/cluster.png';
+ img2.onload = function () {
+ context.drawImage(img2, 0, 0, 25, 25);
+ context.drawImage(img1, 0, 0, 25, 25);
+ };
 
-    context.fill();
-    context.stroke();
+ context.fill();
+ context.stroke();
 
-    return canvas.toDataURL();
+ return canvas.toDataURL();
 
-  }
+ }
 
-  return {get: createMarker(25, 25, 5)}
+ return {get: createMarker(25, 25, 5)}
 
-});*/
+ });*/

@@ -1,16 +1,69 @@
 .ponch__link_icon-b:before {
   content: '';
-  background: url(../img/ponch-icon.png);
+  background: url(../img/ponch-icon.png) no-repeat;
   display: inline-block;
-  vertical-align: bottom;
+  vertical-align: middle;
   width: 10px;
   height: 10px;
+  margin-right: 5px;
 }
-.ponch__link_icon-b:before {
+.ponch__link_change-b:before {
   content: '';
-  background: url(../img/ponch-edit.png);
+  background: url(../img/ponch-edit.png) no-repeat;
   display: inline-block;
-  vertical-align: bottom;
+  vertical-align: middle;
   width: 10px;
   height: 10px;
+  margin-right: 5px;
+}
+.logout-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url(../img/exit-icon.png);
+  position: absolute;
+  right: 0;
+  top: 12px;
+}
+.logo_icon-b:before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url(../img/logo-icon-dark.png);
+}
+.menu__link:before {
+  content: '';
+  width: 22px;
+  height: 24px;
+  margin-right: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url(../img/menu-icons-sprite.png) no-repeat;
+}
+.menu__link_map-icon:before {
+  background-position: center 0;
+}
+.menu__link_news-icon:before {
+  background-position: center -25px;
+}
+.menu__link_mess-icon:before {
+  background-position: center -49px;
+}
+.menu__link_people-icon:before {
+  background-position: center -73px;
+}
+.menu__link_meet-icon:before {
+  background-position: center -96px;
+}
+.menu__link_event-icon:before {
+  background-position: center -121px;
+}
+.menu__link_cab-icon:before {
+  background-position: center -145px;
+}
+.menu__link_sett-icon:before {
+  background-position: center -169px;
 }

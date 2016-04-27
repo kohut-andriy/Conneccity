@@ -39,17 +39,20 @@ gulp.task('htmlTask', function () {
   gulp.src('js/*/*.html')
     .pipe(rename({dirname: ''}))
     .pipe(gulp.dest('app/views'));
+  gulp.src('js/*/*/*.html')
+    .pipe(rename({dirname: ''}))
+    .pipe(gulp.dest('app/views'));
+  gulp.src('js/*/*/*/*.html')
+    .pipe(rename({dirname: ''}))
+    .pipe(gulp.dest('app/views'));
+  gulp.src('js/*/*/*/*/*.html')
+    .pipe(rename({dirname: ''}))
+    .pipe(gulp.dest('app/views'));
 });
 
 
 gulp.task('bowerComponents', function () {
   return gulp.src(mainBowerFiles())
-    .pipe(minifyJS({
-      ext: {
-        src: '-debug.js',
-        min: '.js'
-      }
-    }))
     .pipe(gulp.dest('app/js/externals'))
 });
 
@@ -62,4 +65,4 @@ gulp.task('watch', function () {
 });
 
 
-gulp.task('default', ['cssTask', 'bowerComponents', 'watch', 'jsTask', 'htmlTask', 'webserver']);
+gulp.task('default', ['cssTask', 'watch', 'jsTask', 'htmlTask', 'webserver']);

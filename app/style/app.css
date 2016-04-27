@@ -16,44 +16,200 @@ body {
   overflow: hidden;
 }
 .app {
-  font-size: 0;
   height: 100vh;
+  width: 100vw;
+  display: table;
+  font-family: "Roboto", sans-serif;
 }
 #map {
   height: 100vh;
 }
 .ponch__link_icon-b:before {
   content: '';
-  background: url(../img/ponch-icon.png);
+  background: url(../img/ponch-icon.png) no-repeat;
   display: inline-block;
-  vertical-align: bottom;
+  vertical-align: middle;
   width: 10px;
   height: 10px;
+  margin-right: 5px;
 }
-.ponch__link_icon-b:before {
+.ponch__link_change-b:before {
   content: '';
-  background: url(../img/ponch-edit.png);
+  background: url(../img/ponch-edit.png) no-repeat;
   display: inline-block;
-  vertical-align: bottom;
+  vertical-align: middle;
   width: 10px;
   height: 10px;
+  margin-right: 5px;
+}
+.logout-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url(../img/exit-icon.png);
+  position: absolute;
+  right: 0;
+  top: 12px;
+}
+.logo_icon-b:before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url(../img/logo-icon-dark.png);
+}
+.menu__link:before {
+  content: '';
+  width: 22px;
+  height: 24px;
+  margin-right: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url(../img/menu-icons-sprite.png) no-repeat;
+}
+.menu__link_map-icon:before {
+  background-position: center 0;
+}
+.menu__link_news-icon:before {
+  background-position: center -25px;
+}
+.menu__link_mess-icon:before {
+  background-position: center -49px;
+}
+.menu__link_people-icon:before {
+  background-position: center -73px;
+}
+.menu__link_meet-icon:before {
+  background-position: center -96px;
+}
+.menu__link_event-icon:before {
+  background-position: center -121px;
+}
+.menu__link_cab-icon:before {
+  background-position: center -145px;
+}
+.menu__link_sett-icon:before {
+  background-position: center -169px;
 }
 .main {
-  width: 70%;
-  display: inline-block;
+  width: 100%;
+  display: table-cell;
 }
 .menu {
-  width: 30%;
-  display: inline-block;
+  display: table-cell;
+  white-space: nowrap;
+  background: #2b2f2b;
+  overflow-y: scroll;
+  height: 100vh;
 }
 .menu__header {
   display: block;
-  font-size: 10px;
+  padding: 22px 17px;
+  padding-bottom: 7px;
 }
 .menu__footer {
   display: block;
-  font-size: 10px;
+  padding: 12px 20px;
 }
-.menu__list {
-  font-size: 10pt;
+.menu__link {
+  box-sizing: content-box;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 13px 25px;
+  padding-right: 40px;
+  display: block;
+  border-bottom: 1px solid #121412;
+  background: #222622;
+  position: relative;
+  text-transform: capitalize;
+}
+.menu__link_dark {
+  background: #1b1f1b;
+  color: #4e4e4e;
+}
+.menu__link:hover,
+.menu__link:active {
+  background: #404740;
+  border-color: #404740;
+}
+.menu__message {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #f44336;
+  text-align: center;
+  vertical-align: middle;
+  position: absolute;
+  right: 15px;
+  top: 13px;
+  line-height: 24px;
+  font-size: 14px;
+}
+.user {
+  display: block;
+  position: relative;
+  padding-right: 20px;
+  margin-bottom: 15px;
+}
+.user__img {
+  display: inline-block;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.user__name,
+.user__surname {
+  display: inline-block;
+  font: 500 18px/1 "Roboto", sans-serif;
+  color: #fff;
+  vertical-align: middle;
+}
+.ponches {
+  white-space: normal;
+}
+.ponches__item {
+  display: inline-block;
+}
+.ponches__link {
+  display: block;
+  text-transform: capitalize;
+  color: #fff;
+  text-decoration: none;
+  background: #45b648;
+  font-size: 12px;
+  border-radius: 10px;
+  margin-right: 5px;
+  margin-bottom: 9px;
+  padding: 5px 8px;
+}
+.ponches__link_change {
+  background: #f44336;
+}
+.logo {
+  margin-bottom: 12px;
+}
+.logo__text {
+  color: #4e4e4e;
+  font-size: 16.6px;
+  text-align: center;
+  font-weight: 500;
+}
+.logo__text:before {
+  margin-top: -4px;
+  margin-right: 8px;
+}
+.copyright {
+  text-align: center;
+  font-size: 12px;
+  color: #4e4e4e;
+  font-weight: 500;
+}
+.copyright p:not(:last-child) {
+  margin-bottom: 7px;
 }

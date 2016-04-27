@@ -1,17 +1,15 @@
 mapModule.service('mapCreate', ['markerFactory', function (markerFactory) {
   var self = this;
 
-  self.map =
-    self.map = new google.maps.Map(document.getElementById('map'), {
-      center: {
-        lat: 45,
-        lng: 45
-      },
-      zoom: 8,
-      disableDefaultUI: true,
-      minZoom: 2
-    });
-
+  self.map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: 45,
+      lng: 45
+    },
+    zoom: 8,
+    disableDefaultUI: true,
+    minZoom: 2
+  });
 
   self.markerCluster = new MarkerClusterer(self.map, [],
     {
@@ -22,13 +20,13 @@ mapModule.service('mapCreate', ['markerFactory', function (markerFactory) {
     }]
     });
 
-  self.setData = function (data) {//{ events: e = [], meetings: m = [], users: u = []}) {
+  self.setData = function ({events: e = [], meetings: m = [], users: u = []}) {//(data) {
     console.log("data set");
-    //var data = [].concat(e,m,u);
-    /*  self.all = data;
+    var data = [].concat(e,m,u);
+     self.all = data;
      self.meetings = m;
      self.events = e;
-     self.users = u;*/
+     self.users = u;
     console.log(data);
     self.setMarkers(data);
 
@@ -37,37 +35,31 @@ mapModule.service('mapCreate', ['markerFactory', function (markerFactory) {
   self.setMarkers = function (data) {
 
     for (var markerInfo in data) {
-      markerFactory.get("img/pin.png", "img/cluster.png", data[markerInfo], self.map);
+      markerFactory.get("img/pin.png", "img/cluster.png", data[markerInfo], self.markerCluster);
     }
   };
 
-  /*  this.setMarkers = function () {
-   for(let markerInfo in this.data) {
-
-   }
-   }*/
 }]);
 
-mapModule.factory('markerFactory', ['$state',function ($state) {
+mapModule.factory('markerFactory', ['$state', function ($state) {
 
 
-  var createMarker = function (img, data, map) {
+  var createMarker = function (img, data, cluster) {
     console.log("creting");
     let marker = new google.maps.Marker({
-      map: map,
-      // id: data.id,
+      id: data.id,
       position: new google.maps.LatLng(data.latitude, data.longitude),
-      icon: {url: img, size: new google.maps.Size(25, 25)}
-      // data: data
+      icon: {url: img, size: new google.maps.Size(25, 25)},
+      data: data
     });
 
     marker.addListener('click', function () {
-        $state.go('app.map',{ id : data.id});
-      });
-
+      $state.go('app.map', {id: data.id});
+    });
+    cluster.addMarker(marker);
   };
 
-  var drawIcon = function (img, bg, data, map) {
+  var generateMarker = function (img, bg, data, cluster) {
 
     let canvas;
     let context;
@@ -86,7 +78,7 @@ mapModule.factory('markerFactory', ['$state',function ($state) {
         context.drawImage(img2, 0, 0, 25, 25);
         context.drawImage(img1, 0, 0, 25, 25);
 
-        createMarker(canvas.toDataURL(), data, map);
+        createMarker(canvas.toDataURL(), data, cluster);
       }
     }
 
@@ -102,7 +94,7 @@ mapModule.factory('markerFactory', ['$state',function ($state) {
 
 
   return {
-    get: drawIcon
+    get: generateMarker
   }
 }]);
 
