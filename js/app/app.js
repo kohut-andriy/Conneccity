@@ -39,45 +39,6 @@ window.load = function () {
 window.addEventListener("load", setNormalHeight);*/
 
 
-app.controller('meetingController', ['$scope', '$http', "$routeParams", function ($scope, $http, $routeParams) {
-  $http.get(GOOGLE_IP + "/meetings/" + $routeParams.meetingId, {
-    headers: {
-      "Authorization": "Bearer " + ACCESS_TOKEN
-    }
-  }).then(function (data) {
-    console.log(data);
-  });
-  $scope.id = $routeParams.meetingId;
-}]);
-
-app.controller('eventController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-  $http.get(GOOGLE_IP + "/events/" + $routeParams.eventId, {
-    headers: {
-      "Authorization": "Bearer " + ACCESS_TOKEN
-    }
-  }).then(function (data) {
-    console.log(data);
-  });
-  $scope.id = $routeParams.eventId;
-
-}]);
-app.controller('userController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-  $http.get(GOOGLE_IP + "/users/" + $routeParams.userId, {
-    headers: {
-      "Authorization": "Bearer " + ACCESS_TOKEN
-    }
-  }).then(function (data) {
-    console.log(data);
-  });
-  $scope.id = $routeParams.userId;
-
-}]);
-
-app.controller('mapController', ['$scope', '$http', '$window', function ($scope, $http, $window) {
-
-
-}]);
-
 
 /*app.factory('blendImage', function () {
 

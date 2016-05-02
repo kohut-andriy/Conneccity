@@ -1,1 +1,0 @@
-var controlsModule = angular.module('conneccityMapControls',['markerFactory']);

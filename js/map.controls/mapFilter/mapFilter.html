@@ -1,0 +1,70 @@
+<div class="filter" ng-class="{'active': filterState}">
+    <header class="filter__head"  ng-click="toggleState()">
+        <i class="filter-icon-b" ></i><h1 class="filter__h">Filter</h1><span class="arrow-icon"></span>
+    </header>
+    <ul class="filter__items">
+        <li class="filter__item " ng-class="{'active': peopleState}" >
+            <div class="filter__head filter-peoples-icon-b"
+                 ng-class="{'selected':genderMale || genderFemale || ageFrom || ageTo}"
+                 ng-click="togglePeople()">Peoples<span class=" arrow-icon_small"></span></div>
+            <ul class="filter__sub-list" >
+                <li class="filter__row filter__row_h">Gender</li>
+                <li class="filter__row">
+                    <label for="" class="filter__label">
+                        <input ng-model="genderMale" type="checkbox" name="gender" class="radio"> Male
+                    </label>
+                </li>
+                <li class="filter__row">
+                    <label for="" class="filter__label">
+                        <input type="checkbox" ng-model="genderFemale" name="gender"  class="radio"> Female
+                    </label>
+                </li>
+                <li class="filter__row filter__row_h">Age</li>
+                <li class="filter__row">
+                    <input type="text" placeholder="3" ng-model="ageFrom" class="input"> &mdash; <input type="text" ng-model="ageTo" placeholder="100" class="input"></li>
+            </ul>
+        </li>
+        <li class="filter__item ">
+            <div class="filter__head filter-meetings-icon-b">Meetings<span class=" arrow-icon_small"></span></div>
+            <ul class="filter__sub-list" >
+                <li class="filter__row filter__row_h">Gender</li>
+                <li class="filter__row">
+                    <label for="" class="filter__label">
+                        <input type="checkbox" name="gender" class="radio"> Male
+                    </label>
+                </li>
+                <li class="filter__row">
+                    <label for="" class="filter__label">
+                        <input type="checkbox"  name="gender"  class="radio"> Female
+                    </label>
+                </li>
+                <li class="filter__row filter__row_h">Age</li>
+                <li class="filter__row">
+                    <input type="text" placeholder="3" class="input"> &mdash; <input type="text" placeholder="100" class="input"></li>
+            </ul>
+        </li>
+        <li class="filter__item ">
+            <div class="filter__head filter-events-icon-b">Events<span class=" arrow-icon_small"></span></div>
+            <ul class="filter__sub-list" >
+                <li class="filter__row filter__row_h">Gender</li>
+                <li class="filter__row">
+                    <label for="" class="filter__label">
+                        <input type="checkbox" name="gender" class="radio"> Male
+                    </label>
+                </li>
+                <li class="filter__row">
+                    <label for="" class="filter__label">
+                        <input type="checkbox"  name="gender"  class="radio"> Female
+                    </label>
+                </li>
+                <li class="filter__row filter__row_h">Age</li>
+                <li class="filter__row">
+                    <input type="text" placeholder="3" class="input"> &mdash; <input type="text" placeholder="100" class="input"></li>
+            </ul>
+        </li>
+    </ul>
+    <footer class="filter__controls">
+        <div class="filter__clear filter-clear-icon"></div>
+        <div class="filter__submit">Done</div>
+    </footer>
+</div>

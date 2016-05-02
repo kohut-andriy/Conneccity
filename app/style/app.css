@@ -12,6 +12,9 @@
 .fl-l {
   float: left;
 }
+.fl-r {
+  float: right;
+}
 body {
   overflow: hidden;
 }
@@ -93,15 +96,72 @@ body {
 .menu__link_sett-icon:before {
   background-position: center -169px;
 }
+.filter-icon-b:before {
+  content: '';
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+  background: url(../img/filter-normal-icon.png) center left no-repeat;
+  vertical-align: middle;
+}
+.arrow-icon {
+  width: 6px;
+  height: 15px;
+  display: none;
+  float: right;
+  margin-right: 3px;
+  background: url(../img/arrow.png) center center no-repeat;
+}
+.arrow-icon_small {
+  width: 10px;
+  float: right;
+  margin-top: 6px;
+  height: 5px;
+  display: inline-block;
+  margin-left: 10px;
+  background: url(../img/arrow-small.png) center center no-repeat;
+  background-size: cover;
+}
+.filter-clear-icon {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background: url(../img/filter-clean-icon.png) center center no-repeat;
+  vertical-align: middle;
+}
+.filter-peoples-icon-b:before {
+  content: '';
+  width: 22px;
+  height: 24px;
+  display: inline-block;
+  background: url("../img/filter-icons-sprite.png") -24px 0 no-repeat;
+  vertical-align: middle;
+}
+.filter-events-icon-b:before {
+  content: '';
+  width: 22px;
+  height: 24px;
+  display: inline-block;
+  background: url("../img/filter-icons-sprite.png") -24px -24px no-repeat;
+  vertical-align: middle;
+}
+.filter-meetings-icon-b:before {
+  content: '';
+  width: 22px;
+  height: 24px;
+  display: inline-block;
+  background: url("../img/filter-icons-sprite.png") -24px -48px no-repeat;
+  vertical-align: middle;
+}
 .main {
   width: 100%;
   display: table-cell;
 }
 .menu {
-  display: table-cell;
+  display: block;
   white-space: nowrap;
   background: #2b2f2b;
-  overflow-y: scroll;
+  position: relative;
   height: 100vh;
 }
 .menu__header {
@@ -119,8 +179,7 @@ body {
   font-weight: 500;
   color: #fff;
   text-decoration: none;
-  padding: 13px 25px;
-  padding-right: 40px;
+  padding: 13px 13px 13px 25px;
   display: block;
   border-bottom: 1px solid #121412;
   background: #222622;
@@ -144,9 +203,7 @@ body {
   background: #f44336;
   text-align: center;
   vertical-align: middle;
-  position: absolute;
-  right: 15px;
-  top: 13px;
+  float: right;
   line-height: 24px;
   font-size: 14px;
 }
@@ -212,4 +269,150 @@ body {
 }
 .copyright p:not(:last-child) {
   margin-bottom: 7px;
+}
+.filter {
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 4.8px 0.2px rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  border: 1px solid #ececec;
+}
+.filter.active .filter__items,
+.filter.active .filter__controls {
+  display: block;
+}
+.filter.active .filter__h {
+  display: inline-block;
+}
+.filter.active .filter-icon-b:before {
+  background-position: center right;
+}
+.filter.active .arrow-icon {
+  display: inline-block;
+}
+.filter__head {
+  color: #aeaeae;
+  font-weight: 500;
+  padding: 10px;
+  font-size: 16px;
+  display: block;
+  cursor: pointer;
+  position: relative;
+}
+.filter__head:before {
+  margin-top: -4px;
+  margin-right: 8px;
+}
+.filter__head.active .arrow-icon {
+  -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.filter__head.active .filter__sub-list {
+  display: block;
+}
+.filter__head.selected.filter-peoples-icon-b:before {
+  background-position: 0 0;
+}
+.filter__head.selected.filter-meetings-icon-b:before {
+  background-position: 0 -48px;
+}
+.filter__head.selected.filter-events-icon-b:before {
+  background-position: 0 -24px;
+}
+.filter__h {
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #45b648;
+  display: none;
+  margin-left: 11px;
+}
+.filter__sub-list {
+  display: none;
+  background: #f6f6f6;
+  padding: 15px;
+  color: #aeaeae;
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
+}
+.filter__row {
+  font-size: 14px;
+  font-weight: 500;
+}
+.filter__row:not(:last-child) {
+  margin-bottom: 10px;
+}
+.filter__row_h {
+  text-transform: uppercase;
+}
+.filter__controls {
+  padding: 4px;
+  display: none;
+  text-align: center;
+}
+.filter__items {
+  display: none;
+  padding: 6px 0;
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
+}
+.filter__submit {
+  color: #45b648;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-left: 1px solid #ececec;
+  display: inline-block;
+  cursor: pointer;
+}
+.filter__clear {
+  padding: 7px 12px;
+  display: inline-block;
+  cursor: pointer;
+}
+.filter__item.active .filter__sub-list {
+  display: block;
+}
+.radio {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url(../img/radio-sprite.png) center 0 no-repeat;
+  vertical-align: middle;
+  margin: 0;
+  margin-top: 1px;
+  outline: none;
+}
+.radio:checked {
+  background: url(../img/radio-sprite.png) center -23px no-repeat;
+}
+.input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  border: 1px solid #aeaeae;
+  padding: 6px 8px;
+  border-radius: 2px;
+  width: 32px;
+  box-sizing: border-box;
+  font-size: 13px;
+  text-align: center;
+  color: #8c8c8c;
+}
+.input:focus {
+  border-color: #45b648;
+}
+.map {
+  position: relative;
+  display: block;
+}
+.map-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

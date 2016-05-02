@@ -1,0 +1,1 @@
+var eventsModule = angular.module('events', []);

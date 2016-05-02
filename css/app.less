@@ -8,11 +8,12 @@
 }
 
 .menu {
-  display: table-cell;
+  display: block;
   white-space: nowrap;
   background: @menuBg;
-  overflow-y: scroll;
+  position: relative;
   height: 100vh;
+
   &__header {
     display: block;
     padding: 22px 17px;
@@ -34,8 +35,7 @@
     font-weight: 500;
     color: #fff;
     text-decoration: none;
-    padding: 13px 25px;
-    padding-right: 40px;
+    padding: 13px 13px 13px 25px;
     display: block;
     border-bottom: 1px solid @navigBorderColor;
     background: @navigColorNormal;
@@ -56,12 +56,10 @@
     height: 24px;
     display: inline-block;
     border-radius: 50%;
-    background: @ponchBgChangle;
+    background: #f44336;
     text-align: center;
     vertical-align: middle;
-    position: absolute;
-    right: 15px;
-    top: 13px;
+    float: right;
     line-height: 24px;
     font-size: 14px;
   }
@@ -132,4 +130,169 @@
   p:not(:last-child) {
     margin-bottom: 7px;
   }
+}
+
+.filter {
+  border-radius: 2px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 1px 4.8px 0.2px rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  border: 1px solid @filterBorder;
+  &.active {
+    .filter__items,
+    .filter__controls {
+      display: block;
+    }
+    .filter__h {
+      display: inline-block;
+    }
+    .filter-icon-b:before {
+      background-position: center right;
+    }
+    .arrow-icon {
+      display: inline-block;
+    }
+  }
+  &__head {
+    color: @filterSubFont;
+    font-weight: 500;
+    padding: 10px;
+    font-size: 16px;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    &:before {
+      margin-top: -4px;
+      margin-right: 8px;
+    }
+    &.active {
+      .arrow-icon {
+        transform: rotate(180deg);
+      }
+      .filter__sub-list {
+        display: block;
+      }
+    }
+    &.selected {
+      &.filter-peoples-icon-b:before {
+        background-position: 0 0;
+      }
+      &.filter-meetings-icon-b:before {
+        background-position: 0 -48px;
+      }
+      &.filter-events-icon-b:before {
+        background-position: 0 -24px;
+      }
+    }
+  }
+  &__h {
+    text-transform: uppercase;
+    font-size: 16px;
+    color: @ponchBg;
+    display: none;
+    margin-left: 11px;
+  }
+  &__sub-list {
+    display: none;
+    background: @filterSubBg;
+    padding: 15px;
+    color: @filterSubFont;
+    border-top: 1px solid @filterBorder;
+    border-bottom: 1px solid @filterBorder;
+  }
+  &__row {
+    font-size: 14px;
+    font-weight: 500;
+    &:not(:last-child)
+      {
+        margin-bottom: 10px;
+      }
+  }
+  &__row_h {
+    text-transform: uppercase;
+  }
+
+
+  &__controls {
+    padding: 4px;
+    display: none;
+    text-align: center;
+  }
+
+  &__items {
+    display: none;
+    padding: 6px 0;
+    border-top: 1px solid @filterBorder;
+    border-bottom: 1px solid @filterBorder;
+  }
+
+  &__submit {
+    color: @ponchBg;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-left: 1px solid @filterBorder;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  &__clear {
+    padding: 7px 12px;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  &__item {
+    &.active {
+      .filter__sub-list {
+        display: block;
+
+      }
+    }
+  }
+}
+
+.radio {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url(../img/radio-sprite.png) center 0 no-repeat;
+  vertical-align: middle;
+  margin: 0;
+  margin-top: 1px;
+  outline: none;
+
+  &:checked {
+    background: url(../img/radio-sprite.png) center -23px no-repeat;
+  }
+
+}
+
+.input {
+  appearance: none;
+  outline: none;
+  border: 1px solid @filterSubFont;
+  padding: 6px 8px;
+  border-radius: 2px;
+  width: 32px;
+  box-sizing: border-box;
+  font-size: 13px;
+  text-align: center;
+  color: @filterSubInput;
+  &:focus {
+    border-color: @ponchBg;
+  }
+}
+
+.map {
+  position: relative;
+  display: block;
+}
+
+.map-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

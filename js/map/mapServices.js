@@ -1,26 +1,33 @@
 mapModule.service('mapCreate', ['markerFactory', function (markerFactory) {
   var self = this;
 
-  self.map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: 45,
-      lng: 45
-    },
-    zoom: 8,
-    disableDefaultUI: true,
-    minZoom: 2
-  });
+  self.map = null;
+  self.cluster = null;
 
-  self.markerCluster = new MarkerClusterer(self.map, [],
-    {
-      gridSize: 50, zoomOnClick: false, styles: [{
-      url: "img/cluster.png",
-      height: 28,
-      width: 28
-    }]
+  self.initMap = () => {
+    self.map = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: 49,
+        lng: 26
+      },
+      zoom: 8,
+      disableDefaultUI: true,
+      minZoom: 2
     });
 
-  self.setData = function ({events: e = [], meetings: m = [], users: u = []}) {//(data) {
+    self.markerCluster = new MarkerClusterer(self.map, [],
+      {
+        gridSize: 50, zoomOnClick: false, styles: [{
+        url: "img/cluster.png",
+        height: 28,
+        width: 28
+      }]
+      });
+  };
+
+
+
+  self.setData = function ({events: e = [], meetings: m = [], users: u = []}) { //data) {
     console.log("data set");
     var data = [].concat(e,m,u);
      self.all = data;
@@ -115,15 +122,5 @@ mapModule.factory('getMapInfo', ['$resource', '$http', function ($resource, $htt
       });
     }
   };
-
-  /*return $resource(GOOGLE_IP + "map", {} , {
-   getInfo : {
-   method: "GET",
-   params: {},
-   headers: {
-   "Authorization": "Bearer " + token,
-   "Content-Type": "application/json"
-   }
-   }
-   });*/
+  
 }]);

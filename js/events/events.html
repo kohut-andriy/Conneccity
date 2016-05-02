@@ -1,0 +1,10 @@
+<p>Get all events view</p>
+<p>Events</p>
+<ul>
+    <li ng-repeat="event in events">
+        <a ui-sref="app.events.id({id:event.id})">
+                {{event.name}}
+
+        </a>
+    </li>
+</ul>

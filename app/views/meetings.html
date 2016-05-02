@@ -1,0 +1,10 @@
+<p>Get all meetings view</p>
+<p>Meetings</p>
+<ul>
+    <li ng-repeat="meeting in meetings">
+        <a ui-sref="app.meetings.id({id:meeting.id})">
+
+            <span ng-repeat="member in meeting.members">{{member.name}} </span>
+        </a>
+    </li>
+</ul>

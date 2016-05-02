@@ -1,0 +1,7 @@
+<p>Get all users view</p>
+<p>Users</p>
+<ul>
+    <li ng-repeat="user in users">
+        <a ui-sref="app.users.id({id:user.id})">{{user.name}}  {{user.surname}}</a>
+    </li>
+</ul>

@@ -1,0 +1,1 @@
+var meetingsModule = angular.module('meetings', []);

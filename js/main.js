@@ -2,6 +2,7 @@
 
   //= app/appModule.js
   //= app/appConfig.js
+  //= app/appController.js
 
 // authorization
 
@@ -30,7 +31,6 @@
 
 // map.controls
 
-  //= map.controls/mapControlsModule.js
   //= map.controls/mapControlsDirective.js
 
   // map.controls.resize
@@ -39,36 +39,35 @@
 
   // map.controls.filer
 
-    //= map.controls/mapFilter/mapFilterModule.js
-    //= map.controls/mapFilter/mapFilterController.js
     //= map.controls/mapFilter/mapFilterDirective.js
-    //= map.controls/mapFilter/mapFilterServices.js
 
   // map.controls.mapCurrentPosition
 
-    //= map.controls/mapCurrentUserPosition/mapCUPModule.js
-    //= map.controls/mapCurrentUserPosition/mapCUPController.js
-    //= map.controls/mapCurrentUserPosition/mapCUPServices.js
     //= map.controls/mapCurrentUserPosition/mapCUPDirective.js
 
   // map.controls.Cards
 
-    //= map.controls/mapCard/mapCardModule.js
-    //= map.controls/mapCard/mapCardController.js
     //= map.controls/mapCard/mapCardDirective.js
-    //= map.controls/mapCard/mapCardServices.js
 
-    // map.controls.cards.user
-      
-      //= map.controls/mapCard/mapCard.type/mapCard.type.userInfo/userInfoDirective.js
+// app.users
 
-    // map.controls.cards.event
+  //= users/usersModule.js
+  //= users/usersController.js
+  //= users/usersServices.js
 
-      //= map.controls/mapCard/mapCard.type/mapCard.type.eventInfo/eventInfoDirective.js
+// app.meetings
 
-    // map.controls.cards.meeting
+  //= meetings/meetingsModule.js
+  //= meetings/meetingsController.js
+  //= meetings/meetingsServices.js
 
-      //= map.controls/mapCard/mapCard.type/mapCard.type.meetingInfo/meetingInfoDirective.js
+
+// app.events
+
+  //= events/eventsModule.js
+  //= events/eventsModule.js
+  //= events/eventsController.js
+  //= events/eventsServices.js
 
 // refactoring
 
