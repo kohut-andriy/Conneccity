@@ -91,9 +91,9 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider', function
         }
       }
     })
-    .state('app.filter',{
-      url: "/filter",
-      templateUrl: "<map-filter></map-filter>"
+    .state('card',{
+      url: "/card",
+      templateUrl: "views/mapCard.html"
     });
 
   $urlRouterProvider.otherwise("/");

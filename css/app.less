@@ -88,22 +88,32 @@
 
 .ponches {
   white-space: normal;
+  display: inline-block;
   &__item {
+    display: inline-block;
+    &_mul {
+      margin-bottom: 9px;
+    }
+  }
+  &__counter {
     display: inline-block;
   }
   &__link {
-    display: block;
+    display: inline-block;
     text-transform: capitalize;
     color: #fff;
     text-decoration: none;
-    background: @ponchBg;
     font-size: 12px;
+    background: #bfbfbf;
     border-radius: 10px;
     margin-right: 5px;
-    margin-bottom: 9px;
     padding: 5px 8px;
     &_change {
       background: @ponchBgChangle;
+    }
+
+    &.favorite {
+      background: @ponchBg;
     }
   }
 }
@@ -134,8 +144,8 @@
 
 .filter {
   border-radius: 2px;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0px 1px 4.8px 0.2px rgba(0, 0, 0, 0.4);
+  background-color: #fff;
+  box-shadow: 0 1px 18px rgba(0, 0, 0, 0.44);
   display: inline-block;
   border: 1px solid @filterBorder;
   &.active {
@@ -295,4 +305,161 @@
   position: absolute;
   top: 0;
   left: 0;
+
+}
+
+.resize {
+  background: #fff;
+  padding: 0 5px;
+  box-shadow: 0 1px 18px rgba(0, 0, 0, 0.44);
+  display: inline-block;
+  border-radius: 2px;
+  &__item {
+    padding: 9px 5px;
+    cursor: pointer;
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+  }
+}
+
+.card {
+  display: table;
+  box-shadow: 1px 0 5px rgba(0,0,0,.4);
+  border-radius: 3px;
+  &__prev-button {
+    display: table-cell;
+    width: 48px;
+    height: 100%;
+    background: url("../img/arrow-left.png") center center no-repeat #f6f6f6;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(246,246,246, 0.5);
+    }
+  }
+  &__next-button {
+    display: table-cell;
+    width: 48px;
+    height: 100%;
+    background: url("../img/arrow-right.png") center center no-repeat #f6f6f6;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(246,246,246, 0.5);
+    }
+  }
+  &__content {
+    background: #fff;
+    display: table-cell;
+    box-shadow: 0 0 5px rgba(0,0,0,.4);
+    border-radius: 3px;
+    position: relative;
+  }
+
+  &__header {
+    background: @filterSubBg;
+    color: @userCardNormalText;
+    font-size: 14px;
+    padding: 10px 14px;
+    font-weight: 500;
+    border-bottom: 1px solid @userCardBorder;
+    &.favorite {
+      background: @ponchBg;
+      color: #fff;
+      .card__close-button {
+        background-position: 0 -18px;
+      }
+      .card__event-date:before {
+        background-position: 0 -20px;
+      }
+
+      .card__place:before {
+        background-position: 0 -19px;
+      }
+    }
+  }
+
+  &__place,
+  &__event-date,
+  &__close-button {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  &__close-button {
+    margin-right: -4px;
+  }
+
+  &__counter {
+    padding: 0 10px 10px 10px;
+    margin-top: -10px;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 500;
+    color: #bfbfbf;
+  }
+  &__preview {
+    width: 50px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin-right: 16px;
+    &-status {
+      width: 10px;
+      height: 10px;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: @ponchBg;
+      display: block;
+      position: absolute;
+      right: -4px;
+      bottom: 4px;
+    }
+  }
+
+  &__img {
+    width: 100%;
+    border-radius: 50%;
+  }
+
+  &__main {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 13px;
+  }
+
+  &__event-type {
+    color: @ponchBg;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  &__members-count {
+    font-size: 12px;
+    color: #bfbfbf;
+    display: inline-block;
+  }
+
+  &__event-name {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 8px 0;
+    text-transform: capitalize;
+    color: #222622;
+  }
+
+  &__message {
+    font-size: 14px;
+    color: @ponchBg;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  &__distance {
+    font-size: 14px;
+    font-weight: 500;
+    color: @ponchBg;
+    margin-left: 25px;
+    margin-right: 10px;
+  }
+
 }
