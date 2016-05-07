@@ -31,8 +31,6 @@
 
 // map.controls
 
-  //= map.controls/mapControlsDirective.js
-
   // map.controls.resize
 
     //= map.controls/mapResize/mapResizeDirective.js

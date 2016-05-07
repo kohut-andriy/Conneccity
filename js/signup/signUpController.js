@@ -15,7 +15,7 @@ signUpModule.controller('signUpController', ['$scope', '$http', function ($scope
 
   var req = {
     method: "POST",
-    url: GOOGLE_IP + "/signup",
+    url: GOOGLE_IP + "signup",
     data: $scope.data,
     headers: {
       //   "Authorization": "Basic " + $scope.encoded,

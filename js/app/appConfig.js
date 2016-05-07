@@ -97,31 +97,6 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider', function
     });
 
   $urlRouterProvider.otherwise("/");
-  /*$routeProvider
-   .when("/signin", {
-   templateUrl: 'views/sign.html',
-   controller: 'signInController'
-   })
-   .when("/signup", {
-   templateUrl: 'views/signup.html',
-   controller: 'signupController'
-   })
-   .when("/map", {
-   templateUrl: "views/mappage.html",
-   controller: "mapController"
-   })
-   .when("/map/users/:userId", {
-   templateUrl: "views/user.html",
-   controller: "userController"
-   })
-   .when("/map/events/:eventId", {
-   templateUrl: "views/event.html",
-   controller: "eventController"
-   })
-   .when("/map/meetings/:meetingId", {
-   templateUrl: "views/meeting.html",
-   controller: "meetingController"
-   })*/
-  /*  $locationProvider.html5Mode(true).hashPrefix('!');*/
+
 
 }]);

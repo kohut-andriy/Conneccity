@@ -28,12 +28,6 @@ function setNormalHeight() {
   //console.log(windowHeight+" "+headerHeight+" "+ footerHeight+" ");
 }
 
-window.load = function () {
-
-  jQuery('#customScrollBar').nanoScroller();
-  console.log('scr');
-
-};
 
 /*window.addEventListener("resize", setNormalHeight);
 window.addEventListener("load", setNormalHeight);*/

@@ -1,9 +1,19 @@
-mapModule.service('mapCreate', ['markerFactory', function (markerFactory) {
+mapModule.service('mapCreate', [ '$rootScope',function ($rootScope) {
   var self = this;
 
   self.map = null;
   self.cluster = null;
 
+  // map of marker => marker's data
+  self.markersMap = new Map();
+
+  // map of [lat,lng].join('|') => address
+  self.coordinatesMap = new Map();
+
+  // array selected markers info for cards
+  self.cardsArray = [];
+
+  // create map, clusterer, geocoder
   self.initMap = () => {
     self.map = new google.maps.Map(document.getElementById('map'), {
       center: {
@@ -23,50 +33,70 @@ mapModule.service('mapCreate', ['markerFactory', function (markerFactory) {
         width: 28
       }]
       });
+
+    self.geocoder = new google.maps.Geocoder();
+
+    google.maps.event.addListener( self.markerCluster, "clusterclick" , function (cluster) {
+      var markers = cluster.getMarkers();
+      self.cardsArray = [];
+      for(let i =0; i < markers.length; i++) {
+        self.cardsArray.push(self.markersMap.get(markers[i]));
+      }
+      $rootScope.$digest();
+    });
   };
 
+  // put data
+  self.setData = function (data) {
 
-
-  self.setData = function ({events: e = [], meetings: m = [], users: u = []}) { //data) {
-    console.log("data set");
-    var data = [].concat(e,m,u);
-     self.all = data;
-     self.meetings = m;
-     self.events = e;
-     self.users = u;
-    console.log(data);
     self.setMarkers(data);
 
   };
 
+  // adding event's name, push data to get addresses ,push data to create markers
   self.setMarkers = function (data) {
 
-    for (var markerInfo in data) {
-      markerFactory.get("img/pin.png", "img/cluster.png", data[markerInfo], self.markerCluster);
+    for(let eventType in data) {
+
+      for (let eventInfo in data[eventType]) {
+        switch (eventType) {
+          case 'meetings' :
+          {
+            data[eventType][eventInfo].eventtype = 'meeting';
+            break;
+          }
+
+          case 'events' :
+          {
+            data[eventType][eventInfo].eventtype = 'event';
+            break;
+          }
+
+          case 'people' :
+          {
+            data[eventType][eventInfo].eventtype = '';
+            break;
+          }
+        }
+
+        if (!self.coordinatesMap.get([data[eventType][eventInfo].latitude, data[eventType][eventInfo].longitude].join('|'))) {
+
+          self.getAddress([data[eventType][eventInfo].latitude, data[eventType][eventInfo].longitude]);
+
+        }
+
+          self.drawMarker("img/test/pin.png", "img/test/cluster.png", data[eventType][eventInfo]);
+
+
+      }
+
     }
+
   };
 
-}]);
+  // draw marker, push data to create markers
 
-mapModule.factory('markerFactory', ['$state', function ($state) {
-
-
-  var createMarker = function (img, data, cluster) {
-    console.log("creting");
-    let marker = new google.maps.Marker({
-      id: data.id,
-      position: new google.maps.LatLng(data.latitude, data.longitude),
-      icon: {url: img, size: new google.maps.Size(25, 25)},
-      data: data
-    });
-
-    marker.addListener('click', function () {
-      $state.go('app.map', {id: data.id});
-    });
-    cluster.addMarker(marker);
-  };
-
-  var generateMarker = function (img, bg, data, cluster) {
+  self.drawMarker = function (img, bg, data) {
 
     let canvas;
     let context;
@@ -85,32 +115,97 @@ mapModule.factory('markerFactory', ['$state', function ($state) {
         context.drawImage(img2, 0, 0, 25, 25);
         context.drawImage(img1, 0, 0, 25, 25);
 
-        createMarker(canvas.toDataURL(), data, cluster);
+        self.createMarker(canvas.toDataURL(), data);
       }
     }
 
     let img1 = new Image();
-    img1.src = img;
-    img1.onload = draw;
 
+    img1.onload = draw;
+    img1.src = img;
     let img2 = new Image();
-    img2.src = bg;
+
     img2.onload = draw;
+    img2.src = bg;
+  };
+
+  // create markers, add 'em to clusterer
+
+  self.createMarker = function (img, data) {
+
+    let marker = new google.maps.Marker({
+      position: new google.maps.LatLng(data.latitude, data.longitude),
+      icon: {url: img, size: new google.maps.Size(25, 25)}
+    });
+
+    self.markersMap.set(marker, data);
+
+    marker.addListener('click', function () {
+      
+      console.log(self.markersMap.get(marker));
+
+      self.cardsArray = [];
+
+      self.cardsArray.push(self.markersMap.get(marker));
+
+      $rootScope.$digest();
+      
+    });
+
+    self.markerCluster.addMarker(marker);
 
   };
 
+  // get geocoder data
+  self.getAddress = function (latlng) {
 
-  return {
-    get: generateMarker
-  }
+    self.geocoder.geocode({
+      'latLng': new google.maps.LatLng(latlng[0],latlng[1])
+    }, function (results, status) {
+      console.log('getting address');
+      if (status === google.maps.GeocoderStatus.OK) {
+
+        if (results[0]) {
+          self.coordinatesMap.set(latlng.join('|') ,results[0].address_components[1].short_name+','+results[0].address_components[0].short_name);
+
+        }
+        $rootScope.$digest();
+      }
+
+    });
+  };
+
+  // clear map
+
+  self.clearMap = function () {
+
+      self.markerCluster.clearMarkers();
+
+  };
+  
 }]);
 
+// send request to server
 
-mapModule.factory('getMapInfo', ['$resource', '$http', function ($resource, $http) {
+mapModule.factory('getMapInfo', ['$http', function ($http) {
   var token = ACCESS_TOKEN;
 
   return {
-    get: function () {
+    getAll: function () {
+      return $http({
+        url: GOOGLE_IP + "map",
+        method: "GET",
+        params: {},
+        headers: {
+          "Authorization": "Bearer " + token,
+          "Content-Type": "application/json"
+        }
+      });
+    },
+    getFilteredInfo: function (options) {
+      function convertOptionsToUrl() {
+        
+      }
       return $http({
         url: GOOGLE_IP + "map",
         method: "GET",
@@ -121,6 +216,5 @@ mapModule.factory('getMapInfo', ['$resource', '$http', function ($resource, $htt
         }
       });
     }
-  };
-  
+  }
 }]);

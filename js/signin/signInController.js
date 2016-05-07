@@ -12,7 +12,7 @@ signInModule.controller('signInController', ['$scope', '$http', '$httpParamSeria
 
   var req = {
     method: 'POST',
-    url: GOOGLE_IP + "/oauth/token",
+    url: GOOGLE_IP + "oauth/token",
     data: $httpParamSerializer($scope.data),
     headers: {
       "Authorization": "Basic " + $scope.encoded,
