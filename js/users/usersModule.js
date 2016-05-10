@@ -1,1 +1,1 @@
-var usersModule = angular.module('users', []);
+var usersModule = angular.module('users', ['ngScrollbar']);

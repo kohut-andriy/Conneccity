@@ -36,7 +36,8 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider', function
       url: '{id:int}',
       views: {
         'content@app' : {
-          template: '<p>user id</p>'
+          templateUrl: 'views/userProfile.html',
+          controller: 'userProfileController'
         }
       }
     })

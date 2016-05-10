@@ -53,6 +53,11 @@
   //= users/usersController.js
   //= users/usersServices.js
 
+  // profile
+
+    //= users/profile/userProfileModule.js
+    //= users/profile/userProfileController.js
+    //= users/profile/userProfileServices.js
 // app.meetings
 
   //= meetings/meetingsModule.js

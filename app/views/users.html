@@ -1,8 +1,9 @@
-<div class="users">
+<div class="users" ng-scrollbar rebuild-on-resize rebuild-on="rebuild:me">
     <header class="users__controls">
         <span class="users__text">People nearby</span>
         <p class="users__divider"><span class="line"></span></p>
         <div class="fast-filter">
+
             <input id="recommended" type="radio" name="filter" class="fast-filter__radio" checked>
             <label for="recommended" class="fast-filter__label">Recommended</label>
 
@@ -10,158 +11,33 @@
             <label for="related" class="fast-filter__label">Most related</label>
 
         </div>
-        <div class="users__icon search-icon"></div>
+        <div class="users__icon search-icon-b"></div>
         <div class="users__icon filter-icon-b"></div>
     </header>
     <ul class="users-list">
-        <li class="users-list__item">
-            <img src="img/test/user-list-img.jpg" alt="" class="users-list__img">
-            <div class="users-list__info">
-                <p class="users-list__distance">300m</p>
-                <a href="" class="users-list__name">Name Surname</a>
-                <div class="ponches-wrapper">
+        <li class="users-list__item" ng-repeat="user in users">
+            <img ng-src="{{user.photos.photo200px}}" alt="" class="users-list__img">
+            <div class="short-info-box">
+                <p class="short-info-box__distance">{{getFormattedDistance(user.distance)}}</p>
+                <a ui-sref="app.users.id({id: user.id})" class="short-info-box__name">{{user.name + ' ' + user.surname}}</a>
+                <div class="ponches-wrapper" ng-show="user.ponches.length > 0">
                     <ul class="ponches">
                         <li class="ponches__item">
-                            <a href="" class="ponches__link ponch__link_icon-b">
-                                ponch
+                            <a href=""
+                               class="ponches__link ponch__link_icon-b"
+                               ng-class="{'favorite': ponch.matches}"
+                               ng-repeat="ponch in user.ponches | limitTo: 2">
+                                {{ ponch.name }}
                             </a>
                         </li>
                     </ul>
-                    <div class="ponches__counter" >
-                        <a href="" class="ponches__link ponches__link_round">
-                            +1
+                    <div class="ponches__counter" ng-show="user.ponches.length > 2">
+                        <a href="" class="ponches__link ponches__link_round" ng-class="{ 'favorite' : user.ponches[2].matches}">
+                            +{{user.ponches.length-2}}
                         </a>
                     </div>
                 </div>
             </div>
         </li>
-        <li class="users-list__item">
-            <img src="img/test/user-list-img.jpg" alt="" class="users-list__img">
-            <div class="users-list__info">
-                <p class="users-list__distance">300m</p>
-                <a href="" class="users-list__name">Name Surname</a>
-                <div class="ponches-wrapper">
-                    <ul class="ponches">
-                        <li class="ponches__item">
-                            <a href="" class="ponches__link ponch__link_icon-b">
-                                ponch
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="ponches__counter" >
-                        <a href="" class="ponches__link ponches__link_round">
-                            +1
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li class="users-list__item">
-            <img src="img/test/user-list-img.jpg" alt="" class="users-list__img">
-            <div class="users-list__info">
-                <p class="users-list__distance">300m</p>
-                <a href="" class="users-list__name">Name Surname</a>
-                <div class="ponches-wrapper">
-                    <ul class="ponches">
-                        <li class="ponches__item">
-                            <a href="" class="ponches__link ponch__link_icon-b">
-                                ponch
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="ponches__counter" >
-                        <a href="" class="ponches__link ponches__link_round">
-                            +1
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li class="users-list__item">
-            <img src="img/test/user-list-img.jpg" alt="" class="users-list__img">
-            <div class="users-list__info">
-                <p class="users-list__distance">300m</p>
-                <a href="" class="users-list__name">Name Surname</a>
-                <div class="ponches-wrapper">
-                    <ul class="ponches">
-                        <li class="ponches__item">
-                            <a href="" class="ponches__link ponch__link_icon-b">
-                                ponch
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="ponches__counter" >
-                        <a href="" class="ponches__link ponches__link_round">
-                            +1
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li class="users-list__item">
-            <img src="img/test/user-list-img.jpg" alt="" class="users-list__img">
-            <div class="users-list__info">
-                <p class="users-list__distance">300m</p>
-                <a href="" class="users-list__name">Name Surname</a>
-                <div class="ponches-wrapper">
-                    <ul class="ponches">
-                        <li class="ponches__item">
-                            <a href="" class="ponches__link ponch__link_icon-b">
-                                ponch
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="ponches__counter" >
-                        <a href="" class="ponches__link ponches__link_round">
-                            +1
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li class="users-list__item">
-            <img src="img/test/user-list-img.jpg" alt="" class="users-list__img">
-            <div class="users-list__info">
-                <p class="users-list__distance">300m</p>
-                <a href="" class="users-list__name">Name Surname</a>
-                <div class="ponches-wrapper">
-                    <ul class="ponches">
-                        <li class="ponches__item">
-                            <a href="" class="ponches__link ponch__link_icon-b">
-                                ponch
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="ponches__counter" >
-                        <a href="" class="ponches__link ponches__link_round">
-                            +1
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li class="users-list__item">
-            <img src="img/test/user-list-img.jpg" alt="" class="users-list__img">
-            <div class="users-list__info">
-                <p class="users-list__distance">300m</p>
-                <a href="" class="users-list__name">Name Surname</a>
-                <div class="ponches-wrapper">
-                    <ul class="ponches">
-                        <li class="ponches__item">
-                            <a href="" class="ponches__link ponch__link_icon-b">
-                                ponch
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="ponches__counter" >
-                        <a href="" class="ponches__link ponches__link_round">
-                            +1
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </li>
-
-
     </ul>
 </div>

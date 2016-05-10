@@ -2,7 +2,6 @@
 @import 'globals';
 @import 'icons';
 
-
 .main {
   height: 100vh;
   display: block;
@@ -17,7 +16,6 @@
   position: relative;
   height: 100vh;
   width: 226px;
-
 
   &__header {
     display: block;
@@ -220,15 +218,13 @@
   &__row {
     font-size: 14px;
     font-weight: 500;
-    &:not(:last-child)
-      {
-        margin-bottom: 10px;
-      }
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
   }
   &__row_h {
     text-transform: uppercase;
   }
-
 
   &__controls {
     padding: 4px;
@@ -310,7 +306,7 @@
 }
 
 .map-controls {
-  &_user-pos{
+  &_user-pos {
     position: absolute;
     bottom: 24px;
     left: 24px;
@@ -347,7 +343,7 @@
     padding: 9px 5px;
     cursor: pointer;
     &:not(:last-child) {
-      border-bottom: 1px solid rgba(0,0,0,.1);
+      border-bottom: 1px solid rgba(0, 0, 0, .1);
     }
   }
 }
@@ -355,13 +351,13 @@
 .card {
   display: inline-block;
   text-align: left;
-  box-shadow: 1px 0 5px rgba(0,0,0,.4);
+  box-shadow: 1px 0 5px rgba(0, 0, 0, .4);
   border-radius: 3px;
   &__prev-button {
     display: table-cell;
     width: 48px;
     height: 100%;
-    background: url("../img/arrow-left.png") center center no-repeat rgba(246,246,246, 0.5);
+    background: url("../img/arrow-left.png") center center no-repeat rgba(246, 246, 246, 0.5);
     cursor: pointer;
     &.active,
     &:hover {
@@ -372,7 +368,7 @@
     display: table-cell;
     width: 48px;
     height: 100%;
-    background: url("../img/arrow-right.png") center center no-repeat rgba(246,246,246, 0.5);
+    background: url("../img/arrow-right.png") center center no-repeat rgba(246, 246, 246, 0.5);
     cursor: pointer;
     &.active,
     &:hover {
@@ -382,7 +378,7 @@
   &__content {
     background: #fff;
     display: table-cell;
-    box-shadow: 0 0 5px rgba(0,0,0,.4);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .4);
     border-radius: 3px;
     position: relative;
   }
@@ -473,7 +469,7 @@
   &__main {
     display: inline-block;
     vertical-align: top;
-    &>*:not(:last-child) {
+    & > *:not(:last-child) {
       margin-bottom: 5px;
     }
   }
@@ -505,7 +501,7 @@
   }
 
   &__event-name,
-  &__members{
+  &__members {
     max-width: 250px;
     overflow: hidden;
     white-space: nowrap;
@@ -516,7 +512,7 @@
     font-size: 14px;
     color: #45B648;
     font-weight: 500;
-   // margin-bottom: 8px;
+    // margin-bottom: 8px;
   }
 
   &__distance {
@@ -530,14 +526,16 @@
 }
 
 .users {
-  padding: 40px 35px;
   box-sizing: border-box;
+  height: 100vh;
+  position: relative;
   &__controls {
+    margin-top: 40px;
     white-space: nowrap;
-    & >* {
-      padding-left: 18px;
-      padding-right: 18px;
-    }
+    & > * {
+       padding-left: 18px;
+       padding-right: 18px;
+     }
     & > :first-child {
       padding-left: 0;
     }
@@ -567,8 +565,21 @@
     box-sizing: border-box;
   }
 
+  &__controls {
+    padding: 0 35px;
+    box-sizing: border-box;
+  }
+
+  &__list {
+    padding: 0 35px;
+  }
 }
 
+.users-list {
+  padding: 0 35px;
+  box-sizing: border-box;
+  display: block;
+}
 .line {
   height: 1px;
   background: #d9d9d9;
@@ -577,6 +588,7 @@
   vertical-align: middle;
 
 }
+
 .fast-filter__radio:checked + .fast-filter__label {
   background: #45b648;
   color: #fff;
@@ -598,9 +610,11 @@
     display: inline-block;
     padding: 10px 20px;
     box-sizing: border-box;
-    width: 50%;
     text-align: center;
     cursor: pointer;
+    &:not(:last-child) {
+      border-right: 0;
+    }
     &:nth-child(2) {
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
@@ -616,7 +630,7 @@
   margin: 0 -6px;
   font-size: 0;
   margin-top: 30px;
-  column-count: 4;
+
   text-align: center;
   &__img {
     width: 100%;
@@ -637,20 +651,22 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background: linear-gradient(rgba(255,255,255,0),rgba(0,0,0,1));
+      background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
       border-radius: 4px;
     }
   }
-  &__info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 12px 10px;
-    box-sizing: border-box;
-    & > * {
-      margin-top: 8px;
-    }
+}
+
+.short-info-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 10px;
+  box-sizing: border-box;
+
+  & > * {
+    margin-top: 8px;
   }
 
   &__name {
@@ -668,4 +684,263 @@
   }
 }
 
+.profile{
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  display: block;
+  &__header {
+    overflow: hidden;
+    height: 250px;
+    position: relative;
+  }
 
+  &__bg {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  &__controls {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+
+  &__control {
+    vertical-align: middle;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    &:not(:last-child) {
+      margin-right: 13px;
+    }
+  }
+
+  &__main {
+    margin-top: -77px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 14px;
+
+  }
+
+  &__last-seen,
+  &__address {
+    color: #fff;
+    background: rgba(38, 38, 38, .5);
+    display: inline-block;
+    border-radius: 4px;
+    vertical-align: middle;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    position: absolute;
+    top: 30px;
+    white-space: nowrap;
+  }
+
+  &__last-seen {
+    right: 160px;
+  }
+
+  &__address {
+    left: 160px;
+  }
+
+  &__preview {
+    display: inline-block;
+    position: relative;
+    width: 141px;
+  }
+
+  &__img {
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    margin: 0;
+    &_round {
+      width: 100%;
+      border-radius: 50%;
+      border: 7px solid rgba(255, 255, 255, 0.3);
+      box-sizing: border-box;
+    }
+  }
+
+  &__status {
+    width: 12px;
+    height: 12px;
+    background: #45b648;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 17px;
+    right: 14px;
+  }
+
+  &__name {
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  &__share {
+    text-align: center;
+    margin-top: 18px;
+  }
+
+  &__menu {
+    border: 1px solid #f44336;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 7px 7px;
+    margin-right: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  &__invite {
+    color: #fff;
+    background: #f44336;
+    display: inline-block;
+    padding: 9px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 4px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  &__ponches {
+    max-width: 80%;
+    display: inline-block;
+    margin-top: 16px;
+  }
+
+  &__data {
+    padding: 40px 25px 25px 25px;
+    text-align: left;
+    font-size: 0;
+    display: block;
+  }
+
+  &__filter {
+    display: inline-block;
+    width: 66.66%;
+  }
+
+  &__info {
+    width: 33.3333%;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 30px ;
+    box-sizing: border-box;
+  }
+
+  &__about-button {
+    display: block;
+    cursor: pointer;
+    vertical-align: middle;
+    height: 35px;
+  }
+
+  &__text {
+    color: #262626;
+    font-weight: 500;
+    font-size: 16px;
+    vertical-align: middle;
+      display: inline-block;
+      height: 35px;
+      padding-top: 9px;
+      box-sizing: border-box;
+  }
+
+  &__item {
+    display: inline-block;
+    position: relative;
+    max-width: 290px;
+    margin: 0 6px 6px 6px;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  &__list {
+    margin: 0 -6px;
+    margin-top: 20px;
+    text-align: left;
+    column-count: 2;
+  }
+
+  &__user-info {
+    margin-top: 20px;
+    color: #a6a6a6;
+    font-size: 17px;
+    font-weight: 500;
+    & > * {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__years-count {
+    margin-left: 5px;
+  }
+}
+
+.location-info-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 12px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  & > * {
+    margin-bottom: 6px;
+  }
+}
+
+.controls {
+    white-space: nowrap;
+    width: 100%;
+    display: inline-block;
+    & > * {
+      padding-left: 7px;
+      padding-right: 7px;
+    }
+    & > :first-child {
+      padding-left: 0;
+    }
+    & > :last-child {
+      padding-right: 0;
+    }
+  &__counter {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    background: #6d6d6d;
+    padding: 4px 8px;
+    border-radius: 50%;
+    &.favorite {
+      background: #45b648;
+    }
+  }
+
+  &__text {
+    color: #262626;
+    font-weight: 500;
+    font-size: 16px;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  &__divider {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+  }
+
+}

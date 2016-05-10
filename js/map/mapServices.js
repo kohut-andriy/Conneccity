@@ -28,7 +28,7 @@ mapModule.service('mapCreate', [ '$rootScope',function ($rootScope) {
     self.markerCluster = new MarkerClusterer(self.map, [],
       {
         gridSize: 50, zoomOnClick: false, styles: [{
-        url: "img/cluster.png",
+        url: "img/test/cluster.png",
         height: 28,
         width: 28
       }]
