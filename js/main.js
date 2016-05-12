@@ -16,13 +16,6 @@
   //= signup/signUpServices.js
   //= signup/signUpController.js
 
-
-// menu
-
-  //= menu/menuModule.js
-  //= menu/menuController.js
-  //= menu/menuServices.js
-
 // map
   //= map/mapModule.js
   //= map/mapDirective.js

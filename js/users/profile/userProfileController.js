@@ -1,4 +1,4 @@
-userProfileModule.controller('userProfileController', ['$scope','getUserData','$stateParams',function ($scope, getUserData, $stateParams) {
+userProfileModule.controller('userProfileController', ['$scope', 'getUserData', '$stateParams', function ($scope, getUserData, $stateParams) {
 
   getUserData.get($stateParams.id).then(function (result) {
     $scope.user = result.data;
@@ -31,15 +31,14 @@ userProfileModule.controller('userProfileController', ['$scope','getUserData','$
     let lastSeenDate = new Date(date);
     let dif = new Date(currentDate - lastSeenDate);
 
-    if(dif > DAY) {
+    if (dif > DAY) {
       return lastSeenDate.toLocaleDateString(locale);
-    } else if( dif > HOUR ) {
-      return (dif/HOUR).toFixed(0) + 'hours ego';
-    } else if( dif > MINUTE ) {
-      return (dif/MINUTE).toFixed(0) + 'minutes ego';
-    } else if( dif < MINUTE ) {
-      return (dif/1000).toFixed(0) + 'seconds ego';
+    } else if (dif > HOUR) {
+      return (dif / HOUR).toFixed(0) + 'hours ego';
+    } else if (dif > MINUTE) {
+      return (dif / MINUTE).toFixed(0) + 'minutes ego';
+    } else if (dif < MINUTE) {
+      return (dif / 1000).toFixed(0) + 'seconds ego';
     }
   }
-
 }]);

@@ -1,3 +1,0 @@
-menuModule.controller('menuController', [function () {
-  
-}]);

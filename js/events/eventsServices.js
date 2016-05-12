@@ -1,4 +1,4 @@
-eventsModule.factory('getEvents', ['$http',function ($http) {
+eventsModule.factory('getEvents', ['$http', function ($http) {
   var token = ACCESS_TOKEN;
 
   return {

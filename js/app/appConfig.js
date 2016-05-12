@@ -1,4 +1,4 @@
-app.config(['$stateProvider', '$urlRouterProvider','$locationProvider', function ($stateProvider, $urlRouterProvider,$locationProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
   $stateProvider
     .state('authorization', {
@@ -6,81 +6,81 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider', function
       templateUrl: "views/signin.html",
       controller: 'signInController'
     })
-    .state('registration',{
+    .state('registration', {
       url: "/signUp",
       templateUrl: "views/signup.html",
       controller: 'signUpController'
     })
-    .state('app',{
+    .state('app', {
       url: '/',
       views: {
         '': {
           templateUrl: 'views/app.html',
           controller: 'appController'
         },
-        'content@app' : {
+        'content@app': {
           template: '<conneccity-map class="map"></conneccity-map>'
         }
       }
     })
-    .state('app.users',{
+    .state('app.users', {
       url: 'users/',
       views: {
-        'content@app' : {
+        'content@app': {
           templateUrl: 'views/users.html',
           controller: 'usersController'
         }
       }
     })
-    .state('app.users.id',{
+    .state('app.users.id', {
       url: '{id:int}',
       views: {
-        'content@app' : {
+        'content@app': {
           templateUrl: 'views/userProfile.html',
           controller: 'userProfileController'
         }
       }
     })
-    .state('app.events',{
+    .state('app.events', {
       url: 'events/',
       views: {
-        'content@app' : {
+        'content@app': {
           templateUrl: 'views/events.html',
           controller: 'eventsController'
         }
       }
     })
-    .state('app.events.id',{
+    .state('app.events.id', {
       url: ':id',
       views: {
-        'content@app' : {
+        'content@app': {
           template: '<p>event id</p>'
         }
       }
     })
-    .state('app.meetings',{
+    .state('app.meetings', {
       url: 'meetings/',
       views: {
-        'content@app' : {
+        'content@app': {
           templateUrl: 'views/meetings.html',
           controller: 'meetingsController'
         }
       }
     })
-    .state('app.meetings.id',{
+    .state('app.meetings.id', {
       url: ':id',
       views: {
-        'content@app' : {
+        'content@app': {
           template: '<p>meeting id</p>'
         }
       }
     })
-    .state('app.map',{
+    .state('app.map', {
       url: "map/:id",
-      views : {
-        "content" : {
+      views: {
+        "content": {
           template: '<map-filter></map-filter>',
-          link: function(scope) {
+          link: function (scope) {
             console.log('cont');
 
             scope.filterState = false;
@@ -92,12 +92,10 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider', function
         }
       }
     })
-    .state('card',{
+    .state('card', {
       url: "/card",
       templateUrl: "views/mapCard.html"
     });
 
   $urlRouterProvider.otherwise("/");
-
-
 }]);

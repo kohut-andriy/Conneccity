@@ -1,4 +1,4 @@
-meetingsModule.factory('getMeetings', ['$http',function ($http) {
+meetingsModule.factory('getMeetings', ['$http', function ($http) {
   var token = ACCESS_TOKEN;
 
   return {

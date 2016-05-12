@@ -1,5 +1,5 @@
 mapModule.directive('card', function () {
   return {
-    templateUrl : 'views/mapCard.html'
+    templateUrl: 'views/mapCard.html'
   }
 });

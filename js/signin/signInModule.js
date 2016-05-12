@@ -1,3 +1,2 @@
-
-var signInModule = angular.module('signIn', ['ngResource','ui.router']);
+var signInModule = angular.module('signIn', ['ngResource', 'ui.router']);
 

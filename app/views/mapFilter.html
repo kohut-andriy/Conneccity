@@ -1,13 +1,14 @@
 <div class="filter" ng-class="{'active': filterState}">
-    <header class="filter__head"  ng-click="toggleState()">
-        <i class="filter-icon-b" ></i><h1 class="filter__h">Filter</h1><span class="arrow-icon"></span>
+    <header class="filter__head" ng-click="toggleState()">
+        <i class="filter-icon-b"></i>
+        <h1 class="filter__h">Filter</h1><span class="arrow-icon"></span>
     </header>
     <ul class="filter__items">
-        <li class="filter__item " ng-class="{'active': peopleState}" >
+        <li class="filter__item " ng-class="{'active': peopleState}">
             <div class="filter__head filter-peoples-icon-b"
                  ng-class="{'selected':genderMale || genderFemale || ageFrom || ageTo}"
                  ng-click="togglePeople()">Peoples<span class=" arrow-icon_small"></span></div>
-            <ul class="filter__sub-list" >
+            <ul class="filter__sub-list">
                 <li class="filter__row filter__row_h">Gender</li>
                 <li class="filter__row">
                     <label for="male" class="filter__label">
@@ -16,7 +17,7 @@
                 </li>
                 <li class="filter__row">
                     <label for="female" class="filter__label">
-                        <input type="checkbox" ng-model="genderFemale" name="gender"  class="radio" id="female"> Female
+                        <input type="checkbox" ng-model="genderFemale" name="gender" class="radio" id="female"> Female
                     </label>
                 </li>
                 <li class="filter__row filter__row_h">Age</li>
@@ -33,7 +34,7 @@
                 Meetings
                 <span class=" arrow-icon_small"></span>
             </div>
-            <ul class="filter__sub-list" >
+            <ul class="filter__sub-list">
                 <li class="filter__row filter__row_h">Age</li>
                 <li class="filter__row">
                     <input type="text" placeholder="3" class="input" ng-model="meetingMembersFrom">
@@ -49,7 +50,7 @@
                 Events
                 <span class=" arrow-icon_small"></span>
             </div>
-            <ul class="filter__sub-list" >
+            <ul class="filter__sub-list">
                 <li class="filter__row filter__row_h">Time</li>
                 <li class="filter__row">
                     <input type="date" ng-model="eventTimeFrom"> &mdash; <input type="date" ng-model="eventTimeTo">

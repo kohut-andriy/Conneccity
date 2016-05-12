@@ -1,3 +1,3 @@
-app.controller('appController', ['$scope',function ($scope) {
+app.controller('appController', ['$scope', function ($scope) {
   $scope.isSho = true;
 }]);
