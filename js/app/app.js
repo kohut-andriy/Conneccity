@@ -1,4 +1,4 @@
-function setNormalHeight() {
+/*function setNormalHeight() {
   var windowHeight, headerHeight, footerHeight;
   var header, footer, content;
 
@@ -26,7 +26,7 @@ function setNormalHeight() {
 
 
   //console.log(windowHeight+" "+headerHeight+" "+ footerHeight+" ");
-}
+}*/
 
 
 /*window.addEventListener("resize", setNormalHeight);

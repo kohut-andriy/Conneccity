@@ -10,6 +10,24 @@ mapModule.controller('mapCreateController', ['$scope','mapCreate', 'getMapInfo',
 
   $scope.togglePeople = function () {
     $scope.peopleState = !$scope.peopleState;
+    $scope.eventState = false;
+    $scope.meetingState = false;
+  };
+
+  $scope.meetingState = false;
+
+  $scope.toggleMeeting = function () {
+    $scope.meetingState = !$scope.meetingState;
+    $scope.eventState = false;
+    $scope.peopleState = false;
+  };
+
+  $scope.eventState = false;
+
+  $scope.toggleEvent = function () {
+    $scope.meetingState = false;
+    $scope.peopleState = false;
+    $scope.eventState = !$scope.eventState;
   };
 
   $scope.cardVisible = false;
@@ -44,6 +62,7 @@ mapModule.controller('mapCreateController', ['$scope','mapCreate', 'getMapInfo',
   $scope.setAllInfo = function() {
     
     console.log('setting');
+    mapCreate.clearMap();
     getMapInfo.getAll().then(function (data) {
       console.log(data.data);
       mapCreate.setData(data.data);
@@ -88,10 +107,48 @@ mapModule.controller('mapCreateController', ['$scope','mapCreate', 'getMapInfo',
         $scope.coordinates = mapCreate.coordinatesMap;
       }
 
-
   });
+
+  $scope.zoomIn = function () {
+    mapCreate.zoomIn();
+  };
+
+  $scope.zoomOut = function () {
+    mapCreate.zoomOut();
+  };
 
   mapCreate.initMap();
   $scope.setAllInfo();
+
+  $scope.filterMap = function () {
+    console.log($scope.eventTimeTo);
+    let a = new Date($scope.eventTimeTo).getTime();
+
+    console.log(a);
+    let options = {
+      'meetingStartAtFrom' : null,
+      'meetingStartAtTo' : null,
+      'meetingMembersCountFrom' : $scope.meetingMembersFrom,
+      'meetingMembersCountTo' : $scope.meetingMembersTo,
+      'eventStartAtFrom' : new Date($scope.eventTimeFrom).getTime()/1000 | 0,
+      'eventStartAtTo' : new Date($scope.eventTimeTo).getTime()/1000 | 0,
+      'eventMembersCountFrom' : $scope.eventMembersFrom,
+      'eventMembersCountTo' : $scope.eventMembersTo,
+      'userGender' : $scope.genderMale ? 1 : $scope.genderFemale ? 2 : null,
+      'userAgeFrom' : $scope.ageFrom,
+      'userAgeTo' : $scope.ageTo
+    };
+
+    getMapInfo.getFilteredInfo(options).then(function (data) {
+      mapCreate.clearMap();
+      mapCreate.setData(data.data);
+    });
+
+  };
+
+  /*getMapInfo.getFilteredInfo(options).then(function (res) {
+    console.log('cur');
+    console.log(res);
+  });*/
 
 }]);

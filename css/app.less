@@ -30,6 +30,9 @@
     border-top: 1px solid #1c1c1c;
   }
 
+  &__item {
+    white-space: normal;
+  }
   &__link {
     box-sizing: content-box;
     font-size: 16px;
@@ -109,6 +112,10 @@
     border-radius: 10px;
     margin-right: 5px;
     padding: 4px 8px;
+    max-width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     &_round {
       padding: 4px;
       border-radius: 50%;
@@ -234,7 +241,6 @@
 
   &__items {
     display: none;
-    padding: 6px 0;
     border-top: 1px solid @filterBorder;
     border-bottom: 1px solid @filterBorder;
   }
@@ -408,7 +414,7 @@
 
   &__info {
     padding: 11px 13px;
-    white-space: nowrap;
+    white-space: normal;
     height: 85px;
     min-width: 450px;
     box-sizing: border-box;
@@ -575,11 +581,7 @@
   }
 }
 
-.users-list {
-  padding: 0 35px;
-  box-sizing: border-box;
-  display: block;
-}
+
 .line {
   height: 1px;
   background: #d9d9d9;
@@ -627,6 +629,9 @@
 }
 
 .users-list {
+  padding: 0 35px;
+  box-sizing: border-box;
+  display: block;
   margin: 0 -6px;
   font-size: 0;
   margin-top: 30px;
@@ -644,6 +649,10 @@
     border-radius: 4px;
     position: relative;
     max-width: 210px;
+  }
+
+  &__link {
+    display: block;
     &:before {
       content: '';
       position: absolute;
@@ -654,6 +663,7 @@
       background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
       border-radius: 4px;
     }
+    //position: relative;
   }
 }
 

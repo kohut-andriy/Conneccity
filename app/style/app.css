@@ -338,6 +338,9 @@ body {
   background: #212121;
   border-top: 1px solid #1c1c1c;
 }
+.menu__item {
+  white-space: normal;
+}
 .menu__link {
   box-sizing: content-box;
   font-size: 16px;
@@ -415,6 +418,10 @@ body {
   border-radius: 10px;
   margin-right: 5px;
   padding: 4px 8px;
+  max-width: 100px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .ponches__link_round {
   padding: 4px;
@@ -530,7 +537,6 @@ body {
 }
 .filter__items {
   display: none;
-  padding: 6px 0;
   border-top: 1px solid #ececec;
   border-bottom: 1px solid #ececec;
 }
@@ -687,7 +693,7 @@ body {
 }
 .card__info {
   padding: 11px 13px;
-  white-space: nowrap;
+  white-space: normal;
   height: 85px;
   min-width: 450px;
   box-sizing: border-box;
@@ -833,11 +839,6 @@ body {
 .users__list {
   padding: 0 35px;
 }
-.users-list {
-  padding: 0 35px;
-  box-sizing: border-box;
-  display: block;
-}
 .line {
   height: 1px;
   background: #d9d9d9;
@@ -880,6 +881,9 @@ body {
   border-bottom-right-radius: 4px;
 }
 .users-list {
+  padding: 0 35px;
+  box-sizing: border-box;
+  display: block;
   margin: 0 -6px;
   font-size: 0;
   margin-top: 30px;
@@ -898,7 +902,10 @@ body {
   position: relative;
   max-width: 210px;
 }
-.users-list__item:before {
+.users-list__link {
+  display: block;
+}
+.users-list__link:before {
   content: '';
   position: absolute;
   top: 0;

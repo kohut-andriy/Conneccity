@@ -34,9 +34,9 @@ userProfileModule.controller('userProfileController', ['$scope','getUserData','$
     if(dif > DAY) {
       return lastSeenDate.toLocaleDateString(locale);
     } else if( dif > HOUR ) {
-      return dif/HOUR.toFixed(0) + 'hours ego';
+      return (dif/HOUR).toFixed(0) + 'hours ego';
     } else if( dif > MINUTE ) {
-      return dif/MINUTE.toFixed(0) + 'minutes ego';
+      return (dif/MINUTE).toFixed(0) + 'minutes ego';
     } else if( dif < MINUTE ) {
       return (dif/1000).toFixed(0) + 'seconds ego';
     }

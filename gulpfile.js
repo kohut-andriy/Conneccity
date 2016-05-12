@@ -23,7 +23,7 @@ gulp.task('jsTask', function () {
     .pipe(babel({
       presets: ['es2015']
     }))
-    .pipe(minifyJS())
+    //.pipe(minifyJS())
     .pipe(gulp.dest('app/js'))
 });
 

@@ -10,61 +10,61 @@
             <ul class="filter__sub-list" >
                 <li class="filter__row filter__row_h">Gender</li>
                 <li class="filter__row">
-                    <label for="" class="filter__label">
-                        <input ng-model="genderMale" type="checkbox" name="gender" class="radio"> Male
+                    <label for="male" class="filter__label">
+                        <input ng-model="genderMale" type="checkbox" name="gender" class="radio" id="male"> Male
                     </label>
                 </li>
                 <li class="filter__row">
-                    <label for="" class="filter__label">
-                        <input type="checkbox" ng-model="genderFemale" name="gender"  class="radio"> Female
+                    <label for="female" class="filter__label">
+                        <input type="checkbox" ng-model="genderFemale" name="gender"  class="radio" id="female"> Female
                     </label>
                 </li>
                 <li class="filter__row filter__row_h">Age</li>
                 <li class="filter__row">
-                    <input type="text" placeholder="3" ng-model="ageFrom" class="input"> &mdash; <input type="text" ng-model="ageTo" placeholder="100" class="input"></li>
+                    <input type="text" placeholder="3" ng-model="ageFrom" class="input">
+                    &mdash;
+                    <input type="text" ng-model="ageTo" placeholder="100" class="input"></li>
             </ul>
         </li>
-        <li class="filter__item ">
-            <div class="filter__head filter-meetings-icon-b">Meetings<span class=" arrow-icon_small"></span></div>
+        <li class="filter__item " ng-class="{'active': meetingState}">
+            <div class="filter__head filter-meetings-icon-b"
+                 ng-class="{'selected': meetingMembersFrom || meetingMembersTo}"
+                 ng-click="toggleMeeting()">
+                Meetings
+                <span class=" arrow-icon_small"></span>
+            </div>
             <ul class="filter__sub-list" >
-                <li class="filter__row filter__row_h">Gender</li>
-                <li class="filter__row">
-                    <label for="" class="filter__label">
-                        <input type="checkbox" name="gender" class="radio"> Male
-                    </label>
-                </li>
-                <li class="filter__row">
-                    <label for="" class="filter__label">
-                        <input type="checkbox"  name="gender"  class="radio"> Female
-                    </label>
-                </li>
                 <li class="filter__row filter__row_h">Age</li>
                 <li class="filter__row">
-                    <input type="text" placeholder="3" class="input"> &mdash; <input type="text" placeholder="100" class="input"></li>
+                    <input type="text" placeholder="3" class="input" ng-model="meetingMembersFrom">
+                    &mdash;
+                    <input type="text" placeholder="100" class="input" ng-model="meetingMembersTo">
+                </li>
             </ul>
         </li>
-        <li class="filter__item ">
-            <div class="filter__head filter-events-icon-b">Events<span class=" arrow-icon_small"></span></div>
+        <li class="filter__item " ng-class="{'active': eventState}">
+            <div class="filter__head filter-events-icon-b"
+                 ng-class="{'selected': eventMembersFrom || eventMembersTo}"
+                 ng-click="toggleEvent()">
+                Events
+                <span class=" arrow-icon_small"></span>
+            </div>
             <ul class="filter__sub-list" >
-                <li class="filter__row filter__row_h">Gender</li>
+                <li class="filter__row filter__row_h">Time</li>
                 <li class="filter__row">
-                    <label for="" class="filter__label">
-                        <input type="checkbox" name="gender" class="radio"> Male
-                    </label>
-                </li>
-                <li class="filter__row">
-                    <label for="" class="filter__label">
-                        <input type="checkbox"  name="gender"  class="radio"> Female
-                    </label>
+                    <input type="date" ng-model="eventTimeFrom"> &mdash; <input type="date" ng-model="eventTimeTo">
                 </li>
                 <li class="filter__row filter__row_h">Age</li>
                 <li class="filter__row">
-                    <input type="text" placeholder="3" class="input"> &mdash; <input type="text" placeholder="100" class="input"></li>
+                    <input type="text" placeholder="3" class="input" ng-model="eventMembersFrom">
+                    &mdash;
+                    <input type="text" placeholder="100" class="input" ng-model="eventMembersTo">
+                </li>
             </ul>
         </li>
     </ul>
     <footer class="filter__controls">
-        <div class="filter__clear filter-clear-icon" ng-click="setAllInfo()"></div>
-        <div class="filter__submit">Done</div>
+        <div class="filter__clear filter-clear-icon" ng-click="setAllInfo(); toggleState();"></div>
+        <div class="filter__submit" ng-click="filterMap(); toggleState()">Done</div>
     </footer>
 </div>

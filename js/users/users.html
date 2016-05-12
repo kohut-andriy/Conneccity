@@ -16,28 +16,30 @@
     </header>
     <ul class="users-list">
         <li class="users-list__item" ng-repeat="user in users">
-            <img ng-src="{{user.photos.photo200px}}" alt="" class="users-list__img">
-            <div class="short-info-box">
-                <p class="short-info-box__distance">{{getFormattedDistance(user.distance)}}</p>
-                <a ui-sref="app.users.id({id: user.id})" class="short-info-box__name">{{user.name + ' ' + user.surname}}</a>
-                <div class="ponches-wrapper" ng-show="user.ponches.length > 0">
-                    <ul class="ponches">
-                        <li class="ponches__item">
-                            <a href=""
-                               class="ponches__link ponch__link_icon-b"
-                               ng-class="{'favorite': ponch.matches}"
-                               ng-repeat="ponch in user.ponches | limitTo: 2">
-                                {{ ponch.name }}
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="ponches__counter" ng-show="user.ponches.length > 2">
-                        <a href="" class="ponches__link ponches__link_round" ng-class="{ 'favorite' : user.ponches[2].matches}">
-                            +{{user.ponches.length-2}}
-                        </a>
+            <a ui-sref="app.users.id({id: user.id})" class="users-list__link">
+                <img ng-src="{{user.photos.photo200px}}" alt="" class="users-list__img">
+                <div class="short-info-box">
+                    <p class="short-info-box__distance">{{getFormattedDistance(user.distance)}}</p>
+                    <p class="short-info-box__name">{{user.name + ' ' + user.surname}}</p>
+                    <div class="ponches-wrapper" ng-show="user.ponches.length > 0">
+                        <ul class="ponches">
+                            <li class="ponches__item">
+                                <p
+                                   class="ponches__link ponch__link_icon-b"
+                                   ng-class="{'favorite': ponch.matches}"
+                                   ng-repeat="ponch in user.ponches | limitTo: 2">
+                                    {{ ponch.name }}
+                                </p>
+                            </li>
+                        </ul>
+                        <div class="ponches__counter" ng-show="user.ponches.length > 2">
+                            <p  class="ponches__link ponches__link_round" ng-class="{ 'favorite' : user.ponches[2].matches}">
+                                +{{user.ponches.length-2}}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </li>
     </ul>
 </div>

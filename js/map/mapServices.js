@@ -27,12 +27,26 @@ mapModule.service('mapCreate', [ '$rootScope',function ($rootScope) {
 
     self.markerCluster = new MarkerClusterer(self.map, [],
       {
-        gridSize: 50, zoomOnClick: false, styles: [{
-        url: "img/test/cluster.png",
-        height: 28,
-        width: 28
-      }]
+        gridSize: 70,
+        zoomOnClick: false,
+        styles: [{
+            height: 51,
+            url: "img/cluster.png",
+            width: 54,
+            fontFamily: 'Roboto',
+            textSize: 14,
+            textColor: '#898989'
+          },
+          {
+            height: 51,
+            url: "img/cluster-favorite.png",
+            width: 54,
+            fontFamily: 'Roboto',
+            textSize: 14,
+            textColor: '#ffffff'
+          }]
       });
+    self.markerCluster.setCalculator(calculator);
 
     self.geocoder = new google.maps.Geocoder();
 
@@ -44,6 +58,19 @@ mapModule.service('mapCreate', [ '$rootScope',function ($rootScope) {
       }
       $rootScope.$digest();
     });
+  };
+
+  // markerClusterer calculator
+
+  var calculator  = function(markers, numStyles) {
+
+    for(let marker in markers) {
+      if(self.markersMap.get(markers[marker]).hasPonchesMatches) {
+        return {text: markers.length, index: 2};
+      }
+    }
+
+    return {text: markers.length, index: 1};
   };
 
   // put data
@@ -59,35 +86,36 @@ mapModule.service('mapCreate', [ '$rootScope',function ($rootScope) {
     for(let eventType in data) {
 
       for (let eventInfo in data[eventType]) {
+        let currentData = data[eventType][eventInfo];
         switch (eventType) {
           case 'meetings' :
           {
-            data[eventType][eventInfo].eventtype = 'meeting';
+            currentData.eventtype = 'meeting';
             break;
           }
 
           case 'events' :
           {
-            data[eventType][eventInfo].eventtype = 'event';
+            currentData.eventtype = 'event';
             break;
           }
 
           case 'people' :
           {
-            data[eventType][eventInfo].eventtype = '';
+            currentData.eventtype = '';
             break;
           }
         }
 
-        if (!self.coordinatesMap.get([data[eventType][eventInfo].latitude, data[eventType][eventInfo].longitude].join('|'))) {
+        /*if (!self.coordinatesMap.get([currentData.latitude, currentData.longitude].join('|'))) {
 
-          self.getAddress([data[eventType][eventInfo].latitude, data[eventType][eventInfo].longitude]);
+          self.getAddress([currentData.latitude, currentData.longitude]);
 
-        }
+        }*/
 
-          self.drawMarker("img/test/pin.png", "img/test/cluster.png", data[eventType][eventInfo]);
-
-
+          self.drawMarker(currentData.photos ?
+                currentData.photos.photo200px
+                : 'img/test/pin.png', "img/test/cluster.png", currentData);
       }
 
     }
@@ -102,40 +130,121 @@ mapModule.service('mapCreate', [ '$rootScope',function ($rootScope) {
     let context;
     let instance = 0;
 
+    let draw;
     canvas = document.createElement("canvas");
 
     context = canvas.getContext("2d");
 
-    function draw() {
-
-      instance++;
-
-      if (instance == 2) {
-
-        context.drawImage(img2, 0, 0, 25, 25);
-        context.drawImage(img1, 0, 0, 25, 25);
-
-        self.createMarker(canvas.toDataURL(), data);
-      }
-    }
-
     let img1 = new Image();
+
+    let img2 = new Image();
+
+    if(data.eventtype === 'meeting') {
+
+      img2.src = 'img/meeting-marker.png';
+      draw = drawMeetingMarker;
+      console.log('create meeting');
+
+    } else if(data.eventtype === 'event') {
+
+      img2.src = data.hasPonchesMatches ? 'img/event-marker-favorite.png' : 'img/event-marker.png';
+      draw = drawEventMarker;
+      console.log('create event');
+
+    } else {
+      img2.src = data.hasPonchesMatches ? 'img/user-marker-favorite.png' : 'img/user-marker.png';
+      draw = drawUserMarker;
+      console.log('create user');
+    }
 
     img1.onload = draw;
     img1.src = img;
-    let img2 = new Image();
+    img1.crossOrigin="anonymous";
 
     img2.onload = draw;
-    img2.src = bg;
+    img2.crossOrigin="anonymous";
+
+    function drawMeetingMarker() {
+      instance++;
+
+      if(instance == 2) {
+
+        canvas.width = 400;
+        canvas.height = 600;
+
+        context.drawImage(img2, 0,3,300, 420);
+
+        context.arc(150, 160, 110, 0 ,Math.PI * 2, true);
+        context.clip();
+
+        context.drawImage(img1, 20, 40, 250, 250);  context.clip();
+
+        self.createMarker(canvas.toDataURL(), data, new google.maps.Size(60, 85));
+
+      }
+    }
+
+    function drawUserMarker() {
+      instance++;
+
+      if(instance == 2) {
+
+        canvas.width = 400;
+        canvas.height = 400;
+
+        context.drawImage(img2, 0,0,400, 400);
+        context.arc(200, 190, 140, 0 ,Math.PI * 2, true);
+        context.clip();
+
+        context.drawImage(img1, 45, 35, 310, 310);
+        context.clip();
+
+        self.createMarker(canvas.toDataURL(), data, new google.maps.Size(50,50));
+
+      }
+    }
+
+    function drawEventMarker() {
+      instance++;
+
+      if(instance == 2) {
+        canvas.width = 400;
+        canvas.height = 600;
+
+        context.drawImage(img2, 0,0,400,430);
+        roundedImage(75,60,250,250,0);
+        context.clip();
+        context.drawImage(img1, 50, 30, 300, 300);
+
+        self.createMarker(canvas.toDataURL(), data, new google.maps.Size(50, 70));
+
+      }
+    }
+
+    function roundedImage(x,y,width,height,radius){
+      context.beginPath();
+      context.moveTo(x + radius, y);
+      context.lineTo(x + width - radius, y);
+      context.quadraticCurveTo(x + width, y, x + width, y + radius);
+      context.lineTo(x + width, y + height - radius);
+      context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      context.lineTo(x + radius, y + height);
+      context.quadraticCurveTo(x, y + height, x, y + height - radius);
+      context.lineTo(x, y + radius);
+      context.quadraticCurveTo(x, y, x + radius, y);
+      context.closePath();
+    }
+
   };
 
   // create markers, add 'em to clusterer
 
-  self.createMarker = function (img, data) {
-
+  self.createMarker = function (img, data, size) {
+    console.log('create marker');
     let marker = new google.maps.Marker({
       position: new google.maps.LatLng(data.latitude, data.longitude),
-      icon: {url: img, size: new google.maps.Size(25, 25)}
+      icon: {url: img, size: size, scaledSize: size }
+
     });
 
     self.markersMap.set(marker, data);
@@ -182,6 +291,16 @@ mapModule.service('mapCreate', [ '$rootScope',function ($rootScope) {
       self.markerCluster.clearMarkers();
 
   };
+
+  // resize
+
+  self.zoomIn = function () {
+    self.map.setZoom(self.map.getZoom() + 1);
+  };
+
+  self.zoomOut = function () {
+    self.map.setZoom(self.map.getZoom() - 1);
+  };
   
 }]);
 
@@ -202,12 +321,21 @@ mapModule.factory('getMapInfo', ['$http', function ($http) {
         }
       });
     },
-    getFilteredInfo: function (options) {
-      function convertOptionsToUrl() {
-        
+    getFilteredInfo: function (param) {
+      function convertOptionsToUrl(options) {
+        let url = GOOGLE_IP + "map?";
+
+        for(param in options) {
+          if(options[param])
+          url += param + "=" + options[param] + "&";
+        }
+
+        url = url.slice(0, -1);
+          console.log(url);
+        return url;
       }
       return $http({
-        url: GOOGLE_IP + "map",
+        url: convertOptionsToUrl(param),
         method: "GET",
         params: {},
         headers: {
