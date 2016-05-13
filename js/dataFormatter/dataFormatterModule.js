@@ -1,0 +1,1 @@
+var dataFormatterModule = angular.module('dataFormatter', []);

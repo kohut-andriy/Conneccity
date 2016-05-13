@@ -65,6 +65,11 @@
   //= events/eventsController.js
   //= events/eventsServices.js
 
+// dataFormater
+
+  //= dataFormatter/dataFormatterModule.js
+  //= dataFormatter/dataFormatterServices.js
+
 // refactoring
 
 //= app/app.js

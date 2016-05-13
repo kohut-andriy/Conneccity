@@ -13,6 +13,9 @@ mapModule.service('mapCreate', ['$rootScope', function ($rootScope) {
   // array selected markers info for cards
   self.cardsArray = [];
 
+  // geocoder init
+  self.geocoder = new google.maps.Geocoder();
+
   // create map, clusterer, geocoder
   self.initMap = () => {
     self.map = new google.maps.Map(document.getElementById('map'), {
@@ -47,8 +50,6 @@ mapModule.service('mapCreate', ['$rootScope', function ($rootScope) {
           }]
       });
     self.markerCluster.setCalculator(calculator);
-
-    self.geocoder = new google.maps.Geocoder();
 
     google.maps.event.addListener(self.markerCluster, "clusterclick", function (cluster) {
 
@@ -88,6 +89,7 @@ mapModule.service('mapCreate', ['$rootScope', function ($rootScope) {
 
       for (let eventInfo in data[eventType]) {
         let currentData = data[eventType][eventInfo];
+
         switch (eventType) {
           case 'meetings' :
           {
@@ -107,12 +109,6 @@ mapModule.service('mapCreate', ['$rootScope', function ($rootScope) {
             break;
           }
         }
-
-        /*if (!self.coordinatesMap.get([currentData.latitude, currentData.longitude].join('|'))) {
-
-         self.getAddress([currentData.latitude, currentData.longitude]);
-
-         }*/
 
         self.drawMarker(currentData.photos ? currentData.photos.photo200px : 'img/test/pin.png',
           "img/test/cluster.png",
@@ -282,9 +278,8 @@ mapModule.service('mapCreate', ['$rootScope', function ($rootScope) {
             results[0].address_components[1].short_name +
             ',' +
             results[0].address_components[0].short_name);
+          $rootScope.$digest();
         }
-
-        $rootScope.$digest();
       }
     });
   };

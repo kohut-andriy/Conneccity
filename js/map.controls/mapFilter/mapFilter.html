@@ -29,13 +29,20 @@
         </li>
         <li class="filter__item " ng-class="{'active': meetingState}">
             <div class="filter__head filter-meetings-icon-b"
-                 ng-class="{'selected': meetingMembersFrom || meetingMembersTo}"
+                 ng-class="{'selected': meetingMembersFrom || meetingMembersTo || meetingTimeTo || meetingTimeFrom}"
                  ng-click="toggleMeeting()">
                 Meetings
                 <span class=" arrow-icon_small"></span>
             </div>
             <ul class="filter__sub-list">
-                <li class="filter__row filter__row_h">Age</li>
+                <li class="filter__row filter__row_h">Date</li>
+                <li class="filter__row">
+                    <input type="date" ng-model="meetingTimeFrom" class="filter__date-picker">
+                </li>
+                <li class="filter__row">
+                    <input type="date" ng-model="meetingTimeTo" class="filter__date-picker">
+                </li>
+                <li class="filter__row filter__row_h">Members count</li>
                 <li class="filter__row">
                     <input type="text" placeholder="3" class="input" ng-model="meetingMembersFrom">
                     &mdash;
@@ -45,15 +52,18 @@
         </li>
         <li class="filter__item " ng-class="{'active': eventState}">
             <div class="filter__head filter-events-icon-b"
-                 ng-class="{'selected': eventMembersFrom || eventMembersTo}"
+                 ng-class="{'selected': eventMembersFrom || eventMembersTo || eventTimeFrom || eventTimeTo}"
                  ng-click="toggleEvent()">
                 Events
                 <span class=" arrow-icon_small"></span>
             </div>
             <ul class="filter__sub-list">
-                <li class="filter__row filter__row_h">Time</li>
+                <li class="filter__row filter__row_h">Date</li>
                 <li class="filter__row">
-                    <input type="date" ng-model="eventTimeFrom"> &mdash; <input type="date" ng-model="eventTimeTo">
+                    <input type="date" ng-model="eventTimeFrom" class="filter__date-picker">
+                </li>
+                <li class="filter__row">
+                    <input type="date" ng-model="eventTimeTo" class="filter__date-picker">
                 </li>
                 <li class="filter__row filter__row_h">Age</li>
                 <li class="filter__row">
