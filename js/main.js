@@ -3,6 +3,7 @@
   //= app/appModule.js
   //= app/appConfig.js
   //= app/appController.js
+  //= app/appServices.js
 
 // authorization
 
@@ -51,6 +52,8 @@
     //= users/profile/userProfileModule.js
     //= users/profile/userProfileController.js
     //= users/profile/userProfileServices.js
+    //= users/profile/signedUserProfileController.js
+
 // app.meetings
 
   //= meetings/meetingsModule.js

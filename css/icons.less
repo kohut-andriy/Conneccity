@@ -34,7 +34,8 @@
   top: 12px;
 }
 
-.logo_icon-b {
+.logo_icon-b,
+.logo-icon-white-b{
   &:before {
     content: "";
     width: 30px;
@@ -43,6 +44,12 @@
     vertical-align: middle;
     background: url(../img/logo-icon-dark.png);
   }
+}
+
+.logo-icon-white-b:before {
+  background: url("../img/logo-white-icon.png");
+  background-size: cover;
+  margin-right: 5px;
 }
 
 //menu icons
@@ -351,3 +358,26 @@
   }
 }
 
+.app-store-icon-b {
+  &:before {
+    content: '';
+    background: url("../img/stores-sprite.png") right center no-repeat;
+    display: inline-block;
+    height: 30px;
+    width: 26px;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+}
+
+.play-market-icon-b {
+  &:before {
+    content: '';
+    background: url("../img/stores-sprite.png") left center no-repeat;
+    display: inline-block;
+    height: 30px;
+    width: 26px;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+}

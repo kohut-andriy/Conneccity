@@ -15,6 +15,15 @@
 .fl-r {
   float: right;
 }
+.ta-r {
+  text-align: right;
+}
+.ta-l {
+  text-align: left;
+}
+.ta-c {
+  text-align: center;
+}
 body {
   overflow: hidden;
 }
@@ -61,13 +70,19 @@ body {
   right: 0;
   top: 12px;
 }
-.logo_icon-b:before {
+.logo_icon-b:before,
+.logo-icon-white-b:before {
   content: "";
   width: 30px;
   height: 30px;
   display: inline-block;
   vertical-align: middle;
   background: url(../img/logo-icon-dark.png);
+}
+.logo-icon-white-b:before {
+  background: url("../img/logo-white-icon.png");
+  background-size: cover;
+  margin-right: 5px;
 }
 .menu__link:before {
   content: '';
@@ -313,6 +328,24 @@ body {
   background: url("../img/profile-info-icons-sprite.png") 0 -25px no-repeat;
   margin-right: 12px;
 }
+.app-store-icon-b:before {
+  content: '';
+  background: url("../img/stores-sprite.png") right center no-repeat;
+  display: inline-block;
+  height: 30px;
+  width: 26px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.play-market-icon-b:before {
+  content: '';
+  background: url("../img/stores-sprite.png") left center no-repeat;
+  display: inline-block;
+  height: 30px;
+  width: 26px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
 .main {
   height: 100vh;
   display: block;
@@ -394,6 +427,7 @@ body {
   font: 500 18px/1 "Roboto", sans-serif;
   color: #fff;
   vertical-align: middle;
+  text-decoration: none;
 }
 .ponches {
   white-space: normal;
@@ -445,6 +479,12 @@ body {
 .logo__text:before {
   margin-top: -4px;
   margin-right: 8px;
+}
+.logo__text_white {
+  color: #fff;
+}
+.logo_white {
+  margin-bottom: 0;
 }
 .copyright {
   text-align: center;
@@ -1170,4 +1210,166 @@ body {
   display: table-cell;
   vertical-align: middle;
   width: 100%;
+}
+.sign-in {
+  background: url("../img/main-bg.png") top center;
+}
+.sign-in__header {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+.sign-in__block {
+  width: 50%;
+  padding: 105px 15px;
+  box-sizing: border-box;
+  display: table-cell;
+  vertical-align: middle;
+}
+.sign-in__about {
+  padding-right: 115px;
+  box-sizing: border-box;
+  color: #fff;
+}
+.sign-in__text_h {
+  font-size: 50px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  line-height: 1.1;
+}
+.sign-in__text_p {
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 50px;
+  line-height: 1.5;
+}
+.stores {
+  display: block;
+}
+.stores__store {
+  display: inline-block;
+  margin-right: 20px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  background: #222622;
+  border-radius: 4px;
+}
+.stores__text {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 500;
+  font-size: 12px;
+}
+.stores__name {
+  font-size: 16px;
+  font-weight: 700;
+}
+.form {
+  background: #fff;
+  padding: 35px 60px;
+  display: inline-block;
+  border-radius: 10px;
+  text-align: center;
+  width: 100%;
+  max-width: 380px;
+  box-sizing: border-box;
+}
+.form__text {
+  font-size: 26px;
+  color: #616161;
+}
+.form__text_small {
+  font-weight: 400;
+  font-size: 12px;
+  color: #616161;
+  text-decoration: underline;
+}
+.form__item {
+  width: 100%;
+}
+.form__item:not(:last-child) {
+  margin-bottom: 18px;
+}
+.form__socials {
+  margin-bottom: 25px;
+}
+.form__input {
+  text-align: left;
+  width: 100%;
+  color: #45b648;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid #e1e1e1;
+  outline: none;
+  border-radius: 4px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 500px;
+}
+.form__input:focus {
+  border-color: #45b648;
+}
+.form ::-webkit-input-placeholder {
+  color: #616161;
+}
+.form ::-moz-placeholder {
+  color: #616161;
+}
+.form :-moz-placeholder {
+  color: #616161;
+}
+.form :-ms-input-placeholder {
+  color: #616161;
+}
+.form__buttons {
+  display: table;
+  width: 100%;
+}
+.form__button {
+  display: table-cell;
+  width: 50%;
+  font-size: 18px;
+  text-transform: capitalize;
+  line-height: 53px;
+  cursor: pointer;
+}
+.form__button:not(:last-child) {
+  padding-right: 15px;
+}
+.form__button_sign-in {
+  border: 1px solid #45b648;
+  color: #45b648;
+  border-radius: 4px;
+}
+.form__button_login {
+  background: #45b648;
+  color: #fff;
+  border-radius: 4px;
+}
+.separator {
+  display: table;
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 25px;
+}
+.separator__line-wrapper {
+  width: 50%;
+  display: table-cell;
+}
+.separator__line {
+  height: 1px;
+  background: #e1e1e1;
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+}
+.separator__text {
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #e1e1e1;
+  display: table-cell;
+  padding: 0 15px;
 }

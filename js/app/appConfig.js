@@ -23,8 +23,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         }
       }
     })
+    .state('app.profile', {
+      url: 'profile',
+      views: {
+        'content@app': {
+          templateUrl: 'views/userProfile.html',
+          controller: 'signedUserProfile'
+        }
+      }
+    })
     .state('app.users', {
-      url: 'users/',
+      url: 'users',
       views: {
         'content@app': {
           templateUrl: 'views/users.html',
@@ -33,7 +42,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
       }
     })
     .state('app.users.id', {
-      url: '{id:int}',
+      url: '/{id:int}',
       views: {
         'content@app': {
           templateUrl: 'views/userProfile.html',
@@ -42,7 +51,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
       }
     })
     .state('app.events', {
-      url: 'events/',
+      url: 'events',
       views: {
         'content@app': {
           templateUrl: 'views/events.html',
@@ -51,7 +60,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
       }
     })
     .state('app.events.id', {
-      url: ':id',
+      url: '/:id',
       views: {
         'content@app': {
           template: '<p>event id</p>'
@@ -59,7 +68,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
       }
     })
     .state('app.meetings', {
-      url: 'meetings/',
+      url: 'meetings',
       views: {
         'content@app': {
           templateUrl: 'views/meetings.html',
@@ -68,33 +77,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
       }
     })
     .state('app.meetings.id', {
-      url: ':id',
+      url: '/:id',
       views: {
         'content@app': {
           template: '<p>meeting id</p>'
         }
       }
-    })
-    .state('app.map', {
-      url: "map/:id",
-      views: {
-        "content": {
-          template: '<map-filter></map-filter>',
-          link: function (scope) {
-            console.log('cont');
-
-            scope.filterState = false;
-
-            scope.toggleState = function () {
-              scope.filterState = !scope.filterState;
-            };
-          }
-        }
-      }
-    })
-    .state('card', {
-      url: "/card",
-      templateUrl: "views/mapCard.html"
     });
 
   $urlRouterProvider.otherwise("/");

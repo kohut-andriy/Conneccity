@@ -2,7 +2,7 @@
 <header class="profile__header">
     <img class="profile__bg" src="img/test/user-profile-bg.jpg" alt="">
     <div class="profile__controls">
-        <div class="profile__control settings-icon"></div>
+        <div class="profile__control settings-icon" ng-show="isProfile"></div>
         <div class="profile__control menu-icon"></div>
     </div>
 </header>
@@ -20,17 +20,20 @@
 
 <p class="profile__name">{{user.name + ' ' + user.surname}}</p>
 
-<div class="profile__share">
+<div class="profile__share" ng-show="!isProfile">
     <div class="profile__menu"><i class="profile-settings-type-2-icon"></i></div>
     <div class="profile__invite">Invite to meeting</div>
 </div>
 
 <div class="profile__ponches" ng-show="user.ponches.length > 0">
         <div class="ponches">
-        <ul class="ponches">
-            <li class="ponches__item ponches__item_mul" ng-repeat="ponch in user.ponches">
-                <a href="" class="ponches__link favorite ponch__link_icon-b" ng-class="{'favorite':ponch.matches}">{{ponch.name}}</a></li>
-        </ul>
+            <div class="ponches__item ponches__item_mul" ng-repeat="ponch in user.ponches">
+                <a href="" class="ponches__link favorite ponch__link_icon-b">{{ ponch.name }}</a>
+            </div>
+
+            <p class="ponches__item ponches__item_mul" ng-show="isProfile">
+                <a href="" class="ponches__link ponches__link_change ponch__link_change-b">Edit</a>
+            </p>
         </div>
     </div>
 
