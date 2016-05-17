@@ -13,7 +13,7 @@
         <p class="profile__last-seen" ng-show="!user.online">{{ lastSeenFormatted(user.lastSeen) }}</p>
         <img ng-src="{{user.photos.photo200px}}" alt="" class="profile__img profile__img_round">
         <div class="profile__status" ng-show="user.online"></div>
-        <p class="profile__address profile-address-icon-b">{{ getAddress(user.latitude, user.longitude) }} ({{ getFormattedDistance(user.distance) }} away)</p>
+        <p class="profile__address profile-address-icon-b">{{ getAddress(user.latitude, user.longitude) }} <span ng-show="!isProfile">({{ getFormattedDistance(user.distance) }} away)</span></p>
     </div>
 
 </div>

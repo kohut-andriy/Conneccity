@@ -128,6 +128,6 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
     };
 
     $scope.getGender = function (male, female) {
-      formatter.getGender(male, female);
+      return formatter.getGender(male, female);
     };
   }]);
