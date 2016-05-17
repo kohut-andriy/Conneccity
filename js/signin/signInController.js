@@ -1,5 +1,4 @@
-signInModule.controller('signInController', ['$scope', '$http', '$httpParamSerializer', function ($scope, $http, $httpParamSerializer) {
-  
+signInModule.controller('signInController', ['$scope', '$http', '$httpParamSerializer', '$cookies', '$cookieStore', function ($scope, $http, $httpParamSerializer, $cookies, $cookieStore) {
 
   $scope.login = function (user) {
 
@@ -23,15 +22,15 @@ signInModule.controller('signInController', ['$scope', '$http', '$httpParamSeria
       }
     };
 
-    if(user) {
+    if (user) {
       console.log('req');
       $http(req).success(function (name) {
-        console.log("Google WP");
+        $cookieStore.put('accessToken', name.access_token);
         console.log(name);
       }).error(function (name, ere) {
         console.log(ere);
       });
     }
   };
-  
+
 }]);
