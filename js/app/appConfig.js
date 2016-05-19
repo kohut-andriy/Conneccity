@@ -1,5 +1,6 @@
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
-
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider','OAuthProvider','OAuthTokenProvider',
+  function ($stateProvider, $urlRouterProvider, $locationProvider, OAuthProvider, OAuthTokenProvider) {
+    
   $stateProvider
     .state('authorization', {
       url: "/signIn",
@@ -86,4 +87,20 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     });
 
   $urlRouterProvider.otherwise("/");
+
+  OAuthProvider.configure({
+    baseUrl: GOOGLE_IP,
+    clientId: 'clientapp',
+    clientSecret: '123456',
+    grantPath: '/oauth/token',
+    revokePath: '/oauth/token'
+  });
+
+  OAuthTokenProvider.configure({
+    name: 'token',
+    options: {
+      secure: false
+    }
+  });
 }]);
+

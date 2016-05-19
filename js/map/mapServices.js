@@ -305,18 +305,13 @@ mapModule.service('mapCreate', ['$rootScope', function ($rootScope) {
 // send request to server
 
 mapModule.factory('getMapInfo', ['$http', function ($http) {
-  var token = ACCESS_TOKEN;
 
   return {
     getAll: function () {
       return $http({
         url: GOOGLE_IP + "map",
         method: "GET",
-        params: {},
-        headers: {
-          "Authorization": "Bearer " + token,
-          "Content-Type": "application/json"
-        }
+        params: {}
       });
     },
     getFilteredInfo: function (param) {
@@ -336,11 +331,7 @@ mapModule.factory('getMapInfo', ['$http', function ($http) {
       return $http({
         url: convertOptionsToUrl(param),
         method: "GET",
-        params: {},
-        headers: {
-          "Authorization": "Bearer " + token,
-          "Content-Type": "application/json"
-        }
+        params: {}
       });
     }
   }

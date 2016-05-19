@@ -15,5 +15,40 @@ var app = angular.module('conneccityApp',
     'userProfile',
     'meetings',
     'events',
-    'dataFormatter'
+    'dataFormatter',
+    'ngCookies',
+    'angular-oauth2'
   ]);
+
+app.run(['$rootScope', '$state', 'OAuth', '$location', function ($rootScope, $state, OAuth, $location) {
+  /* if( !OAuth.isAuthenticated() ) {
+   $location.path('/signIn');
+   }*/
+  var encoded = btoa("clientapp:123456");
+
+  $rootScope.$on('oauth:error', function (event, rejection) {
+
+    if ('invalid_grant' === rejection.data.error) {
+      return;
+    }
+
+    if ('invalid_token' === rejection.data.error) {
+      return OAuth.getRefreshToken({}, {
+          headers: {
+            "Authorization": "Basic " + encoded,
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+          }
+        }
+      );
+    }
+    // $location.path('/signIn');
+    return $location.path('/signIn');
+  });
+
+  $rootScope.$on("$locationChangeStart", function (event, next, current) {
+    if (!OAuth.isAuthenticated()) {
+      $location.path('/signIn');
+    }
+  });
+
+}]);

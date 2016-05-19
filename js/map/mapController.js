@@ -1,5 +1,5 @@
-mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo', 'formatter',
-  function ($scope, mapCreate, getMapInfo, formatter) {
+mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo', 'formatter', '$q',
+  function ($scope, mapCreate, getMapInfo, formatter, $q) {
 
     $scope.filterState = false;
 
@@ -101,6 +101,7 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
       mapCreate.zoomOut();
     };
 
+    console.log($q.defer());
     mapCreate.initMap();
     $scope.setAllInfo();
 
