@@ -1,7 +1,7 @@
 <div class="users" ng-scrollbar rebuild-on-resize rebuild-on="rebuild:me">
-    <header class="users__controls">
-        <span class="users__text">People nearby</span>
-        <p class="users__divider"><span class="line"></span></p>
+    <header class="controls controls_mt">
+        <span class="controls__text">People nearby</span>
+        <p class="controls__divider controls__divider_1"><span class="line"></span></p>
         <div class="fast-filter">
 
             <input id="recommended" type="radio" name="filter" class="fast-filter__radio" checked>
@@ -11,16 +11,16 @@
             <label for="related" class="fast-filter__label">Most related</label>
 
         </div>
-        <div class="users__icon search-icon-b"></div>
-        <div class="users__icon filter-icon-b"></div>
+        <div class="controls__icon search-icon-b"></div>
+        <div class="controls__icon filter-icon-b"></div>
     </header>
     <ul class="users-list">
         <li class="users-list__item" ng-repeat="user in users">
             <a ui-sref="app.users.id({id: user.id})" class="users-list__link">
                 <img ng-src="{{user.photos.photo200px}}" alt="" class="users-list__img">
                 <div class="short-info-box">
-                    <p class="short-info-box__distance">{{getFormattedDistance(user.distance)}}</p>
-                    <p class="short-info-box__name">{{user.name + ' ' + user.surname}}</p>
+                    <p class="short-info-box__distance short-info-box__distance_block">{{getFormattedDistance(user.distance)}}</p>
+                    <p class="short-info-box__name short-info-box__distance_block">{{user.name + ' ' + user.surname}}</p>
                     <div class="ponches-wrapper" ng-show="user.ponches.length > 0">
                         <ul class="ponches">
                             <li class="ponches__item">

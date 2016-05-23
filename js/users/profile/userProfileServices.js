@@ -1,5 +1,4 @@
 userProfileModule.factory('getUserData', ['$http', function ($http) {
-  var token = ACCESS_TOKEN;
 
   return {
     get: function (id) {

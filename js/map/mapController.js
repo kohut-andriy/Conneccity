@@ -46,7 +46,7 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
       if ($scope.cardCounter < $scope.cardInfo.length - 1) $scope.cardCounter++;
     };
 
-    $scope.getFormatedDistance = function (distance) {
+    $scope.getFormattedDistance = function (distance) {
       return formatter.getDistance(distance);
     };
 
@@ -101,7 +101,6 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
       mapCreate.zoomOut();
     };
 
-    console.log($q.defer());
     mapCreate.initMap();
     $scope.setAllInfo();
 

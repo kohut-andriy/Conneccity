@@ -1,5 +1,4 @@
 usersModule.factory('getUsers', ['$http', function ($http) {
-  var token = ACCESS_TOKEN;
 
   return {
     get: function () {

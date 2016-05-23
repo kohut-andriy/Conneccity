@@ -1,7 +1,6 @@
 'use strict';
 
 var GOOGLE_IP = "http://192.168.1.102:8080/";
-var ACCESS_TOKEN = "bc0178c1-f7fe-424c-a090-34a65b1493ae";
 
 var app = angular.module('conneccityApp',
   [
@@ -17,13 +16,14 @@ var app = angular.module('conneccityApp',
     'events',
     'dataFormatter',
     'ngCookies',
-    'angular-oauth2'
+    'angular-oauth2',
+    'chat'
   ]);
 
 app.run(['$rootScope', '$state', 'OAuth', '$location', function ($rootScope, $state, OAuth, $location) {
-  /* if( !OAuth.isAuthenticated() ) {
+   if( !OAuth.isAuthenticated() ) {
    $location.path('/signIn');
-   }*/
+   }
   var encoded = btoa("clientapp:123456");
 
   $rootScope.$on('oauth:error', function (event, rejection) {
@@ -39,15 +39,19 @@ app.run(['$rootScope', '$state', 'OAuth', '$location', function ($rootScope, $st
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
           }
         }
-      );
+      ).then(function () {
+        $state.reload();
+      }, function () {
+        $state.go('authorization');
+      });
     }
-    // $location.path('/signIn');
+    $location.path('/signIn');
     return $location.path('/signIn');
   });
 
   $rootScope.$on("$locationChangeStart", function (event, next, current) {
     if (!OAuth.isAuthenticated()) {
-      $location.path('/signIn');
+     $location.path('/signIn');
     }
   });
 

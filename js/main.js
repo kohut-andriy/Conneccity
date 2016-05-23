@@ -68,6 +68,14 @@
   //= events/eventsController.js
   //= events/eventsServices.js
 
+
+// app.chat
+
+  //= chat/chatModule.js
+  //= chat/chatServices.js
+  //= chat/chatController.js
+
+
 // dataFormater
 
   //= dataFormatter/dataFormatterModule.js

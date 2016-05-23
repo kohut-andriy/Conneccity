@@ -84,6 +84,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider','OAuthPr
           template: '<p>meeting id</p>'
         }
       }
+    })
+    .state('app.chat', {
+      url: 'chat',
+      views: {
+        'content@app': {
+          templateUrl: 'views/chat.html',
+          controller: 'chatController'
+        }
+      }
     });
 
   $urlRouterProvider.otherwise("/");

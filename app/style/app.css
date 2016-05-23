@@ -120,7 +120,7 @@ body {
 .filter-icon-b:before {
   content: '';
   width: 17px;
-  height: 17px;
+  height: 18px;
   display: inline-block;
   background: url(../img/filter-normal-icon.png) center left no-repeat;
   vertical-align: middle;
@@ -234,7 +234,7 @@ body {
   content: '';
   display: inline-block;
   width: 19px;
-  height: 19px;
+  height: 20px;
   background: url("../img/search-icon.png") center center no-repeat;
 }
 .settings-icon {
@@ -841,44 +841,84 @@ body {
   height: 100vh;
   position: relative;
 }
-.users__controls {
-  margin-top: 40px;
+.users__list {
+  padding: 0 35px;
+}
+.controls {
   white-space: nowrap;
+  box-sizing: border-box;
 }
-.users__controls > * {
-  padding-left: 18px;
-  padding-right: 18px;
+.controls_mt {
+  margin-top: 40px;
+  padding: 0 35px;
 }
-.users__controls > :first-child {
+.controls > * {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.controls > :first-child {
   padding-left: 0;
 }
-.users__controls > :last-child {
+.controls > :last-child {
   padding-right: 0;
 }
-.users__text,
-.users__divider,
-.users__icon {
+.controls__button {
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  background: #f44336;
+  display: table-cell;
+  vertical-align: middle;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 18px;
+}
+.controls__container {
   display: table-cell;
   vertical-align: middle;
 }
-.users__icon {
-  cursor: pointer;
+.controls__text,
+.controls__divider,
+.controls__icon {
+  display: table-cell;
+  vertical-align: middle;
 }
-.users__text {
+.controls__icon {
+  cursor: pointer;
+  padding: 0 8px;
+}
+.controls__text {
   font-weight: 400;
   color: #262626;
   font-size: 24px;
 }
-.users__divider {
+.controls__text_small {
+  color: #262626;
+  font-weight: 500;
+  font-size: 16px;
+  display: table-cell;
+  vertical-align: middle;
+}
+.controls__divider {
+  box-sizing: border-box;
+}
+.controls__divider_1 {
   width: 100%;
-  box-sizing: border-box;
 }
-.users__controls {
-  padding: 0 35px;
-  box-sizing: border-box;
+.controls__divider_2 {
+  width: 50%;
 }
-.users__list {
-  padding: 0 35px;
+.controls__counter {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  background: #6d6d6d;
+  padding: 4px 8px;
+  border-radius: 50%;
+}
+.controls__counter.favorite {
+  background: #45b648;
 }
 .line {
   height: 1px;
@@ -926,7 +966,6 @@ body {
   box-sizing: border-box;
   display: block;
   margin: 0 -6px;
-  font-size: 0;
   margin-top: 30px;
   text-align: center;
 }
@@ -959,6 +998,7 @@ body {
 }
 .short-info-box {
   position: absolute;
+  z-index: 1;
   bottom: 0;
   left: 0;
   right: 0;
@@ -972,12 +1012,20 @@ body {
   color: #fff;
   text-decoration: none;
   margin-top: 8px;
+  max-width: 70%;
+}
+.short-info-box__name_block {
+  display: block;
 }
 .short-info-box__distance {
   color: #45b648;
   font-weight: 500;
   font-size: 13px;
   margin-top: 8px;
+  display: inline-block;
+}
+.short-info-box__distance_block {
+  display: block;
 }
 .profile {
   height: 100vh;
@@ -1040,13 +1088,6 @@ body {
   display: inline-block;
   position: relative;
   width: 141px;
-}
-.profile__img {
-  border-radius: 4px;
-  display: inline-block;
-  vertical-align: middle;
-  width: 100%;
-  margin: 0;
 }
 .profile__img_round {
   width: 100%;
@@ -1132,15 +1173,7 @@ body {
   padding-top: 9px;
   box-sizing: border-box;
 }
-.profile__item {
-  display: inline-block;
-  position: relative;
-  max-width: 290px;
-  margin: 0 6px 6px 6px;
-  box-sizing: border-box;
-  text-align: left;
-}
-.profile__list {
+.profile__events {
   margin: 0 -6px;
   margin-top: 20px;
   text-align: left;
@@ -1160,11 +1193,64 @@ body {
 .profile__years-count {
   margin-left: 5px;
 }
+.event-card {
+  display: inline-block;
+  position: relative;
+  width: 290px;
+  height: 160px;
+  margin: 0 6px 6px 6px;
+  box-sizing: border-box;
+  text-align: left;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.event-card .short-info-box__distance {
+  display: none;
+}
+.event-card .location-info-box__people-count {
+  display: none;
+}
+.event-card__link {
+  display: block;
+}
+.event-card__link:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 100%);
+  border-radius: 4px;
+}
+.event-card__link:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+.event-card__link:hover .short-info-box__distance {
+  display: inline-block;
+}
+.event-card__link:hover .location-info-box__people-count {
+  display: inline-block;
+}
+.event-card__img {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  margin: 0;
+}
 .location-info-box {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1;
   padding: 10px 12px;
   color: #fff;
   font-size: 12px;
@@ -1172,44 +1258,6 @@ body {
 }
 .location-info-box > * {
   margin-bottom: 6px;
-}
-.controls {
-  white-space: nowrap;
-  width: 100%;
-  display: inline-block;
-}
-.controls > * {
-  padding-left: 7px;
-  padding-right: 7px;
-}
-.controls > :first-child {
-  padding-left: 0;
-}
-.controls > :last-child {
-  padding-right: 0;
-}
-.controls__counter {
-  color: #fff;
-  font-size: 12px;
-  font-weight: 500;
-  background: #6d6d6d;
-  padding: 4px 8px;
-  border-radius: 50%;
-}
-.controls__counter.favorite {
-  background: #45b648;
-}
-.controls__text {
-  color: #262626;
-  font-weight: 500;
-  font-size: 16px;
-  display: table-cell;
-  vertical-align: middle;
-}
-.controls__divider {
-  display: table-cell;
-  vertical-align: middle;
-  width: 100%;
 }
 .sign-in {
   background: url("../img/main-bg.png") top center;
@@ -1332,7 +1380,6 @@ body {
   font-size: 18px;
   text-transform: capitalize;
   line-height: 53px;
-  cursor: pointer;
 }
 .form__button:not(:last-child) {
   padding-right: 15px;
@@ -1341,11 +1388,13 @@ body {
   border: 1px solid #45b648;
   color: #45b648;
   border-radius: 4px;
+  cursor: pointer;
 }
 .form__button_login {
   background: #45b648;
   color: #fff;
   border-radius: 4px;
+  cursor: pointer;
 }
 .separator {
   display: table;
@@ -1372,4 +1421,13 @@ body {
   color: #e1e1e1;
   display: table-cell;
   padding: 0 15px;
+}
+.events {
+  height: 100vh;
+}
+.events__list {
+  padding: 35px;
+  box-sizing: border-box;
+  font-size: 0;
+  margin: 0 -6px;
 }

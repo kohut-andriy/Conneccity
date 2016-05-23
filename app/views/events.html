@@ -1,10 +1,68 @@
-<p>Get all events view</p>
-<p>Events</p>
-<ul>
-    <li ng-repeat="event in events">
-        <a ui-sref="app.events.id({id:event.id})">
-                {{event.name}}
+<div class="events" ng-scrollbar rebuild-on-resize rebuild-on="rebuild:me">
+    <header class="controls controls_mt">
+        <span class="controls__text">Events</span>
+        <p class="controls__divider controls__divider_2"><span class="line"></span></p>
+        <div class="fast-filter">
+            <input id="recommended" type="radio" name="filter" class="fast-filter__radio" checked>
+            <label for="recommended" class="fast-filter__label">Recommended</label>
 
-        </a>
-    </li>
-</ul>
+            <input id="upcoming" type="radio" name="filter" class="fast-filter__radio">
+            <label for="upcoming" class="fast-filter__label">Upcoming</label>
+
+            <input id="my" type="radio" name="filter" class="fast-filter__radio">
+            <label for="my" class="fast-filter__label">My events</label>
+
+            <input id="past" type="radio" name="filter" class="fast-filter__radio">
+            <label for="past" class="fast-filter__label">Past</label>
+        </div>
+        <p class="controls__divider controls__divider_2"><span class="line"></span></p>
+        <div class="controls__container">
+            <div class="controls__button">Create event</div>
+        </div>
+        <div class="controls__container">
+            <div class="controls__icon search-icon-b"></div>
+        </div>
+        <div class="controls__container">
+            <div class="controls__icon filter-icon-b"></div>
+        </div>
+    </header>
+    <ul class="events__list">
+        <li class="event-card" ng-repeat="event in events">
+            <a ui-sref="app.events.id({id: event.id})" class="event-card__link">
+                <img ng-src="{{ event.photos.photo400px }}" alt="" class="event-card__img">
+                <div class="location-info-box">
+                    <p class="location-info-box__time profile-card-clock-icon-b"> {{ parseDate(event.startAt) }}
+                            <span class="location-info-box__people-count profile-card-people-icon-b fl-r">
+                                {{ event.memberCount }}
+                            </span>
+                    </p>
+                    <p class="location-info-box__place profile-card-pin-icon-b">
+                        {{ getAddress(event.latitude, event.longitude) }}
+                    </p>
+                </div>
+                <div class="short-info-box">
+                        <p class="short-info-box__distance fl-r">{{getFormattedDistance(event.distance)}}</p>
+                        <p class="short-info-box__name">{{event.name + ' ' + event.surname}}</p>
+                        <div class="ponches-wrapper" ng-show="event.ponches.length > 0">
+                            <ul class="ponches">
+                                <li class="ponches__item">
+                                    <p
+                                            class="ponches__link ponch__link_icon-b"
+                                            ng-class="{'favorite': ponch.matches}"
+                                            ng-repeat="ponch in event.ponches | limitTo: 2">
+                                        {{ ponch.name }}
+                                    </p>
+                                </li>
+                            </ul>
+                            <div class="ponches__counter" ng-show="event.ponches.length > 2">
+                                <p  class="ponches__link ponches__link_round" ng-class="{ 'favorite' : event.ponches[2].matches}">
+                                    +{{event.ponches.length-2}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+            </a>
+        </li>
+    </ul>
+</div>

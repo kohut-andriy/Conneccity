@@ -1,4 +1,4 @@
-mapModule.service('mapCreate', ['$rootScope', function ($rootScope) {
+mapModule.service('mapCreate', ['$rootScope','$q', function ($rootScope, $q) {
   var self = this;
 
   self.map = null;
