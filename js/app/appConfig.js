@@ -61,10 +61,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider','OAuthPr
       }
     })
     .state('app.events.id', {
-      url: '/:id',
+      url: '/{id:int}',
       views: {
         'content@app': {
-          template: '<p>event id</p>'
+          templateUrl: 'views/eventProfile.html',
+          controller: 'eventProfileController'
         }
       }
     })

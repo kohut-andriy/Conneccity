@@ -1,6 +1,6 @@
 'use strict';
 
-var GOOGLE_IP = "http://192.168.1.102:8080/";
+var GOOGLE_IP = "http://192.168.1.103:8080/";
 
 var app = angular.module('conneccityApp',
   [
@@ -17,7 +17,8 @@ var app = angular.module('conneccityApp',
     'dataFormatter',
     'ngCookies',
     'angular-oauth2',
-    'chat'
+    'chat',
+    'eventProfile'
   ]);
 
 app.run(['$rootScope', '$state', 'OAuth', '$location', function ($rootScope, $state, OAuth, $location) {

@@ -1,0 +1,72 @@
+<div class="event-profile cf" ng-click="rebuild()">
+    <img src="img/test/event-profile-bg.jpg" alt="" class="event-profile__bg">
+    <div class="event-profile__scroll-container" ng-scrollbar rebuild-on-resize rebuild-on="scrollRebuild">
+    <div class="event-profile__content">
+        <header class="event-profile__header">
+            <div class="event-profile__controls">
+                <div class="event-profile__control settings-icon"></div>
+                <div class="event-profile__control menu-icon"></div>
+            </div>
+            <span class="event-profile__name">Event</span>
+            <h1 class="event-profile__event-name">{{ event.name }}</h1>
+
+            <div class="event-profile__ponches ponches" ng-show="event.ponches.length > 0">
+                <div class="ponches__item ponches__item_mul" ng-repeat="ponch in event.ponches">
+                    <a href="" class="ponches__link ponch__link_icon-b" ng-class="{ 'favorite' : ponch.matches}">{{ ponch.name }}</a>
+                </div>
+
+                <p class="ponches__item ponches__item_mul">
+                    <a href="" class="ponches__link ponches__link_change ponch__link_change-b">Edit</a>
+                </p>
+            </div>
+        </header>
+
+        <p class="event-profile__text">
+            {{ event.description }}
+        </p>
+
+        <div class="event-profile__info-box info-box">
+            <p class="info-box__text info-place-icon-b">{{ getAddress(event.latitude, event.longitude) }}</p>
+            <p class="info-box__text info-price-icon-b" ng-show="event.price">{{ event.price }}</p>
+            <p class="info-box__text info-date-icon-b">{{ parseDate(event.startAt)}} - {{ parseDate(event.endAt) }}</p>
+        </div>
+
+        <div class="event-profile__buttons">
+            <div class="button button_green button-icon-accept-b">Joined</div>
+            <div class="button button_red button-icon-message-b">Message</div>
+        </div>
+
+        <p class="event-profile__text">Participants</p>
+
+        <div class="event-profile__users-previews-list users-previews-list">
+            <a href="" class="user-preview" ng-repeat="member in members | limitTo : 6">
+                <div class="avatar avatar_block">
+                    <img ng-src="{{ member.photos.photo200px }}" alt="" class="avatar__img">
+                    <div class="avatar__status" ng-show="member.online"></div>
+                </div>
+                <p class="user-preview__name">{{ member.name }}</p>
+            </a>
+
+            <div class="users-previews-list__counter" ng-show="members.length > 6">
+                +{{members.length - 6}}
+            </div>
+        </div>
+
+        <p class="event-profile__text">Admins</p>
+
+        <ul class="event-profile__admins-previews-list admins-previews-list">
+            <li class="admins-previews-list__item">
+                <a href="" class="admins-preview">
+                <div class="avatar">
+                    <img ng-src="{{ event.creator.photos.photo200px }}" alt="" class="avatar__img">
+                    <div class="avatar__status" ng-show="event.creator.online"></div>
+                </div>
+                <div class="admins-preview__info">
+                    <p class="admins-preview__name">{{ event.creator.name }}</p>
+                    <p class="admins-preview__position">Creator</p>
+                </div>
+            </a></li>
+        </ul>
+    </div>
+    </div>
+</div>

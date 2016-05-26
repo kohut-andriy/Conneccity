@@ -75,6 +75,12 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
       } else if (dif < MINUTE) {
         return (dif / 1000).toFixed(0) + 'seconds ego';
       }
+    },
+    
+    getUserListImg : function (url) {
+      return url ? url : 'img/test/user-list-img.jpg';
     }
+    
+    
   }
 }]);

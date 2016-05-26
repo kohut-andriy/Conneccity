@@ -24,4 +24,7 @@ userProfileModule.controller('signedUserProfile', ['$scope', 'getSignedUserInfo'
       return formatter.getAddress(lat, lng);
     };
 
+    $scope.$watch(function () {
+      $scope.$broadcast('scrollRebuild');
+    });
   }]);

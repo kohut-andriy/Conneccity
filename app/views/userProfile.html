@@ -1,31 +1,32 @@
-<div class="profile" ng-scrollbar rebuild-on-resize rebuild-on="rebuild:me">
-<header class="profile__header">
-    <img class="profile__bg" src="img/test/user-profile-bg.jpg" alt="">
-    <div class="profile__controls">
-        <div class="profile__control settings-icon" ng-show="isProfile"></div>
-        <div class="profile__control menu-icon"></div>
+<div class="profile" ng-scrollbar rebuild-on-resize rebuild-on="scrollRebuild">
+    <header class="profile__header">
+        <img class="profile__bg" src="img/test/user-profile-bg.jpg" alt="">
+        <div class="profile__controls">
+            <div class="profile__control settings-icon" ng-show="isProfile"></div>
+            <div class="profile__control menu-icon"></div>
+        </div>
+    </header>
+
+    <div class="profile__main">
+
+        <div class="profile__preview">
+            <p class="profile__last-seen" ng-show="!user.online">{{ lastSeenFormatted(user.lastSeen) }}</p>
+            <img ng-src="{{ getUserImgUrl(user.photos.photo200px) }}" alt="" class="profile__img profile__img_round">
+            <div class="profile__status" ng-show="user.online"></div>
+            <p class="profile__address profile-address-icon-b">{{ getAddress(user.latitude, user.longitude) }} <span
+                    ng-show="!isProfile">({{ getFormattedDistance(user.distance) }} away)</span></p>
+        </div>
+
     </div>
-</header>
 
-<div class="profile__main">
+    <p class="profile__name">{{user.name + ' ' + user.surname}}</p>
 
-    <div class="profile__preview">
-        <p class="profile__last-seen" ng-show="!user.online">{{ lastSeenFormatted(user.lastSeen) }}</p>
-        <img ng-src="{{user.photos.photo200px}}" alt="" class="profile__img profile__img_round">
-        <div class="profile__status" ng-show="user.online"></div>
-        <p class="profile__address profile-address-icon-b">{{ getAddress(user.latitude, user.longitude) }} <span ng-show="!isProfile">({{ getFormattedDistance(user.distance) }} away)</span></p>
+    <div class="profile__share" ng-show="!isProfile">
+        <div class="profile__menu"><i class="profile-settings-type-2-icon"></i></div>
+        <div class="profile__invite">Invite to meeting</div>
     </div>
 
-</div>
-
-<p class="profile__name">{{user.name + ' ' + user.surname}}</p>
-
-<div class="profile__share" ng-show="!isProfile">
-    <div class="profile__menu"><i class="profile-settings-type-2-icon"></i></div>
-    <div class="profile__invite">Invite to meeting</div>
-</div>
-
-<div class="profile__ponches" ng-show="user.ponches.length > 0">
+    <div class="profile__ponches" ng-show="user.ponches.length > 0">
         <div class="ponches">
             <div class="ponches__item ponches__item_mul" ng-repeat="ponch in user.ponches">
                 <a href="" class="ponches__link favorite ponch__link_icon-b">{{ ponch.name }}</a>
@@ -37,95 +38,96 @@
         </div>
     </div>
 
-<div class="profile__data">
-    <div class="profile__filter">
-        <div class="controls">
-            <p class="controls__text_small profile-calendar-icon-b">Events <span class="controls__counter">2</span></p>
-            <p class="controls__divider controls__divider_1"><span class="line"></span></p>
-            <div class="fast-filter">
+    <div class="profile__data">
+        <div class="profile__filter">
+            <div class="controls">
+                <p class="controls__text_small profile-calendar-icon-b">Events <span class="controls__counter">2</span>
+                </p>
+                <p class="controls__divider controls__divider_1"><span class="line"></span></p>
+                <div class="fast-filter">
 
-                <input id="common" type="radio" name="filter" class="fast-filter__radio" checked>
-                <label for="common" class="fast-filter__label">Common</label>
+                    <input id="common" type="radio" name="filter" class="fast-filter__radio" checked>
+                    <label for="common" class="fast-filter__label">Common</label>
 
-                <input id="upcoming" type="radio" name="filter" class="fast-filter__radio">
-                <label for="upcoming" class="fast-filter__label">Upcoming</label>
+                    <input id="upcoming" type="radio" name="filter" class="fast-filter__radio">
+                    <label for="upcoming" class="fast-filter__label">Upcoming</label>
 
-                <input id="past" type="radio" name="filter" class="fast-filter__radio">
-                <label for="past" class="fast-filter__label">Past</label>
+                    <input id="past" type="radio" name="filter" class="fast-filter__radio">
+                    <label for="past" class="fast-filter__label">Past</label>
 
+                </div>
+            </div>
+            <ul class="profile__events">
+                <li class="event-card">
+                    <img src="img/test/profile-card-bg.jpg" alt="" class="event-card__img">
+                    <div class="location-info-box">
+                        <p class="location-info-box__time profile-card-clock-icon-b"> 21 May, 20:00
+                        <span class="location-info-box__people-count profile-card-people-icon-b fl-r">
+                            999
+                        </span>
+                        </p>
+                        <p class="location-info-box__place profile-card-pin-icon-b">Ddf dsfs</p>
+                    </div>
+                    <div class="short-info-box">
+                        <p class="short-info-box__distance fl-r">300m</p>
+                        <a href="" class="short-info-box__name">Name Surname</a>
+                        <div class="ponches-wrapper">
+                            <ul class="ponches">
+                                <li class="ponches__item">
+                                    <a href="" class="ponches__link ponch__link_icon-b">
+                                        ponch
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="ponches__counter">
+                                <a href="" class="ponches__link ponches__link_round">
+                                    +1
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="event-card">
+                    <img src="img/test/profile-card-bg.jpg" alt="" class="event-card__img">
+                    <div class="location-info-box">
+                        <p class="location-info-box__time profile-card-clock-icon-b"> 21 May, 20:00
+                        <span class="location-info-box__people-count profile-card-people-icon-b fl-r">
+                            999
+                        </span>
+                        </p>
+                        <p class="location-info-box__place profile-card-pin-icon-b">Ddf dsfs</p>
+                    </div>
+                    <div class="short-info-box">
+                        <p class="short-info-box__distance fl-r">300m</p>
+                        <a href="" class="short-info-box__name">Name Surname</a>
+                        <div class="ponches-wrapper">
+                            <ul class="ponches">
+                                <li class="ponches__item">
+                                    <a href="" class="ponches__link ponch__link_icon-b">
+                                        ponch
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="ponches__counter">
+                                <a href="" class="ponches__link ponches__link_round">
+                                    +1
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="profile__info fl-r">
+            <div class="profile__about-button">
+                <div class="profile__text profile__text profile-about-icon-b" ng-click="toggleAbout()">About</div>
+            </div>
+            <div class="profile__user-info" ng-show="aboutBox">
+                <p class="profile__birthday profile-birthday-icon-b">{{ user.dateBirthday }}
+                    <span class="profile__years-count">( {{ getAge(user.dateBirthday)}} years)</span>
+                </p>
+                <p class="profile__phone profile-phone-icon-b" ng-show="user.mobilePhone"> {{ user.mobilePhone }}</p>
             </div>
         </div>
-        <ul class="profile__events">
-            <li class="event-card">
-                <img src="img/test/profile-card-bg.jpg" alt="" class="event-card__img">
-                <div class="location-info-box">
-                    <p class="location-info-box__time profile-card-clock-icon-b"> 21 May, 20:00
-                        <span class="location-info-box__people-count profile-card-people-icon-b fl-r">
-                            999
-                        </span>
-                    </p>
-                    <p class="location-info-box__place profile-card-pin-icon-b">Ddf dsfs</p>
-                </div>
-                <div class="short-info-box">
-                    <p class="short-info-box__distance fl-r">300m</p>
-                    <a href="" class="short-info-box__name">Name Surname</a>
-                    <div class="ponches-wrapper">
-                        <ul class="ponches">
-                            <li class="ponches__item">
-                                <a href="" class="ponches__link ponch__link_icon-b">
-                                    ponch
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="ponches__counter" >
-                            <a href="" class="ponches__link ponches__link_round">
-                                +1
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="event-card">
-                <img src="img/test/profile-card-bg.jpg" alt="" class="event-card__img">
-                <div class="location-info-box">
-                    <p class="location-info-box__time profile-card-clock-icon-b"> 21 May, 20:00
-                        <span class="location-info-box__people-count profile-card-people-icon-b fl-r">
-                            999
-                        </span>
-                    </p>
-                    <p class="location-info-box__place profile-card-pin-icon-b">Ddf dsfs</p>
-                </div>
-                <div class="short-info-box">
-                    <p class="short-info-box__distance fl-r">300m</p>
-                    <a href="" class="short-info-box__name">Name Surname</a>
-                    <div class="ponches-wrapper">
-                        <ul class="ponches">
-                            <li class="ponches__item">
-                                <a href="" class="ponches__link ponch__link_icon-b">
-                                    ponch
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="ponches__counter" >
-                            <a href="" class="ponches__link ponches__link_round">
-                                +1
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
     </div>
-    <div class="profile__info fl-r">
-        <div class="profile__about-button">
-            <div class="profile__text profile__text profile-about-icon-b" ng-click="toggleAbout()">About</div>
-        </div>
-        <div class="profile__user-info" ng-show="aboutBox">
-            <p class="profile__birthday profile-birthday-icon-b">{{ user.dateBirthday }}
-                <span class="profile__years-count">( {{ getAge(user.dateBirthday)}} years)</span>
-            </p>
-            <p class="profile__phone profile-phone-icon-b" ng-show="user.mobilePhone"> {{ user.mobilePhone }}</p>
-        </div>
-    </div>
-</div>
 </div>

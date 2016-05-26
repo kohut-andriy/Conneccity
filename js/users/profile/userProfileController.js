@@ -4,8 +4,6 @@ userProfileModule.controller('userProfileController', ['$scope', 'getUserData', 
     getUserData.get($stateParams.id).then(function (result) {
       $scope.user = result.data;
       console.log($scope.user);
-    }).then(function () {
-      $scope.$broadcast('rebuild:me');
     });
 
     $scope.aboutBox = false;
@@ -30,4 +28,12 @@ userProfileModule.controller('userProfileController', ['$scope', 'getUserData', 
     $scope.lastSeenFormatted = function (date) {
       return formatter.getLastSeenTime(date);
     };
+
+    $scope.getUserImgUrl = function (url) {
+      return formatter.getUserImgUrl(url);
+    };
+
+    $scope.$watch(function () {
+      $scope.$broadcast('scrollRebuild');
+    });
   }]);

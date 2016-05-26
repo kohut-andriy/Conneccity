@@ -7,4 +7,9 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', fu
   $scope.logout = function () {
     OAuthToken.removeToken();
   };
+
+  $scope.scrollBuild = function () {
+    $scope.$broadcast('rebuild:me');
+  }
 }]);
+

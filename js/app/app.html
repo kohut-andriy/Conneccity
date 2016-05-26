@@ -3,12 +3,14 @@
 <div  class="menu fl-l" ng-scrollbar rebuild-on-resize>
     <header class="menu__header">
         <div class="user">
+            <a ui-sref="app.profile" class="user__link">
             <img ng-src="{{ user.photos.photo200px }}" alt="" class="user__img">
-            <a ui-sref="app.profile" class="user__name">
+            <div class="user__name">
                 <p>{{ user.name }}</p>
                 <p>{{ user.surname }}</p>
+            </div>
             </a>
-            <a ui-sref="authorization" class="logout-icon" ng-click="logout()"></a>
+            <a ui-sref="authorization" class="logout-icon fl-r" ng-click="logout()"></a>
         </div>
         <div class="ponches">
                 <div class="ponches__item ponches__item_mul" ng-repeat="ponch in user.ponches">
@@ -41,4 +43,4 @@
         </div>
     </footer>
 </div>
-<ui-view [ name="content" ] class="main"></ui-view>
+<ui-view [ name="content" ] class="main"> </ui-view>

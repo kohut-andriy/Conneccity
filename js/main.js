@@ -68,6 +68,11 @@
   //= events/eventsController.js
   //= events/eventsServices.js
 
+  // app.events.profile
+
+    //= events/profile/eventProfileModule.js
+    //= events/profile/eventProfileServices.js
+    //= events/profile/eventProfileController.js
 
 // app.chat
 

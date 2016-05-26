@@ -1,0 +1,1 @@
+var eventProfile = angular.module('eventProfile', []);
