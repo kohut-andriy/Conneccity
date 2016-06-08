@@ -20,7 +20,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider','OAuthPr
           controller: 'appController'
         },
         'content@app': {
-          template: '<conneccity-map class="map"></conneccity-map>'
+          templateUrl: 'views/map.html'
         }
       }
     })
@@ -82,7 +82,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider','OAuthPr
       url: '/:id',
       views: {
         'content@app': {
-          template: '<p>meeting id</p>'
+          templateUrl: 'views/meetingProfile.html',
+          controller: 'meetingProfileController'
         }
       }
     })

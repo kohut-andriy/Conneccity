@@ -29,7 +29,7 @@
     <div class="profile__ponches" ng-show="user.ponches.length > 0">
         <div class="ponches">
             <div class="ponches__item ponches__item_mul" ng-repeat="ponch in user.ponches">
-                <a href="" class="ponches__link favorite ponch__link_icon-b">{{ ponch.name }}</a>
+                <a href="" class="ponches__link ponch__link_icon-b" ng-class="{'favorite': ponch.matches}">{{ ponch.name }}</a>
             </div>
 
             <p class="ponches__item ponches__item_mul" ng-show="isProfile">

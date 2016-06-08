@@ -1,6 +1,6 @@
 mapModule.directive('conneccityMap', function () {
   return {
-    templateUrl: "views/map.html",
+    templateUrl: "views/_map.html",
     controller: "mapCreateController"
   }
 });

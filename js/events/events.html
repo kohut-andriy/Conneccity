@@ -29,7 +29,7 @@
     <ul class="events__list">
         <li class="event-card" ng-repeat="event in events">
             <a ui-sref="app.events.id({id: event.id})" class="event-card__link">
-                <img ng-src="{{ event.photos.photo400px }}" alt="" class="event-card__img">
+                <img ng-src="{{ getEventImg(event.photos.photo400px) }}" alt="" class="event-card__img">
                 <div class="location-info-box">
                     <p class="location-info-box__time profile-card-clock-icon-b"> {{ parseDate(event.startAt) }}
                             <span class="location-info-box__people-count profile-card-people-icon-b fl-r">

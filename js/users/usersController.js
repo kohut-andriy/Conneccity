@@ -11,7 +11,7 @@ usersModule.controller('usersController', ['$scope', 'getUsers', 'formatter', fu
     $scope.$broadcast('scrollRebuild');
   });
 
-  $scope.getImgUrl = function (url) {
+  $scope.getUserImgUrl = function (url) {
     return formatter.getUserListImg(url);
   };
 }]);

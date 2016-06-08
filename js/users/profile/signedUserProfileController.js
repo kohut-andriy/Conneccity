@@ -24,6 +24,10 @@ userProfileModule.controller('signedUserProfile', ['$scope', 'getSignedUserInfo'
       return formatter.getAddress(lat, lng);
     };
 
+    $scope.getUserImgUrl = function (url) {
+      return formatter.getUserImg(url);
+    };
+    
     $scope.$watch(function () {
       $scope.$broadcast('scrollRebuild');
     });

@@ -17,7 +17,7 @@
     <ul class="users-list">
         <li class="users-list__item" ng-repeat="user in users">
             <a ui-sref="app.users.id({id: user.id})" class="users-list__link">
-                <img ng-src="{{ getImgUrl(user.photos.photo200px) }}" alt="" class="users-list__img">
+                <img ng-src="{{ getUserImgUrl(user.photos.photo200px) }}" alt="" class="users-list__img">
                 <div class="short-info-box">
                     <p class="short-info-box__distance short-info-box__distance_block">{{getFormattedDistance(user.distance)}}</p>
                     <p class="short-info-box__name short-info-box__distance_block">{{user.name + ' ' + user.surname}}</p>

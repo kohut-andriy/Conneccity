@@ -30,7 +30,7 @@ userProfileModule.controller('userProfileController', ['$scope', 'getUserData', 
     };
 
     $scope.getUserImgUrl = function (url) {
-      return formatter.getUserImgUrl(url);
+      return formatter.getUserImg(url);
     };
 
     $scope.$watch(function () {

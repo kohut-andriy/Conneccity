@@ -16,6 +16,35 @@ mapModule.service('mapCreate', ['$rootScope','$q', function ($rootScope, $q) {
   // geocoder init
   self.geocoder = new google.maps.Geocoder();
 
+  // lite map init
+  self.liteMapInit = (marker, markerType) => {
+    self.map = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: marker.latitude,
+        lng: (marker.longitude + 0.005)
+      },
+      zoom: 16,
+      maxZoom: 16,
+      minZoom: 16,
+      clickableIcons: false,
+      rotateControl: false,
+      disableDefaultUI: true,
+      draggable: false
+    });
+
+    self.markerCluster = new MarkerClusterer(self.map, [],[]);
+
+    let dataArray = {};
+
+    dataArray[markerType] = {
+      '0' : marker
+    };
+
+    console.log(dataArray);
+    
+    self.setMarkers(dataArray);
+  };
+
   // create map, clusterer, geocoder
   self.initMap = () => {
     self.map = new google.maps.Map(document.getElementById('map'), {
@@ -49,6 +78,7 @@ mapModule.service('mapCreate', ['$rootScope','$q', function ($rootScope, $q) {
             textColor: '#ffffff'
           }]
       });
+    
     self.markerCluster.setCalculator(calculator);
 
     google.maps.event.addListener(self.markerCluster, "clusterclick", function (cluster) {
@@ -85,13 +115,15 @@ mapModule.service('mapCreate', ['$rootScope','$q', function ($rootScope, $q) {
   // adding event's name, push data to get addresses ,push data to create markers
   self.setMarkers = function (data) {
 
+    console.log('mark');
     for (let eventType in data) {
-
+      console.log(data[eventType]);
       for (let eventInfo in data[eventType]) {
         let currentData = data[eventType][eventInfo];
 
         switch (eventType) {
           case 'meetings' :
+            console.log('met');
           {
             currentData.eventtype = 'meeting';
             break;
@@ -123,6 +155,7 @@ mapModule.service('mapCreate', ['$rootScope','$q', function ($rootScope, $q) {
 
   self.drawMarker = function (img, bg, data) {
 
+    console.log('draw');
     let canvas;
     let context;
     let instance = 0;

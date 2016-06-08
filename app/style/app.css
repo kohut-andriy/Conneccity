@@ -1603,7 +1603,7 @@ body {
   bottom: 0;
   width: 7px;
   height: 7px;
-  border: 3px solid transparent;
+  border: 3px solid #fff;
   border-radius: 50%;
   background: #45b648;
 }

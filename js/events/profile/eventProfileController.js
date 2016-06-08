@@ -22,6 +22,11 @@ eventProfile.controller('eventProfileController', ['$scope', 'getEventInfo', '$s
       return formatter.formatDate(date);
     };
 
+    $scope.getUserImg = function (url) {
+      return formatter.getUserImg(url);
+    };
+    
+
     $scope.$watch(function () {
       $scope.$broadcast('scrollRebuild');
     });

@@ -79,8 +79,14 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
     
     getUserListImg : function (url) {
       return url ? url : 'img/test/user-list-img.jpg';
+    },
+
+    getUserImg : function (url) {
+      return url ? url : 'img/test/user-icon.jpg';
+    },
+
+    getEventListImg : function (url) {
+      return url ? url : 'img/test/profile-card-bg.jpg';
     }
-    
-    
   }
 }]);

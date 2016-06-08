@@ -18,7 +18,8 @@ var app = angular.module('conneccityApp',
     'ngCookies',
     'angular-oauth2',
     'chat',
-    'eventProfile'
+    'eventProfile',
+    'meetingProfile'
   ]);
 
 app.run(['$rootScope', '$state', 'OAuth', '$location', function ($rootScope, $state, OAuth, $location) {

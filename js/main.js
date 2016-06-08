@@ -22,6 +22,8 @@
   //= map/mapDirective.js
   //= map/mapController.js
   //= map/mapServices.js
+  //= map/mapLiteController.js
+  //= map/mapLiteDirective.js
 
 // map.controls
 
@@ -59,6 +61,12 @@
   //= meetings/meetingsModule.js
   //= meetings/meetingsController.js
   //= meetings/meetingsServices.js
+
+  // app.meetings.profile
+
+    //= meetings/profile/meetingProfileModule.js
+    //= meetings/profile/meetingProfileController.js
+    //= meetings/profile/meetingProfileServices.js
 
 
 // app.events

@@ -1,0 +1,1 @@
+var meetingProfileModule = angular.module('meetingProfile', []);

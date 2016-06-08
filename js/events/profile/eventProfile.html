@@ -1,5 +1,5 @@
 <div class="event-profile cf" ng-click="rebuild()">
-    <img src="img/test/event-profile-bg.jpg" alt="" class="event-profile__bg">
+    <img ng-src="{{ event.photos.photoOriginal }}" alt="" class="event-profile__bg">
     <div class="event-profile__scroll-container" ng-scrollbar rebuild-on-resize rebuild-on="scrollRebuild">
     <div class="event-profile__content">
         <header class="event-profile__header">
@@ -39,9 +39,9 @@
         <p class="event-profile__text">Participants</p>
 
         <div class="event-profile__users-previews-list users-previews-list">
-            <a href="" class="user-preview" ng-repeat="member in members | limitTo : 6">
+            <a ui-sref="app.users.id({ id : member.id})" class="user-preview" ng-repeat="member in members | limitTo : 6">
                 <div class="avatar avatar_block">
-                    <img ng-src="{{ member.photos.photo200px }}" alt="" class="avatar__img">
+                    <img ng-src="{{ getUserImg(member.photos.photo200px) }}" alt="" class="avatar__img">
                     <div class="avatar__status" ng-show="member.online"></div>
                 </div>
                 <p class="user-preview__name">{{ member.name }}</p>
@@ -56,13 +56,13 @@
 
         <ul class="event-profile__admins-previews-list admins-previews-list">
             <li class="admins-previews-list__item">
-                <a href="" class="admins-preview">
+                <a ui-sref="app.users.id({ id : event.creator.id})" class="admins-preview">
                 <div class="avatar">
-                    <img ng-src="{{ event.creator.photos.photo200px }}" alt="" class="avatar__img">
+                    <img ng-src="{{ getUserImg(event.creator.photos.photo200px) }}" alt="" class="avatar__img">
                     <div class="avatar__status" ng-show="event.creator.online"></div>
                 </div>
                 <div class="admins-preview__info">
-                    <p class="admins-preview__name">{{ event.creator.name }}</p>
+                    <p class="admins-preview__name">{{ event.creator.name }} {{ event.creator.surname }}</p>
                     <p class="admins-preview__position">Creator</p>
                 </div>
             </a></li>

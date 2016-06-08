@@ -53,10 +53,11 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
     $scope.setAllInfo = function () {
 
       console.log('setting');
-      mapCreate.clearMap();
+
 
       getMapInfo.getAll().then(function (data) {
         console.log(data.data);
+        mapCreate.clearMap();
         mapCreate.setData(data.data);
       });
     };

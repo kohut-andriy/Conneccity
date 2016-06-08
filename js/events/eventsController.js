@@ -15,5 +15,7 @@ eventsModule.controller('eventsController', ['$scope', 'getEvents', 'formatter',
     return formatter.getAddress(lat, lng);
   };
   
-  
+  $scope.getEventImg = function (url) {
+    return formatter.getEventListImg(url);
+  }
 }]);
