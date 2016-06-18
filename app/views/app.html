@@ -4,7 +4,7 @@
     <header class="menu__header">
         <div class="user">
             <a ui-sref="app.profile" class="user__link">
-            <img ng-src="{{ user.photos.photo200px }}" alt="" class="user__img">
+            <img ng-src="{{ getUserImgUrl(user.photos.photo200px) }}" alt="" class="user__img">
             <div class="user__name">
                 <p>{{ user.name }}</p>
                 <p>{{ user.surname }}</p>

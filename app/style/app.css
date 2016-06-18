@@ -42,6 +42,18 @@ body {
 .ngsb-wrap .ngsb-scrollbar .ngsb-thumb-pos:active {
   background: none;
 }
+.empty-list-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  display: block;
+  z-index: -1;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
 .ponch__link_icon-b:before {
   content: '';
   background: url(../img/ponch-icon.png) no-repeat;
@@ -79,6 +91,13 @@ body {
 }
 .logo-icon-white-b:before {
   background: url("../img/logo-white-icon.png");
+  background-size: cover;
+  margin-right: 5px;
+}
+.logo-icon-green-b:before {
+  content: '';
+  display: inline-block;
+  background: url("../img/logo-green.png");
   background-size: cover;
   margin-right: 5px;
 }
@@ -290,14 +309,20 @@ body {
   background: url("../img/profile-card-sprite.png") -16px 0 no-repeat;
   vertical-align: middle;
 }
+.profile-card-pin-icon-b_gray:before {
+  background-position: -16px bottom;
+}
 .profile-card-clock-icon-b:before {
   content: '';
   width: 14px;
   height: 15px;
   display: inline-block;
   margin-right: 5px;
-  background: url("../img/profile-card-sprite.png") 0 -1px no-repeat;
+  background: url("../img/profile-card-sprite.png") 0 0 no-repeat;
   vertical-align: middle;
+}
+.profile-card-clock-icon-b_gray:before {
+  background-position: 0 bottom;
 }
 .profile-card-people-icon-b:before {
   content: '';
@@ -389,9 +414,26 @@ body {
   vertical-align: middle;
   background: url("../img/button-sprite.png") -17px 0 no-repeat;
 }
+.decline-icon-b:before {
+  content: '';
+  height: 10px;
+  width: 12px;
+  display: inline-block;
+  margin-right: 15px;
+  background: url("../img/meeting-button-icons.png") 0 -1px;
+}
+.accept-icon-b:before {
+  content: '';
+  height: 12px;
+  width: 16px;
+  display: inline-block;
+  margin-right: 15px;
+  background: url("../img/meeting-button-icons.png") -13px 0;
+}
 .main {
   height: 100vh;
   display: block;
+  position: relative;
   margin-left: 226px;
   box-sizing: border-box;
 }
@@ -495,14 +537,14 @@ body {
   background: #727373;
   border-radius: 10px;
   margin-right: 5px;
-  padding: 4px 8px;
+  padding: 5px 8px;
   max-width: 100px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 .ponches__link_round {
-  padding: 4px;
+  padding: 5px 6px;
   border-radius: 50%;
 }
 .ponches__link_change {
@@ -512,7 +554,7 @@ body {
   background: #45B648;
 }
 .logo {
-  margin-bottom: 12px;
+  display: inline-block;
 }
 .logo__text {
   color: #4e4e4e;
@@ -526,6 +568,11 @@ body {
 }
 .logo__text_white {
   color: #fff;
+}
+.logo__text_green {
+  color: #45b648;
+  font-size: 18px;
+  text-transform: uppercase;
 }
 .logo_white {
   margin-bottom: 0;
@@ -886,6 +933,12 @@ body {
   box-sizing: border-box;
   height: 100vh;
   position: relative;
+}
+.users .ponches__link {
+  max-width: 55px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .users__list {
   padding: 0 35px;
@@ -1304,7 +1357,12 @@ body {
   font-size: 12px;
   font-weight: 500;
 }
-.location-info-box > * {
+.location-info-box_static {
+  position: relative;
+  background: #f6f6f6;
+  color: #8a8a8a;
+}
+.location-info-box > *:not(:last-child) {
   margin-bottom: 6px;
 }
 .sign-in {
@@ -1369,6 +1427,24 @@ body {
   max-width: 380px;
   box-sizing: border-box;
 }
+.form_small {
+  padding: 10px;
+  line-height: 48px;
+  margin: 0 auto;
+  display: block;
+  text-align: left;
+}
+.form__label {
+  font-size: 14px;
+  color: #666666;
+  font-weight: 500;
+  max-width: 100px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+}
 .form__text {
   font-size: 26px;
   color: #616161;
@@ -1388,6 +1464,10 @@ body {
 .form__socials {
   margin-bottom: 25px;
 }
+.form__wrapper {
+  width: 260px;
+  font-size: 0;
+}
 .form__input {
   text-align: left;
   width: 100%;
@@ -1401,7 +1481,7 @@ body {
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
-  font-weight: 500px;
+  font-weight: 500;
 }
 .form__input:focus {
   border-color: #45b648;
@@ -1426,6 +1506,7 @@ body {
   display: table-cell;
   width: 50%;
   font-size: 18px;
+  text-align: center;
   text-transform: capitalize;
   line-height: 53px;
 }
@@ -1438,11 +1519,49 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
-.form__button_login {
+.form__button_submit {
   background: #45b648;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 18px;
+  text-align: center;
+  text-transform: capitalize;
+  line-height: 48px;
+  display: inline-block;
+  width: 100%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  box-shadow: none;
+}
+.form__radio {
+  display: none;
+}
+.form__radio:checked + label {
+  background: url("../img/form-radio.png") left center;
+}
+.form__radio-item {
+  display: inline-block;
+  margin-right: 20px;
+}
+.form__radio-label {
+  padding-left: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #cacaca;
+  vertical-align: middle;
+}
+.form__radio-label_bg {
+  content: '';
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background: url("../img/form-radio.png") right center;
+  vertical-align: middle;
 }
 .separator {
   display: table;
@@ -1471,7 +1590,7 @@ body {
   padding: 0 15px;
 }
 .events {
-  height: 100vh;
+  min-height: 100vh;
 }
 .events__list {
   padding: 35px;
@@ -1619,6 +1738,9 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.user-preview_dark {
+  color: #212121;
+}
 .user-preview__name {
   display: inline;
   line-height: 18px;
@@ -1664,4 +1786,104 @@ body {
   font-weight: 500;
   color: #999999;
   line-height: 18px;
+}
+.meetings {
+  min-height: 100vh;
+}
+.meetings__list {
+  padding: 30px 35px;
+  margin: 0 -5px;
+}
+.meeting-card {
+  display: inline-block;
+  width: 285px;
+  margin: 0 5px 10px 5px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.55);
+}
+.meeting-card__link {
+  text-decoration: none;
+}
+.meeting-card__members {
+  padding: 16px 12px;
+}
+.meeting-card__members > :not(:first-child) {
+  vertical-align: top;
+  margin-right: 10px;
+}
+.meeting-card__fullinfo {
+  display: inline-block;
+}
+.meeting-card__fullinfo > * {
+  vertical-align: middle;
+}
+.meeting-card__info {
+  display: inline-block;
+}
+.meeting-card__name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #212121;
+}
+.meeting-card__distance {
+  color: #45b648;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  margin-top: 15px;
+}
+.meeting-card__invite {
+  color: #ffa600;
+  font-weight: 500;
+  font-size: 12px;
+}
+.meeting-card__buttons > :not(:last-child) {
+  border-right: 1px solid #ededed;
+}
+.meeting-card__button {
+  display: inline-block;
+  width: 50%;
+  float: left;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  border-top: 1px solid #ededed;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 14px 0;
+}
+.meeting-card__button_accept {
+  color: #45b648;
+}
+.meeting-card__button_decline {
+  color: #f44336;
+}
+.sign-up__header {
+  box-shadow: 0px 2px 4.75px 0.25px rgba(0, 0, 0, 0.14);
+  padding: 15px 10px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  line-height: 48px;
+}
+.sign-up__header-content {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+.sign-up__button {
+  color: #45b648;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0 46px;
+  border-radius: 3px;
+  border: 1px solid #45b648;
+  text-transform: uppercase;
+}
+.sign-up__h1 {
+  font-size: 24px;
+  line-height: 60px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #666666;
 }

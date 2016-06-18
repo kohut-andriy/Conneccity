@@ -1,21 +1,32 @@
-eventsModule.controller('eventsController', ['$scope', 'getEvents', 'formatter', function ($scope, getEvents, formatter) {
-  getEvents.get().then(function (response) {
-    $scope.events = response.data;
-  });
+eventsModule.controller('eventsController', ['$scope', 'getEvents', 'formatter', '$cookies',
+  function ($scope, getEvents, formatter, $cookies) {
+    getEvents.get().then(function (response) {
+      $scope.events = response.data;
+    });
 
-  $scope.getFormattedDistance = function (distance) {
-    return formatter.getDistance(distance);
-  };
+    $scope.getCurrentUserId = function () {
+      return $cookies.getObject('currentUser').id;
+    };
 
-  $scope.parseDate = function (date) {
-    return formatter.formatDate(date);
-  };
+    $scope.getFilteredEvents = function (type) {
+      getEvents.get(type).then(function (response) {
+        $scope.events = response.data;
+      });
+    };
 
-  $scope.getAddress = function (lat, lng) {
-    return formatter.getAddress(lat, lng);
-  };
-  
-  $scope.getEventImg = function (url) {
-    return formatter.getEventListImg(url);
-  }
-}]);
+    $scope.getFormattedDistance = function (distance) {
+      return formatter.getDistance(distance);
+    };
+
+    $scope.parseDate = function (date) {
+      return formatter.formatDate(date);
+    };
+
+    $scope.getAddress = function (lat, lng) {
+      return formatter.getAddress(lat, lng);
+    };
+
+    $scope.getEventImg = function (url) {
+      return formatter.getEventListImg(url);
+    }
+  }]);

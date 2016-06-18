@@ -1,6 +1,6 @@
 'use strict';
 
-var GOOGLE_IP = "http://192.168.1.103:8080/";
+var GOOGLE_IP = "http://develop.conneccity.net/";
 
 var app = angular.module('conneccityApp',
   [
@@ -23,9 +23,11 @@ var app = angular.module('conneccityApp',
   ]);
 
 app.run(['$rootScope', '$state', 'OAuth', '$location', function ($rootScope, $state, OAuth, $location) {
-   if( !OAuth.isAuthenticated() ) {
-   $location.path('/signIn');
-   }
+  if (!OAuth.isAuthenticated() && $location.path() != '/signUp') {
+
+    $location.path('/signIn');
+  }
+
   var encoded = btoa("clientapp:123456");
 
   $rootScope.$on('oauth:error', function (event, rejection) {
@@ -44,16 +46,20 @@ app.run(['$rootScope', '$state', 'OAuth', '$location', function ($rootScope, $st
       ).then(function () {
         $state.reload();
       }, function () {
+        /*  if($state.getName() != 'registration')
+         console.log($state.getName());*/
         $state.go('authorization');
       });
     }
+
     $location.path('/signIn');
     return $location.path('/signIn');
   });
 
   $rootScope.$on("$locationChangeStart", function (event, next, current) {
-    if (!OAuth.isAuthenticated()) {
-     $location.path('/signIn');
+
+    if (!OAuth.isAuthenticated() && ($location.path() != '/signUp')) {
+      $location.path('/signIn');
     }
   });
 

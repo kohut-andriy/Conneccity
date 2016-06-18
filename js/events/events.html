@@ -1,19 +1,20 @@
+<img src="img/empty-list.png" alt="" class="empty-list-bg" ng-if="events.length < 1">
 <div class="events" ng-scrollbar rebuild-on-resize rebuild-on="rebuild:me">
     <header class="controls controls_mt">
         <span class="controls__text">Events</span>
         <p class="controls__divider controls__divider_2"><span class="line"></span></p>
         <div class="fast-filter">
-            <input id="recommended" type="radio" name="filter" class="fast-filter__radio" checked>
-            <label for="recommended" class="fast-filter__label">Recommended</label>
+            <input id="recommended" type="radio" name="filter" class="fast-filter__radio" >
+            <label for="recommended" class="fast-filter__label" ng-click="getFilteredEvents('recommendation')">Recommended</label>
 
-            <input id="upcoming" type="radio" name="filter" class="fast-filter__radio">
-            <label for="upcoming" class="fast-filter__label">Upcoming</label>
+            <input id="upcoming" type="radio" name="filter" class="fast-filter__radio" checked>
+            <label for="upcoming" class="fast-filter__label" ng-click="getFilteredEvents()">Upcoming</label>
 
             <input id="my" type="radio" name="filter" class="fast-filter__radio">
-            <label for="my" class="fast-filter__label">My events</label>
+            <label for="my" class="fast-filter__label" ng-click="getFilteredEvents('nearby')">Nearby</label>
 
             <input id="past" type="radio" name="filter" class="fast-filter__radio">
-            <label for="past" class="fast-filter__label">Past</label>
+            <label for="past" class="fast-filter__label" ng-click="getFilteredEvents('past')">Past</label>
         </div>
         <p class="controls__divider controls__divider_2"><span class="line"></span></p>
         <div class="controls__container">

@@ -14,7 +14,6 @@ signInModule.controller('signInController', ['$scope', '$http', '$state','OAuth'
     }).then(function () {
       $state.go('app');
     });
-
   };
 
 }]);

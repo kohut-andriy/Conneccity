@@ -1,1 +1,76 @@
-<p>sign up</p>
+<div class="sign-up">
+    <header class="sign-up__header">
+        <div class="sign-up__header-content cf">
+            <div class="logo logo_green">
+                <div class="logo__text_green logo_icon-b logo-icon-green-b">Conneccity</div>
+            </div>
+            <div class="sign-up__button fl-r">Login</div>
+        </div>
+    </header>
+    <h1 class="sign-up__h1">
+        Create an account in Conneccity
+    </h1>
+
+    <form class="form form_small" ng-submit="signUp(user)">
+        <ul class="form__list">
+            <li class="form__item">
+                <label for="name" class="form__label">First name:</label>
+                <div class="form__wrapper fl-r">
+                    <input type="text" id="name"
+                           class="form__input form__input_static" ng-model="user.firstName" required>
+                </div>
+            </li>
+            <li class="form__item">
+                <label for="surname" class="form__label">Last name:</label>
+                <div class="form__wrapper fl-r">
+                    <input type="text" id="surname"
+                           class="form__input form__input_static" ng-model="user.lastName" required>
+                </div>
+            </li>
+            <li class="form__item">
+                <label class="form__label">Gender:</label>
+                <div class="form__wrapper fl-r">
+                    <div class="form__radio-item">
+                        <input type="radio" id="male" name="gender" class="form__radio" ng-model="user.genderMale"
+                               checked>
+                        <label for="male" class="form__radio-label_bg"></label>
+                        <label for="male" class="form__radio-label">Male</label>
+                    </div>
+                    <div class="form__radio-item">
+                        <input type="radio" id="female" name="gender" class="form__radio" ng-model="user.genderFemale">
+                        <label for="female" class="form__radio-label_bg"></label>
+                        <label for="female" class="form__radio-label">Female</label>
+                    </div>
+                </div>
+            </li>
+            <li class="form__item">
+                <label for="email" class="form__label">Email</label>
+                <div class="form__wrapper fl-r">
+                    <input type="email" id="email"
+                           class="form__input form__input_static" ng-model="user.email" required>
+                </div>
+            </li>
+            <li class="form__item">
+                <label for="pass" class="form__label">Password</label>
+                <div class="form__wrapper fl-r">
+                    <input type="password" id="pass"
+                           class="form__input form__input_static" ng-model="user.password" required>
+                </div>
+            </li>
+            <li class="form__item">
+                <label for="pass-conf" class="form__label">Confirm password</label>
+                <div class="form__wrapper fl-r">
+                    <input type="text" id="pass-conf"
+                           class="form__input form__input_static" ng-model="user.passwordConfirm" required>
+                </div>
+            </li>
+            <li class="form__item">
+                <div class="form__wrapper fl-r">
+                    <div class="form__button fl-r">
+                        <input type="submit" class="form__button_submit" value="Sign up">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>

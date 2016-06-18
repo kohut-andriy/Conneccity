@@ -50,6 +50,14 @@
   margin-right: 5px;
 }
 
+.logo-icon-green-b:before {
+  content: '';
+  display: inline-block;
+  background: url("../img/logo-green.png");
+  background-size: cover;
+  margin-right: 5px;
+}
+
 //menu icons
 
 .menu__link:before {
@@ -306,6 +314,11 @@
     background: url("../img/profile-card-sprite.png") -16px 0 no-repeat;
     vertical-align: middle;
   }
+  &_gray{
+    &:before {
+      background-position: -16px bottom;
+    }
+  }
 }
 
 .profile-card-clock-icon-b {
@@ -315,8 +328,13 @@
     height: 15px;
     display: inline-block;
     margin-right: 5px;
-    background: url("../img/profile-card-sprite.png") 0 -1px no-repeat;
+    background: url("../img/profile-card-sprite.png") 0 0 no-repeat;
     vertical-align: middle;
+  }
+  &_gray{
+    &:before {
+      background-position: 0 bottom;
+    }
   }
 }
 
@@ -437,5 +455,27 @@
     margin-right: 7px;
     vertical-align: middle;
     background: url("../img/button-sprite.png") -17px 0 no-repeat;
+  }
+}
+
+.decline-icon-b {
+  &:before {
+    content: '';
+    height: 10px;
+    width: 12px;
+    display: inline-block;
+    margin-right: 15px;
+    background: url("../img/meeting-button-icons.png") 0 -1px;
+  }
+}
+
+.accept-icon-b {
+  &:before {
+    content: '';
+    height: 12px;
+    width: 16px;
+    display: inline-block;
+    margin-right: 15px;
+    background: url("../img/meeting-button-icons.png") -13px 0;
   }
 }

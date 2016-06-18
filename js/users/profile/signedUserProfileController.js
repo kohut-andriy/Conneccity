@@ -1,12 +1,28 @@
-userProfileModule.controller('signedUserProfile', ['$scope', 'getSignedUserInfo', 'formatter',
-  function ($scope, getSignedUserInfo, formatter) {
+userProfileModule.controller('signedUserProfile', ['$scope', 'getUserData', 'formatter', '$cookies',
+  function ($scope, getUserData, formatter, $cookies) {
 
-    getSignedUserInfo.get().then(function (result) {
-      $scope.user = result.data;
-      console.log($scope.user);
-    }).then(function () {
-      $scope.$broadcast('rebuild:me');
+    $scope.user = $cookies.getObject('currentUser');
+
+    getUserData.getEvents($scope.user.id).then(function (result) {
+      $scope.events = result.data;
+      console.log($scope.events);
     });
+
+    $scope.getEventImg = function (url) {
+      return formatter.getEventListImg(url);
+    };
+
+    $scope.parseDate = function (date) {
+      return formatter.formatDate(date);
+    };
+
+    $scope.getFilteredEventsList = function (type) {
+
+      getUserData.getEvents($scope.user.id, type).then(function (data) {
+
+        $scope.events = data.data;
+      });
+    };
 
     $scope.isProfile = true;
 
@@ -14,6 +30,10 @@ userProfileModule.controller('signedUserProfile', ['$scope', 'getSignedUserInfo'
 
     $scope.toggleAbout = function () {
       $scope.aboutBox = !$scope.aboutBox;
+    };
+
+    $scope.lastSeenFormatted = function (date) {
+      return formatter.getLastSeenTime(date);
     };
 
     $scope.getAge = function (date) {
@@ -27,7 +47,7 @@ userProfileModule.controller('signedUserProfile', ['$scope', 'getSignedUserInfo'
     $scope.getUserImgUrl = function (url) {
       return formatter.getUserImg(url);
     };
-    
+
     $scope.$watch(function () {
       $scope.$broadcast('scrollRebuild');
     });

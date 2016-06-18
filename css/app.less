@@ -5,6 +5,7 @@
 .main {
   height: 100vh;
   display: block;
+  position: relative;
   margin-left: 226px;
   box-sizing: border-box;
 }
@@ -123,14 +124,14 @@
     background: #727373;
     border-radius: 10px;
     margin-right: 5px;
-    padding: 4px 8px;
+    padding: 5px 8px;
     max-width: 100px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 
     &_round {
-      padding: 4px;
+      padding: 5px 6px;
       border-radius: 50%;
     }
 
@@ -145,7 +146,8 @@
 }
 
 .logo {
-  margin-bottom: 12px;
+ // margin-bottom: 12px;
+  display: inline-block;
 
   &__text {
     color: @menuFooterText;
@@ -158,6 +160,11 @@
     }
     &_white {
       color: #fff;
+    }
+    &_green {
+      color: #45b648;
+      font-size: 18px;
+      text-transform: uppercase;
     }
   }
   &_white {
@@ -581,6 +588,13 @@
   box-sizing: border-box;
   height: 100vh;
   position: relative;
+
+  .ponches__link {
+    max-width: 55px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
 
   &__list {
@@ -1064,8 +1078,13 @@
   color: #fff;
   font-size: 12px;
   font-weight: 500;
+  &_static {
+    position: relative;
+    background: #f6f6f6;
+    color: #8a8a8a;
+  }
 
-  & > * {
+  & > *:not(:last-child) {
     margin-bottom: 6px;
   }
 }
@@ -1143,6 +1162,24 @@
   width: 100%;
   max-width: 380px;
   box-sizing: border-box;
+  &_small {
+    padding: 10px;
+    line-height: 48px;
+    margin: 0 auto;
+    display: block;
+    text-align: left;
+  }
+  &__label {
+    font-size: 14px;
+    color: #666666;
+    font-weight: 500;
+    max-width: 100px;
+    padding-right: 20px;
+    box-sizing: border-box;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+  }
   &__text {
     font-size: 26px;
     color: #616161;
@@ -1165,6 +1202,10 @@
     margin-bottom: 25px;
   }
 
+  &__wrapper {
+    width: 260px;
+    font-size: 0;
+  }
   &__input {
     text-align: left;
     width: 100%;
@@ -1176,7 +1217,7 @@
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
-    font-weight: 500px;
+    font-weight: 500;
     &:focus {
       border-color: #45b648;
     }
@@ -1196,6 +1237,7 @@
     display: table-cell;
     width: 50%;
     font-size: 18px;
+    text-align: center;
     text-transform: capitalize;
     line-height: 53px;
     &:not(:last-child) {
@@ -1208,13 +1250,53 @@
       cursor: pointer;
     }
     
-    &_login {
+    &_submit {
       background: #45b648;
       color: #fff;
       border-radius: 4px;
       cursor: pointer;
+      font-size: 18px;
+      text-align: center;
+      text-transform: capitalize;
+      line-height: 48px;
+      display: inline-block;
+      width: 100%;
+      appearance: none;
+      border: none;
+      box-shadow: none;
     }
   }
+
+  &__radio {
+    display: none;
+    &:checked + label {
+        background: url("../img/form-radio.png") left center;
+    }
+  }
+
+  &__radio-item {
+    display: inline-block;
+    margin-right: 20px;
+  }
+
+  &__radio-label {
+    padding-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #cacaca;
+    vertical-align: middle;
+    &_bg {
+      content: '';
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      background: url("../img/form-radio.png") right center;
+      vertical-align: middle;
+    }
+  }
+
 }
 
 
@@ -1249,7 +1331,7 @@
 }
 
 .events {
-  height: 100vh;
+  min-height: 100vh;
   &__list {
     padding: 35px;
     box-sizing: border-box;
@@ -1422,6 +1504,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  &_dark {
+    color: #212121;
+  }
   &__name {
     display: inline;
     line-height: 18px;
@@ -1477,5 +1562,119 @@
     font-weight: 500;
     color: #999999;
     line-height: 18px;
+  }
+}
+
+.meetings{
+  min-height: 100vh;
+  &__list {
+    padding: 30px 35px;
+    margin: 0 -5px;
+  }
+}
+
+.meeting-card {
+  display: inline-block;
+  width: 285px;
+  //height: 135px;
+  margin: 0 5px 10px 5px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.55);
+  &__link {
+    text-decoration: none;
+  }
+  &__members {
+    padding: 16px 12px;
+    & > :not(:first-child)  {
+      vertical-align: top;
+      margin-right: 10px;
+    }
+  }
+  &__fullinfo {
+    display: inline-block;
+    &> * {
+      vertical-align: middle;
+    }
+  }
+  &__info {
+    display: inline-block;
+  }
+  &__name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #212121;
+  }
+
+  &__distance {
+    color: #45b648;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 15px;
+  }
+  &__invite {
+    color: #ffa600;
+    font-weight: 500;
+    font-size: 12px;
+  }
+
+  &__buttons {
+    & > :not(:last-child) {
+      border-right: 1px solid #ededed;
+    }
+  }
+
+  &__button {
+    display: inline-block;
+    width: 50%;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-top: 1px solid #ededed;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 14px 0;
+    &_accept {
+      color: #45b648;
+    }
+    &_decline {
+      color: #f44336;
+    }
+  }
+}
+
+.sign-up {
+  //padding: 15px 10px;
+  &__header {
+    box-shadow: 0px 2px 4.75px 0.25px rgba(0, 0, 0, 0.14);
+    padding: 15px 10px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    line-height: 48px;
+    &-content {
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+  }
+
+  &__button {
+    color: #45b648;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0 46px;
+    border-radius: 3px;
+    border: 1px solid #45b648;
+    text-transform: uppercase;
+  }
+
+  &__h1 {
+    font-size: 24px;
+    line-height: 60px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #666666;
   }
 }
