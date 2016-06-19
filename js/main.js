@@ -25,6 +25,11 @@
   //= map/mapLiteController.js
   //= map/mapLiteDirective.js
 
+// geolocation
+
+  //= geolocation/geolocationModule.js
+  //= geolocation/geolocationServices.js
+
 // map.controls
 
   // map.controls.resize

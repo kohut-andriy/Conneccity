@@ -1,5 +1,5 @@
-signUpModule.controller('signUpController', ['$scope', 'addUser', 'OAuthToken', '$state', '$cookies',
-  function ($scope, addUser, OAuthToken, $state, $cookies) {
+signUpModule.controller('signUpController', ['$scope', 'addUser', 'OAuthToken', '$state', '$cookies', 'getUserLocation',
+  function ($scope, addUser, OAuthToken, $state, $cookies, getUserLocation) {
 
     
     $scope.signUp = function (user) {
@@ -18,6 +18,9 @@ signUpModule.controller('signUpController', ['$scope', 'addUser', 'OAuthToken', 
         OAuthToken.setToken(data.data);
         console.log(data);
         $cookies.putObject(user);
+
+        getUserLocation.get();
+
         $state.go('app');
       });
 

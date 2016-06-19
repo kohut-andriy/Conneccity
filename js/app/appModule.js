@@ -19,7 +19,8 @@ var app = angular.module('conneccityApp',
     'angular-oauth2',
     'chat',
     'eventProfile',
-    'meetingProfile'
+    'meetingProfile',
+    'geolocation'
   ]);
 
 app.run(['$rootScope', '$state', 'OAuth', '$location', function ($rootScope, $state, OAuth, $location) {

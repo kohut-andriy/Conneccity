@@ -1509,6 +1509,7 @@ body {
   text-align: center;
   text-transform: capitalize;
   line-height: 53px;
+  text-decoration: none;
 }
 .form__button:not(:last-child) {
   padding-right: 15px;

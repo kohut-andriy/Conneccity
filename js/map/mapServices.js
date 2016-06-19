@@ -1,4 +1,4 @@
-mapModule.service('mapCreate', ['$rootScope','$q', function ($rootScope, $q) {
+mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootScope, $q, $cookies) {
   var self = this;
 
   self.map = null;
@@ -16,6 +16,17 @@ mapModule.service('mapCreate', ['$rootScope','$q', function ($rootScope, $q) {
   // geocoder init
   self.geocoder = new google.maps.Geocoder();
 
+  // show user location
+
+  self.centerMapToUser = function () {
+    self.map.setCenter(new google.maps.LatLng(
+      $cookies.getObject('currentUser').latitude,
+      $cookies.getObject('currentUser').longitude
+    ));
+
+    self.map.setZoom(10);
+  };
+
   // lite map init
   self.liteMapInit = (marker, markerType) => {
     self.map = new google.maps.Map(document.getElementById('map'), {
@@ -32,16 +43,16 @@ mapModule.service('mapCreate', ['$rootScope','$q', function ($rootScope, $q) {
       draggable: false
     });
 
-    self.markerCluster = new MarkerClusterer(self.map, [],[]);
+    self.markerCluster = new MarkerClusterer(self.map, [], []);
 
     let dataArray = {};
 
     dataArray[markerType] = {
-      '0' : marker
+      '0': marker
     };
 
     console.log(dataArray);
-    
+
     self.setMarkers(dataArray);
   };
 
@@ -78,7 +89,7 @@ mapModule.service('mapCreate', ['$rootScope','$q', function ($rootScope, $q) {
             textColor: '#ffffff'
           }]
       });
-    
+
     self.markerCluster.setCalculator(calculator);
 
     google.maps.event.addListener(self.markerCluster, "clusterclick", function (cluster) {
@@ -277,7 +288,8 @@ mapModule.service('mapCreate', ['$rootScope','$q', function ($rootScope, $q) {
         url: img,
         size: size,
         scaledSize: size
-      }
+      },
+      animation:google.maps.Animation.DROP
     });
 
     self.markersMap.set(marker, data);
