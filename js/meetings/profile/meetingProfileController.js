@@ -36,5 +36,9 @@ meetingProfileModule.controller('meetingProfileController',
         getMeetingInfo.leave(id).success(function () {
           $state.go('app.meetings');
         });
+      };
+
+      $scope.getStatusStile = function (status) {
+        return formatter.getMeetingStatusIconStyle(status);
       }
     }]);

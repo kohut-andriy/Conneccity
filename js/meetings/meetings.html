@@ -31,7 +31,6 @@
                     <div class="meeting-card__fullinfo" ng-if="meeting.selfState == '1'">
                         <div class="avatar">
                             <img ng-src="{{meeting.creator.photos.photo200px}}" alt="" class="avatar__img">
-                            <div class="avatar__status"></div>
                         </div>
                         <div class="meeting-card__info">
                             <p class="meeting-card__name">{{ meeting.creator.name }} {{ meeting.creator.surname
@@ -46,7 +45,7 @@
                          ng-repeat="member in meeting.members | limitTo : 3">
                         <div class="avatar avatar_block">
                             <img ng-src="{{ member.photos.photo200px }}" alt="" class="avatar__img">
-                            <div class="avatar__status"></div>
+                            <div class="meeting-status-icon" ng-class="getStatusStile(member.state)"></div>
                         </div>
                         <p class="user-preview__name">{{ member.name }}</p>
                     </div>

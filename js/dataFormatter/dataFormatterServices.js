@@ -87,6 +87,16 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
 
     getEventListImg : function (url) {
       return url ? url : 'img/test/profile-card-bg.jpg';
+    },
+    
+    getMeetingStatusIconStyle: function (status) {
+      if(status == 'DECLINED') {
+        return 'meeting-status-icon_declined';
+      } else if (status == "INVITED") {
+        return 'meeting-status-icon_invited';
+      } else {
+        return 'meeting-status-icon_accepted';
+      }
     }
   }
 }]);

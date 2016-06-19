@@ -479,3 +479,25 @@
     background: url("../img/meeting-button-icons.png") -13px 0;
   }
 }
+
+.meeting-status-icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background: url("../img/meeting-status-icon.png");
+  &_declined {
+    background-position: 0 0;
+  }
+
+  &_accepted {
+    background-position: -18px 0;
+  }
+
+  &_invited {
+    background-position: -36px 0;
+  }
+}
