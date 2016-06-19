@@ -1,5 +1,5 @@
-eventProfile.controller('eventProfileController', ['$scope', 'getEventInfo', '$stateParams', 'formatter',
-  function ($scope, getEventInfo, $stateParams, formatter) {
+eventProfile.controller('eventProfileController', ['$scope', 'getEventInfo', '$stateParams', 'formatter', '$cookies',
+  function ($scope, getEventInfo, $stateParams, formatter, $cookies) {
 
     getEventInfo.get($stateParams.id).then(function (response) {
       $scope.event = response.data;
@@ -30,4 +30,26 @@ eventProfile.controller('eventProfileController', ['$scope', 'getEventInfo', '$s
     $scope.$watch(function () {
       $scope.$broadcast('scrollRebuild');
     });
+
+    $scope.join = function (id) {
+      getEventInfo.join(id).success(function () {
+        $scope.toggleMember();
+      });
+    };
+
+    $scope.leave = function (id) {
+      getEventInfo.leave(id).success(function () {
+        $scope.toggleMember();
+      });
+    };
+
+    $scope.toggleMember = function () {
+      if($scope.event.isMember) {
+        $scope.event.isMember = false;
+        $scope.members.shift();
+      } else {
+        $scope.unshift($cookies.getObject('currentUser'));
+        $scope.event.selfState = true;
+      }
+    };
   }]);

@@ -11,6 +11,18 @@ meetingProfileModule.factory('getMeetingInfo', ['$http', function ($http) {
         url: GOOGLE_IP + "meetings/" + id + "/members",
         method: "GET"
       });
+    },
+    join: function (id) {
+      return $http({
+        url: GOOGLE_IP + "meetings/" + id,
+        method: "POST"
+      });
+    },
+    leave: function (id) {
+      return $http({
+        url: GOOGLE_IP + "meetings/" + id,
+        method: "DELETE"
+      })
     }
   };
 }]);

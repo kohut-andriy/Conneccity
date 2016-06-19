@@ -1,9 +1,9 @@
 signUpModule.controller('signUpController', ['$scope', 'addUser', 'OAuthToken', '$state', '$cookies', 'getUserLocation',
   function ($scope, addUser, OAuthToken, $state, $cookies, getUserLocation) {
 
-    
+
     $scope.signUp = function (user) {
-      
+
       $scope.userInfo = {
         "email": user.email,
         "name": user.firstName,
@@ -18,23 +18,11 @@ signUpModule.controller('signUpController', ['$scope', 'addUser', 'OAuthToken', 
         OAuthToken.setToken(data.data);
         console.log(data);
         $cookies.putObject(user);
-
         getUserLocation.get();
-
+      }).then(function () {
         $state.go('app');
       });
 
     };
-    /* var req = {
-     method: "POST",
-     url: GOOGLE_IP + "signup",
-     data: $scope.data,
-     headers: {
-     //   "Authorization": "Basic " + $scope.encoded,
-     "Content-Type": "application/json"
-     }
-     };
-
-     // $http(req);*/
 
   }]);

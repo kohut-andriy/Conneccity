@@ -17,33 +17,32 @@
         <div class="controls__container">
             <div class="controls__button">Create meeting</div>
         </div>
-        <div class="controls__container">
+        <!--<div class="controls__container">
             <div class="controls__icon search-icon-b"></div>
         </div>
         <div class="controls__container">
             <div class="controls__icon filter-icon-b"></div>
-        </div>
+        </div>-->
     </header>
     <ul class="meetings__list">
         <li class="meeting-card" ng-repeat="meeting in meetings">
             <a href="" class="meeting-card__link" ui-sref="app.meetings.id({ id: meeting.id })">
                 <div class="meeting-card__members">
-                    <div class="meeting-card__fullinfo" ng-if="meeting.memberCount < 3">
+                    <div class="meeting-card__fullinfo" ng-if="meeting.selfState == '1'">
                         <div class="avatar">
-                            <img ng-src="{{meeting.members[0].photos.photo200px}}" alt="" class="avatar__img">
+                            <img ng-src="{{meeting.creator.photos.photo200px}}" alt="" class="avatar__img">
                             <div class="avatar__status"></div>
                         </div>
                         <div class="meeting-card__info">
-                            <p class="meeting-card__name">{{ meeting.members[0].name }} {{ meeting.members[0].surname
+                            <p class="meeting-card__name">{{ meeting.creator.name }} {{ meeting.creator.surname
                                 }}</p>
-                            <p class="meeting-card__invite"
-                               ng-show="meeting.members[meeting.selfState-1].state != 'ACCEPTED'">invite you</p>
+                            <p class="meeting-card__invite">invite you</p>
                         </div>
                     </div>
                     <div class="meeting-card__distance fl-r">
                         {{ getDistance(meeting.distance) }}
                     </div>
-                    <div class="user-preview user-preview_dark" ng-if="meeting.memberCount > 2"
+                    <div class="user-preview user-preview_dark" ng-if="meeting.selfState != '1'"
                          ng-repeat="member in meeting.members | limitTo : 3">
                         <div class="avatar avatar_block">
                             <img ng-src="{{ member.photos.photo200px }}" alt="" class="avatar__img">
@@ -51,7 +50,8 @@
                         </div>
                         <p class="user-preview__name">{{ member.name }}</p>
                     </div>
-                    <div class="users-previews-list__counter" ng-if="meeting.memberCount > 4">
+                    <div class="users-previews-list__counter"
+                         ng-if="meeting.memberCount > 4 && meeting.selfState != '1'">
                         +{{ meeting.memberCount - 3 }}
                     </div>
                 </div>
@@ -63,9 +63,13 @@
                     </p>
                 </div>
             </a>
-            <div class="meeting-card__buttons cf" ng-if="meeting.members[0].state != 'ACCEPTED'">
-                <div class="meeting-card__button meeting-card__button_decline decline-icon-b fl-l">Decline</div>
-                <div class="meeting-card__button meeting-card__button_accept accept-icon-b">Accept</div>
+            <div class="meeting-card__buttons cf" ng-if="meeting.selfState == '1'">
+                <div class="meeting-card__button meeting-card__button_decline decline-icon-b fl-l"
+                     ng-click="decline(meeting.id)">Decline
+                </div>
+                <div class="meeting-card__button meeting-card__button_accept accept-icon-b"
+                     ng-click="accept(meeting.id)">Accept
+                </div>
             </div>
         </li>
     </ul>

@@ -1,4 +1,5 @@
-meetingsModule.controller('meetingsController', ['$scope', 'getMeetings', 'formatter', function ($scope, getMeetings, formatter) {
+meetingsModule.controller('meetingsController', ['$scope', 'getMeetings', 'formatter', 'getMeetingInfo',
+  function ($scope, getMeetings, formatter, getMeetingInfo) {
   getMeetings.get().then(function (response) {
     $scope.meetings = response.data;
     console.log($scope.meetings);
@@ -25,4 +26,12 @@ meetingsModule.controller('meetingsController', ['$scope', 'getMeetings', 'forma
       console.log($scope.meetings);
     });
   };
+
+  $scope.accept = function (id) {
+    getMeetingInfo.join(id);
+  };
+
+  $scope.decline = function (id) {
+    getMeetingInfo.leave(id);
+  }
 }]);
