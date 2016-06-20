@@ -1,5 +1,5 @@
-chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter', 'getChat', '$stateParams', '$cookies',
-  function ($scope, getSocketData, formatter, getChat, $stateParams, $cookies) {
+chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter', 'getChat', '$stateParams', '$cookies', '$interval',
+  function ($scope, getSocketData, formatter, getChat, $stateParams, $cookies, $interval) {
 
   //  getSocketData.connect();
     $scope.currentUserId = $cookies.getObject('currentUser').id;
@@ -14,6 +14,13 @@ chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter',
       });
     });
 
+
+    $interval(function () {
+      getChat.getMessages($stateParams.id).then(function (data) {
+        $scope.messages = data.data;
+      });
+    }, 5000);
+
     $scope.getTime = function (date) {
       return formatter.getTime(date);
     };
@@ -27,9 +34,21 @@ chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter',
       return formatter.getTime(date);
     };
 
+    $scope.checkSender = function (data) {
+
+      return data == $scope.currentUserId;
+    };
  /*   $scope.$watch(function () {
       $scope.$broadcast('message');
     });*/
+
+    $scope.sendMessage = function (message) {
+      console.log(message);
+      getChat.send($stateParams.id, message).then(function (data) {
+        $scope.messages.unshift({ 'message' : message, date : new Date(), 'sender' : { 'id' : $scope.currentUserId }});
+        $scope.message = '';
+      });
+    }
   }]);
 
 
@@ -40,7 +59,7 @@ chatModule.directive('schrollBottom', function () {
     },
     link: function (scope, element) {
       scope.$watchCollection('schrollBottom', function (newValue) {
-        console.log(element);
+      
         if (newValue)
         {
           element[0].scrollTop = element[0].scrollHeight;

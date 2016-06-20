@@ -12,10 +12,9 @@
 <div class="chat__content fl-l">
     <ul class="chat__messages" schroll-bottom="messages" bottom>
         <li class="chat__message cf" ng-repeat="message in messages | orderBy:'-'"
-            ng-class="{'chat__message_reverse': currentUserId == meesage.sender.id}"
-            >
+            ng-class="{'chat__message_reverse': checkSender(message.sender.id) }">
             <div class="chat__text"
-                 ng-class="(currentUserId != meesage.sender.id ) ? 'chat__text_got' : 'chat__text_my'">
+                 ng-class=" !checkSender(message.sender.id)  ? 'chat__text_got' : 'chat__text_my'">
                 {{ message.message }}
             </div>
             <span class="chat__time">{{ getLastSeenTime(message.date) }}</span>
@@ -23,14 +22,14 @@
     </ul>
 </div>
 <div class="chat__footer fl-l">
-    <form ng-submit="sendMessage()" class="form form_full">
+    <form ng-submit="sendMessage(message)" class="form form_full">
         <ul class="form__list">
             <li class="form__item">
                 <textarea name="" id="" cols="30" rows="10" class="form__textarea"
-                          placeholder="Write message here..."></textarea>
+                          placeholder="Write message here..." ng-model="message"></textarea>
             </li>
             <li class="form__item">
-                <input type="submit" class="form__button_submit-2 fl-r" value="Send">
+                <input type="submit" class="form__button_submit-2 fl-r"  value="Send">
             </li>
         </ul>
     </form>

@@ -6,12 +6,19 @@ userProfileModule.controller('userProfileController', ['$scope', 'getUserData', 
       console.log($scope.user);
 
 
+
       getUserData.getEvents($scope.user.id).then(function (result) {
         $scope.events = result.data;
         console.log($scope.events);
       });
     });
 
+
+    getUserData.getChatId($stateParams.id).then(function (data) {
+      console.log(data);
+     $scope.chatId = data.data.id;
+    });
+    
     $scope.getFilteredEventsList = function (type) {
 
       getUserData.getEvents($scope.user.id, type).then(function (data) {

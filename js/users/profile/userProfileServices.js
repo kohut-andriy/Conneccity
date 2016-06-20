@@ -14,6 +14,13 @@ userProfileModule.factory('getUserData', ['$http', function ($http) {
         url: GOOGLE_IP + "users/" + id + "/events/" + type,
         method: "GET"
       });
+    },
+    getChatId: function (id) {
+
+      return $http({
+        url: GOOGLE_IP + "users/" + id + "/chat",
+        method: "GET"
+      });
     }
   };
 }]);
