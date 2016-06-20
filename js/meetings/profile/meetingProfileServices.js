@@ -14,13 +14,13 @@ meetingProfileModule.factory('getMeetingInfo', ['$http', function ($http) {
     },
     join: function (id) {
       return $http({
-        url: GOOGLE_IP + "meetings/" + id,
+        url: GOOGLE_IP + "meetings/" + id + "/members",
         method: "POST"
       });
     },
     leave: function (id) {
       return $http({
-        url: GOOGLE_IP + "meetings/" + id,
+        url: GOOGLE_IP + "meetings/" + id + "/members",
         method: "DELETE"
       })
     }

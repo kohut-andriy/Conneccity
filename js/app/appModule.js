@@ -1,6 +1,6 @@
 'use strict';
 
-var GOOGLE_IP = "http://develop.conneccity.net/";
+var GOOGLE_IP = "http://46.63.90.181:8080/";
 
 var app = angular.module('conneccityApp',
   [
@@ -17,6 +17,7 @@ var app = angular.module('conneccityApp',
     'dataFormatter',
     'ngCookies',
     'angular-oauth2',
+    'chatList',
     'chat',
     'eventProfile',
     'meetingProfile',

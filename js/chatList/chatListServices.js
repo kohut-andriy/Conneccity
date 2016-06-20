@@ -1,11 +1,11 @@
-chatModule.factory('getSocketData', ['OAuthToken',  function(OAuthToken) {
+chatListModule.factory('getSocketData', ['OAuthToken',  function(OAuthToken) {
   var service = {};
 
   service.connect = function() {
     if (service.ws) {
       return;
     }
-    var ws = new WebSocket("ws://192.168.1.105:8080/notifications");
+    var ws = new WebSocket("ws://api.conneccity.net/notifications");
 
     ws.onopen = function() {
       /*ws.send(JSON.stringify({
@@ -37,4 +37,16 @@ chatModule.factory('getSocketData', ['OAuthToken',  function(OAuthToken) {
   };
 
   return service;
+}]);
+
+chatListModule.factory('getChats', ['$http', function ($http) {
+
+  return {
+    get: function () {
+      return $http({
+        url: GOOGLE_IP + "chats/",
+        method: "GET"
+      });
+    }
+  };
 }]);

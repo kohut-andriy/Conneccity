@@ -14,13 +14,13 @@ eventProfile.factory('getEventInfo', ['$http', function ($http) {
     },
     join: function (id) {
       return $http({
-        url: GOOGLE_IP + "events/" + id,
+        url: GOOGLE_IP + "events/" + id + "/members",
         method: "POST"
       });
     },
     leave: function (id) {
       return $http({
-        url: GOOGLE_IP + "events/" + id,
+        url: GOOGLE_IP + "events/" + id + "/members",
         method: "DELETE"
       })
     }

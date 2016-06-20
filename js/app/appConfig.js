@@ -79,7 +79,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider','OAuthPr
       }
     })
     .state('app.meetings.id', {
-      url: '/:id',
+      url: '/{id:int}',
       views: {
         'content@app': {
           templateUrl: 'views/meetingProfile.html',
@@ -91,6 +91,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider','OAuthPr
       url: 'chat',
       views: {
         'content@app': {
+          templateUrl: 'views/chatList.html',
+          controller: 'chatListController'
+        }
+      }
+    })
+    .state('app.chat.id', {
+      url: '/{id:int}',
+      views: {
+        'chat@app.chat': {
           templateUrl: 'views/chat.html',
           controller: 'chatController'
         }

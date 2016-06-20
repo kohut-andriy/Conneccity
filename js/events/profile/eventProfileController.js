@@ -48,8 +48,9 @@ eventProfile.controller('eventProfileController', ['$scope', 'getEventInfo', '$s
         $scope.event.isMember = false;
         $scope.members.shift();
       } else {
-        $scope.unshift($cookies.getObject('currentUser'));
-        $scope.event.selfState = true;
+        $scope.members.unshift($cookies.getObject('currentUser'));
+
+        $scope.event.isMember = true;
       }
     };
   }]);

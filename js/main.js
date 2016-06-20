@@ -87,12 +87,17 @@
     //= events/profile/eventProfileServices.js
     //= events/profile/eventProfileController.js
 
-// app.chat
+// app.chatList
 
-  //= chat/chatModule.js
-  //= chat/chatServices.js
-  //= chat/chatController.js
+  //= chatList/chatListModule.js
+  //= chatList/chatListServices.js
+  //= chatList/chatListController.js
 
+  // app.chat
+
+    //= chatList/chat/chatModule.js
+    //= chatList/chat/chatServices.js
+    //= chatList/chat/chatController.js
 
 // dataFormater
 

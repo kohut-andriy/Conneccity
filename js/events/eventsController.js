@@ -28,5 +28,9 @@ eventsModule.controller('eventsController', ['$scope', 'getEvents', 'formatter',
 
     $scope.getEventImg = function (url) {
       return formatter.getEventListImg(url);
-    }
+    };
+
+    $scope.$watch(function () {
+      $scope.$broadcast('rebuild:me');
+    });
   }]);
