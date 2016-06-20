@@ -97,6 +97,12 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
       } else {
         return 'meeting-status-icon_accepted';
       }
+    },
+
+    getTime: function (date) {
+      var _date = new Date(date);
+
+      return _date.getHours() + ":" + _date.getMinutes();
     }
   }
 }]);

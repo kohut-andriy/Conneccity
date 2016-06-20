@@ -1,11 +1,37 @@
 <div class="chat__header">
     <div class="avatar">
-        <img src="img/test/user-icon.jpg" alt="" class="avatar__img avatar__img_big">
-        <div class="avatar__status avatar__status_big"></div>
+        <img ng-src="{{ chat.user.photos.photo200px || chat.event.photos.photo200px}}" alt=""
+             class="avatar__img avatar__img_big">
+        <div class="avatar__status avatar__status_big" ng-show="chat.user.online"></div>
     </div>
     <div class="chat__info">
-        <p class="chat__name">sdfsd</p>
-        <p class="chat__last-seen">sdfsdf</p>
+        <p class="chat__name">{{ chat.event.name || chat.user.name + " " + chat.user.surname}}</p>
+        <p class="chat__last-seen" ng-show="!chat.user.online && !chat.event">{{ getLastSeenTime(chat.user.lastSeen) }}</p>
     </div>
 </div>
-
+<div class="chat__content fl-l">
+    <ul class="chat__messages" schroll-bottom="messages" bottom>
+        <li class="chat__message cf" ng-repeat="message in messages | orderBy:'-'"
+            ng-class="{'chat__message_reverse': currentUserId == meesage.sender.id}"
+            >
+            <div class="chat__text"
+                 ng-class="(currentUserId != meesage.sender.id ) ? 'chat__text_got' : 'chat__text_my'">
+                {{ message.message }}
+            </div>
+            <span class="chat__time">{{ getLastSeenTime(message.date) }}</span>
+        </li>
+    </ul>
+</div>
+<div class="chat__footer fl-l">
+    <form ng-submit="sendMessage()" class="form form_full">
+        <ul class="form__list">
+            <li class="form__item">
+                <textarea name="" id="" cols="30" rows="10" class="form__textarea"
+                          placeholder="Write message here..."></textarea>
+            </li>
+            <li class="form__item">
+                <input type="submit" class="form__button_submit-2 fl-r" value="Send">
+            </li>
+        </ul>
+    </form>
+</div>

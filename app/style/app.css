@@ -1463,12 +1463,44 @@ body {
   max-width: 380px;
   box-sizing: border-box;
 }
+.form_full {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
 .form_small {
   padding: 10px;
   line-height: 48px;
   margin: 0 auto;
   display: block;
   text-align: left;
+}
+.form__textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  resize: none;
+  width: 100%;
+  height: 90px;
+  color: #bfbfbf;
+  border: 1px solid #e6e6e6;
+  outline: none;
+  border-radius: 3px;
+  padding: 18px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.form__textarea ::-webkit-input-placeholder {
+  color: #bfbfbf;
+}
+.form__textarea ::-moz-placeholder {
+  color: #bfbfbf;
+}
+.form__textarea :-moz-placeholder {
+  color: #bfbfbf;
+}
+.form__textarea :-ms-input-placeholder {
+  color: #bfbfbf;
 }
 .form__label {
   font-size: 14px;
@@ -1519,20 +1551,20 @@ body {
   font-size: 14px;
   font-weight: 500;
 }
+.form__input ::-webkit-input-placeholder {
+  color: #616161;
+}
+.form__input ::-moz-placeholder {
+  color: #616161;
+}
+.form__input :-moz-placeholder {
+  color: #616161;
+}
+.form__input :-ms-input-placeholder {
+  color: #616161;
+}
 .form__input:focus {
   border-color: #45b648;
-}
-.form ::-webkit-input-placeholder {
-  color: #616161;
-}
-.form ::-moz-placeholder {
-  color: #616161;
-}
-.form :-moz-placeholder {
-  color: #616161;
-}
-.form :-ms-input-placeholder {
-  color: #616161;
 }
 .form__buttons {
   display: table;
@@ -1567,6 +1599,24 @@ body {
   line-height: 48px;
   display: inline-block;
   width: 100%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  box-shadow: none;
+}
+.form__button_submit-2 {
+  background: #45b648;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 40px;
+  display: inline-block;
+  padding: 0 44px;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -2006,4 +2056,117 @@ body {
   height: 100vh;
   margin-left: 300px;
   position: relative;
+}
+.chat__header {
+  display: block;
+  width: 100%;
+  padding: 15px 35px;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4.75px 0.25px rgba(0, 0, 0, 0.2);
+}
+.chat__header > * {
+  vertical-align: middle;
+}
+.chat__info {
+  display: inline-block;
+  margin-left: 10px;
+  max-width: 80%;
+}
+.chat__name {
+  width: 100%;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+  font-size: 22px;
+  color: #404040;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.chat__last-seen {
+  color: #bfbfbf;
+  font-weight: 500;
+  font-size: 14px;
+}
+.chat__footer {
+  width: 100%;
+  padding: 32px 24px;
+  box-sizing: border-box;
+  box-shadow: 0px -2px 4.75px 0.25px rgba(0, 0, 0, 0.2);
+}
+.chat__content {
+  display: block;
+  height: 100vh;
+  padding: 125px 15px 230px 30px;
+  margin-right: -10px;
+  margin-top: -95px;
+  margin-bottom: -200px;
+  box-sizing: border-box;
+  width: 100%;
+  float: left;
+}
+.chat__messages {
+  max-height: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  list-style: none;
+  font-size: 14px;
+  color: #404040;
+  line-height: 20px;
+}
+.chat__message {
+  margin-bottom: 10px;
+}
+.chat__message_reverse {
+  direction: rtl;
+  text-align: right;
+}
+.chat__message > * {
+  vertical-align: middle;
+}
+.chat__text {
+  max-width: 50%;
+  display: inline-block;
+  word-break: break-all;
+  padding: 15px 13px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  position: relative;
+}
+.chat__text_got {
+  background: #e6e6e6;
+  margin-right: 18px;
+  margin-left: 8px;
+}
+.chat__text_got:before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  bottom: 5px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #e6e6e6;
+}
+.chat__text_my {
+  background: #c2ffc3;
+  margin-left: 18px;
+  margin-right: 8px;
+}
+.chat__text_my:after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  bottom: 5px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #c2ffc3;
+}
+.chat__time {
+  font-size: 13px;
+  color: #bfbfbf;
 }

@@ -166,7 +166,7 @@
 }
 
 .logo {
- // margin-bottom: 12px;
+  // margin-bottom: 12px;
   display: inline-block;
 
   &__text {
@@ -616,7 +616,6 @@
     text-overflow: ellipsis;
   }
 
-
   &__list {
     padding: 0 35px;
   }
@@ -1053,7 +1052,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background: linear-gradient(rgba(0,0,0, 0) 40%, rgba(0, 0, 0, 0.6) 100%);
+      background: linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 100%);
       border-radius: 4px;
     }
     &:after {
@@ -1063,11 +1062,11 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background: rgba(0,0,0,.4);
+      background: rgba(0, 0, 0, .4);
     }
     &:hover {
       &:before {
-       // background-color: rgba(0,0,0,.4);
+        // background-color: rgba(0,0,0,.4);
       }
 
       .short-info-box__distance {
@@ -1109,11 +1108,10 @@
   }
 }
 
-
 .sign-in {
   background: url("../img/main-bg.png") top center;
   &__header {
-    background: rgba(0,0,0,.1);
+    background: rgba(0, 0, 0, .1);
     padding: 15px;
   }
 
@@ -1182,6 +1180,12 @@
   width: 100%;
   max-width: 380px;
   box-sizing: border-box;
+  &_full {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+
   &_small {
     padding: 10px;
     line-height: 48px;
@@ -1189,6 +1193,34 @@
     display: block;
     text-align: left;
   }
+
+  &__textarea {
+    appearance: none;
+    resize: none;
+    width: 100%;
+    height: 90px;
+    color: #bfbfbf;
+    border: 1px solid #e6e6e6;
+    outline: none;
+    border-radius: 3px;
+    padding: 18px;
+    box-sizing: border-box;
+    font-size: 16px;
+
+    ::-webkit-input-placeholder {
+      color: #bfbfbf;
+    }
+    ::-moz-placeholder {
+      color: #bfbfbf;
+    }
+    :-moz-placeholder {
+      color: #bfbfbf;
+    }
+    :-ms-input-placeholder {
+      color: #bfbfbf;
+    }
+  }
+
   &__label {
     font-size: 14px;
     color: #666666;
@@ -1238,15 +1270,24 @@
     box-sizing: border-box;
     font-size: 14px;
     font-weight: 500;
+
+    ::-webkit-input-placeholder {
+      color: #616161;
+    }
+    ::-moz-placeholder {
+      color: #616161;
+    }
+    :-moz-placeholder {
+      color: #616161;
+    }
+    :-ms-input-placeholder {
+      color: #616161;
+    }
+
     &:focus {
       border-color: #45b648;
     }
   }
-
-  ::-webkit-input-placeholder {color:#616161;}
-  ::-moz-placeholder          {color:#616161;}
-  :-moz-placeholder           {color:#616161;}
-  :-ms-input-placeholder      {color:#616161;}
 
   &__buttons {
     display: table;
@@ -1270,7 +1311,7 @@
       border-radius: 4px;
       cursor: pointer;
     }
-    
+
     &_submit {
       background: #45b648;
       color: #fff;
@@ -1286,12 +1327,29 @@
       border: none;
       box-shadow: none;
     }
+
+    &_submit-2 {
+      background: #45b648;
+      color: #fff;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 40px;
+      display: inline-block;
+      padding: 0 44px;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+    }
   }
 
   &__radio {
     display: none;
     &:checked + label {
-        background: url("../img/form-radio.png") left center;
+      background: url("../img/form-radio.png") left center;
     }
   }
 
@@ -1319,8 +1377,6 @@
   }
 
 }
-
-
 
 .separator {
   display: table;
@@ -1387,7 +1443,7 @@
   &__content {
     width: 475px;
     min-height: 100vh;
-    background: rgba(28,38,28,.85);
+    background: rgba(28, 38, 28, .85);
     display: block;
 
     padding: 20px 35px 20px 30px;
@@ -1453,7 +1509,6 @@
   &__users-previews-list {
     margin-bottom: 30px;
   }
-
 
 }
 
@@ -1601,7 +1656,7 @@
   }
 }
 
-.meetings{
+.meetings {
   min-height: 100vh;
   &__list {
     padding: 30px 35px;
@@ -1621,14 +1676,14 @@
   }
   &__members {
     padding: 16px 12px;
-    & > :not(:first-child)  {
+    & > :not(:first-child) {
       vertical-align: top;
       margin-right: 10px;
     }
   }
   &__fullinfo {
     display: inline-block;
-    &> * {
+    & > * {
       vertical-align: middle;
     }
   }
@@ -1794,4 +1849,129 @@
   height: 100vh;
   margin-left: 300px;
   position: relative;
+
+  &__header {
+    display: block;
+    width: 100%;
+    padding: 15px 35px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 4.75px 0.25px rgba(0, 0, 0, 0.2);
+    & > * {
+      vertical-align: middle;
+    }
+  }
+
+  &__info {
+    display: inline-block;
+    margin-left: 10px;
+    max-width: 80%;
+  }
+
+  &__name {
+    width: 100%;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+    font-size: 22px;
+    color: #404040;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  &__last-seen {
+    color: #bfbfbf;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  &__footer {
+    width: 100%;
+    padding: 32px 24px;
+    box-sizing: border-box;
+    box-shadow: 0px -2px 4.75px 0.25px rgba(0, 0, 0, 0.2);
+  }
+
+  &__content {
+    display: block;
+    height: 100vh;
+    padding: 125px 15px 230px 30px;
+    margin-right: -10px;
+    margin-top: -95px;
+    margin-bottom: -200px;
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+  }
+
+  &__messages {
+    max-height: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    list-style: none;
+    font-size: 14px;
+    color: #404040;
+    line-height: 20px;
+  }
+
+  &__message {
+    margin-bottom: 10px;
+    &_reverse {
+      direction: rtl;
+      text-align: right;
+    }
+    & > * {
+      vertical-align: middle;
+    }
+  }
+
+  &__text {
+    max-width: 50%;
+    display: inline-block;
+    word-break: break-all;
+    padding: 15px 13px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    position: relative;
+    &_got {
+      background: #e6e6e6;
+      margin-right: 18px;
+      margin-left: 8px;
+      &:before {
+        content: '';
+        position: absolute;
+        left: -8px;
+        bottom: 5px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid #e6e6e6;
+      }
+    }
+
+    &_my {
+      background: #c2ffc3;
+      margin-left: 18px;
+      margin-right: 8px;
+      &:after {
+        content: '';
+        position: absolute;
+        right: -8px;
+        bottom: 5px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid #c2ffc3;
+      }
+    }
+  }
+
+  &__time {
+    font-size: 13px;
+    color: #bfbfbf;
+  }
 }
+
