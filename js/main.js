@@ -73,7 +73,12 @@
     //= meetings/profile/meetingProfileController.js
     //= meetings/profile/meetingProfileServices.js
 
+  // app.meetings.create
 
+    //= meetings/create/createMeetingModule.js
+    //= meetings/create/createMeetingController.js
+    //= meetings/create/createMeetingServices.js
+    
 // app.events
 
   //= events/eventsModule.js

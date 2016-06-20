@@ -23,6 +23,12 @@ eventProfile.factory('getEventInfo', ['$http', function ($http) {
         url: GOOGLE_IP + "events/" + id + "/members",
         method: "DELETE"
       })
-    }
+    },
+    sendMessage: function (id) {
+    return $http({
+      url: GOOGLE_IP + "events/" + id + "/chat",
+      method: "GET"
+    });
+  }
   };
 }]);

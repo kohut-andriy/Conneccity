@@ -1,9 +1,8 @@
-
 dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
-  
+
   return {
     formatDate: function (stringDate) {
-      
+
       var date = new Date(stringDate);
 
       var locale = "en-us";
@@ -13,7 +12,7 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
 
       return day + ' ' + month + ', ' + hours;
     },
-    
+
     getAddress: function (lat, lng) {
       var address = mapCreate.coordinatesMap.get([lat, lng].join("|"));
 
@@ -23,7 +22,7 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
 
       return address;
     },
-    
+
     getDistance: function (distance) {
       if (distance < 1000) {
         return distance + 'm';
@@ -33,11 +32,11 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
     },
 
     getGender: function (male, female) {
-      if(male && female) {
+      if (male && female) {
         return null;
-      } else if(male) {
+      } else if (male) {
         return 1;
-      } else if(female) {
+      } else if (female) {
         return 2;
       }
 
@@ -47,7 +46,7 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
     getUnixTime: function (date) {
       return new Date(date).getTime() / 1000 | 0;
     },
-    
+
     getAge: function (date) {
       var currentDate = new Date();
 
@@ -55,7 +54,7 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
 
       return currentDate.getYear() - birthdayDate.getYear() - !!(currentDate.getMonth() - birthdayDate.getMonth());
     },
-    
+
     getLastSeenTime: function (date) {
       var MINUTE = 60 * 1000;
       var HOUR = MINUTE * 60;
@@ -76,21 +75,21 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
         return (dif / 1000).toFixed(0) + ' seconds ago';
       }
     },
-    
-    getUserListImg : function (url) {
+
+    getUserListImg: function (url) {
       return url ? url : 'img/test/user-list-img.jpg';
     },
 
-    getUserImg : function (url) {
+    getUserImg: function (url) {
       return url ? url : 'img/test/user-icon.jpg';
     },
 
-    getEventListImg : function (url) {
+    getEventListImg: function (url) {
       return url ? url : 'img/test/profile-card-bg.jpg';
     },
-    
+
     getMeetingStatusIconStyle: function (status) {
-      if(status == 'DECLINED') {
+      if (status == 'DECLINED') {
         return 'meeting-status-icon_declined';
       } else if (status == "INVITED") {
         return 'meeting-status-icon_invited';

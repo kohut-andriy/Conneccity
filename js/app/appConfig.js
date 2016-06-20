@@ -78,6 +78,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider','OAuthPr
         }
       }
     })
+    .state('app.meetingCreate', {
+      url: 'createmeeting',
+      views: {
+        'content@app': {
+          templateUrl: 'views/createMeeting.html',
+          controller: 'createMeetingController'
+        }
+      }
+    })
     .state('app.meetings.id', {
       url: '/{id:int}',
       views: {

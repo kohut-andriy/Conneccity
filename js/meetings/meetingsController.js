@@ -39,6 +39,8 @@ meetingsModule.controller('meetingsController', ['$scope', 'getMeetings', 'forma
       return formatter.getMeetingStatusIconStyle(status);
     };
 
+    
+    
     $scope.$watch(function () {
       $scope.$broadcast('rebuild:me');
     });

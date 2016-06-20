@@ -23,6 +23,12 @@ meetingProfileModule.factory('getMeetingInfo', ['$http', function ($http) {
         url: GOOGLE_IP + "meetings/" + id + "/members",
         method: "DELETE"
       })
+    },
+    sendMessage: function (id) {
+      return $http({
+        url: GOOGLE_IP + "meetings/" + id + "/chat",
+        method: "GET"
+      });
     }
   };
 }]);

@@ -31,9 +31,9 @@
                 <div class="button button_green button-icon-accept-b" ng-if="meeting.selfState == '1'"
                      ng-click="join(meeting.id)">Join
                 </div>
-                <div class=" button button_red button-icon-message-b
+                <a ui-sref="app.chat.id({ id: chatId })" class=" button button_red button-icon-message-b
                 ">Message
-                </div>
+                </a>
             </div>
 
             <p class="event-profile__text">Participants</p>

@@ -53,4 +53,10 @@ eventProfile.controller('eventProfileController', ['$scope', 'getEventInfo', '$s
         $scope.event.isMember = true;
       }
     };
+
+
+    getEventInfo.sendMessage($stateParams.id).then(function (data) {
+      console.log(data);
+      $scope.chatId = data.data.id;
+    });
   }]);

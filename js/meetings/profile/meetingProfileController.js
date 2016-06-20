@@ -37,8 +37,15 @@ meetingProfileModule.controller('meetingProfileController',
           $state.go('app.meetings');
         });
       };
-
+      
+      getMeetingInfo.sendMessage($stateParams.id).then(function (data) {
+        console.log(data);
+        $scope.chatId = data.data.id;
+      });
+      
       $scope.getStatusStile = function (status) {
         return formatter.getMeetingStatusIconStyle(status);
-      }
+      };
+      
+      
     }]);

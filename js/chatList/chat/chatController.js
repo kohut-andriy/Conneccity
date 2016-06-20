@@ -17,7 +17,9 @@ chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter',
 
     $interval(function () {
       getChat.getMessages($stateParams.id).then(function (data) {
-        $scope.messages = data.data;
+        if($scope.messages != data.data) {
+          $scope.messages != data.data;
+        }
       });
     }, 5000);
 
@@ -59,7 +61,7 @@ chatModule.directive('schrollBottom', function () {
     },
     link: function (scope, element) {
       scope.$watchCollection('schrollBottom', function (newValue) {
-      
+
         if (newValue)
         {
           element[0].scrollTop = element[0].scrollHeight;

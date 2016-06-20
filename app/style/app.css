@@ -1785,6 +1785,7 @@ body {
   text-align: center;
   margin-right: 15px;
   cursor: pointer;
+  text-decoration: none;
 }
 .button_red {
   background: #f44336;
@@ -2050,6 +2051,12 @@ body {
   height: 5px;
   background: #f44336;
   border-radius: 50%;
+}
+.chat-list__user {
+  display: inline-block;
+}
+.chat-list__user:not(:last-child):after {
+  content: ', ';
 }
 .chat {
   display: block;
