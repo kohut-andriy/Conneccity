@@ -1,11 +1,11 @@
 <div class="event-profile cf" ng-click="rebuild()">
-    <img ng-src="{{ event.photos.photoOriginal }}" alt="" class="event-profile__bg">
+    <img ng-src="{{ event.photos.photoOriginal || 'img/test/event.jpg' }}" alt="" class="event-profile__bg">
     <div class="event-profile__scroll-container" ng-scrollbar rebuild-on-resize rebuild-on="scrollRebuild">
         <div class="event-profile__content">
             <header class="event-profile__header">
                 <div class="event-profile__controls">
-                    <div class="event-profile__control settings-icon"></div>
-                    <div class="event-profile__control menu-icon"></div>
+                    <a ui-sref="app.eventEdit({id : event.id})" class="event-profile__control settings-icon"></a>
+                    <!--<div class="event-profile__control menu-icon"></div>-->
                 </div>
                 <span class="event-profile__name">Event</span>
                 <h1 class="event-profile__event-name">{{ event.name }}</h1>
@@ -29,8 +29,8 @@
             <div class="event-profile__info-box info-box">
                 <p class="info-box__text info-place-icon-b">{{ getAddress(event.latitude, event.longitude) }}</p>
                 <p class="info-box__text info-price-icon-b" ng-show="event.price">{{ event.price }}</p>
-                <p class="info-box__text info-date-icon-b">{{ parseDate(event.startAt)}} - {{ parseDate(event.endAt)
-                    }}</p>
+                <p class="info-box__text info-date-icon-b">{{ parseDate(event.startAt)}} <!-- - {{ parseDate(event.endAt)
+                    }}--></p>
             </div>
 
             <div class="event-profile__buttons">

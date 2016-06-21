@@ -102,6 +102,10 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
       var _date = new Date(date);
 
       return _date.getHours() + ":" + _date.getMinutes();
+    },
+
+    getGoogleMapsSrc: function ([lat, lng]) {
+      return "https://www.google.com.ua/maps/@"+lat+","+lng+",12z";
     }
   }
 }]);

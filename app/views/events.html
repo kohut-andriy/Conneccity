@@ -18,7 +18,7 @@
         </div>
         <p class="controls__divider controls__divider_2"><span class="line"></span></p>
         <div class="controls__container">
-            <div class="controls__button">Create event</div>
+            <a ui-sref="app.eventCreate" class="controls__button">Create event</a>
         </div>
         <!--<div class="controls__container">
             <div class="controls__icon search-icon-b"></div>
@@ -37,9 +37,9 @@
                                 {{ event.memberCount }}
                             </span>
                     </p>
-                    <p class="location-info-box__place profile-card-pin-icon-b">
+                  <!--  <p class="location-info-box__place profile-card-pin-icon-b">
                         {{ getAddress(event.latitude, event.longitude) }}
-                    </p>
+                    </p>-->
                 </div>
                 <div class="short-info-box">
                         <p class="short-info-box__distance fl-r">{{getFormattedDistance(event.distance)}}</p>

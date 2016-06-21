@@ -1008,6 +1008,7 @@ body {
   color: #fff;
   cursor: pointer;
   padding: 10px 18px;
+  text-decoration: none;
 }
 .controls__container {
   display: table-cell;
@@ -1271,6 +1272,7 @@ body {
   vertical-align: middle;
   text-transform: uppercase;
   cursor: pointer;
+  text-decoration: none;
 }
 .profile__ponches {
   max-width: 80%;

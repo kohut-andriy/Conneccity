@@ -1,6 +1,6 @@
 meetingProfileModule.controller('meetingProfileController',
-  ['$scope', 'formatter', 'getMeetingInfo', '$stateParams', 'mapCreate', "$state",
-    function ($scope, formatter, getMeetingInfo, $stateParams, mapCreate, $state) {
+  ['$scope', 'formatter', 'getMeetingInfo', '$stateParams', 'mapCreate', "$state", "$cookies",
+    function ($scope, formatter, getMeetingInfo, $stateParams, mapCreate, $state, $cookies) {
       getMeetingInfo.get($stateParams.id).then(function (response) {
         $scope.meeting = response.data;
 

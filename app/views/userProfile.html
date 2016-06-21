@@ -3,7 +3,7 @@
         <img class="profile__bg" src="img/test/user-profile-bg.jpg" alt="">
         <div class="profile__controls">
             <div class="profile__control settings-icon" ng-show="isProfile"></div>
-            <div class="profile__control menu-icon"></div>
+            <!--<div class="profile__control menu-icon"></div>-->
         </div>
     </header>
 
@@ -22,8 +22,8 @@
     <p class="profile__name">{{user.name + ' ' + user.surname}}</p>
 
     <div class="profile__share" ng-show="!isProfile">
-        <a  ui-sref="app.chat.id({ id:  chatId })" class="profile__menu" ><i class="profile-settings-type-2-icon"></i></a>
-        <div class="profile__invite">Invite to meeting</div>
+        <a ui-sref="app.chat.id({ id:  chatId })" class="profile__menu"><i class="profile-settings-type-2-icon"></i></a>
+        <a ui-sref="app.meetingCreate" class="profile__invite" ng-click="setUser()">Invite to meeting</a>
     </div>
 
     <div class="profile__ponches" ng-show="user.ponches.length > 0">
@@ -50,7 +50,7 @@
 
                     <input id="common" type="radio" name="filter" class="fast-filter__radio">
                     <label for="common" class="fast-filter__label"
-                           ng-click="getFilteredEventsList('common')" >Common</label>
+                           ng-click="getFilteredEventsList('common')">Common</label>
 
                     <input id="upcoming" type="radio" name="filter" class="fast-filter__radio" checked>
                     <label for="upcoming" class="fast-filter__label"

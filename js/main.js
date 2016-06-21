@@ -92,6 +92,12 @@
     //= events/profile/eventProfileServices.js
     //= events/profile/eventProfileController.js
 
+  // app.event.create
+
+    //= events/create/createEventModule.js
+    //= events/create/createEventController.js
+    //= events/create/createEventServices.js
+
 // app.chatList
 
   //= chatList/chatListModule.js

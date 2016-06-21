@@ -22,7 +22,8 @@ var app = angular.module('conneccityApp',
     'eventProfile',
     'meetingProfile',
     'geolocation',
-    'createMeeting'
+    'createMeeting',
+    'createEvent'
   ]);
 
 app.run(['$rootScope', '$state', 'OAuth', '$location', function ($rootScope, $state, OAuth, $location) {

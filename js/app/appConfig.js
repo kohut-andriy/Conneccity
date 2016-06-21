@@ -60,6 +60,24 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider','OAuthPr
         }
       }
     })
+    .state('app.eventCreate', {
+      url: 'createevent',
+      views: {
+        'content@app': {
+          templateUrl: 'views/createEvent.html',
+          controller: 'createEventController'
+        }
+      }
+    })
+    .state('app.eventEdit', {
+      url: '{{id:int}/eventedit}',
+      views: {
+        'content@app': {
+          templateUrl: 'views/createEvent.html',
+          controller: 'createEventController'
+        }
+      }
+    })
     .state('app.events.id', {
       url: '/{id:int}',
       views: {

@@ -1,0 +1,1 @@
+var createMeetingModule = angular.module('createEvent', []);

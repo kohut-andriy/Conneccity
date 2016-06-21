@@ -1,5 +1,5 @@
-userProfileModule.controller('userProfileController', ['$scope', 'getUserData', '$stateParams', 'formatter',
-  function ($scope, getUserData, $stateParams, formatter) {
+userProfileModule.controller('userProfileController', ['$scope', 'getUserData', '$stateParams', 'formatter', '$cookies',
+  function ($scope, getUserData, $stateParams, formatter, $cookies) {
 
     getUserData.get($stateParams.id).then(function (result) {
       $scope.user = result.data;
@@ -65,4 +65,8 @@ userProfileModule.controller('userProfileController', ['$scope', 'getUserData', 
     $scope.$watch(function () {
       $scope.$broadcast('scrollRebuild');
     });
+
+    $scope.setUser = function () {
+      $cookies.userId = $scope.user.id;
+    }
   }]);
