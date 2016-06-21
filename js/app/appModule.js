@@ -1,6 +1,6 @@
 'use strict';
 
-var GOOGLE_IP = "http://46.63.90.181:8080/";
+var GOOGLE_IP = "http://api.conneccity.net:8080/";
 
 var app = angular.module('conneccityApp',
   [
@@ -26,7 +26,13 @@ var app = angular.module('conneccityApp',
     'createEvent'
   ]);
 
-app.run(['$rootScope', '$state', 'OAuth', '$location', function ($rootScope, $state, OAuth, $location) {
+app.run(['$rootScope', '$state', 'OAuth', '$location', 'getUserLocation', '$interval',
+  function ($rootScope, $state, OAuth, $location, getUserLocation, $interval) {
+
+    $interval(function () {
+      getUserLocation.get();
+    }, 1000 * 60 * 5);
+
   if (!OAuth.isAuthenticated() && $location.path() != '/signUp') {
 
     $location.path('/signIn');

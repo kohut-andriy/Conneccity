@@ -6,6 +6,13 @@ createMeetingModule.factory('createEvent',  ['$http', function ($http) {
         method: "POST",
         data: data
       });
+    },
+    update: function (data, id) {
+      return $http({
+        url: GOOGLE_IP + "events/" + id,
+        method: "PUT",
+        data: data
+      });
     }
   }
 }]);

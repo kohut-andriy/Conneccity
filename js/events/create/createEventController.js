@@ -26,17 +26,31 @@ createMeetingModule.controller('createEventController', ['$scope', 'createEvent'
     $scope.create = function (data) {
 
       console.log($cookies.userId);
+    if($stateParams.id) {
+      createEvent.update({
+        "name": data.name,
+        "startAt": data.startAt,
+        "latitude": data.latitude,
+        "longitude": data.longitude,
+        "description": data.description,
+        "priceFrom": data.price
+      }, $stateParams.id).then(function (data) {
+        $state.go('app.events');
+        console.log(data);
+      });
+    } else {
       createEvent.create({
         "name": data.name,
-        "startAt" : data.startAt,
-        "latitude" : data.latitude,
-        "longitude" : data.longitude,
-        "description" : data.description,
+        "startAt": data.startAt,
+        "latitude": data.latitude,
+        "longitude": data.longitude,
+        "description": data.description,
         "priceFrom": data.price
       }).then(function (data) {
         $state.go('app.events');
         console.log(data);
       });
+    }
     }
     
   }]);

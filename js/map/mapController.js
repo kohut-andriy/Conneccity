@@ -1,5 +1,5 @@
-mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo', 'formatter', '$q',
-  function ($scope, mapCreate, getMapInfo, formatter, $q) {
+mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo', 'formatter', '$q', '$state',
+  function ($scope, mapCreate, getMapInfo, formatter, $q, $state) {
 
     $scope.filterState = false;
 
@@ -14,6 +14,7 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
       $scope.eventState = false;
       $scope.meetingState = false;
     };
+    
 
     $scope.meetingState = false;
 
@@ -128,6 +129,10 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
 
     };
 
+    $scope.getSref = function () {
+      
+    };
+    
     $scope.centerMap = function () {
       mapCreate.centerMapToUser();
     };

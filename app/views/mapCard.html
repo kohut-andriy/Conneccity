@@ -1,9 +1,12 @@
 <div class="card">
-    <div class="card__prev-button" ng-show="cardInfo.length > 1" ng-class="{ 'active' : cardCounter == 0}" ng-click="getPreviousCard()"></div>
+    <div class="card__prev-button" ng-show="cardInfo.length > 1" ng-class="{ 'active' : cardCounter == 0}"
+         ng-click="getPreviousCard()"></div>
     <div class="card__content">
         <header class="card__header" ng-class="{'favorite' : cardInfo[cardCounter].ponches[0].matches}">
-            <p class="card__place place-icon-b">{{ getAddress(cardInfo[cardCounter].latitude,cardInfo[cardCounter].longitude) }}</p>
-            <p class="card__event-date date-icon-b" ng-show="cardInfo[cardCounter].startAt">{{ parseDate(cardInfo[cardCounter].startAt) }}</p>
+            <p class="card__place place-icon-b">{{
+                getAddress(cardInfo[cardCounter].latitude,cardInfo[cardCounter].longitude) }}</p>
+            <p class="card__event-date date-icon-b" ng-show="cardInfo[cardCounter].startAt">{{
+                parseDate(cardInfo[cardCounter].startAt) }}</p>
             <span class="card__close-button close-but-icon fl-r" ng-click="toggleCard()"></span>
         </header>
         <div class="card__info">
@@ -13,10 +16,16 @@
             </div>
             <main class="card__main">
                 <span class="card__event-type">{{ cardInfo[cardCounter].eventtype }}</span>
-                <p class="card__members-count people-icon-b" ng-show="cardInfo[cardCounter].memberCount">{{cardInfo[cardCounter].memberCount}}</p>
-                <a class="card__event-name" ng-show="cardInfo[cardCounter].name">{{cardInfo[cardCounter].name}} {{cardInfo[cardCounter].surname}}</a>
-                <p class="card__message" ng-show="cardInfo[cardCounter].message">{{cardInfo[cardCounter].description.name}}</p>
-                <p class="card__members" ng-show="cardInfo[cardCounter].members"><span class="card__member-name" ng-repeat="member in cardInfo[cardCounter].members">{{member.name}}</span></p>
+                <p class="card__members-count people-icon-b" ng-show="cardInfo[cardCounter].memberCount">
+                    {{cardInfo[cardCounter].memberCount}}</p>
+                <a ui-sref="app.users.id({ id: cardInfo[cardCounter].id} )" class="card__event-name" ng-show="cardInfo[cardCounter].name">{{cardInfo[cardCounter].name}}
+                    {{cardInfo[cardCounter].surname}}</a>
+                <p class="card__message" ng-show="cardInfo[cardCounter].message">
+                    {{cardInfo[cardCounter].description.name}}</p>
+                <p class="card__members" ng-show="cardInfo[cardCounter].members">
+                    <span class="card__member-name"
+                          ng-repeat="member in cardInfo[cardCounter].members">{{member.name}}</span>
+                </p>
                 <div class="ponches-wrapper" ng-show="cardInfo[cardCounter].ponches.length>0">
                     <ul class="ponches">
                         <li class="ponches__item" ng-repeat="ponch in cardInfo[cardCounter].ponches | limitTo: 3">
@@ -26,7 +35,8 @@
                         </li>
                     </ul>
                     <div class="ponches__counter" ng-show="cardInfo[cardCounter].ponches.length>3">
-                        <a href="" class="ponches__link ponches__link_round" ng-class="{'favorite': cardInfo[cardCounter].ponches[3].matches}">
+                        <a href="" class="ponches__link ponches__link_round"
+                           ng-class="{'favorite': cardInfo[cardCounter].ponches[3].matches}">
                             +{{cardInfo[cardCounter].ponches.length-3}}
                         </a>
                     </div>
@@ -36,5 +46,6 @@
         </div>
         <footer class="card__counter" ng-show="cardInfo.length > 1">{{ cardCounter+1 }} / {{ cardInfo.length }}</footer>
     </div>
-    <div class="card__next-button" ng-show="cardInfo.length > 1" ng-class="{ 'active' : cardCounter == cardInfo.length-1}" ng-click="getNextCard()"></div>
+    <div class="card__next-button" ng-show="cardInfo.length > 1"
+         ng-class="{ 'active' : cardCounter == cardInfo.length-1}" ng-click="getNextCard()"></div>
 </div>

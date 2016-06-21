@@ -1987,3 +1987,56 @@
 
 }
 
+a {
+  text-decoration: none;
+}
+
+.ponch-editor {
+  position: absolute;
+  width: 400px;
+  max-height: 500px;
+
+  left: 50%;
+  top: 50%;
+  z-index: 99999999;
+  &__area {
+    width: 100%;
+    max-height: 500px;
+    overflow-y: scroll;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 0 4.75px 0.25px rgba(0, 0, 0, 0.3);
+
+
+
+    padding: 30px;
+    box-sizing: border-box;
+  }
+  &__head {
+    font-weight: 500;
+    color: #2b2b2b;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .form__input {
+    width: 70%;
+  }
+
+  .form__button {
+    width: 30%;
+    padding: 0 !important;
+  }
+
+  .form__button_submit {
+    line-height: 46px;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .ponches {
+    margin-bottom: 20px;
+  }
+}
+

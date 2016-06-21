@@ -22,7 +22,7 @@ meetingProfileModule.controller('meetingProfileController',
       $scope.getUserImg = function (url) {
         return formatter.getUserImg(url);
       };
-
+      
 
       $scope.$watch(function () {
         $scope.$broadcast('scrollRebuild');
@@ -47,5 +47,7 @@ meetingProfileModule.controller('meetingProfileController',
         return formatter.getMeetingStatusIconStyle(status);
       };
       
-      
+      $scope.checkPermition = function () {
+        return $cookies.getObject('currentUser').id == $scope.meeting.creator.id;
+      }
     }]);

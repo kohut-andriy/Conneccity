@@ -18,7 +18,7 @@
                 </div>
 
                 <p class="ponches__item ponches__item_mul">
-                    <a href="" class="ponches__link ponches__link_change ponch__link_change-b">Edit</a>
+                    <a href="" class="ponches__link ponches__link_change ponch__link_change-b" ng-click="hideDe()">Edit</a>
                 </p>
         </div>
     </header>
@@ -42,5 +42,38 @@
             <p>All rights reserved.</p>
         </div>
     </footer>
+</div>
+<div class="ponch-editor" ng-if="showEdit">
+    <form class="ponch-editor__area">
+        <h1 class="ponch-editor__head">Change your interests:</h1>
+
+        <div class="form__item cf">
+                <input type="text" id="name"
+                       class="form__input form__input_static fl-l" ng-model="user.firstName" required>
+                <div class="form__button fl-l">
+                    <input type="button" class="form__button_submit" ng-click="add(user.firstName)" value="Add">
+                </div>
+
+            <div class="ponches">
+                <div class="ponches__item ponches__item_mul" ng-repeat="ponch in ponchesList">
+                    <a href="" class="ponches__link favorite ponch__link_icon-b" ng-click="delete(ponch)">{{ ponch }}</a>
+                </div>
+            </div>
+
+            <div class="related">
+                <h2 class="related__g2">Related:</h2>
+                <div class="ponches">
+                    <div class="ponches__item ponches__item_mul" ng-repeat="ponch in related">
+                        <a href="" class="ponches__link ponch__link_icon-b" ng-click="add(ponch)">{{ ponch }}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form__button fl-r">
+                <input type="button" class="form__button_submit" value="Change" ng-click="submit()">
+            </div>
+            </div>
+    </form>
+
 </div>
 <ui-view [ name="content" ] class="main"></ui-view>

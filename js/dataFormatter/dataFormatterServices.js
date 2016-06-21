@@ -7,10 +7,10 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
 
       var locale = "en-us";
       var day = date.getDay();
-      var month = date.toLocaleString(locale, {month: "short"});
-      var hours = date.toLocaleTimeString(locale, {hour: "2-digit", minute: "2-digit", hour12: false});
+      var month = date.getMonth()+1;//date.toLocaleString(locale, {month: "short"});
+      var hours = date.getHours();//date.toLocaleTimeString(locale, {hour: "2-digit", minute: "2-digit", hour12: false});
 
-      return day + ' ' + month + ', ' + hours;
+      return date.toDateString();//day + ' ' + month + ', ' + hours;
     },
 
     getAddress: function (lat, lng) {

@@ -137,18 +137,21 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
             console.log('met');
           {
             currentData.eventtype = 'meeting';
+            currentData.url = 'app.meetings.id( id :' + currentData.id + ")" ;
             break;
           }
 
           case 'events' :
           {
             currentData.eventtype = 'event';
+            currentData.url = 'app.events.id( id :' + currentData.id + ")" ;
             break;
           }
 
           case 'people' :
           {
             currentData.eventtype = '';
+            currentData.url = 'app.users.id( id :' + currentData.id + ")" ;
             break;
           }
         }

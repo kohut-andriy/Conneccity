@@ -97,7 +97,16 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider','OAuthPr
       }
     })
     .state('app.meetingCreate', {
-      url: 'createmeeting',
+      url: 'create-meeting',
+      views: {
+        'content@app': {
+          templateUrl: 'views/createMeeting.html',
+          controller: 'createMeetingController'
+        }
+      }
+    })
+    .state('app.meetingEdit', {
+      url: '{{id:int}/meeting-edit}',
       views: {
         'content@app': {
           templateUrl: 'views/createMeeting.html',

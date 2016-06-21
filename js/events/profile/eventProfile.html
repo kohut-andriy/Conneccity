@@ -4,7 +4,7 @@
         <div class="event-profile__content">
             <header class="event-profile__header">
                 <div class="event-profile__controls">
-                    <a ui-sref="app.eventEdit({id : event.id})" class="event-profile__control settings-icon"></a>
+                    <a ui-sref="app.eventEdit({id : event.id})" class="event-profile__control settings-icon" ng-if="checkPermition()"></a>
                     <!--<div class="event-profile__control menu-icon"></div>-->
                 </div>
                 <span class="event-profile__name">Event</span>
