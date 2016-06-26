@@ -126,32 +126,30 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
   // adding event's name, push data to get addresses ,push data to create markers
   self.setMarkers = function (data) {
 
-    console.log('mark');
     for (let eventType in data) {
-      console.log(data[eventType]);
+
       for (let eventInfo in data[eventType]) {
         let currentData = data[eventType][eventInfo];
 
         switch (eventType) {
           case 'meetings' :
-            console.log('met');
           {
             currentData.eventtype = 'meeting';
-            currentData.url = 'app.meetings.id( id :' + currentData.id + ")" ;
+            //currentData.url = 'app.meetings.id( id :' + currentData.id + ")" ;
             break;
           }
 
           case 'events' :
           {
             currentData.eventtype = 'event';
-            currentData.url = 'app.events.id( id :' + currentData.id + ")" ;
+            //currentData.url = 'app.events.id( id :' + currentData.id + ")" ;
             break;
           }
 
           case 'people' :
           {
             currentData.eventtype = '';
-            currentData.url = 'app.users.id( id :' + currentData.id + ")" ;
+            //currentData.url = 'app.users.id( id :' + currentData.id + ")" ;
             break;
           }
         }
@@ -165,11 +163,12 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
 
   };
 
-  // draw marker, push data to create markers
+  // draw marker icon, push data to create markers
 
   self.drawMarker = function (img, bg, data) {
 
-    console.log('draw');
+    //console.log('draw');
+
     let canvas;
     let context;
     let instance = 0;
@@ -187,19 +186,19 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
 
       img2.src = 'img/meeting-marker.png';
       draw = drawMeetingMarker;
-      console.log('create meeting');
+      //console.log('create meeting');
 
     } else if (data.eventtype === 'event') {
 
       img2.src = data.hasPonchesMatches ? 'img/event-marker-favorite.png' : 'img/event-marker.png';
       draw = drawEventMarker;
-      console.log('create event');
+      //console.log('create event');
 
     } else {
 
       img2.src = data.hasPonchesMatches ? 'img/user-marker-favorite.png' : 'img/user-marker.png';
       draw = drawUserMarker;
-      console.log('create user');
+      //console.log('create user');
 
     }
 
@@ -284,7 +283,7 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
   // create markers, add 'em to clusterer
 
   self.createMarker = function (img, data, size) {
-    console.log('create marker');
+    //console.log('create marker');
     let marker = new google.maps.Marker({
       position: new google.maps.LatLng(data.latitude, data.longitude),
       icon: {
@@ -292,7 +291,7 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
         size: size,
         scaledSize: size
       },
-      animation:google.maps.Animation.DROP
+      animation: google.maps.Animation.DROP
     });
 
     self.markersMap.set(marker, data);

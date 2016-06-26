@@ -1,35 +1,37 @@
-
-
-<div  class="menu fl-l" ng-scrollbar rebuild-on-resize>
+<div class="menu fl-l">
     <header class="menu__header">
-        <div class="user">
-            <a ui-sref="app.profile" class="user__link">
-            <img ng-src="{{ getUserImgUrl(user.photos.photo200px) }}" alt="" class="user__img">
-            <div class="user__name">
-                <p>{{ user.name }}</p>
-                <p>{{ user.surname }}</p>
-            </div>
+        <div class="user cf">
+            <a ui-sref="app.profile" class="user__link fl-l">
+                <img ng-src="{{ getUserImgUrl(user.photos.photo200px) }}" alt="" class="user__img">
+                <div class="user__name">
+                    <p>{{ user.name }}</p>
+                    <p>{{ user.surname }}</p>
+                </div>
             </a>
             <a ui-sref="authorization" class="logout-icon fl-r" ng-click="logout()"></a>
         </div>
         <div class="ponches">
-                <div class="ponches__item ponches__item_mul" ng-repeat="ponch in user.ponches">
-                    <a href="" class="ponches__link favorite ponch__link_icon-b">{{ ponch.name }}</a>
-                </div>
+            <div class="ponches__item ponches__item_mul" ng-repeat="ponch in user.ponches">
+                <a href="" class="ponches__link favorite ponch__link_icon-b">{{ ponch.name }}</a>
+            </div>
 
-                <p class="ponches__item ponches__item_mul">
-                    <a href="" class="ponches__link ponches__link_change ponch__link_change-b" ng-click="hideDe()">Edit</a>
-                </p>
+            <p class="ponches__item ponches__item_mul">
+                <a href="" class="ponches__link ponches__link_change ponch__link_change-b" ng-click="hideDe()">Edit</a>
+            </p>
         </div>
     </header>
     <nav class="menu__navigation">
         <ul class="menu__list">
             <li class="menu__item"><a href="" class="menu__link menu__link_map-icon" ui-sref="app">Map</a></li>
-          <!--  <li class="menu__item"><a href="" class="menu__link menu__link_news-icon">News feed</a></li>-->
-            <li class="menu__item"><a href="" class="menu__link menu__link_mess-icon" ui-sref="app.chat">Messages<!--<span class="menu__message"></span>--></a></li>
-            <li class="menu__item"><a href="" class="menu__link menu__link_people-icon" ui-sref="app.users">People</a></li>
-            <li class="menu__item"><a href="" class="menu__link menu__link_meet-icon" ui-sref="app.meetings">Meetings</a></li>
-            <li class="menu__item"><a href="" class="menu__link menu__link_event-icon" ui-sref="app.events">Events</a></li>
+            <!--  <li class="menu__item"><a href="" class="menu__link menu__link_news-icon">News feed</a></li>-->
+            <li class="menu__item"><a href="" class="menu__link menu__link_mess-icon" ui-sref="app.chat">Messages<span
+                    class="menu__message">{{ getCounter() }}</span></a></li>
+            <li class="menu__item"><a href="" class="menu__link menu__link_people-icon" ui-sref="app.users">People</a>
+            </li>
+            <li class="menu__item"><a href="" class="menu__link menu__link_meet-icon"
+                                      ui-sref="app.meetings">Meetings</a></li>
+            <li class="menu__item"><a href="" class="menu__link menu__link_event-icon" ui-sref="app.events">Events</a>
+            </li>
             <!--<li class="menu__item"><a href="" class="menu__link menu__link_dark menu__link_sett-icon">Settings</a></li>-->
         </ul>
     </nav>
@@ -48,15 +50,16 @@
         <h1 class="ponch-editor__head">Change your interests:</h1>
 
         <div class="form__item cf">
-                <input type="text" id="name"
-                       class="form__input form__input_static fl-l" ng-model="user.firstName" required>
-                <div class="form__button fl-l">
-                    <input type="button" class="form__button_submit" ng-click="add(user.firstName)" value="Add">
-                </div>
+            <input type="text" id="name"
+                   class="form__input form__input_static fl-l" ng-model="user.firstName" required>
+            <div class="form__button fl-l">
+                <input type="button" class="form__button_submit" ng-click="add(user.firstName)" value="Add">
+            </div>
 
             <div class="ponches">
                 <div class="ponches__item ponches__item_mul" ng-repeat="ponch in ponchesList">
-                    <a href="" class="ponches__link favorite ponch__link_icon-b" ng-click="delete(ponch)">{{ ponch }}</a>
+                    <a href="" class="ponches__link favorite ponch__link_icon-b" ng-click="delete(ponch)">{{ ponch
+                        }}</a>
                 </div>
             </div>
 
@@ -72,7 +75,7 @@
             <div class="form__button fl-r">
                 <input type="button" class="form__button_submit" value="Change" ng-click="submit()">
             </div>
-            </div>
+        </div>
     </form>
 
 </div>

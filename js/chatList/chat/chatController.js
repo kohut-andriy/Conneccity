@@ -1,27 +1,21 @@
 chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter', 'getChat', '$stateParams', '$cookies', '$interval',
   function ($scope, getSocketData, formatter, getChat, $stateParams, $cookies, $interval) {
 
-  //  getSocketData.connect();
+    //  getSocketData.connect();
     $scope.currentUserId = $cookies.getObject('currentUser').id;
 
-    getChat.get($stateParams.id).then(function (data) {
-      $scope.chat = data.data;
-      console.log(data);
-    }).then(function () {
-      getChat.getMessages($stateParams.id).then(function (data) {
-        $scope.messages = data.data;
-        console.log(data);
-      });
+    $scope.messages = [];
+    getChat.get($stateParams.id)
+      .then(function (data) {
+        $scope.chat = data.data;
+        //console.log(data);
+      }).then(function () {
+      getChat.getMessages($stateParams.id)
+        .then(function (data) {
+          $scope.messages = data.data;
+          //console.log(data);
+        });
     });
-
-
-    $interval(function () {
-      getChat.getMessages($stateParams.id).then(function (data) {
-        if($scope.messages != data.data) {
-          $scope.messages != data.data;
-        }
-      });
-    }, 5000);
 
     $scope.getTime = function (date) {
       return formatter.getTime(date);
@@ -32,7 +26,7 @@ chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter',
     };
 
     $scope.getLastSeenTime = function (date) {
-  //    $scope.$broadcast('message');
+
       return formatter.getTime(date);
     };
 
@@ -40,17 +34,24 @@ chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter',
 
       return data == $scope.currentUserId;
     };
- /*   $scope.$watch(function () {
-      $scope.$broadcast('message');
-    });*/
 
     $scope.sendMessage = function (message) {
-      console.log(message);
+      //console.log(message);
       getChat.send($stateParams.id, message).then(function (data) {
-        $scope.messages.unshift({ 'message' : message, date : new Date(), 'sender' : { 'id' : $scope.currentUserId }});
-        $scope.message = '';
+        /*  $scope.messages.unshift({'message': message, date: new Date(), 'sender': {'id': $scope.currentUserId}});
+         $scope.message = '';*/
       });
-    }
+    };
+
+    $scope.$watch(function () {
+      return getSocketData.message;
+    } , function (newVal, oldVal) {
+
+      if (newVal != 'undefined' && newVal != oldVal) {
+         $scope.messages.unshift(newVal);
+      }
+
+    });
   }]);
 
 
@@ -62,8 +63,7 @@ chatModule.directive('schrollBottom', function () {
     link: function (scope, element) {
       scope.$watchCollection('schrollBottom', function (newValue) {
 
-        if (newValue)
-        {
+        if (newValue) {
           element[0].scrollTop = element[0].scrollHeight;
         }
       });

@@ -1,42 +1,35 @@
-chatListModule.factory('getSocketData', ['OAuthToken',  function(OAuthToken) {
-  var service = {};
+chatListModule.service('getSocketData', ['OAuthToken', '$rootScope', function (OAuthToken, $rootScope) {
+  var self = this;
 
-  service.connect = function() {
-    if (service.ws) {
-      return;
-    }
-    var ws = new WebSocket("ws://api.conneccity.net/notifications");
+  var ws = new WebSocket('ws://46.63.89.93:8080/notifications?token=' + OAuthToken.getToken()['access_token']);
 
-    ws.onopen = function() {
-      /*ws.send(JSON.stringify({
-        type: "auth",
-        token: OAuthToken.getAccessToken()
-      }));*/
-      console.log("Succeeded to open a conection");
+  self.message = {};
+
+  self.connect = function () {
+      ws.onopen = function (event) {
+
+      };
+
+      ws.onclose = function (event) {
+        console.log('close');
+      };
+
+      ws.onmessage = function (event) {
+        let gottenMessage = JSON.parse(event.data).payload;
+        console.log(JSON.parse(event.data));
+        self.message = {
+          'message': gottenMessage.message,
+          date: new Date(gottenMessage.date),
+          'sender': {'id': gottenMessage.sender.id}
+        };
+
+        $rootScope.$digest();
+      };
+
+      ws.onerror = function (error) {
+        console.log(error);
+      };
     };
-
-    ws.onerror = function() {
-      console.log("Failed to open a connection");
-    };
-
-    ws.onmessage = function(message) {
-      /*var obj = JSON.parse(message.data);
-      if (obj.result) return;
-
-      if (obj.id) {
-        setTimeout(function() {
-          service.callback(obj);
-        }, 1000)
-      }*/
-    };
-    service.ws = ws;
-  };
-
-  service.subscribe = function(callback) {
-    service.callback = callback;
-  };
-
-  return service;
 }]);
 
 chatListModule.factory('getChats', ['$http', function ($http) {
@@ -50,3 +43,5 @@ chatListModule.factory('getChats', ['$http', function ($http) {
     }
   };
 }]);
+
+chatListModule.value('unreadMessagesCount', 0);

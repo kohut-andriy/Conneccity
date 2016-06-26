@@ -99,9 +99,17 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
     },
 
     getTime: function (date) {
-      var _date = new Date(date);
+      let currentDate = new Date(date);
 
-      return _date.getHours() + ":" + _date.getMinutes();
+      let hours = currentDate.getHours();
+
+      hours = hours < 10 ? '0' + hours : hours;
+
+      let minutes = currentDate.getMinutes();
+
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+
+      return hours + ":" + minutes;
     },
 
     getGoogleMapsSrc: function ([lat, lng]) {

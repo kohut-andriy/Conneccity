@@ -1,12 +1,12 @@
-app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'formatter', '$cookies',
-  function ($scope, getSignedUserInfo, OAuthToken, formatter, $cookies) {
+app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'formatter', '$cookies', 'unreadMessagesCount',
+  function ($scope, getSignedUserInfo, OAuthToken, formatter, $cookies, unreadMessagesCount) {
 
     getSignedUserInfo.get().then(function (data) {
       $scope.user = data.data;
 
       $cookies.putObject('currentUser', $scope.user);
 
-      console.log($cookies.getObject('currentUser'));
+      //console.log($cookies.getObject('currentUser'));
 
       $scope.ponchesList = [];
 
@@ -15,7 +15,7 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'f
       }
 
       
-      console.log($scope.ponchesList);
+     // console.log($scope.ponchesList);
     });
 
     getSignedUserInfo.getInterests().then(function (data) {
@@ -25,7 +25,7 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'f
         $scope.related.push(data.data[ponch].name);
       }
 
-      console.log(data);
+    //  console.log(data);
     });
 
     $scope.showEdit = false;
@@ -46,10 +46,13 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'f
       }
     };
 
+    $scope.getCounter = function () {
+      return unreadMessagesCount;
+    };
 
     $scope.submit = function () {
       getSignedUserInfo.putPonches($scope.ponchesList).then(function (data) {
-        console.log(data);
+       // console.log(data);
       });
     };
 

@@ -35,7 +35,7 @@
                           placeholder="Write message here..." ng-model="message"></textarea>
             </li>
             <li class="form__item">
-                <input type="submit" class="form__button_submit-2 fl-r" value="Send">
+                <input type="submit" class="form__button_submit-2 fl-r" value="Send" ng-model="message" ng-click="message = ''">
             </li>
         </ul>
     </form>

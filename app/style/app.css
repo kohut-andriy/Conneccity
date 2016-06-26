@@ -1404,7 +1404,10 @@ body {
   margin-bottom: 6px;
 }
 .sign-in {
-  background: url("../img/main-bg.png") top center;
+  background: url("../img/main-bg.png") top center no-repeat;
+  min-width: 100%;
+  min-height: 100%;
+  background-size: cover;
 }
 .sign-in__header {
   background: rgba(0, 0, 0, 0.1);
@@ -1805,6 +1808,7 @@ body {
 .avatar__img {
   border-radius: 50%;
   width: 40px;
+  display: inline-block;
 }
 .avatar__img_big {
   width: 62px;

@@ -1,6 +1,6 @@
 userProfileModule.controller('signedUserProfile', ['$scope', 'getUserData', 'formatter', '$cookies',
   function ($scope, getUserData, formatter, $cookies) {
-
+    console.log('relodad');
     $scope.user = $cookies.getObject('currentUser');
 
     getUserData.getEvents($scope.user.id).then(function (result) {
