@@ -1,12 +1,14 @@
 var gulp = require('gulp'),
-    less = require('gulp-less'),
-    mainBowerFiles = require('main-bower-files'),
-    prefixer = require('gulp-autoprefixer'),
-    rigger = require('gulp-rigger'),
-    minifyJS = require('gulp-uglify'),
-    babel = require('gulp-babel'),
-    connect = require('gulp-connect'),
-    rename = require('gulp-rename');
+  less = require('gulp-less'),
+  mainBowerFiles = require('main-bower-files'),
+  prefixer = require('gulp-autoprefixer'),
+  rigger = require('gulp-rigger'),
+  minifyJS = require('gulp-uglify'),
+  babel = require('gulp-babel'),
+  connect = require('gulp-connect'),
+  rename = require('gulp-rename'),
+  imagemin = require('gulp-imagemin'),
+  minfy = require('gulp-clean-css');
 
 
 gulp.task('webserver', function () {
@@ -46,6 +48,13 @@ gulp.task('bowerComponents', function () {
   /*  gulp.src("app/js/externals/!*.js")
    .pipe(minifyJS())
    .pipe(gulp.dest('app/js/externals'));*/
+});
+
+gulp.task('mnifyImg', function () {
+  gulp.src('images/*')
+    .pipe(gulp.dest('app/js/externals/'))
+   .pipe(imagemin())
+   .pipe(gulp.dest('images-min'));
 });
 
 gulp.task('watch', function () {

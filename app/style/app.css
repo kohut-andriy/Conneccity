@@ -1442,11 +1442,13 @@ body {
 }
 .stores__store {
   display: inline-block;
-  margin-right: 20px;
   padding: 8px 16px;
   box-sizing: border-box;
   background: #222622;
   border-radius: 4px;
+}
+.stores__store:not(:last-child) {
+  margin-right: 20px;
 }
 .stores__text {
   display: inline-block;
@@ -2146,6 +2148,7 @@ body {
   box-sizing: border-box;
   border-radius: 8px;
   position: relative;
+  direction: ltr;
 }
 .chat__text_got {
   background: #e6e6e6;

@@ -1,10 +1,11 @@
-chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter', 'getChat', '$stateParams', '$cookies', '$interval',
-  function ($scope, getSocketData, formatter, getChat, $stateParams, $cookies, $interval) {
+chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter', 'getChat', '$stateParams', '$cookies', '$rootScope',
+  function ($scope, getSocketData, formatter, getChat, $stateParams, $cookies, $rootScope) {
 
     //  getSocketData.connect();
     $scope.currentUserId = $cookies.getObject('currentUser').id;
 
     $scope.messages = [];
+
     getChat.get($stateParams.id)
       .then(function (data) {
         $scope.chat = data.data;
@@ -38,17 +39,30 @@ chatModule.controller('chatController', ['$scope', 'getSocketData', 'formatter',
     $scope.sendMessage = function (message) {
       //console.log(message);
       getChat.send($stateParams.id, message).then(function (data) {
-        /*  $scope.messages.unshift({'message': message, date: new Date(), 'sender': {'id': $scope.currentUserId}});
-         $scope.message = '';*/
+      }, function (error) {
+        alert(error);
       });
     };
 
     $scope.$watch(function () {
       return getSocketData.message;
-    } , function (newVal, oldVal) {
+    }, function (newVal, oldVal) {
 
       if (newVal != 'undefined' && newVal != oldVal) {
-         $scope.messages.unshift(newVal);
+
+        if(newVal.chatId == $stateParams.id) {
+          $scope.messages.unshift(newVal);
+        }
+
+          $scope.message = '';
+
+
+        //console.log(newVal);
+        //console.log(1);
+
+        if (newVal.sender.id != $scope.currentUserId) {
+          $rootScope.counter.add(newVal.chatId);
+        }
       }
 
     });

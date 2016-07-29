@@ -21,8 +21,12 @@ app.factory('getSignedUserInfo', ['$http', function ($http) {
           "ponches" : data
         }
       });
+    },
+    getCounter : function () {
+      return $http({
+        url: GOOGLE_IP + "profile/counters",
+        method: "GET"
+      })
     }
-
-
   };
 }]);

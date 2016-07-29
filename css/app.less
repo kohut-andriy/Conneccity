@@ -1156,11 +1156,13 @@
   display: block;
   &__store {
     display: inline-block;
-    margin-right: 20px;
     padding: 8px 16px;
     box-sizing: border-box;
     background: #222622;
     border-radius: 4px;
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
   }
 
   &__text {
@@ -1948,6 +1950,7 @@
     box-sizing: border-box;
     border-radius: 8px;
     position: relative;
+    direction: ltr;
     &_got {
       background: #e6e6e6;
       margin-right: 18px;

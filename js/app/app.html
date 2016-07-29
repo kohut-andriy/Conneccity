@@ -25,7 +25,7 @@
             <li class="menu__item"><a href="" class="menu__link menu__link_map-icon" ui-sref="app">Map</a></li>
             <!--  <li class="menu__item"><a href="" class="menu__link menu__link_news-icon">News feed</a></li>-->
             <li class="menu__item"><a href="" class="menu__link menu__link_mess-icon" ui-sref="app.chat">Messages<span
-                    class="menu__message">{{ getCounter() }}</span></a></li>
+                    class="menu__message" ng-if="getCounter()">{{ getCounter() }}</span></a></li>
             <li class="menu__item"><a href="" class="menu__link menu__link_people-icon" ui-sref="app.users">People</a>
             </li>
             <li class="menu__item"><a href="" class="menu__link menu__link_meet-icon"

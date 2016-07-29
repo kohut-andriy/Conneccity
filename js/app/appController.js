@@ -1,7 +1,8 @@
-app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'formatter', '$cookies', 'unreadMessagesCount',
-  function ($scope, getSignedUserInfo, OAuthToken, formatter, $cookies, unreadMessagesCount) {
+app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'formatter', '$cookies', '$rootScope',
+  function ($scope, getSignedUserInfo, OAuthToken, formatter, $cookies, $rootScope) {
 
     getSignedUserInfo.get().then(function (data) {
+
       $scope.user = data.data;
 
       $cookies.putObject('currentUser', $scope.user);
@@ -14,18 +15,23 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'f
         $scope.ponchesList.push($scope.user.ponches[ponch].name);
       }
 
-      
      // console.log($scope.ponchesList);
-    });
+    }).then(function () {
 
-    getSignedUserInfo.getInterests().then(function (data) {
-      $scope.related = [];
+      getSignedUserInfo.getInterests().then(function (data) {
+        $scope.related = [];
 
-      for(var ponch in data.data) {
-        $scope.related.push(data.data[ponch].name);
-      }
+        for (var ponch in data.data) {
+          $scope.related.push(data.data[ponch].name);
+        }
 
-    //  console.log(data);
+        //  console.log(data);
+      });
+    }).then(function () {
+      getSignedUserInfo.getCounter().then(function (data) {
+
+        $rootScope.counter = new Set(data.data.unreadChatsIds);
+      });
     });
 
     $scope.showEdit = false;
@@ -44,10 +50,6 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'f
           $scope.ponchesList.splice(i, i+1);
         }
       }
-    };
-
-    $scope.getCounter = function () {
-      return unreadMessagesCount;
     };
 
     $scope.submit = function () {
@@ -70,6 +72,10 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'f
 
     $scope.getUserImgUrl = function (url) {
       return formatter.getUserImg(url);
+    };
+
+    $scope.getCounter = function () {
+      return $rootScope.counter?$rootScope.counter.size : 0;
     };
 
 

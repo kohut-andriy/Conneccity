@@ -3,17 +3,12 @@ chatListModule.controller('chatListController', ['$scope', 'getSocketData', 'for
 
     getSocketData.connect();
 
-   
 
     getChats.get().then(function (data) {
       $scope.chats = data.data;
-     // console.log(data);
-    }).then(function () {
-
-
-     // console.log($scope.chats);
+      // console.log(data);
     });
-
+    
     $scope.getUserImg = function (url) {
       return formatter.getUserImgUrl(url);
     };

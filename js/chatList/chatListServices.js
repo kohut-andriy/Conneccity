@@ -1,35 +1,37 @@
 chatListModule.service('getSocketData', ['OAuthToken', '$rootScope', function (OAuthToken, $rootScope) {
   var self = this;
 
-  var ws = new WebSocket('ws://46.63.89.93:8080/notifications?token=' + OAuthToken.getToken()['access_token']);
+  var ws = new WebSocket('ws://10.0.0.188:8080/notifications?token=' + OAuthToken.getToken()['access_token']);
 
   self.message = {};
 
   self.connect = function () {
-      ws.onopen = function (event) {
+    ws.onopen = function (event) {
 
-      };
-
-      ws.onclose = function (event) {
-        console.log('close');
-      };
-
-      ws.onmessage = function (event) {
-        let gottenMessage = JSON.parse(event.data).payload;
-        console.log(JSON.parse(event.data));
-        self.message = {
-          'message': gottenMessage.message,
-          date: new Date(gottenMessage.date),
-          'sender': {'id': gottenMessage.sender.id}
-        };
-
-        $rootScope.$digest();
-      };
-
-      ws.onerror = function (error) {
-        console.log(error);
-      };
     };
+
+    ws.onclose = function (event) {
+      console.log('close');
+    };
+
+    ws.onmessage = function (event) {
+      // let gottenMessage = JSON.parse(event.data).payload;
+      let eventData = JSON.parse(event.data);
+
+      console.log(eventData);
+
+      if (eventData.type == 'MESSAGE_RECEIVED') {
+        self.message = eventData.payload;
+      } else if (eventData.type == 'MESSAGE_READ') {
+        $rootScope.counter.delete(eventData.payload.chatId);
+      }
+
+    };
+
+    ws.onerror = function (error) {
+      console.log(error);
+    };
+  };
 }]);
 
 chatListModule.factory('getChats', ['$http', function ($http) {
@@ -44,4 +46,3 @@ chatListModule.factory('getChats', ['$http', function ($http) {
   };
 }]);
 
-chatListModule.value('unreadMessagesCount', 0);
