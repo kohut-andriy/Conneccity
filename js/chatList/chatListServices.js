@@ -1,7 +1,7 @@
 chatListModule.service('getSocketData', ['OAuthToken', '$rootScope', function (OAuthToken, $rootScope) {
   var self = this;
 
-  var ws = new WebSocket('ws://10.0.0.188:8080/notifications?token=' + OAuthToken.getToken()['access_token']);
+  var ws = new WebSocket('ws://api.conneccity.net/dev/notifications?token=' + OAuthToken.getToken()['access_token']);
 
   self.message = {};
 

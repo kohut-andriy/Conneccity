@@ -166,9 +166,9 @@
 }
 
 .logo {
-  // margin-bottom: 12px;
   display: inline-block;
 
+  text-transform: uppercase;
   &__text {
     color: @menuFooterText;
     font-size: 16.6px;
@@ -1110,33 +1110,46 @@
   }
 }
 
+.sign-up {
+  height: 100%;
+  overflow-y: scroll;
+}
+
 .sign-in {
-  background: url("../img/main-bg.png") top center no-repeat;
-  min-width: 100%;
+  background: url("../img/main-bg.jpg") top center no-repeat;
   min-height: 100%;
   background-size: cover;
+  height: 100%;
+  overflow-y: scroll;
   &__header {
-    background: rgba(0, 0, 0, .1);
-    padding: 15px;
+    padding: 40px 15px;
+  }
+
+  &__blocks {
+    display: table;
+    min-height: 100vh;
+    margin-top: -110px;
+    padding-top: 110px;
+    box-sizing: border-box;
   }
 
   &__block {
     width: 50%;
-    padding: 105px 15px;
+    padding: 15px;
     box-sizing: border-box;
     display: table-cell;
     vertical-align: middle;
   }
 
   &__about {
-    padding-right: 115px;
+    padding-right: 15px;
     box-sizing: border-box;
     color: #fff;
   }
 
   &__text {
     &_h {
-      font-size: 50px;
+      font-size: 54px;
       font-weight: 700;
       margin-bottom: 25px;
       line-height: 1.1;
@@ -1144,7 +1157,7 @@
 
     &_p {
       font-weight: 500;
-      font-size: 16px;
+      font-size: 21px;
       margin-bottom: 50px;
       line-height: 1.5;
 
@@ -1158,8 +1171,14 @@
     display: inline-block;
     padding: 8px 16px;
     box-sizing: border-box;
-    background: #222622;
+    background: rgba(255, 255, 255, .7);
     border-radius: 4px;
+    opacity: 0.8;
+    &:hover,
+    &:focus {
+      opacity: 1;
+      outline: none;
+    }
     &:not(:last-child) {
       margin-right: 20px;
     }
@@ -1170,6 +1189,7 @@
     vertical-align: middle;
     font-weight: 500;
     font-size: 12px;
+    color: #202020;
   }
 
   &__name {
@@ -1187,12 +1207,31 @@
   width: 100%;
   max-width: 380px;
   box-sizing: border-box;
+  position: relative;
   &_full {
     width: 100%;
     max-width: 100%;
     padding: 0;
   }
 
+  &__validation-text {
+    display: block;
+    color: #f44336;
+    font-size: 14px;
+    line-height: 1.5;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    &.ng-enter {
+      animation: slideInUp 1s linear;
+    }
+
+    &.ng-leave {
+      animation: slideOutDown 1s linear;
+    }
+  }
   &_small {
     padding: 10px;
     line-height: 48px;
@@ -1253,7 +1292,7 @@
   &__item {
     width: 100%;
     &:not(:last-child) {
-      margin-bottom: 18px;
+      margin-bottom: 15px;
     }
   }
 
@@ -1307,8 +1346,12 @@
     font-size: 18px;
     text-align: center;
     text-transform: capitalize;
-    line-height: 53px;
+    line-height: 46px;
     text-decoration: none;
+    opacity: 0.9;
+    &:hover {
+      opacity: 1;
+    }
     &:not(:last-child) {
       padding-right: 15px;
     }
@@ -1327,7 +1370,7 @@
       font-size: 18px;
       text-align: center;
       text-transform: capitalize;
-      line-height: 48px;
+      line-height: 46px;
       display: inline-block;
       width: 100%;
       appearance: none;
@@ -1951,6 +1994,7 @@
     border-radius: 8px;
     position: relative;
     direction: ltr;
+    text-align: left;
     &_got {
       background: #e6e6e6;
       margin-right: 18px;
@@ -1991,7 +2035,6 @@
     color: #bfbfbf;
   }
 
-
 }
 
 a {
@@ -2014,8 +2057,6 @@ a {
     background: #fff;
     border-radius: 4px;
     box-shadow: 0px 0 4.75px 0.25px rgba(0, 0, 0, 0.3);
-
-
 
     padding: 30px;
     box-sizing: border-box;

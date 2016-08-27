@@ -30,6 +30,11 @@
   //= geolocation/geolocationModule.js
   //= geolocation/geolocationServices.js
 
+// websocket
+
+  //= websocket/websocketModule.js
+  //= websocket/websocketServices.js
+
 // map.controls
 
   // map.controls.resize

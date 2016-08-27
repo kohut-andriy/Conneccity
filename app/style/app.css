@@ -33,6 +33,12 @@ body {
   display: block;
   font-family: "Roboto", sans-serif;
 }
+.content {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  display: block;
+}
 #map {
   height: 100vh;
 }
@@ -591,6 +597,7 @@ body {
 }
 .logo {
   display: inline-block;
+  text-transform: uppercase;
 }
 .logo__text {
   color: #4e4e4e;
@@ -1403,37 +1410,48 @@ body {
 .location-info-box > *:not(:last-child) {
   margin-bottom: 6px;
 }
+.sign-up {
+  height: 100%;
+  overflow-y: scroll;
+}
 .sign-in {
-  background: url("../img/main-bg.png") top center no-repeat;
-  min-width: 100%;
+  background: url("../img/main-bg.jpg") top center no-repeat;
   min-height: 100%;
   background-size: cover;
+  height: 100%;
+  overflow-y: scroll;
 }
 .sign-in__header {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: 40px 15px;
+}
+.sign-in__blocks {
+  display: table;
+  min-height: 100vh;
+  margin-top: -110px;
+  padding-top: 110px;
+  box-sizing: border-box;
 }
 .sign-in__block {
   width: 50%;
-  padding: 105px 15px;
+  padding: 15px;
   box-sizing: border-box;
   display: table-cell;
   vertical-align: middle;
 }
 .sign-in__about {
-  padding-right: 115px;
+  padding-right: 15px;
   box-sizing: border-box;
   color: #fff;
 }
 .sign-in__text_h {
-  font-size: 50px;
+  font-size: 54px;
   font-weight: 700;
   margin-bottom: 25px;
   line-height: 1.1;
 }
 .sign-in__text_p {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 21px;
   margin-bottom: 50px;
   line-height: 1.5;
 }
@@ -1444,8 +1462,14 @@ body {
   display: inline-block;
   padding: 8px 16px;
   box-sizing: border-box;
-  background: #222622;
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 4px;
+  opacity: 0.8;
+}
+.stores__store:hover,
+.stores__store:focus {
+  opacity: 1;
+  outline: none;
 }
 .stores__store:not(:last-child) {
   margin-right: 20px;
@@ -1455,6 +1479,7 @@ body {
   vertical-align: middle;
   font-weight: 500;
   font-size: 12px;
+  color: #202020;
 }
 .stores__name {
   font-size: 16px;
@@ -1469,11 +1494,31 @@ body {
   width: 100%;
   max-width: 380px;
   box-sizing: border-box;
+  position: relative;
 }
 .form_full {
   width: 100%;
   max-width: 100%;
   padding: 0;
+}
+.form__validation-text {
+  display: block;
+  color: #f44336;
+  font-size: 14px;
+  line-height: 1.5;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.form__validation-text.ng-enter {
+  -webkit-animation: slideInUp 1s linear;
+          animation: slideInUp 1s linear;
+}
+.form__validation-text.ng-leave {
+  -webkit-animation: slideOutDown 1s linear;
+          animation: slideOutDown 1s linear;
 }
 .form_small {
   padding: 10px;
@@ -1534,7 +1579,7 @@ body {
   width: 100%;
 }
 .form__item:not(:last-child) {
-  margin-bottom: 18px;
+  margin-bottom: 15px;
 }
 .form__socials {
   margin-bottom: 25px;
@@ -1583,8 +1628,12 @@ body {
   font-size: 18px;
   text-align: center;
   text-transform: capitalize;
-  line-height: 53px;
+  line-height: 46px;
   text-decoration: none;
+  opacity: 0.9;
+}
+.form__button:hover {
+  opacity: 1;
 }
 .form__button:not(:last-child) {
   padding-right: 15px;
@@ -1603,7 +1652,7 @@ body {
   font-size: 18px;
   text-align: center;
   text-transform: capitalize;
-  line-height: 48px;
+  line-height: 46px;
   display: inline-block;
   width: 100%;
   -webkit-appearance: none;
@@ -2149,6 +2198,7 @@ body {
   border-radius: 8px;
   position: relative;
   direction: ltr;
+  text-align: left;
 }
 .chat__text_got {
   background: #e6e6e6;

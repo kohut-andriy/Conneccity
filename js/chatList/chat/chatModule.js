@@ -1,1 +1,1 @@
-var chatModule = angular.module('chat', ['ngWebSocket']);
+var chatModule = angular.module('chat', []);

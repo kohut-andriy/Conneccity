@@ -4,14 +4,14 @@
             <div class="logo logo_green">
                 <div class="logo__text_green logo_icon-b logo-icon-green-b">Conneccity</div>
             </div>
-            <div class="sign-up__button fl-r">Login</div>
+            <a ui-sref="authorization" class="sign-up__button fl-r">Login</a>
         </div>
     </header>
     <h1 class="sign-up__h1">
         Create an account in Conneccity
     </h1>
 
-    <form class="form form_small" ng-submit="signUp(user)">
+    <form class="form form_small cf" ng-submit="signUp(user)">
         <ul class="form__list">
             <li class="form__item">
                 <label for="name" class="form__label">First name:</label>

@@ -1,9 +1,10 @@
 'use strict';
 
-var GOOGLE_IP = "http://46.63.90.62:8080/";
+var GOOGLE_IP = "http://api.conneccity.net/dev/";
 
 var app = angular.module('conneccityApp',
   [
+    'ngAnimate',
     'ngScrollbar',
     'ngResource',
     'ui.router',

@@ -15,9 +15,6 @@ gulp.task('webserver', function () {
   connect.server();
 });
 
-gulp.task('webserverReload', function () {
-  connect.reload();
-});
 
 gulp.task('jsTask', function () {
   gulp.src('js/main.js')
@@ -50,18 +47,18 @@ gulp.task('bowerComponents', function () {
    .pipe(gulp.dest('app/js/externals'));*/
 });
 
-gulp.task('mnifyImg', function () {
-  gulp.src('images/*')
-    .pipe(gulp.dest('app/js/externals/'))
-   .pipe(imagemin())
-   .pipe(gulp.dest('images-min'));
+gulp.task('minImg', function () {
+  gulp.src('img/**')
+    .pipe(imagemin())
+    .pipe(gulp.dest('app/img'));
 });
 
 gulp.task('watch', function () {
-  gulp.watch('js/**/*.js', ['jsTask', 'webserverReload']);
-  gulp.watch('css/*.less', ['cssTask', 'webserverReload']);
-  gulp.watch('js/**/*.html', ['htmlTask', 'webserverReload']);
-  gulp.watch('js/main.js', ['jsTask', 'webserverReload']);
+  gulp.watch('js/**', ['jsTask']);
+  gulp.watch('js/**', ['htmlTask']);
+  gulp.watch('css/*.less', ['cssTask']);
+  gulp.watch('img/**', ['minImg']);
+  gulp.watch('js/main.js', ['jsTask']);
 });
 
-gulp.task('default', ['cssTask', 'watch', 'jsTask', 'htmlTask', 'webserver']);
+gulp.task('default', ['cssTask', 'watch', 'jsTask', 'htmlTask', 'minImg', 'webserver']);

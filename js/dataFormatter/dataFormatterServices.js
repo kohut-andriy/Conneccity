@@ -77,11 +77,11 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
     },
 
     getUserListImg: function (url) {
-      return url ? url : 'img/test/user-list-img.jpg';
+      return url ? url : 'img/test/user_icon.png';
     },
 
     getUserImg: function (url) {
-      return url ? url : 'img/test/user-icon.jpg';
+      return url ? url : 'img/test/user_icon.png';
     },
 
     getEventListImg: function (url) {
