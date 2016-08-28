@@ -28,11 +28,12 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
   };
 
   // lite map init
-  self.liteMapInit = (marker, markerType) => {
-    self.map = new google.maps.Map(document.getElementById('map'), {
+  self.liteMapInit = (elem) => {
+
+    self.map = new google.maps.Map(elem, {
       center: {
-        lat: marker.latitude,
-        lng: (marker.longitude + 0.005)
+        lat: 49.423318,
+        lng: 26.985861
       },
       zoom: 16,
       maxZoom: 16,
@@ -43,22 +44,22 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
       draggable: false
     });
 
+
+
+
     self.markerCluster = new MarkerClusterer(self.map, [], []);
 
-    let dataArray = {};
-
-    dataArray[markerType] = {
-      '0': marker
-    };
+/*
 
     console.log(dataArray);
-
-    self.setMarkers(dataArray);
+*/
+    //self.setMarkers(dataArray);
   };
 
   // create map, clusterer, geocoder
-  self.initMap = () => {
-    self.map = new google.maps.Map(document.getElementById('map'), {
+  self.initMap = (elem) => {
+    /*console.log(elem);*/
+    self.map = new google.maps.Map(elem, {
       center: {
         lat: 49,
         lng: 26
@@ -118,62 +119,17 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
     return {text: markers.length, index: 1};
   };
 
-  // put data
-  self.setData = function (data) {
-    self.setMarkers(data);
-  };
-
-  // adding event's name, push data to get addresses ,push data to create markers
-  self.setMarkers = function (data) {
-
-    for (let eventType in data) {
-
-      for (let eventInfo in data[eventType]) {
-        let currentData = data[eventType][eventInfo];
-
-        switch (eventType) {
-          case 'meetings' :
-          {
-            currentData.eventtype = 'meeting';
-            //currentData.url = 'app.meetings.id( id :' + currentData.id + ")" ;
-            break;
-          }
-
-          case 'events' :
-          {
-            currentData.eventtype = 'event';
-            //currentData.url = 'app.events.id( id :' + currentData.id + ")" ;
-            break;
-          }
-
-          case 'people' :
-          {
-            currentData.eventtype = '';
-            //currentData.url = 'app.users.id( id :' + currentData.id + ")" ;
-            break;
-          }
-        }
-
-        self.drawMarker(currentData.photos ? currentData.photos.photo200px : 'img/test/pin.png',
-          "img/test/cluster.png",
-          currentData);
-      }
-
-    }
-
-  };
 
   // draw marker icon, push data to create markers
 
-  self.drawMarker = function (img, bg, data) {
-
-    //console.log('draw');
+  self.drawMarker = function (data, type) {
 
     let canvas;
     let context;
     let instance = 0;
 
     let draw;
+
     canvas = document.createElement("canvas");
 
     context = canvas.getContext("2d");
@@ -182,28 +138,26 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
 
     let img2 = new Image();
 
-    if (data.eventtype === 'meeting') {
+    if (type === 'meeting') {
 
       img2.src = 'img/meeting-marker.png';
+      img1.src = data.photos ? data.photos.photo200px : 'img/test/meeting_icon.png';
       draw = drawMeetingMarker;
-      //console.log('create meeting');
 
-    } else if (data.eventtype === 'event') {
-
+    } else if (type === 'event') {
+      img1.src = data.photos ? data.photos.photo200px : 'img/test/event_icon.png';
       img2.src = data.hasPonchesMatches ? 'img/event-marker-favorite.png' : 'img/event-marker.png';
       draw = drawEventMarker;
-      //console.log('create event');
 
     } else {
-
+      img1.src = data.photos ? data.photos.photo200px : 'img/test/user_icon.png';
       img2.src = data.hasPonchesMatches ? 'img/user-marker-favorite.png' : 'img/user-marker.png';
       draw = drawUserMarker;
-      //console.log('create user');
 
     }
 
     img1.onload = draw;
-    img1.src = img;
+
     img1.crossOrigin = "anonymous";
 
     img2.onload = draw;
@@ -283,7 +237,7 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
   // create markers, add 'em to clusterer
 
   self.createMarker = function (img, data, size) {
-    //console.log('create marker');
+
     let marker = new google.maps.Marker({
       position: new google.maps.LatLng(data.latitude, data.longitude),
       icon: {
@@ -308,6 +262,18 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
     });
 
     self.markerCluster.addMarker(marker);
+
+  };
+
+  self.drawDefaultMarker = function (data) {
+
+    let marker = new google.maps.Marker({
+      map: self.map,
+      position: new google.maps.LatLng(data.latitude, data.longitude),
+      animation: google.maps.Animation.DROP
+    });
+
+    self.map.setCenter({lat : data.latitude, lng: data.longitude + 0.005});
   };
 
   // get geocoder data

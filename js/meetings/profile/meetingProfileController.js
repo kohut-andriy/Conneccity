@@ -1,12 +1,12 @@
 meetingProfileModule.controller('meetingProfileController',
-  ['$scope', 'formatter', 'getMeetingInfo', '$stateParams', 'mapCreate', "$state", "$cookies",
-    function ($scope, formatter, getMeetingInfo, $stateParams, mapCreate, $state, $cookies) {
+  ['$scope', 'formatter', 'getMeetingInfo', '$stateParams', "$state", "$cookies","mapCreate",
+    function ($scope, formatter, getMeetingInfo, $stateParams, $state, $cookies, mapCreate) {
+
       getMeetingInfo.get($stateParams.id).then(function (response) {
+
         $scope.meeting = response.data;
 
-        console.log($scope.meeting);
-
-        mapCreate.liteMapInit($scope.meeting, 'meetings');
+        mapCreate.drawDefaultMarker($scope.meeting);
       });
 
       $scope.getAddress = function (lat, lng) {
@@ -47,7 +47,7 @@ meetingProfileModule.controller('meetingProfileController',
         return formatter.getMeetingStatusIconStyle(status);
       };
       
-      $scope.checkPermition = function () {
-        return $cookies.getObject('currentUser').id == $scope.meeting.creator.id;
+      $scope.checkPermition = function (id) {
+        return $cookies.getObject('currentUser').id == id;
       }
     }]);

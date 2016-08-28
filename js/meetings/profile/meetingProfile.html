@@ -1,11 +1,12 @@
 <div class="event-profile cf" ng-click="rebuild()">
-    <conneccity-map-lite></conneccity-map-lite>
+    <conneccity-map class="map" litemode></conneccity-map>
     <div class="event-profile__scroll-container" ng-scrollbar rebuild-on-resize rebuild-on="scrollRebuild">
         <div class="event-profile__content">
             <header class="event-profile__header">
                 <div class="event-profile__controls">
-                <a ui-sref="app.meetingEdit({ id : meeting.id })" class="event-profile__control settings-icon" ng-if="checkPermition()"></a>
-               <!--     <div class="event-profile__control menu-icon"></div>-->
+                    <a ui-sref="app.meetingEdit({ id : meeting.id })" class="event-profile__control settings-icon"
+                       ng-if="checkPermition(meeting.creator.id)"></a>
+                    <!--     <div class="event-profile__control menu-icon"></div>-->
                 </div>
                 <span class="event-profile__name">Meeting</span>
                 <h1 class="event-profile__event-name">{{ meeting.name }}</h1>
@@ -56,14 +57,13 @@
 
             <ul class="event-profile__admins-previews-list admins-previews-list">
                 <li class="admins-previews-list__item">
-                    <a ui-sref="app.users.id({ id : meetings.creator.id})" class="admins-preview">
+                    <a ui-sref="app.users.id({ id : meeting.creator.id})" class="admins-preview">
                         <div class="avatar">
                             <img ng-src="{{ getUserImg(meeting.creator.photos.photo200px) }}" alt=""
                                  class="avatar__img">
                         </div>
                         <div class="admins-preview__info">
-                            <p class="admins-preview__name">{{ meeting.creator.name }} {{ meeting.creator.surname
-                                }}</p>
+                            <p class="admins-preview__name">{{ meeting.creator.name }} {{ meeting.creator.surname }}</p>
                             <p class="admins-preview__position">Creator</p>
                         </div>
                     </a></li>

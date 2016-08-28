@@ -22,8 +22,6 @@
   //= map/mapDirective.js
   //= map/mapController.js
   //= map/mapServices.js
-  //= map/mapLiteController.js
-  //= map/mapLiteDirective.js
 
 // geolocation
 

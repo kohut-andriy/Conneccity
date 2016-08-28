@@ -1,1 +1,1 @@
-var meetingProfileModule = angular.module('meetingProfile', []);
+var meetingProfileModule = angular.module('meetingProfile', ['conneccityMap']);

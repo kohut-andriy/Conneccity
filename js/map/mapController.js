@@ -1,6 +1,17 @@
 mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo', 'formatter', '$q', '$state',
   function ($scope, mapCreate, getMapInfo, formatter, $q, $state) {
 
+    getMapInfo.getAll().then(function (data) {
+      console.log(data.data);
+
+      $scope.markers = data.data;
+      /*
+      mapCreate.clearMap();
+      mapCreate.setData(data.data);*/
+    });
+
+
+
     $scope.filterState = false;
 
     $scope.toggleState = function () {
@@ -50,7 +61,7 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
     $scope.getFormattedDistance = function (distance) {
       return formatter.getDistance(distance);
     };
-
+/*
     $scope.setAllInfo = function () {
 
       console.log('setting');
@@ -61,7 +72,7 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
         mapCreate.clearMap();
         mapCreate.setData(data.data);
       });
-    };
+    };*/
 
     $scope.parseDate = function (date) {
       return formatter.formatDate(date);
@@ -102,9 +113,10 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
     $scope.zoomOut = function () {
       mapCreate.zoomOut();
     };
+/*
 
-    mapCreate.initMap();
     $scope.setAllInfo();
+*/
 
     $scope.filterMap = function () {
 
@@ -124,14 +136,11 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
 
       getMapInfo.getFilteredInfo(options).then(function (data) {
         mapCreate.clearMap();
-        mapCreate.setData(data.data);
+        $scope.markers = data.data;
       });
 
     };
 
-    $scope.getSref = function () {
-      
-    };
     
     $scope.centerMap = function () {
       mapCreate.centerMapToUser();
