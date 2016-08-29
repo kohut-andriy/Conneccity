@@ -456,6 +456,9 @@ body {
 .meeting-status-icon_invited {
   background-position: -36px 0;
 }
+a {
+  outline: none;
+}
 .main {
   height: 100vh;
   display: block;
@@ -511,6 +514,7 @@ body {
   position: relative;
   text-transform: capitalize;
   border-top: 1px solid #1c1c1c;
+  outline: none;
 }
 .menu__link_dark {
   background: #212121;
@@ -1535,7 +1539,7 @@ body {
           appearance: none;
   resize: none;
   width: 100%;
-  height: 90px;
+  height: 60px;
   color: #404040;
   border: 1px solid #e6e6e6;
   outline: none;
@@ -1581,7 +1585,7 @@ body {
   width: 100%;
 }
 .form__item:not(:last-child) {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 .form__socials {
   margin-bottom: 25px;
@@ -1645,6 +1649,7 @@ body {
   color: #45b648;
   border-radius: 4px;
   cursor: pointer;
+  display: block;
 }
 .form__button_submit {
   background: #45b648;
@@ -1672,7 +1677,7 @@ body {
   font-weight: 700;
   text-align: center;
   text-transform: uppercase;
-  line-height: 40px;
+  line-height: 35px;
   display: inline-block;
   padding: 0 44px;
   -webkit-appearance: none;
@@ -2123,6 +2128,16 @@ body {
   margin-left: 300px;
   position: relative;
 }
+.chat__status {
+  position: absolute;
+  top: 50%;
+  margin-top: -3px;
+  right: -14px;
+  width: 5px;
+  height: 5px;
+  background: #f44336;
+  border-radius: 50%;
+}
 .chat__header {
   display: block;
   width: 100%;
@@ -2157,17 +2172,17 @@ body {
 }
 .chat__footer {
   width: 100%;
-  padding: 32px 24px;
+  padding: 15px;
   box-sizing: border-box;
   box-shadow: 0px -2px 4.75px 0.25px rgba(0, 0, 0, 0.2);
 }
 .chat__content {
   display: block;
   height: 100vh;
-  padding: 125px 15px 230px 30px;
+  padding: 98px 0 140px 15px;
   margin-right: -10px;
   margin-top: -95px;
-  margin-bottom: -200px;
+  margin-bottom: -138px;
   box-sizing: border-box;
   width: 100%;
   float: left;
@@ -2183,6 +2198,7 @@ body {
 }
 .chat__message {
   margin-bottom: 10px;
+  position: relative;
 }
 .chat__message_reverse {
   direction: rtl;

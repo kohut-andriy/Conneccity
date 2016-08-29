@@ -1,6 +1,6 @@
 <div class="chat__header">
     <div class="avatar">
-        <img ng-src="{{ chat.user.photos.photo200px || chat.event.photos.photo200px || 'img/test/pin.png' }}" alt=""
+        <img ng-src="{{ chat.user.photos.photo200px || chat.event.photos.photo200px || 'img/test/meeting_icon.png' }}" alt=""
              class="avatar__img avatar__img_big">
         <div class="avatar__status avatar__status_big" ng-show="chat.user.online"></div>
     </div>
@@ -16,14 +16,16 @@
     </div>
 </div>
 <div class="chat__content fl-l">
-    <ul class="chat__messages" schroll-bottom="messages" bottom>
+    <ul class="chat__messages" schroll-bottom="messages">
         <li class="chat__message cf" ng-repeat="message in messages | orderBy:'-'"
             ng-class="{'chat__message_reverse': checkSender(message.sender.id) }">
             <div class="chat__text"
                  ng-class=" !checkSender(message.sender.id)  ? 'chat__text_got' : 'chat__text_my'">
                 {{ message.message }}
+                <p class="chat__status" ng-show="getStatus(message)"></p>
             </div>
             <span class="chat__time">{{ getLastSeenTime(message.date) }}</span>
+
         </li>
     </ul>
 </div>
@@ -32,7 +34,7 @@
         <ul class="form__list">
             <li class="form__item">
                 <textarea name="" id="" cols="30" rows="10" class="form__textarea"
-                          placeholder="Write message here..." ng-model="message" required></textarea>
+                          placeholder="Write message here..." ng-model="message"></textarea>
             </li>
             <li class="form__item">
                 <input type="submit" class="form__button_submit-2 fl-r" value="Send">

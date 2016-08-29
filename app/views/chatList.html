@@ -14,7 +14,7 @@
                     <p class="chat-list__online" ng-show="chat.user.online">Online</p>
                     <p class="chat-list__last-seen" ng-show="!chat.user.online">{{ getLastSeenTime(chat.user.lastSeen)
                         }}</p>
-                    <p class="chat-list__status" ng-show="chat.countUnreadMessages"></p>
+                    <p class="chat-list__status" ng-show="getState(chat.id)"></p>
                 </div>
             </a>
         </li>

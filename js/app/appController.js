@@ -1,5 +1,5 @@
-app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'formatter', '$cookies', '$rootScope',
-  function ($scope, getSignedUserInfo, OAuthToken, formatter, $cookies, $rootScope) {
+app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'formatter', '$cookies', 'socketFactory', '$stateParams',
+  function ($scope, getSignedUserInfo, OAuthToken, formatter, $cookies, socketFactory, $stateParams) {
 
     getSignedUserInfo.get().then(function (data) {
 
@@ -30,7 +30,9 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'f
     }).then(function () {
       getSignedUserInfo.getCounter().then(function (data) {
 
-        $rootScope.counter = new Set(data.data.unreadChatsIds);
+        $scope.counter = new Set(data.data.unreadChatsIds);
+
+        socketFactory.counter = $scope.counter;
       });
     });
 
@@ -75,7 +77,7 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'f
     };
 
     $scope.getCounter = function () {
-      return $rootScope.counter?$rootScope.counter.size : 0;
+      return $scope.counter?$scope.counter.size : 0;
     };
 
 

@@ -1,7 +1,7 @@
-chatListModule.controller('chatListController', ['$scope', 'getSocketData', 'formatter', 'getChats', 'getUserData',
-  function ($scope, getSocketData, formatter, getChats, getUserData) {
+chatListModule.controller('chatListController', ['$scope', 'formatter', 'getChats', 'getUserData', 'socketFactory',
+  function ($scope, formatter, getChats, getUserData, socketFactory) {
 
-    getSocketData.connect();
+    //websocket.connect();
 
 
     getChats.get().then(function (data) {
@@ -17,7 +17,14 @@ chatListModule.controller('chatListController', ['$scope', 'getSocketData', 'for
       return formatter.getLastSeenTime(date);
     };
 
-    $scope.$watch(function () {
-      $scope.$broadcast('rebuild:me');
-    });
+    $scope.getState = function (id) {
+        return socketFactory.counter.has(id);
+    };
+   // $scope.$broadcast('rebuild:me');
+   /* $scope.$watch(function () {
+      return ;
+    }, function (newVal, oldVal) {
+
+
+    });*/
   }]);

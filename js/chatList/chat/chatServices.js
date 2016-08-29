@@ -21,6 +21,13 @@ chatModule.factory('getChat', ['$http', function ($http) {
         },
         method: "POST"
       }) 
+    },
+    read: function (id) {
+      return $http({
+          url: GOOGLE_IP + "chats/"+id+"/messages" ,
+          method: "PUT"
+        })
+
     }
   };
 }]);
