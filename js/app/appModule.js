@@ -28,18 +28,15 @@ var app = angular.module('conneccityApp',
     'websocket'
   ]);
 
-app.run(['$rootScope', '$state', 'OAuth', '$location', 'getUserLocation', '$interval', 'socketFactory',
-  function ($rootScope, $state, OAuth, $location, getUserLocation, $interval, socketFactory) {
+app.run(['$rootScope', '$state', 'OAuth', '$location', 'getUserLocation', '$interval',
+  function ($rootScope, $state, OAuth, $location, getUserLocation, $interval) {
 
     $interval(function () {
       getUserLocation.get();
     }, 1000 * 60 * 5);
 
-    if (!OAuth.isAuthenticated() && $location.path() != '/signUp') {
-
+    if (!OAuth.isAuthenticated() && ($location.path() != '/signUp')) {
       $location.path('/signIn');
-    } else {
-      socketFactory.connect();
     }
 
     var encoded = btoa("clientapp:123456");

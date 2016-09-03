@@ -1,6 +1,8 @@
 websocket.service('socketFactory', ['OAuthToken', '$rootScope', '$cookies', function (OAuthToken, $rootScope, $cookies) {
   var self = this;
 
+
+
   var ws = new WebSocket('ws://api.conneccity.net/dev/notifications?token=' + OAuthToken.getToken()['access_token']);
 
   self.counter = new Set();

@@ -1,6 +1,10 @@
 app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'formatter', '$cookies', 'socketFactory', '$stateParams',
   function ($scope, getSignedUserInfo, OAuthToken, formatter, $cookies, socketFactory, $stateParams) {
 
+    if(!OAuthToken.isAuthenticated) {
+      socketFactory.connect();
+    }
+
     getSignedUserInfo.get().then(function (data) {
 
       $scope.user = data.data;
