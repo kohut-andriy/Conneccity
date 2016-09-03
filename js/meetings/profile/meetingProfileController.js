@@ -22,7 +22,6 @@ meetingProfileModule.controller('meetingProfileController',
       $scope.getUserImg = function (url) {
         return formatter.getUserImg(url);
       };
-      
 
       $scope.$watch(function () {
         $scope.$broadcast('scrollRebuild');

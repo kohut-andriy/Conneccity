@@ -33,8 +33,8 @@ createMeetingModule.controller('createMeetingController',
         if($stateParams.id) {
           createMeeting.update({
             "startAt": data.startAt,
-            "latitude": data.latitude,
-            "longitude": data.longitude,
+            "latitude": $scope.placePicker.lat,
+            "longitude": $scope.placePicker.lng,
             "description": data.description,
             "invitedIds": $cookies.userId ? [$cookies.userId] : $scope.meeting.invitedIds
           }, $stateParams.id).then(function (data) {
@@ -45,8 +45,8 @@ createMeetingModule.controller('createMeetingController',
         } else {
           createMeeting.create({
             "startAt": data.startAt,
-            "latitude": data.latitude,
-            "longitude": data.longitude,
+            "latitude": $scope.placePicker.lat,
+            "longitude": $scope.placePicker.lng,
             "description": data.description,
             "invitedIds": $cookies.userId ? [$cookies.userId] : $scope.meeting.invitedIds
           }).then(function (data) {

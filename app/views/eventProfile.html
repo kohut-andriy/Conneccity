@@ -1,10 +1,11 @@
-<div class="event-profile cf" ng-click="rebuild()">
+<div class="event-profile cf">
     <img ng-src="{{ event.photos.photoOriginal || 'img/test/event.jpg' }}" alt="" class="event-profile__bg">
     <div class="event-profile__scroll-container" ng-scrollbar rebuild-on-resize rebuild-on="scrollRebuild">
         <div class="event-profile__content">
             <header class="event-profile__header">
                 <div class="event-profile__controls">
-                    <a ui-sref="app.eventEdit({id : event.id})" class="event-profile__control settings-icon" ng-if="checkPermition()"></a>
+                    <a ui-sref="app.eventEdit({id : event.id})" class="event-profile__control settings-icon"
+                       ng-if="checkPermition(event.creator.id)"></a>
                     <!--<div class="event-profile__control menu-icon"></div>-->
                 </div>
                 <span class="event-profile__name">Event</span>
@@ -40,7 +41,7 @@
                 <div class="button button_green button-icon-accept-b" ng-if="event.isMember"
                      ng-click="leave(event.id)">Leave
                 </div>
-                <a ui-sref="app.chat.id({ id : chatId })" class="button button_red button-icon-message-b" >
+                <a ui-sref="app.chat.id({ id : chatId })" class="button button_red button-icon-message-b">
                     Message
                 </a>
             </div>

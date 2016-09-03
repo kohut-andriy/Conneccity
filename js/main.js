@@ -33,6 +33,11 @@
   //= websocket/websocketModule.js
   //= websocket/websocketServices.js
 
+// placePicker
+
+  //= placePicker/placePickerModule.js
+  //= placePicker/placePickerDirective.js
+
 // map.controls
 
   // map.controls.resize

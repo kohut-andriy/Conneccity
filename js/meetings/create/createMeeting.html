@@ -1,47 +1,37 @@
-<h1 class="sign-up__h1">
-    Meeting
-</h1>
+<div class="scroll">
+    <h1 class="sign-up__h1">
+        Meeting
+    </h1>
 
-<form class="form form_small" ng-submit="create(meeting)">
-    <ul class="form__list">
-        <li class="form__item">
-            <label for="name" class="form__label">Start at:</label>
-            <div class="form__wrapper fl-r">
-                <input type="date" id="name"
-                       class="form__input form__input_static" ng-model="meeting.startAt" required>
-            </div>
-        </li>
-        <li class="form__item">
-            <a ng-href="{{ getMapSrc() }}">Find place coordinates!</a>
-        </li>
-        <li class="form__item">
-            <label for="surname" class="form__label">Latitude:</label>
-            <div class="form__wrapper fl-r">
-                <input type="text" id="surname"
-                       class="form__input form__input_static" ng-model="meeting.latitude" required>
-            </div>
-        </li>
-
-        <li class="form__item">
-            <label for="email" class="form__label">Longitude:</label>
-            <div class="form__wrapper fl-r">
-                <input type="text" id="email"
-                       class="form__input form__input_static" ng-model="meeting.longitude" required>
-            </div>
-        </li>
-        <li class="form__item">
-            <label for="pass" class="form__label">Short description:</label>
-            <div class="form__wrapper fl-r">
-                <input type="text" id="pass"
-                       class="form__input form__input_static" ng-model="meeting.description">
-            </div>
-        </li>
-        <li class="form__item">
-            <div class="form__wrapper fl-r">
-                <div class="form__button fl-r">
-                    <input type="submit" class="form__button_submit" value="Submit">
+    <form class="form form_small" ng-submit="create(meeting)">
+        <ul class="form__list">
+            <li class="form__item">
+                <label for="name" class="form__label">Start at:</label>
+                <div class="form__wrapper fl-r">
+                    <input type="date" id="name"
+                           class="form__input form__input_static" ng-model="meeting.startAt" required>
                 </div>
-            </div>
-        </li>
-    </ul>
-</form>
+            </li>
+
+            <li class="form__item">
+                <label class="form__label">Find place!</label>
+                <place-picker></place-picker>
+            </li>
+
+            <li class="form__item">
+                <label for="pass" class="form__label">Short description:</label>
+                <div class="form__wrapper fl-r">
+                    <input type="text" id="pass"
+                           class="form__input form__input_static" ng-model="meeting.description">
+                </div>
+            </li>
+            <li class="form__item">
+                <div class="form__wrapper fl-r">
+                    <div class="form__button fl-r">
+                        <input type="submit" class="form__button_submit" value="Submit">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>

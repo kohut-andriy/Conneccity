@@ -25,7 +25,8 @@ var app = angular.module('conneccityApp',
     'geolocation',
     'createMeeting',
     'createEvent',
-    'websocket'
+    'websocket',
+    'placePicker'
   ]);
 
 app.run(['$rootScope', '$state', 'OAuth', '$location', 'getUserLocation', '$interval',

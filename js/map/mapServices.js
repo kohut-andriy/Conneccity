@@ -27,35 +27,6 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
     self.map.setZoom(10);
   };
 
-  // lite map init
-  self.liteMapInit = (elem) => {
-
-    self.map = new google.maps.Map(elem, {
-      center: {
-        lat: 49.423318,
-        lng: 26.985861
-      },
-      zoom: 16,
-      maxZoom: 16,
-      minZoom: 16,
-      clickableIcons: false,
-      rotateControl: false,
-      disableDefaultUI: true,
-      draggable: false
-    });
-
-
-
-
-    self.markerCluster = new MarkerClusterer(self.map, [], []);
-
-/*
-
-    console.log(dataArray);
-*/
-    //self.setMarkers(dataArray);
-  };
-
   // create map, clusterer, geocoder
   self.initMap = (elem) => {
     /*console.log(elem);*/

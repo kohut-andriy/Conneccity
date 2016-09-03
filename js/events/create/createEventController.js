@@ -1,13 +1,14 @@
 createMeetingModule.controller('createEventController', ['$scope', 'createEvent', 'formatter', '$cookies', '$state', '$stateParams', 'getEventInfo',
   function ($scope, createEvent, formatter, $cookies, $state, $stateParams, getEventInfo) {
 
+
     $scope.user = $cookies.getObject('currentUser');
     $scope.getMapSrc = function () {
       return formatter.getGoogleMapsSrc([$scope.user.latitude,
         $scope.user.latitude]);
     };
 
-    console.log($stateParams.id);
+    $scope.pickerVisible = false;
 
     $scope.event = {};
 
@@ -30,8 +31,8 @@ createMeetingModule.controller('createEventController', ['$scope', 'createEvent'
         createEvent.update({
           "name": data.name,
           "startAt": data.startAt,
-          "latitude": data.latitude,
-          "longitude": data.longitude,
+          "latitude": $scope.placePicker.lat,
+          "longitude": $scope.placePicker.lng,
           "description": data.description,
           "priceFrom": data.price
         }, $stateParams.id).then(function (data) {
@@ -42,8 +43,8 @@ createMeetingModule.controller('createEventController', ['$scope', 'createEvent'
         createEvent.create({
           "name": data.name,
           "startAt": data.startAt,
-          "latitude": data.latitude,
-          "longitude": data.longitude,
+          "latitude": $scope.placePicker.lat,
+          "longitude": $scope.placePicker.lng,
           "description": data.description,
           "priceFrom": data.price
         }).then(function (data) {

@@ -1,0 +1,1 @@
+var placePicker = angular.module('placePicker', ['conneccityMap','ui.router']);

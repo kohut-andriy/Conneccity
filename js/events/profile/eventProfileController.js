@@ -54,8 +54,8 @@ eventProfile.controller('eventProfileController', ['$scope', 'getEventInfo', '$s
       }
     };
 
-    $scope.checkPermition = function () {
-      return $cookies.getObject('currentUser').id == $scope.event.creator.id;
+    $scope.checkPermition = function (id) {
+      return $cookies.getObject('currentUser').id == id;
     };
 
     getEventInfo.sendMessage($stateParams.id).then(function (data) {
