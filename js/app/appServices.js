@@ -14,6 +14,7 @@ app.factory('getSignedUserInfo', ['$http', function ($http) {
       });
     },
     putPonches: function (data) {
+      console.log(data);
       return $http({
         url: GOOGLE_IP + "profile/ponches",
         method: "PUT",

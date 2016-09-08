@@ -23,9 +23,6 @@ placePicker.directive('placePicker', ['mapCreate', function (mapCreate) {
 
       });
 
-
-
-
     }
   }
 }]);

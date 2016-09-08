@@ -38,6 +38,12 @@
   //= placePicker/placePickerModule.js
   //= placePicker/placePickerDirective.js
 
+// ponchPicker
+
+  //= ponchPicker/ponchPickerModule.js
+  //= ponchPicker/ponchPickerController.js
+  //= ponchPicker/ponchPickerDirective.js
+
 // map.controls
 
   // map.controls.resize

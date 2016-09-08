@@ -35,6 +35,7 @@ websocket.service('socketFactory', ['OAuthToken', '$rootScope', '$cookies', func
 
       if (eventData.type == 'MESSAGE_READ') {
         self.counter.delete(eventData.payload.chatId);
+      } else  {
         self.chatMessage[eventData.payload.chatId] = eventData.payload.id;
       }
       $rootScope.$digest();

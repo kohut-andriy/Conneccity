@@ -1,26 +1,22 @@
 app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'formatter', '$cookies', 'socketFactory', '$stateParams',
   function ($scope, getSignedUserInfo, OAuthToken, formatter, $cookies, socketFactory, $stateParams) {
 
-    if(!OAuthToken.isAuthenticated) {
-      socketFactory.connect();
-    }
+    var getInterests = function () {
+      getSignedUserInfo.get().then(function (data) {
 
-    getSignedUserInfo.get().then(function (data) {
+        $scope.user = data.data;
 
-      $scope.user = data.data;
+        $cookies.putObject('currentUser', $scope.user);
 
-      $cookies.putObject('currentUser', $scope.user);
+        $scope.ponchesList = [];
 
-      //console.log($cookies.getObject('currentUser'));
+        console.log($scope.user.ponches);
 
-      $scope.ponchesList = [];
+        for (var ponch in $scope.user.ponches) {
+          $scope.ponchesList.push($scope.user.ponches[ponch].name);
+        }
 
-      for(var ponch in $scope.user.ponches) {
-        $scope.ponchesList.push($scope.user.ponches[ponch].name);
-      }
-
-     // console.log($scope.ponchesList);
-    }).then(function () {
+      });
 
       getSignedUserInfo.getInterests().then(function (data) {
         $scope.related = [];
@@ -31,42 +27,28 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'f
 
         //  console.log(data);
       });
-    }).then(function () {
-      getSignedUserInfo.getCounter().then(function (data) {
+    };
 
-        $scope.counter = new Set(data.data.unreadChatsIds);
+    $scope.hidePicker = function () {
+      $scope.show = false;
+    };
 
-        socketFactory.counter = $scope.counter;
-      });
+    getInterests();
+
+    if (!OAuthToken.isAuthenticated) {
+      socketFactory.connect();
+    }
+
+    getSignedUserInfo.getCounter().then(function (data) {
+
+      $scope.counter = new Set(data.data.unreadChatsIds);
+
+      socketFactory.counter = $scope.counter;
     });
 
-    $scope.showEdit = false;
-    
-    $scope.add = function (ponch) {
-      for(var i =0; i < 5; i++) {
-        if($scope.ponchesList[i] == ponch) return;
-      }
-      if($scope.ponchesList.length < 5 )
-        $scope.ponchesList.push(ponch);
-    };
 
-    $scope.delete = function (ponch) {
-      for(var i = 0; i < 5; i++) {
-        if($scope.ponchesList[i] == ponch) {
-          $scope.ponchesList.splice(i, i+1);
-        }
-      }
-    };
+    //$scope.showEdit = false;
 
-    $scope.submit = function () {
-      getSignedUserInfo.putPonches($scope.ponchesList).then(function (data) {
-       // console.log(data);
-      });
-    };
-
-    $scope.hideDe = function () {
-      $scope.showEdit = !$scope.showEdit;
-    };
 
     $scope.logout = function () {
       OAuthToken.removeToken();
@@ -81,9 +63,15 @@ app.controller('appController', ['$scope', 'getSignedUserInfo', 'OAuthToken', 'f
     };
 
     $scope.getCounter = function () {
-      return $scope.counter?$scope.counter.size : 0;
+      return $scope.counter ? $scope.counter.size : 0;
     };
 
+    $scope.submitPonches = function (list) {
+      getSignedUserInfo.putPonches(list).then(function () {
+        $scope.show = false;
+        getInterests();
+      });
+    };
 
   }]);
 

@@ -5,6 +5,7 @@
 a {
   outline: none;
 }
+
 .main {
   height: 100vh;
   display: block;
@@ -129,6 +130,7 @@ a {
 .ponches {
   white-space: normal;
   display: inline-block;
+  font-size: 0;
 
   &__item {
     display: inline-block;
@@ -710,6 +712,7 @@ a {
     background: #6d6d6d;
     padding: 4px 8px;
     border-radius: 50%;
+    margin-left: 10px;
 
     &.favorite {
       background: #45b648;
@@ -1353,6 +1356,7 @@ a {
     text-transform: capitalize;
     line-height: 46px;
     text-decoration: none;
+    outline: none;
     opacity: 0.9;
     &:hover {
       opacity: 1;
@@ -2059,6 +2063,7 @@ a {
   text-decoration: none;
 }
 
+/*
 .ponch-editor {
   position: absolute;
   width: 400px;
@@ -2103,5 +2108,142 @@ a {
   .ponches {
     margin-bottom: 20px;
   }
-}
+}*/
 
+.picker {
+  position: absolute;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  top: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+  padding-left: 50%;
+  padding-top: 50%;
+  margin-top: -50%;
+  margin-left: -50%;
+  box-sizing: border-box;
+
+
+  &__content {
+    background: #fff;
+    box-shadow: 0 2px 55.18px 6.82px rgba(0, 0, 0, 0.4);
+    display: inline-block;
+    transform: translate(-50%, -50%);
+    max-height: 100vh;
+  }
+
+  &__head {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: #2b2b2b;
+    padding: 25px 35px;
+    border-bottom: 2px solid #eaeaea;
+    box-shadow: 0px 1px 0px 0px rgba(247, 247, 247, 0.004);
+  }
+
+  &__close-button {
+    width: 20px;
+    height: 20px;
+    background: url("../img/close_button.png");
+    display: inline-block;
+    margin-left: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+    &_green {
+      background-position: center right;
+    }
+  }
+
+  &__inner {
+    padding: 20px 35px;
+  }
+
+  &__row {
+    display: block;
+    margin-bottom: 20px;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+    width: 380px;
+    max-width: 100%;
+  }
+  &__form {
+    padding: 0;
+    display: flex;
+    width: 100vw;
+    border-radius: 5px;
+    overflow: hidden;
+    & > *:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    & > *:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      width: auto;
+      min-width: 90px;
+      text-transform: uppercase;
+    }
+  }
+
+  &__list {
+    display: block;
+    font-size: 0;
+    max-height: 136px;
+    overflow-y: scroll;
+  }
+
+  &__item {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__link {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 11px 14px;
+    border-radius: 16px;
+    color: #666666;
+    background: #e7e7e7;
+    &_edit {
+      color: #2c932f;
+      background: #bcffbe;
+      padding: 8px;
+    }
+  }
+
+  &__text {
+    vertical-align: middle;
+  }
+
+  &__button {
+    display: block;
+    color: #fff;
+    text-transform: uppercase;
+    background: #45b648;
+    text-align: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 60px;
+    cursor: pointer;
+    opacity: 0.9;
+    &:before {
+      content: '';
+      width: 22px;
+      height: 17px;
+      background: url("../img/accept_icon.png") center center no-repeat;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+}
