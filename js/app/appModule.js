@@ -30,12 +30,8 @@ var app = angular.module('conneccityApp',
     'ponchPicker'
   ]);
 
-app.run(['$rootScope', '$state', 'OAuth', '$location', 'getUserLocation', '$interval',
-  function ($rootScope, $state, OAuth, $location, getUserLocation, $interval) {
-
-    $interval(function () {
-      getUserLocation.get();
-    }, 1000 * 60 * 5);
+app.run(['$rootScope', '$state', 'OAuth', '$location', 'getUserLocation',
+  function ($rootScope, $state, OAuth, $location, getUserLocation) {
 
     if (!OAuth.isAuthenticated() && ($location.path() != '/signUp')) {
       $location.path('/signIn');
@@ -59,8 +55,7 @@ app.run(['$rootScope', '$state', 'OAuth', '$location', 'getUserLocation', '$inte
         ).then(function () {
           $state.reload();
         }, function () {
-          /*  if($state.getName() != 'registration')
-           console.log($state.getName());*/
+
           $state.go('authorization');
         });
       }

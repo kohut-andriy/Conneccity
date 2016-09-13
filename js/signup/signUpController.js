@@ -16,7 +16,6 @@ signUpModule.controller('signUpController', ['$scope', 'addUser', 'OAuthToken', 
 
       addUser.create($scope.userInfo).then(function (data) {
         OAuthToken.setToken(data.data);
-        console.log(data);
         $cookies.putObject(user);
         getUserLocation.get();
       }).then(function () {

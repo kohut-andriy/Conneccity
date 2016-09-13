@@ -2,15 +2,8 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
   function ($scope, mapCreate, getMapInfo, formatter, $q, $state) {
 
     getMapInfo.getAll().then(function (data) {
-      console.log(data.data);
-
       $scope.markers = data.data;
-      /*
-      mapCreate.clearMap();
-      mapCreate.setData(data.data);*/
     });
-
-
 
     $scope.filterState = false;
 
@@ -61,18 +54,6 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
     $scope.getFormattedDistance = function (distance) {
       return formatter.getDistance(distance);
     };
-/*
-    $scope.setAllInfo = function () {
-
-      console.log('setting');
-
-
-      getMapInfo.getAll().then(function (data) {
-        console.log(data.data);
-        mapCreate.clearMap();
-        mapCreate.setData(data.data);
-      });
-    };*/
 
     $scope.parseDate = function (date) {
       return formatter.formatDate(date);
@@ -113,10 +94,6 @@ mapModule.controller('mapCreateController', ['$scope', 'mapCreate', 'getMapInfo'
     $scope.zoomOut = function () {
       mapCreate.zoomOut();
     };
-/*
-
-    $scope.setAllInfo();
-*/
 
     $scope.filterMap = function () {
 

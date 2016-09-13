@@ -1,1 +1,1 @@
-var signUpModule = angular.module('signUp', ['ngResource','ui.router']);
+var signUpModule = angular.module('signUp', ['geolocation','ui.router']);

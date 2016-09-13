@@ -8,9 +8,6 @@ ponchPicker.directive('ponchPicker', [function () {
       submitFunc: "&"
     },
     templateUrl: "views/ponchPicker.html",
-    controller: "ponchPickerController"/*,
-    link: function (scope, elem, attrs) {
-
-    }*/
+    controller: "ponchPickerController"
   }
 }]);

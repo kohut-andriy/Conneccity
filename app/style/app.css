@@ -817,8 +817,8 @@ a {
   text-align: center;
   position: absolute;
   bottom: 30px;
-  left: 0;
-  right: 0;
+  left: 50%;
+  right: 50%;
 }
 .resize {
   background: #fff;
@@ -839,6 +839,9 @@ a {
   text-align: left;
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.4);
   border-radius: 3px;
+  -webkit-transform: translate(-50%);
+      -ms-transform: translate(-50%);
+          transform: translate(-50%);
 }
 .card .ponches__item {
   margin-top: 0;
@@ -1568,6 +1571,7 @@ a {
   padding: 18px;
   box-sizing: border-box;
   font-size: 16px;
+  font-family: inherit;
 }
 .form__textarea ::-webkit-input-placeholder {
   color: #bfbfbf;
@@ -1689,6 +1693,7 @@ a {
           appearance: none;
   border: none;
   box-shadow: none;
+  font-family: inherit;
 }
 .form__button_submit-2 {
   background: #45b648;
@@ -1707,6 +1712,7 @@ a {
           appearance: none;
   border: none;
   box-shadow: none;
+  font-family: inherit;
 }
 .form__radio {
   display: none;
