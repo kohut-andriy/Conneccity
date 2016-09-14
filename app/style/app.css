@@ -839,6 +839,7 @@ a {
   text-align: left;
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.4);
   border-radius: 3px;
+  position: relative;
   -webkit-transform: translate(-50%);
       -ms-transform: translate(-50%);
           transform: translate(-50%);
@@ -847,22 +848,32 @@ a {
   margin-top: 0;
 }
 .card__prev-button {
-  display: table-cell;
+  display: block;
   width: 48px;
-  height: 100%;
   background: url("../img/arrow-left.png") center center no-repeat rgba(246, 246, 246, 0.5);
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin-left: -48px;
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.4);
 }
 .card__prev-button.active,
 .card__prev-button:hover {
   background-color: #f6f6f6;
 }
 .card__next-button {
-  display: table-cell;
+  display: block;
   width: 48px;
-  height: 100%;
   background: url("../img/arrow-right.png") center center no-repeat rgba(246, 246, 246, 0.5);
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin-right: -48px;
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.4);
 }
 .card__next-button.active,
 .card__next-button:hover {
@@ -874,6 +885,7 @@ a {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   border-radius: 3px;
   position: relative;
+  z-index: 2;
 }
 .card__header {
   background: #f6f6f6;
