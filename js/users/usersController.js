@@ -1,26 +1,31 @@
-usersModule.controller('usersController', ['$scope', 'getUsers', 'formatter',
-  function usersController($scope, getUsers, formatter) {
-    getUsers.get().then((response) => {
-      $scope.users = response.data;
-    });
+angular
+  .module('users')
+  .controller(UsersController);
 
-    $scope.getEventImg = function getEventImg(url) {
-      return formatter.getEventListImg(url);
-    };
+UsersController.$inject = ['$scope', 'getUsers', 'formatter'];
 
-    $scope.parseDate = function parseDate(date) {
-      return formatter.formatDate(date);
-    };
+function UsersController($scope, getUsers, formatter) {
+  getUsers.get().then((response) => {
+    $scope.users = response.data;
+  });
 
-    $scope.getFormattedDistance = function getFormattedDistance(distance) {
-      return formatter.getDistance(distance);
-    };
+  $scope.getEventImg = function getEventImg(url) {
+    return formatter.getEventListImg(url);
+  };
 
-    $scope.$watch(() => {
-      $scope.$broadcast('scrollRebuild');
-    });
+  $scope.parseDate = function parseDate(date) {
+    return formatter.formatDate(date);
+  };
 
-    $scope.getUserImgUrl = function getUserImgUrl(url) {
-      return formatter.getUserListImg(url);
-    };
-  }]);
+  $scope.getFormattedDistance = function getFormattedDistance(distance) {
+    return formatter.getDistance(distance);
+  };
+
+  $scope.$watch(() => {
+    $scope.$broadcast('scrollRebuild');
+  });
+
+  $scope.getUserImgUrl = function getUserImgUrl(url) {
+    return formatter.getUserListImg(url);
+  };
+}

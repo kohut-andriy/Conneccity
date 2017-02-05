@@ -1,4 +1,8 @@
-ponchPicker.directive('ponchPicker', function ponchPicker() {
+angular
+  .module('ponchPicker')
+  .directive(ponchPicker);
+
+function ponchPicker() {
   return {
     scope: {
       my: '=my',
@@ -7,6 +11,6 @@ ponchPicker.directive('ponchPicker', function ponchPicker() {
       submitFunc: '&',
     },
     templateUrl: 'views/ponchPicker.html',
-    controller: 'ponchPickerController',
+    controller: 'PonchPickerController',
   };
-});
+}

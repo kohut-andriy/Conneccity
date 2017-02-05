@@ -1,4 +1,10 @@
-meetingProfileModule.factory('getMeetingInfo', ['$http', function getMeetingInfo($http) {
+angular
+  .module('meetingProfile')
+  .factory(getMeetingInfo);
+
+getMeetingInfo.$inject = ['$http'];
+
+function getMeetingInfo($http) {
   return {
     get(id) {
       return $http({
@@ -31,4 +37,4 @@ meetingProfileModule.factory('getMeetingInfo', ['$http', function getMeetingInfo
       });
     },
   };
-}]);
+}

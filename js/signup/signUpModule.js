@@ -1,1 +1,1 @@
-const signUpModule = angular.module('signUp', ['geolocation', 'ui.router']);
+angular.module('signUp', ['geolocation', 'ui.router']);

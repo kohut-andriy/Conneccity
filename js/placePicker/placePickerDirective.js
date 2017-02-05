@@ -1,4 +1,10 @@
-placePicker.directive('placePicker', ['mapCreate', function placePicker(mapCreate) {
+angular
+  .module('placePicker')
+  .directive(placePicker);
+
+placePicker.$inject = ['mapCreate'];
+
+function placePicker(mapCreate) {
   return {
     template: "<conneccity-map class='map'></conneccity-map>",
     link(scope) {
@@ -20,4 +26,4 @@ placePicker.directive('placePicker', ['mapCreate', function placePicker(mapCreat
       });
     },
   };
-}]);
+}

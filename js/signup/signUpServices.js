@@ -1,4 +1,10 @@
-signUpModule.factory('addUser', ['$http', function addUser($http) {
+angular
+  .module('signUp')
+  .factory(addUser);
+
+addUser.$inject = ['$http'];
+
+function addUser($http) {
   return {
     create(userData) {
       return $http({
@@ -11,4 +17,4 @@ signUpModule.factory('addUser', ['$http', function addUser($http) {
       });
     },
   };
-}]);
+}

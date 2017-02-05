@@ -1,1 +1,1 @@
-const chatListModule = angular.module('chatList', []);
+angular.module('chatList', []);

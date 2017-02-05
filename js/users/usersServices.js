@@ -1,4 +1,10 @@
-usersModule.factory('getUsers', ['$http', function getUsers($http) {
+angular
+  .module('users')
+  .factory(getUsers);
+
+getUsers.$inject = ['$http'];
+
+function getUsers($http) {
   return {
     get() {
       return $http({
@@ -7,4 +13,4 @@ usersModule.factory('getUsers', ['$http', function getUsers($http) {
       });
     },
   };
-}]);
+}

@@ -1,4 +1,10 @@
-app.factory('getSignedUserInfo', ['$http', function getSignedUserInfo($http) {
+angular
+  .module('conneccityApp')
+  .factory(getSignedUserInfo);
+
+getSignedUserInfo.$inject = ['$http'];
+
+function getSignedUserInfo($http) {
   return {
     get() {
       return $http({
@@ -28,4 +34,4 @@ app.factory('getSignedUserInfo', ['$http', function getSignedUserInfo($http) {
       });
     },
   };
-}]);
+}

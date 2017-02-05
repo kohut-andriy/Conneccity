@@ -1,1 +1,1 @@
-const meetingProfileModule = angular.module('meetingProfile', ['conneccityMap']);
+angular.module('meetingProfile', ['conneccityMap']);

@@ -1,1 +1,1 @@
-const createEventModule = angular.module('createEvent', []);
+angular.module('createEvent', []);

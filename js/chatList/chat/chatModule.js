@@ -1,1 +1,1 @@
-const chatModule = angular.module('chat', ['websocket']);
+angular.module('chat', ['websocket']);

@@ -1,1 +1,1 @@
-const meetingsModule = angular.module('meetings', []);
+angular.module('meetings', []);

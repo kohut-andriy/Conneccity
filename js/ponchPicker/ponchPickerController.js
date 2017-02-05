@@ -1,9 +1,15 @@
-ponchPicker.controller('ponchPickerController', ['$scope', function ponchPickerController($scope) {
+angular
+  .module('ponchPicker')
+  .controller(PonchPickerController);
+
+PonchPickerController.$inject = ['$scope'];
+
+function PonchPickerController($scope) {
   let changed = false;
 
   $scope.add = function addPocnch(ponch) {
     if ($scope.my.length < 5 && ponch) {
-      for (var i = 0; i < $scope.my.length; i += 1) {
+      for (let i = 0; i < $scope.my.length; i += 1) {
         if ($scope.my[i] === ponch) return;
       }
       $scope.my.push(ponch);
@@ -29,4 +35,4 @@ ponchPicker.controller('ponchPickerController', ['$scope', function ponchPickerC
       $scope.hideFunc();
     }
   };
-}]);
+}

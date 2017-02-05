@@ -1,4 +1,13 @@
-mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function mapCreate($rootScope, $q, $cookies) {
+// TODO: Separate services
+
+angular
+  .module('conneccityMap')
+  .service(mapCreate)
+  .factory(getMapInfo);
+
+mapCreate.$inject = ['$rootScope', '$cookies'];
+
+function mapCreate($rootScope, $cookies) {
   const self = this;
 
   self.map = null;
@@ -247,10 +256,12 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function mapCrea
   self.zoomOut = function zoomOut() {
     self.map.setZoom(self.map.getZoom() - 1);
   };
-}]);
+}
 
 // send request to server
-mapModule.factory('getMapInfo', ['$http', function getMapInfo($http) {
+getMapInfo.$inject = ['$http'];
+
+function getMapInfo($http) {
   return {
     getAll() {
       return $http({
@@ -280,4 +291,4 @@ mapModule.factory('getMapInfo', ['$http', function getMapInfo($http) {
       });
     },
   };
-}]);
+}

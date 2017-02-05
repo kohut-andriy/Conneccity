@@ -1,12 +1,20 @@
-mapModule.directive('conneccityMap', ['mapCreate', function conneccityMap(mapCreate) {
+angular
+  .module('conneccityMap')
+  .directive(conneccityMap)
+  .directive(conneccityMarker);
+
+conneccityMap.$inject = ['mapCreate'];
+conneccityMarker.$inject = ['mapCreate'];
+
+function conneccityMap(mapCreate) {
   return {
     compile: function compile(templateElem) {
       mapCreate.initMap(templateElem[0]);
     },
   };
-}]);
+}
 
-mapModule.directive('conneccityMarker', ['mapCreate', function conneccityMarker(mapCreate) {
+function conneccityMarker(mapCreate) {
   return {
     scope: {
       marker: '=data',
@@ -15,4 +23,4 @@ mapModule.directive('conneccityMarker', ['mapCreate', function conneccityMarker(
       mapCreate.drawMarker(scope.marker, attrs.type);
     },
   };
-}]);
+}

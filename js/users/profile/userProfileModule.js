@@ -1,1 +1,1 @@
-const userProfileModule = angular.module('userProfile', ['ngScrollbar']);
+angular.module('userProfile', ['ngScrollbar']);

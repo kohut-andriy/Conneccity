@@ -1,4 +1,10 @@
-userProfileModule.factory('getUserData', ['$http', function getUserData($http) {
+angular
+  .module('userProfile')
+  .factory('getUserData');
+
+getUserData.$inject = ['$http'];
+
+function getUserData($http) {
   return {
     get(id) {
       return $http({
@@ -19,4 +25,4 @@ userProfileModule.factory('getUserData', ['$http', function getUserData($http) {
       });
     },
   };
-}]);
+}

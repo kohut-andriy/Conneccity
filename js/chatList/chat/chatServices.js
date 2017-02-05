@@ -1,20 +1,26 @@
-chatModule.factory('getChat', ['$http', function getChat($http) {
+angular
+  .module('chat')
+  .factory(getChat);
+
+getChat.$inject = ['$http'];
+
+function getChat($http) {
   return {
     get(id) {
       return $http({
-        url: GOOGLE_IP + 'chats/' + id,
+        url: `${GOOGLE_IP}chats/'${id}`,
         method: 'GET',
       });
     },
     getMessages(id) {
       return $http({
-        url: GOOGLE_IP + 'chats/' + id + '/messages',
+        url: `${GOOGLE_IP}chats/${id}/messages`,
         method: 'GET',
       });
     },
     send(id, message) {
       return $http({
-        url: GOOGLE_IP + 'chats/' + id + '/messages',
+        url: `${GOOGLE_IP}chats/${id}/messages`,
         data: {
           message,
         },
@@ -23,9 +29,9 @@ chatModule.factory('getChat', ['$http', function getChat($http) {
     },
     read(id) {
       return $http({
-        url: GOOGLE_IP + 'chats/' + id + '/messages',
+        url: `${GOOGLE_IP}chats/${id}/messages`,
         method: 'PUT',
       });
     },
   };
-}]);
+}

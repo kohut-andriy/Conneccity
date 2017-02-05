@@ -1,49 +1,55 @@
-meetingProfileModule.controller('meetingProfileController',
-  ['$scope', 'formatter', 'getMeetingInfo', '$stateParams', '$state', '$cookies', 'mapCreate',
-    function meetingProfileController($scope, formatter, getMeetingInfo, $stateParams, $state, $cookies, mapCreate) {
-      getMeetingInfo.get($stateParams.id).then((response) => {
-        $scope.meeting = response.data;
+angular
+  .module('meetingProfile')
+  .controller(MeetingProfileController);
 
-        mapCreate.drawDefaultMarker($scope.meeting);
-      });
+MeetingProfileController.$inject = ['$scope', 'formatter', 'getMeetingInfo', '$stateParams', '$state',
+  '$cookies', 'mapCreate'];
 
-      $scope.getAddress = function getAddress(lat, lng) {
+function MeetingProfileController($scope, formatter, getMeetingInfo, $stateParams, $state,
+  $cookies, mapCreate) {
+  getMeetingInfo.get($stateParams.id).then((response) => {
+    $scope.meeting = response.data;
 
-        return formatter.getAddress(lat, lng);
-      };
+    mapCreate.drawDefaultMarker($scope.meeting);
+  });
 
-      $scope.parseDate = function parseDate(date) {
+  $scope.getAddress = function getAddress(lat, lng) {
 
-        return formatter.formatDate(date);
-      };
+    return formatter.getAddress(lat, lng);
+  };
 
-      $scope.getUserImg = function getUserImg(url) {
-        return formatter.getUserImg(url);
-      };
+  $scope.parseDate = function parseDate(date) {
 
-      $scope.$watch(() => {
-        $scope.$broadcast('scrollRebuild');
-      });
+    return formatter.formatDate(date);
+  };
 
-      $scope.join = function join(id) {
-        getMeetingInfo.join(id);
-      };
+  $scope.getUserImg = function getUserImg(url) {
+    return formatter.getUserImg(url);
+  };
 
-      $scope.leave = function leave(id) {
-        getMeetingInfo.leave(id).success(() => {
-          $state.go('app.meetings');
-        });
-      };
+  $scope.$watch(() => {
+    $scope.$broadcast('scrollRebuild');
+  });
 
-      getMeetingInfo.sendMessage($stateParams.id).then((data) => {
-        $scope.chatId = data.data.id;
-      });
+  $scope.join = function join(id) {
+    getMeetingInfo.join(id);
+  };
 
-      $scope.getStatusStile = function getStatusStile(status) {
-        return formatter.getMeetingStatusIconStyle(status);
-      };
+  $scope.leave = function leave(id) {
+    getMeetingInfo.leave(id).success(() => {
+      $state.go('app.meetings');
+    });
+  };
 
-      $scope.checkPermition = function checkPermition(id) {
-        return $cookies.getObject('currentUser').id === id;
-      };
-    }]);
+  getMeetingInfo.sendMessage($stateParams.id).then((data) => {
+    $scope.chatId = data.data.id;
+  });
+
+  $scope.getStatusStile = function getStatusStile(status) {
+    return formatter.getMeetingStatusIconStyle(status);
+  };
+
+  $scope.checkPermition = function checkPermition(id) {
+    return $cookies.getObject('currentUser').id === id;
+  };
+}

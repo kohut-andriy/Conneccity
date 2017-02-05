@@ -1,1 +1,1 @@
-const geolocationModule = angular.module('geolocation', []);
+angular.module('geolocation', []);

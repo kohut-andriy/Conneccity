@@ -1,4 +1,10 @@
-createEventModule.factory('createEvent', ['$http', function createEvent($http) {
+angular
+  .module('createEvent')
+  .factory(createEvent);
+
+createEvent.$inject = ['$http'];
+
+function createEvent($http) {
   return {
     create(data) {
       return $http({
@@ -15,4 +21,4 @@ createEventModule.factory('createEvent', ['$http', function createEvent($http) {
       });
     },
   };
-}]);
+}

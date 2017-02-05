@@ -1,36 +1,41 @@
-websocket.service('socketFactory', ['OAuthToken', '$rootScope', '$cookies',
-  function socketFactory(OAuthToken, $rootScope, $cookies) {
-    const ws = new WebSocket(`ws://api.conneccity.net/dev/notifications?token=${OAuthToken.getToken().access_token}`);
+angular
+  .module('websocket')
+  .service(socketFactory);
 
-    this.counter = new Set();
+socketFactory.$inject = ['OAuthToken', '$rootScope', '$cookies'];
 
-    this.chatMessage = {};
+function socketFactory(OAuthToken, $rootScope, $cookies) {
+  const ws = new WebSocket(`ws://api.conneccity.net/dev/notifications?token=${OAuthToken.getToken().access_token}`);
 
-    this.message = {};
+  this.counter = new Set();
 
-    this.connect = () => {
-      ws.onopen = () => {};
+  this.chatMessage = {};
 
-      ws.onclose = () => {};
+  this.message = {};
 
-      ws.onmessage = (event) => {
-        const eventData = JSON.parse(event.data);
+  this.connect = () => {
+    ws.onopen = () => {};
 
-        this.message = eventData.payload;
+    ws.onclose = () => {};
 
-        if (this.message.sender.id !== $cookies.getObject('currentUser').id) {
-          this.counter.add(eventData.payload.chatId);
-        }
+    ws.onmessage = (event) => {
+      const eventData = JSON.parse(event.data);
 
-        if (eventData.type === 'MESSAGE_READ') {
-          this.counter.delete(eventData.payload.chatId);
-        } else {
-          this.chatMessage[eventData.payload.chatId] = eventData.payload.id;
-        }
+      this.message = eventData.payload;
 
-        $rootScope.$digest();
-      };
+      if (this.message.sender.id !== $cookies.getObject('currentUser').id) {
+        this.counter.add(eventData.payload.chatId);
+      }
 
-      ws.onerror = () => {};
+      if (eventData.type === 'MESSAGE_READ') {
+        this.counter.delete(eventData.payload.chatId);
+      } else {
+        this.chatMessage[eventData.payload.chatId] = eventData.payload.id;
+      }
+
+      $rootScope.$digest();
     };
-  }]);
+
+    ws.onerror = () => {};
+  };
+}

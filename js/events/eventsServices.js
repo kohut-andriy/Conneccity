@@ -1,4 +1,10 @@
-eventsModule.factory('getEvents', ['$http', function getEvents($http) {
+angular
+  .module('events')
+  .factory(getEvents);
+
+getEvents.$inject = ['$http'];
+
+function getEvents($http) {
   return {
     get(type = '') {
       return $http({
@@ -7,4 +13,4 @@ eventsModule.factory('getEvents', ['$http', function getEvents($http) {
       });
     },
   };
-}]);
+}

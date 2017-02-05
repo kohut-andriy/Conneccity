@@ -1,4 +1,10 @@
-dataFormatterModule.factory('formatter', ['mapCreate', function formatter(mapCreate) {
+angular
+  .module('dataFormatter')
+  .factory(formatter);
+
+formatter.$inject = ['mapCreate'];
+
+function formatter(mapCreate) {
   return {
     formatDate(stringDate) {
       const date = new Date(stringDate);
@@ -113,4 +119,4 @@ dataFormatterModule.factory('formatter', ['mapCreate', function formatter(mapCre
       return `https://www.google.com.ua/maps/@${lat},${lng},12z`;
     },
   };
-}]);
+}

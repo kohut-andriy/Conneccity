@@ -1,4 +1,10 @@
-eventProfile.factory('getEventInfo', ['$http', function getEventInfo($http) {
+angular
+  .module('eventProfile')
+  .factory(getEventInfo);
+
+getEventInfo.$inject = ['$http'];
+
+function getEventInfo($http) {
   return {
     get(id) {
       return $http({
@@ -31,4 +37,4 @@ eventProfile.factory('getEventInfo', ['$http', function getEventInfo($http) {
       });
     },
   };
-}]);
+}

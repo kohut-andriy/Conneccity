@@ -22,6 +22,24 @@
   //= map/mapController.js
   //= map/mapServices.js
 
+  // controls
+
+    // resize
+
+      //= map/controls/mapResize/mapResizeDirective.js
+
+    // filer
+
+      //= map/controls/mapFilter/mapFilterDirective.js
+
+    // mapCurrentPosition
+
+      //= map/controls/mapCurrentUserPosition/mapCUPDirective.js
+
+    // cards
+
+      //= map/controls/mapCard/mapCardDirective.js
+
 // geolocation
 
   //= geolocation/geolocationModule.js
@@ -42,24 +60,6 @@
   //= ponchPicker/ponchPickerModule.js
   //= ponchPicker/ponchPickerController.js
   //= ponchPicker/ponchPickerDirective.js
-
-// map.controls
-
-  // map.controls.resize
-
-    //= map.controls/mapResize/mapResizeDirective.js
-
-  // map.controls.filer
-
-    //= map.controls/mapFilter/mapFilterDirective.js
-
-  // map.controls.mapCurrentPosition
-
-    //= map.controls/mapCurrentUserPosition/mapCUPDirective.js
-
-  // map.controls.Cards
-
-    //= map.controls/mapCard/mapCardDirective.js
 
 // app.users
 
@@ -113,12 +113,14 @@
 // app.chatList
 
   //= chatList/chatListModule.js
-  //= chatList/chatListServices.js
   //= chatList/chatListController.js
+  //= chatList/chatListServices.js
+
 
   // app.chat
 
     //= chatList/chat/chatModule.js
+    //= chatList/chat/chatDirective.js
     //= chatList/chat/chatServices.js
     //= chatList/chat/chatController.js
 
@@ -126,7 +128,3 @@
 
   //= dataFormatter/dataFormatterModule.js
   //= dataFormatter/dataFormatterServices.js
-
-// refactoring
-
-//= app/app.js

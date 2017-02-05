@@ -1,4 +1,10 @@
-createMeetingModule.factory('createMeeting', ['$http', function createMeeting($http) {
+angular
+  .module('createMeeting')
+  .factory(createMeeting);
+
+createMeeting.$inject = ['$http'];
+
+function createMeeting($http) {
   return {
     create(data) {
       return $http({
@@ -15,4 +21,4 @@ createMeetingModule.factory('createMeeting', ['$http', function createMeeting($h
       });
     },
   };
-}]);
+}
