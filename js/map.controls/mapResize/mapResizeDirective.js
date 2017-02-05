@@ -1,5 +1,5 @@
-mapModule.directive('mapResize', [function () {
+mapModule.directive('mapResize', function mapResize() {
   return {
-    templateUrl: "views/mapResize.html"
-  }
-}]);
+    templateUrl: 'views/mapResize.html',
+  };
+});

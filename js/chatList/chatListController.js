@@ -1,30 +1,18 @@
 chatListModule.controller('chatListController', ['$scope', 'formatter', 'getChats', 'getUserData', 'socketFactory',
-  function ($scope, formatter, getChats, getUserData, socketFactory) {
-
-    //websocket.connect();
-
-
-    getChats.get().then(function (data) {
+  function chatListController($scope, formatter, getChats, getUserData, socketFactory) {
+    getChats.get().then((data) => {
       $scope.chats = data.data;
-      // console.log(data);
     });
-    
-    $scope.getUserImg = function (url) {
+
+    $scope.getUserImg = function getUserImg(url) {
       return formatter.getUserImgUrl(url);
     };
 
-    $scope.getLastSeenTime = function (date) {
+    $scope.getLastSeenTime = function getLastSeenTime(date) {
       return formatter.getLastSeenTime(date);
     };
 
-    $scope.getState = function (id) {
-        return socketFactory.counter.has(id);
+    $scope.getState = function getState(id) {
+      return socketFactory.counter.has(id);
     };
-   // $scope.$broadcast('rebuild:me');
-   /* $scope.$watch(function () {
-      return ;
-    }, function (newVal, oldVal) {
-
-
-    });*/
   }]);

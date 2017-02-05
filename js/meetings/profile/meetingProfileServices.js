@@ -1,34 +1,34 @@
-meetingProfileModule.factory('getMeetingInfo', ['$http', function ($http) {
+meetingProfileModule.factory('getMeetingInfo', ['$http', function getMeetingInfo($http) {
   return {
-    get: function (id) {
+    get(id) {
       return $http({
-        url: GOOGLE_IP + "meetings/" + id,
-        method: "GET"
+        url: `${GOOGLE_IP}meetings/${id}`,
+        method: 'GET',
       });
     },
-    getMembers: function (id) {
+    getMembers(id) {
       return $http({
-        url: GOOGLE_IP + "meetings/" + id + "/members",
-        method: "GET"
+        url: `${GOOGLE_IP}meetings/${id}/members`,
+        method: 'GET',
       });
     },
-    join: function (id) {
+    join(id) {
       return $http({
-        url: GOOGLE_IP + "meetings/" + id + "/members",
-        method: "POST"
+        url: `${GOOGLE_IP}meetings/${id}/members`,
+        method: 'POST',
       });
     },
-    leave: function (id) {
+    leave(id) {
       return $http({
-        url: GOOGLE_IP + "meetings/" + id + "/members",
-        method: "DELETE"
-      })
-    },
-    sendMessage: function (id) {
-      return $http({
-        url: GOOGLE_IP + "meetings/" + id + "/chat",
-        method: "GET"
+        url: `${GOOGLE_IP}meetings/${id}/members`,
+        method: 'DELETE',
       });
-    }
+    },
+    sendMessage(id) {
+      return $http({
+        url: `${GOOGLE_IP}meetings/${id}/chat`,
+        method: 'GET',
+      });
+    },
   };
 }]);

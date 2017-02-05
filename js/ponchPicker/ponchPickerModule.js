@@ -1,1 +1,1 @@
-var ponchPicker = angular.module('ponchPicker', []);
+const ponchPicker = angular.module('ponchPicker', []);

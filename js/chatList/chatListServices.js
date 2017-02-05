@@ -1,12 +1,11 @@
-chatListModule.factory('getChats', ['$http', function ($http) {
-
+chatListModule.factory('getChats', ['$http', function getChats($http) {
   return {
-    get: function () {
+    get() {
       return $http({
-        url: GOOGLE_IP + "chats/",
-        method: "GET"
+        url: GOOGLE_IP + 'chats/',
+        method: 'GET',
       });
-    }
+    },
   };
 }]);
 

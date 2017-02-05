@@ -1,112 +1,91 @@
 chatModule.controller('chatController', ['$scope', 'socketFactory', 'formatter', 'getChat', '$stateParams', '$cookies', '$rootScope',
-  function ($scope, socketFactory, formatter, getChat, $stateParams, $cookies, $rootScope) {
-
-    //  getSocketData.connect();
+  function chatController($scope, socketFactory, formatter, getChat, $stateParams, $cookies) {
     $scope.currentUserId = $cookies.getObject('currentUser').id;
 
     $scope.messages = [];
 
     getChat.get($stateParams.id)
-      .then(function (data) {
-        $scope.chat = data.data;
-        //console.log(data);
-      }).then(function () {
+    .then((data) => {
+      $scope.chat = data.data;
+    }).then(() => {
       getChat.getMessages($stateParams.id)
-        .then(function (data) {
-          $scope.messages = data.data;
-          //console.log(data);
-        });
+      .then((data) => {
+        $scope.messages = data.data;
+      });
     });
 
-    $scope.getTime = function (date) {
+    $scope.getTime = function getTime(date) {
       return formatter.getTime(date);
     };
 
-    $scope.getUserImg = function (url) {
+    $scope.getUserImg = function getUserImg(url) {
       return formatter.getUserImgUrl(url);
     };
 
-    $scope.getLastSeenTime = function (date) {
-
+    $scope.getLastSeenTime = function getLastSeenTime(date) {
       return formatter.getTime(date);
     };
 
-    $scope.checkSender = function (data) {
-
-      return data == $scope.currentUserId;
+    $scope.checkSender = function checkSender(data) {
+      return data === $scope.currentUserId;
     };
 
-    $scope.sendMessage = function (message) {
-
-      getChat.read($stateParams.id).then(function (data) {});
+    $scope.sendMessage = function sendMessage(message) {
+      getChat.read($stateParams.id);
 
       if (message) {
-        getChat.send($stateParams.id, message).then(function (data) {
+        getChat.send($stateParams.id, message).then(() => {
           $scope.message = '';
 
           socketFactory.counter.delete($stateParams.id);
-
-        }, function (error) {
-          console.log(error);
         });
       }
     };
 
-    $scope.getStatus = function (state) {
-      return !state.readState && $cookies.getObject('currentUser').id != state.sender.id;
+    $scope.getStatus = function getStatus(state) {
+      return !state.readState && $cookies.getObject('currentUser').id !== state.sender.id;
     };
 
-    $scope.$watch(function () {
-      return socketFactory.message;
-    }, function (newVal, oldVal) {
-      if (newVal != 'undefined' && newVal != oldVal) {
+    $scope.$watch(() => socketFactory.message,
+      (newVal, oldVal) => {
+        if (newVal !== 'undefined' && newVal !== oldVal) {
+          if (newVal.chatId === $stateParams.id) {
+            $scope.messages.unshift(newVal);
+          }
 
-        if (newVal.chatId == $stateParams.id) {
-          $scope.messages.unshift(newVal);
+          if (newVal.chatId === $stateParams.id) {
+            let i = 1;
+
+            do {
+              if (socketFactory.chatMessage[newVal.chatId] >= $scope.messages[i].id) {
+                $scope.messages[i].readState = 1;
+              }
+
+              i += 1;
+            } while (!$scope.messages[i].readState);
+          }
+
+          $scope.message = '';
+
+          if (newVal.sender.id !== $scope.currentUserId) {
+            socketFactory.counter.add(newVal.chatId);
+          }
         }
-
-        console.log(newVal.chatId == $stateParams.id);
-        if (newVal.chatId == $stateParams.id) {
-          var i = 1;
-
-          do {
-            console.log(socketFactory.chatMessage[newVal.chatId]);
-            if(socketFactory.chatMessage[newVal.chatId] >= $scope.messages[i].id) {
-              $scope.messages[i].readState = 1;
-              console.log($scope.messages[i].readState);
-            }
-            console.log(i);
-
-            i++;
-          } while (!$scope.messages[i].readState);
-        }
-
-        $scope.message = '';
-
-        //console.log(newVal);
-        //console.log(1);
-
-        if (newVal.sender.id != $scope.currentUserId) {
-          socketFactory.counter.add(newVal.chatId);
-        }
-      }
-
-    });
+      });
   }]);
 
 
 chatModule.directive('schrollBottom', function () {
   return {
     scope: {
-      schrollBottom: "="
+      schrollBottom: '=',
     },
-    link: function (scope, element) {
-      scope.$watchCollection('schrollBottom', function (newValue) {
-
+    link(scope, element) {
+      scope.$watchCollection('schrollBottom', (newValue) => {
         if (newValue) {
           element[0].scrollTop = element[0].scrollHeight;
         }
       });
-    }
-  }
+    },
+  };
 });

@@ -8,7 +8,6 @@
 // authorization
 
   //= signin/signInModule.js
-  //= signin/signInServices.js
   //= signin/signInController.js
 
 // registration
@@ -95,7 +94,6 @@
     
 // app.events
 
-  //= events/eventsModule.js
   //= events/eventsModule.js
   //= events/eventsController.js
   //= events/eventsServices.js

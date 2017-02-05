@@ -1,36 +1,36 @@
 eventsModule.controller('eventsController', ['$scope', 'getEvents', 'formatter', '$cookies',
-  function ($scope, getEvents, formatter, $cookies) {
-    getEvents.get().then(function (response) {
+  function eventsController($scope, getEvents, formatter, $cookies) {
+    getEvents.get().then((response) => {
       $scope.events = response.data;
     });
 
-    $scope.getCurrentUserId = function () {
+    $scope.getCurrentUserId = function getCurrentUserId() {
       return $cookies.getObject('currentUser').id;
     };
 
-    $scope.getFilteredEvents = function (type) {
-      getEvents.get(type).then(function (response) {
+    $scope.getFilteredEvents = function getFilteredEvents(type) {
+      getEvents.get(type).then((response) => {
         $scope.events = response.data;
       });
     };
 
-    $scope.getFormattedDistance = function (distance) {
+    $scope.getFormattedDistance = function getFormattedDistance(distance) {
       return formatter.getDistance(distance);
     };
 
-    $scope.parseDate = function (date) {
+    $scope.parseDate = function parseDate(date) {
       return formatter.formatDate(date);
     };
 
-    $scope.getAddress = function (lat, lng) {
+    $scope.getAddress = function getAddress(lat, lng) {
       return formatter.getAddress(lat, lng);
     };
 
-    $scope.getEventImg = function (url) {
+    $scope.getEventImg = function getEventImg(url) {
       return formatter.getEventListImg(url);
     };
 
-    $scope.$watch(function () {
+    $scope.$watch(() => {
       $scope.$broadcast('rebuild:me');
     });
   }]);

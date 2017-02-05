@@ -1,1 +1,1 @@
-var eventsModule = angular.module('events', []);
+const eventsModule = angular.module('events', []);

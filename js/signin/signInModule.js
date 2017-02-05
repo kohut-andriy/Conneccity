@@ -1,2 +1,1 @@
-var signInModule = angular.module('signIn', [ 'ui.router','ngCookies']);
-
+const signInModule = angular.module('signIn', ['ui.router', 'ngCookies']);

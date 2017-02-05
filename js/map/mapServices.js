@@ -1,5 +1,5 @@
-mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootScope, $q, $cookies) {
-  var self = this;
+mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function mapCreate($rootScope, $q, $cookies) {
+  const self = this;
 
   self.map = null;
   self.cluster = null;
@@ -17,27 +17,24 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
   self.geocoder = new google.maps.Geocoder();
 
   // show user location
-
-  self.centerMapToUser = function () {
+  self.centerMapToUser = function centerMapToUser() {
     self.map.setCenter(new google.maps.LatLng(
       $cookies.getObject('currentUser').latitude,
-      $cookies.getObject('currentUser').longitude
-    ));
+      $cookies.getObject('currentUser').longitude));
 
     self.map.setZoom(10);
   };
 
   // create map, clusterer, geocoder
   self.initMap = (elem) => {
-    /*console.log(elem);*/
     self.map = new google.maps.Map(elem, {
       center: {
         lat: 49,
-        lng: 26
+        lng: 26,
       },
       zoom: 8,
       disableDefaultUI: true,
-      minZoom: 2
+      minZoom: 2,
     });
 
     self.markerCluster = new MarkerClusterer(self.map, [],
@@ -46,30 +43,28 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
         zoomOnClick: false,
         styles: [{
           height: 51,
-          url: "img/cluster.png",
+          url: 'img/cluster.png',
           width: 54,
           fontFamily: 'Roboto',
           textSize: 14,
-          textColor: '#898989'
-        },
-          {
-            height: 51,
-            url: "img/cluster-favorite.png",
-            width: 54,
-            fontFamily: 'Roboto',
-            textSize: 14,
-            textColor: '#ffffff'
-          }]
+          textColor: '#898989',
+        }, {
+          height: 51,
+          url: 'img/cluster-favorite.png',
+          width: 54,
+          fontFamily: 'Roboto',
+          textSize: 14,
+          textColor: '#ffffff',
+        }],
       });
 
     self.markerCluster.setCalculator(calculator);
 
-    google.maps.event.addListener(self.markerCluster, "clusterclick", function (cluster) {
-
-      var markers = cluster.getMarkers();
+    google.maps.event.addListener(self.markerCluster, 'clusterclick', function clusterclick(cluster) {
+      const markers = cluster.getMarkers();
 
       self.cardsArray = [];
-      for (let i = 0; i < markers.length; i++) {
+      for (let i = 0; i < markers.length; i += 1) {
         self.cardsArray.push(self.markersMap.get(markers[i]));
       }
 
@@ -78,66 +73,56 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
   };
 
   // markerClusterer calculator
-
-  var calculator = function (markers, numStyles) {
-
+  const calculator = (markers) => {
     for (let marker in markers) {
       if (self.markersMap.get(markers[marker]).hasPonchesMatches) {
-        return {text: markers.length, index: 2};
+        return { text: markers.length, index: 2 };
       }
     }
 
-    return {text: markers.length, index: 1};
+    return { text: markers.length, index: 1 };
   };
 
-
   // draw marker icon, push data to create markers
-
-  self.drawMarker = function (data, type) {
-
-    let canvas;
-    let context;
+  self.drawMarker = function drawMarker(data, type) {
     let instance = 0;
-
     let draw;
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
 
-    canvas = document.createElement("canvas");
+    const img1 = new Image();
+    const img2 = new Image();
 
-    context = canvas.getContext("2d");
-
-    let img1 = new Image();
-
-    let img2 = new Image();
-
-    if (type === 'meeting') {
-
-      img2.src = 'img/meeting-marker.png';
-      img1.src = data.photos ? data.photos.photo200px : 'img/test/meeting_icon.png';
-      draw = drawMeetingMarker;
-
-    } else if (type === 'event') {
-      img1.src = data.photos ? data.photos.photo200px : 'img/test/event_icon.png';
-      img2.src = data.hasPonchesMatches ? 'img/event-marker-favorite.png' : 'img/event-marker.png';
-      draw = drawEventMarker;
-
-    } else {
-      img1.src = data.photos ? data.photos.photo200px : 'img/test/user_icon.png';
-      img2.src = data.hasPonchesMatches ? 'img/user-marker-favorite.png' : 'img/user-marker.png';
-      draw = drawUserMarker;
-
+    switch (type) {
+      case 'meeting': {
+        img2.src = 'img/meeting-marker.png';
+        img1.src = data.photos ? data.photos.photo200px : 'img/test/meeting_icon.png';
+        draw = drawMeetingMarker;
+        break;
+      }
+      case 'event': {
+        img1.src = data.photos ? data.photos.photo200px : 'img/test/event_icon.png';
+        img2.src = data.hasPonchesMatches ? 'img/event-marker-favorite.png' : 'img/event-marker.png';
+        draw = drawEventMarker;
+        break;
+      }
+      default: {
+        img1.src = data.photos ? data.photos.photo200px : 'img/test/user_icon.png';
+        img2.src = data.hasPonchesMatches ? 'img/user-marker-favorite.png' : 'img/user-marker.png';
+        draw = drawUserMarker;
+      }
     }
 
     img1.onload = draw;
-
-    img1.crossOrigin = "anonymous";
+    img1.crossOrigin = 'anonymous';
 
     img2.onload = draw;
-    img2.crossOrigin = "anonymous";
+    img2.crossOrigin = 'anonymous';
 
     function drawMeetingMarker() {
-      instance++;
+      instance += 1;
 
-      if (instance == 2) {
+      if (instance === 2) {
 
         canvas.width = 400;
         canvas.height = 600;
@@ -155,9 +140,9 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
     }
 
     function drawUserMarker() {
-      instance++;
+      instance += 1;
 
-      if (instance == 2) {
+      if (instance === 2) {
 
         canvas.width = 400;
         canvas.height = 400;
@@ -174,9 +159,9 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
     }
 
     function drawEventMarker() {
-      instance++;
+      instance += 1;
 
-      if (instance == 2) {
+      if (instance === 2) {
         canvas.width = 400;
         canvas.height = 600;
 
@@ -192,39 +177,33 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
     function roundedImage(x, y, width, height, radius) {
       context.beginPath();
       context.moveTo(x + radius, y);
-      context.lineTo(x + width - radius, y);
+      context.lineTo(x + (width - radius), y);
       context.quadraticCurveTo(x + width, y, x + width, y + radius);
-      context.lineTo(x + width, y + height - radius);
-      context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      context.lineTo(x + width, y + (height - radius));
+      context.quadraticCurveTo(x + width, y + height, x + (width - radius), y + height);
       context.lineTo(x + radius, y + height);
-      context.quadraticCurveTo(x, y + height, x, y + height - radius);
+      context.quadraticCurveTo(x, y + height, x, y + (height - radius));
       context.lineTo(x, y + radius);
       context.quadraticCurveTo(x, y, x + radius, y);
       context.closePath();
     }
-
   };
 
   // create markers, add 'em to clusterer
-
-  self.createMarker = function (img, data, size) {
-
-    let marker = new google.maps.Marker({
+  self.createMarker = function createMarker(img, data, size) {
+    const marker = new google.maps.Marker({
       position: new google.maps.LatLng(data.latitude, data.longitude),
       icon: {
         url: img,
-        size: size,
-        scaledSize: size
+        size,
+        scaledSize: size,
       },
-      animation: google.maps.Animation.DROP
+      animation: google.maps.Animation.DROP,
     });
 
     self.markersMap.set(marker, data);
 
-    marker.addListener('click', function () {
-
-      console.log(self.markersMap.get(marker));
-
+    marker.addListener('click', () => {
       self.cardsArray = [];
 
       self.cardsArray.push(self.markersMap.get(marker));
@@ -233,35 +212,22 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
     });
 
     self.markerCluster.addMarker(marker);
-
   };
 
-  self.drawDefaultMarker = function (data) {
-
-    let marker = new google.maps.Marker({
-      map: self.map,
-      position: new google.maps.LatLng(data.latitude, data.longitude),
-      animation: google.maps.Animation.DROP
-    });
-
-    self.map.setCenter({lat : data.latitude, lng: data.longitude + 0.005});
+  self.drawDefaultMarker = function drawDefaultMarker(data) {
+    self.map.setCenter({ lat: data.latitude, lng: data.longitude + 0.005 });
   };
 
   // get geocoder data
-  self.getAddress = function (latlng) {
-
+  self.getAddress = function getAddress(latlng) {
     self.geocoder.geocode({
-      'latLng': new google.maps.LatLng(latlng[0], latlng[1])
-    }, function (results, status) {
-      console.log('getting address');
-
+      latLng: new google.maps.LatLng(latlng[0], latlng[1]),
+    }, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
-
         if (results[0]) {
           self.coordinatesMap.set(latlng.join('|'),
-            results[0].address_components[1].short_name +
-            ',' +
-            results[0].address_components[0].short_name);
+            `${results[0].address_components[1].short_name},
+            ${results[0].address_components[0].short_name}`);
           $rootScope.$digest();
         }
       }
@@ -269,54 +235,49 @@ mapModule.service('mapCreate', ['$rootScope', '$q', '$cookies', function ($rootS
   };
 
   // clear map
-
-  self.clearMap = function () {
+  self.clearMap = function clearMap() {
     self.markerCluster.clearMarkers();
   };
 
   // resize
-
-  self.zoomIn = function () {
+  self.zoomIn = function zoomIn() {
     self.map.setZoom(self.map.getZoom() + 1);
   };
 
-  self.zoomOut = function () {
+  self.zoomOut = function zoomOut() {
     self.map.setZoom(self.map.getZoom() - 1);
   };
-
 }]);
 
 // send request to server
-
-mapModule.factory('getMapInfo', ['$http', function ($http) {
-
+mapModule.factory('getMapInfo', ['$http', function getMapInfo($http) {
   return {
-    getAll: function () {
+    getAll() {
       return $http({
-        url: GOOGLE_IP + "map",
-        method: "GET",
-        params: {}
+        url: `${GOOGLE_IP}map`,
+        method: 'GET',
+        params: {},
       });
     },
-    getFilteredInfo: function (param) {
+    getFilteredInfo(param) {
       function convertOptionsToUrl(options) {
-        let url = GOOGLE_IP + "map?";
+        let url = `${GOOGLE_IP}map?`;
 
         for (param in options) {
-          if (options[param])
-            url += param + "=" + options[param] + "&";
+          if (options[param]) {
+            url += `${param}=${options[param]}&`;
+          }
         }
 
         url = url.slice(0, -1);
-        console.log(url);
         return url;
       }
 
       return $http({
         url: convertOptionsToUrl(param),
-        method: "GET",
-        params: {}
+        method: 'GET',
+        params: {},
       });
-    }
-  }
+    },
+  };
 }]);

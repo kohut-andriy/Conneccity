@@ -1,1 +1,1 @@
-var websocket = angular.module('websocket', []);
+const websocket = angular.module('websocket', []);

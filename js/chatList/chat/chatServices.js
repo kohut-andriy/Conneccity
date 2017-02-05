@@ -1,33 +1,31 @@
-chatModule.factory('getChat', ['$http', function ($http) {
-
+chatModule.factory('getChat', ['$http', function getChat($http) {
   return {
-    get: function (id) {
+    get(id) {
       return $http({
-        url: GOOGLE_IP + "chats/" + id,
-        method: "GET"
-      });
-    }, 
-    getMessages: function (id) {
-      return $http({
-        url: GOOGLE_IP + "chats/" + id + "/messages",
-        method: "GET"
+        url: GOOGLE_IP + 'chats/' + id,
+        method: 'GET',
       });
     },
-    send: function (id, message) {
+    getMessages(id) {
       return $http({
-        url: GOOGLE_IP + "chats/" + id + "/messages",
+        url: GOOGLE_IP + 'chats/' + id + '/messages',
+        method: 'GET',
+      });
+    },
+    send(id, message) {
+      return $http({
+        url: GOOGLE_IP + 'chats/' + id + '/messages',
         data: {
-          "message": message
+          message,
         },
-        method: "POST"
-      }) 
+        method: 'POST',
+      });
     },
-    read: function (id) {
+    read(id) {
       return $http({
-          url: GOOGLE_IP + "chats/"+id+"/messages" ,
-          method: "PUT"
-        })
-
-    }
+        url: GOOGLE_IP + 'chats/' + id + '/messages',
+        method: 'PUT',
+      });
+    },
   };
 }]);

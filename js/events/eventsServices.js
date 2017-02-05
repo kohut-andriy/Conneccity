@@ -1,11 +1,10 @@
-eventsModule.factory('getEvents', ['$http', function ($http) {
-
+eventsModule.factory('getEvents', ['$http', function getEvents($http) {
   return {
-    get: function (type = "") {
+    get(type = '') {
       return $http({
-        url: GOOGLE_IP + "events/" + type,
-        method: "GET"
+        url: `${GOOGLE_IP}events/${type}`,
+        method: 'GET',
       });
-    }
+    },
   };
 }]);

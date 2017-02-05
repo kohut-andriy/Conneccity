@@ -1,1 +1,1 @@
-var meetingProfileModule = angular.module('meetingProfile', ['conneccityMap']);
+const meetingProfileModule = angular.module('meetingProfile', ['conneccityMap']);

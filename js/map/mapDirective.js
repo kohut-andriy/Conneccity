@@ -1,18 +1,18 @@
-mapModule.directive('conneccityMap', ["mapCreate", function (mapCreate) {
+mapModule.directive('conneccityMap', ['mapCreate', function conneccityMap(mapCreate) {
   return {
-    compile: function compile(templateElem, templateAttrs) {
+    compile: function compile(templateElem) {
       mapCreate.initMap(templateElem[0]);
-    }
-  }
+    },
+  };
 }]);
 
-mapModule.directive('conneccityMarker', ["mapCreate", function (mapCreate) {
+mapModule.directive('conneccityMarker', ['mapCreate', function conneccityMarker(mapCreate) {
   return {
     scope: {
-      marker: "=data"
+      marker: '=data',
     },
-    link: function (scope, element, attrs) {
+    link(scope, attrs) {
       mapCreate.drawMarker(scope.marker, attrs.type);
-    }
-  }
+    },
+  };
 }]);

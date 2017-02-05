@@ -1,27 +1,26 @@
 usersModule.controller('usersController', ['$scope', 'getUsers', 'formatter',
-  function ($scope, getUsers, formatter) {
-  getUsers.get().then(function (response) {
-    $scope.users = response.data;
-  });
+  function usersController($scope, getUsers, formatter) {
+    getUsers.get().then((response) => {
+      $scope.users = response.data;
+    });
 
-  $scope.getEventImg = function (url) {
-    return formatter.getEventListImg(url);
-  };
+    $scope.getEventImg = function getEventImg(url) {
+      return formatter.getEventListImg(url);
+    };
 
-  $scope.parseDate = function (date) {
-    return formatter.formatDate(date);
-  };
+    $scope.parseDate = function parseDate(date) {
+      return formatter.formatDate(date);
+    };
 
+    $scope.getFormattedDistance = function getFormattedDistance(distance) {
+      return formatter.getDistance(distance);
+    };
 
-  $scope.getFormattedDistance = function (distance) {
-    return formatter.getDistance(distance);
-  };
+    $scope.$watch(() => {
+      $scope.$broadcast('scrollRebuild');
+    });
 
-  $scope.$watch(function () {
-    $scope.$broadcast('scrollRebuild');
-  });
-
-  $scope.getUserImgUrl = function (url) {
-    return formatter.getUserListImg(url);
-  };
-}]);
+    $scope.getUserImgUrl = function getUserImgUrl(url) {
+      return formatter.getUserListImg(url);
+    };
+  }]);

@@ -1,32 +1,28 @@
-signInModule.controller('signInController', ['$scope', '$http', '$state', 'OAuth', '$timeout','$animate',
-  function ($scope, $http, $state, OAuth, $timeout, $animate) {
-
+signInModule.controller('signInController', ['$scope', '$http', '$state', 'OAuth', '$timeout', '$animate',
+  function signInController($scope, $http, $state, OAuth, $timeout) {
     $scope.isValid = true;
     $scope.conncction = true;
 
-    $scope.login = function (user) {
-
-      $scope.encoded = btoa("clientapp:123456");
+    $scope.login = function login(user) {
+      $scope.encoded = btoa('clientapp:123456');
 
       OAuth.getAccessToken(user, {
         headers: {
-          "Authorization": "Basic " + $scope.encoded,
-          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
-        }
-      }).then(function () {
-          $state.go('app');
+          Authorization: `Basic ${$scope.encoded}`,
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
         },
-        function (e) {
-          if (e.status == '401') {
-            $scope.isValid = false;
-          } else {
-            $scope.conncction = false;
-          }
-          $timeout(function () {
-            $scope.isValid = true;
-            $scope.conncction = true;
-          }, 5000);
-        });
+      }).then(() => {
+        $state.go('app');
+      }, (err) => {
+        if (err.status === '401') {
+          $scope.isValid = false;
+        } else {
+          $scope.conncction = false;
+        }
+        $timeout(() => {
+          $scope.isValid = true;
+          $scope.conncction = true;
+        }, 5000);
+      });
     };
-
   }]);

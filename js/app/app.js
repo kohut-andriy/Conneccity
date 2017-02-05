@@ -1,40 +1,34 @@
-/*function setNormalHeight() {
-  var windowHeight, headerHeight, footerHeight;
-  var header, footer, content;
+/* function setNormalHeight() {
+ var windowHeight, headerHeight, footerHeight;
+ var header, footer, content;
 
-  console.log("draw");
+ console.log("draw");
 
-  header = document.getElementsByClassName('menu__header')[0];
-  footer = document.getElementsByClassName('menu__footer')[0];
-  content = document.getElementsByClassName('menu__navigation')[0];
+ header = document.getElementsByClassName('menu__header')[0];
+ footer = document.getElementsByClassName('menu__footer')[0];
+ content = document.getElementsByClassName('menu__navigation')[0];
 
-  windowHeight = window.innerHeight;
+ windowHeight = window.innerHeight;
 
-  if (header) {
-    headerHeight = header.clientHeight;
-  }
+ if (header) {
+ headerHeight = header.clientHeight;
+ }
 
-  if (footer) {
-    footerHeight = footer.clientHeight;
-  }
+ if (footer) {
+ footerHeight = footer.clientHeight;
+ }
 
-  if (content){
-    content.style.height = windowHeight - headerHeight - footerHeight + "px";
-  }
+ if (content){
+ content.style.height = windowHeight - headerHeight - footerHeight + "px";
+ }
 
+ //console.log(windowHeight+" "+headerHeight+" "+ footerHeight+" ");
+ }*/
 
+/* window.addEventListener("resize", setNormalHeight);
+ window.addEventListener("load", setNormalHeight); */
 
-
-  //console.log(windowHeight+" "+headerHeight+" "+ footerHeight+" ");
-}*/
-
-
-/*window.addEventListener("resize", setNormalHeight);
-window.addEventListener("load", setNormalHeight);*/
-
-
-
-/*app.factory('blendImage', function () {
+/* app.factory('blendImage', function () {
 
  function createMarker(width, height, radius) {
 
@@ -89,11 +83,4 @@ window.addEventListener("load", setNormalHeight);*/
 
  return {get: createMarker(25, 25, 5)}
 
- });*/
-
-
-
-
-
-
-
+ }); */

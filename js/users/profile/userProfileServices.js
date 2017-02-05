@@ -1,26 +1,22 @@
-userProfileModule.factory('getUserData', ['$http', function ($http) {
-
+userProfileModule.factory('getUserData', ['$http', function getUserData($http) {
   return {
-    get: function (id) {
+    get(id) {
       return $http({
-        url: GOOGLE_IP + "users/" + id,
-        method: "GET"
+        url: `${GOOGLE_IP}users/${id}`,
+        method: 'GET',
       });
     },
-    getEvents: function (id, type = "") {
-      console.log(type);
-
+    getEvents(id, type = '') {
       return $http({
-        url: GOOGLE_IP + "users/" + id + "/events/" + type,
-        method: "GET"
+        url: `${GOOGLE_IP}users/${id}/events/${type}`,
+        method: 'GET',
       });
     },
-    getChatId: function (id) {
-
+    getChatId(id) {
       return $http({
-        url: GOOGLE_IP + "users/" + id + "/chat",
-        method: "GET"
+        url: `${GOOGLE_IP}users/${id}/chat`,
+        method: 'GET',
       });
-    }
+    },
   };
 }]);

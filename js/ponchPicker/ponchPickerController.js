@@ -1,37 +1,32 @@
-ponchPicker.controller('ponchPickerController', ["$scope", function ($scope) {
+ponchPicker.controller('ponchPickerController', ['$scope', function ponchPickerController($scope) {
+  let changed = false;
 
-  var changed = false;
-
-  $scope.add = function (ponch) {
-
+  $scope.add = function addPocnch(ponch) {
     if ($scope.my.length < 5 && ponch) {
-      for (var i = 0; i < $scope.my.length; i++) {
-        if ($scope.my[i] == ponch) return;
+      for (var i = 0; i < $scope.my.length; i += 1) {
+        if ($scope.my[i] === ponch) return;
       }
       $scope.my.push(ponch);
-      $scope.item = "";
+      $scope.item = '';
     }
 
     changed = true;
   };
 
-  $scope.delete = function (ponch) {
-
-
-    for (var i = 0; i < $scope.my.length; i++) {
-      if ($scope.my[i] == ponch) {
+  $scope.delete = function deletePonch(ponch) {
+    for (let i = 0; i < $scope.my.length; i += 1) {
+      if ($scope.my[i] === ponch) {
         $scope.my.splice(i, 1);
         changed = true;
       }
     }
   };
 
-  $scope.submit = function () {
+  $scope.submit = function submit() {
     if (changed) {
-      $scope.submitFunc({ponches: $scope.my});
+      $scope.submitFunc({ ponches: $scope.my });
     } else {
       $scope.hideFunc();
     }
   };
-
 }]);

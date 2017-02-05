@@ -1,57 +1,50 @@
-createMeetingModule.controller('createEventController', ['$scope', 'createEvent', 'formatter', '$cookies', '$state', '$stateParams', 'getEventInfo',
-  function ($scope, createEvent, formatter, $cookies, $state, $stateParams, getEventInfo) {
+createEventModule.controller('createEventController',
+  ['$scope', 'createEvent', 'formatter', '$cookies', '$state', '$stateParams', 'getEventInfo',
+    function createEventController($scope, createEvent, formatter,
+      $cookies, $state, $stateParams, getEventInfo) {
+      $scope.user = $cookies.getObject('currentUser');
+      $scope.getMapSrc = function getMapSrc() {
+        return formatter.getGoogleMapsSrc([$scope.user.latitude,
+          $scope.user.latitude]);
+      };
 
+      $scope.pickerVisible = false;
 
-    $scope.user = $cookies.getObject('currentUser');
-    $scope.getMapSrc = function () {
-      return formatter.getGoogleMapsSrc([$scope.user.latitude,
-        $scope.user.latitude]);
-    };
+      $scope.event = {};
 
-    $scope.pickerVisible = false;
+      getEventInfo.get($stateParams.id).then((data) => {
+        const event = data.data;
+        $scope.event.name = event.name;
+        $scope.event.startAt = new Date(event.startAt);
+        $scope.event.latitude = event.latitude;
+        $scope.event.longitude = event.longitude;
+        $scope.event.description = event.description;
+        $scope.event.price = event.priceFrom;
+      });
 
-    $scope.event = {};
-
-    getEventInfo.get($stateParams.id).then(function (data) {
-
-      var event = data.data;
-      console.log(event);
-      $scope.event.name = event.name;
-      $scope.event.startAt = new Date(event.startAt);
-      $scope.event.latitude = event.latitude;
-      $scope.event.longitude = event.longitude;
-      $scope.event.description = event.description;
-      $scope.event.price = event.priceFrom;
-    });
-
-    $scope.create = function (data) {
-
-      console.log($cookies.userId);
-      if ($stateParams.id) {
-        createEvent.update({
-          "name": data.name,
-          "startAt": data.startAt,
-          "latitude": $scope.placePicker.lat,
-          "longitude": $scope.placePicker.lng,
-          "description": data.description,
-          "priceFrom": data.price
-        }, $stateParams.id).then(function (data) {
-          $state.go('app.events');
-          console.log(data);
-        });
-      } else {
-        createEvent.create({
-          "name": data.name,
-          "startAt": data.startAt,
-          "latitude": $scope.placePicker.lat,
-          "longitude": $scope.placePicker.lng,
-          "description": data.description,
-          "priceFrom": data.price
-        }).then(function (data) {
-          $state.go('app.events');
-          console.log(data);
-        });
-      }
-    }
-
-  }]);
+      $scope.create = function create(data) {
+        if ($stateParams.id) {
+          createEvent.update({
+            name: data.name,
+            startAt: data.startAt,
+            latitude: $scope.placePicker.lat,
+            longitude: $scope.placePicker.lng,
+            description: data.description,
+            priceFrom: data.price,
+          }, $stateParams.id).then(() => {
+            $state.go('app.events');
+          });
+        } else {
+          createEvent.create({
+            name: data.name,
+            startAt: data.startAt,
+            latitude: $scope.placePicker.lat,
+            longitude: $scope.placePicker.lng,
+            description: data.description,
+            priceFrom: data.price,
+          }).then(() => {
+            $state.go('app.events');
+          });
+        }
+      };
+    }]);

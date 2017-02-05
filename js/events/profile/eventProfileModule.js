@@ -1,1 +1,1 @@
-var eventProfile = angular.module('eventProfile', []);
+const eventProfile = angular.module('eventProfile', []);

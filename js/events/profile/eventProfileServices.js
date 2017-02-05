@@ -1,34 +1,34 @@
-eventProfile.factory('getEventInfo', ['$http', function ($http) {
+eventProfile.factory('getEventInfo', ['$http', function getEventInfo($http) {
   return {
-    get: function (id) {
+    get(id) {
       return $http({
-        url: GOOGLE_IP + "events/" + id,
-        method: "GET"
+        url: `${GOOGLE_IP}events/${id}`,
+        method: 'GET',
       });
     },
-    getMembers: function (id) {
+    getMembers(id) {
       return $http({
-        url: GOOGLE_IP + "events/" + id + "/members",
-        method: "GET"
+        url: `${GOOGLE_IP}events/${id}/members`,
+        method: 'GET',
       });
     },
-    join: function (id) {
+    join(id) {
       return $http({
-        url: GOOGLE_IP + "events/" + id + "/members",
-        method: "POST"
+        url: `${GOOGLE_IP}events/${id}/members`,
+        method: 'POST',
       });
     },
-    leave: function (id) {
+    leave(id) {
       return $http({
-        url: GOOGLE_IP + "events/" + id + "/members",
-        method: "DELETE"
-      })
+        url: `${GOOGLE_IP}events/${id}/members`,
+        method: 'DELETE',
+      });
     },
-    sendMessage: function (id) {
-    return $http({
-      url: GOOGLE_IP + "events/" + id + "/chat",
-      method: "GET"
-    });
-  }
+    sendMessage(id) {
+      return $http({
+        url: `${GOOGLE_IP}events/${id}/chat`,
+        method: 'GET',
+      });
+    },
   };
 }]);

@@ -1,0 +1,50 @@
+{
+  "name": "connecity",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.5.3",
+    "angular-resource": "^1.5.3",
+    "js-marker-clusterer": "*",
+    "reset-css": "^2.0.2011012603",
+    "angular-ui-router": "^0.2.18",
+    "ng-scrollbar": "^0.0.8",
+    "angular-cookies": "^1.5.5",
+    "angular-oauth2": "^4.0.0",
+    "angular-animate": "^1.5.8",
+    "animate.css": "^3.5.2"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-config-angular": "^0.5.0",
+    "eslint-plugin-angular": "^1.6.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.9.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean-css": "^2.0.11",
+    "gulp-connect": "^3.2.2",
+    "gulp-imagemin": "^3.0.1",
+    "gulp-less": "^3.0.5",
+    "gulp-rename": "^1.2.2",
+    "gulp-rigger": "^0.5.8",
+    "gulp-uglify": "^2.0.1"
+  },
+  "scripts": {
+    "eslint": "eslint",
+    "lint": "eslint. ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrey Kogut",
+  "license": "GL1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreyKogut/Conneccity.git"
+  },
+  "homepage": "https://github.com/AndreyKogut/Conneccity.git#readme",
+  "description": ""
+}

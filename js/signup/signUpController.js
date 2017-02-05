@@ -1,27 +1,22 @@
 signUpModule.controller('signUpController', ['$scope', 'addUser', 'OAuthToken', '$state', '$cookies', 'getUserLocation',
-  function ($scope, addUser, OAuthToken, $state, $cookies, getUserLocation) {
-
-
-    $scope.signUp = function (user) {
-
+  function signUpController($scope, addUser, OAuthToken, $state, $cookies, getUserLocation) {
+    $scope.signUp = function signUp(user) {
       $scope.userInfo = {
-        "email": user.email,
-        "name": user.firstName,
-        "surname": user.lastName,
-        "dateBirthday": "1997-12-20",//+(new Date()),
-        "gender": user.genderMale ? "1" : "2",
-        "password": user.password,
-        "passwordConfirm": user.passwordConfirm
+        email: user.email,
+        name: user.firstName,
+        surname: user.lastName,
+        dateBirthday: '1997-12-20',
+        gender: user.genderMale ? '1' : '2',
+        password: user.password,
+        passwordConfirm: user.passwordConfirm,
       };
 
-      addUser.create($scope.userInfo).then(function (data) {
+      addUser.create($scope.userInfo).then((data) => {
         OAuthToken.setToken(data.data);
         $cookies.putObject(user);
         getUserLocation.get();
-      }).then(function () {
+      }).then(() => {
         $state.go('app');
       });
-
     };
-
   }]);

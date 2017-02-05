@@ -1,20 +1,13 @@
-dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
-
+dataFormatterModule.factory('formatter', ['mapCreate', function formatter(mapCreate) {
   return {
-    formatDate: function (stringDate) {
+    formatDate(stringDate) {
+      const date = new Date(stringDate);
 
-      var date = new Date(stringDate);
-
-      var locale = "en-us";
-      var day = date.getDay();
-      var month = date.getMonth()+1;//date.toLocaleString(locale, {month: "short"});
-      var hours = date.getHours();//date.toLocaleTimeString(locale, {hour: "2-digit", minute: "2-digit", hour12: false});
-
-      return date.toDateString();//day + ' ' + month + ', ' + hours;
+      return date.toDateString();
     },
 
-    getAddress: function (lat, lng) {
-      var address = mapCreate.coordinatesMap.get([lat, lng].join("|"));
+    getAddress(lat, lng) {
+      const address = mapCreate.coordinatesMap.get([lat, lng].join('|'));
 
       if (!address && lat && lng) {
         mapCreate.getAddress([lat, lng]);
@@ -23,97 +16,101 @@ dataFormatterModule.factory('formatter', ['mapCreate', function (mapCreate) {
       return address;
     },
 
-    getDistance: function (distance) {
+    getDistance(distance) {
       if (distance < 1000) {
-        return distance + 'm';
-      } else {
-        return (distance / 1000).toFixed(1) + 'km';
+        return `${distance} m`;
       }
+
+      return `${(distance / 1000).toFixed(1)} km`;
     },
 
-    getGender: function (male, female) {
+    getGender(male, female) {
       if (male && female) {
         return null;
-      } else if (male) {
+      }
+      if (male) {
         return 1;
-      } else if (female) {
+      }
+      if (female) {
         return 2;
       }
 
       return null;
     },
 
-    getUnixTime: function (date) {
-      return new Date(date).getTime() / 1000 | 0;
+    getUnixTime(date) {
+      return new Date(date).getTime() / 1000;
     },
 
-    getAge: function (date) {
-      var currentDate = new Date();
+    getAge(date) {
+      const currentDate = new Date();
 
-      var birthdayDate = new Date(date);
+      const birthdayDate = new Date(date);
 
-      return currentDate.getYear() - birthdayDate.getYear() - !!(currentDate.getMonth() - birthdayDate.getMonth());
+      return currentDate.getYear() - birthdayDate.getYear()
+        - !!(currentDate.getMonth() - birthdayDate.getMonth());
     },
 
-    getLastSeenTime: function (date) {
-      var MINUTE = 60 * 1000;
-      var HOUR = MINUTE * 60;
-      var DAY = HOUR * 24;
-      var locale = "en-us";
+    getLastSeenTime(date) {
+      const MINUTE = 60 * 1000;
+      const HOUR = MINUTE * 60;
+      const DAY = HOUR * 24;
+      const locale = 'en-us';
 
-      let currentDate = new Date();
-      let lastSeenDate = new Date(date);
-      let dif = new Date(currentDate - lastSeenDate);
+      const currentDate = new Date();
+      const lastSeenDate = new Date(date);
+      const dif = new Date(currentDate - lastSeenDate);
 
       if (dif > DAY) {
         return lastSeenDate.toLocaleDateString(locale);
-      } else if (dif > HOUR) {
-        return (dif / HOUR).toFixed(0) + ' hours ago';
-      } else if (dif > MINUTE) {
-        return (dif / MINUTE).toFixed(0) + ' minutes ago';
-      } else if (dif < MINUTE) {
-        return (dif / 1000).toFixed(0) + ' seconds ago';
+      }
+
+      if (dif > HOUR) {
+        return `${(dif / HOUR).toFixed(0)} hours ago`;
+      }
+
+      if (dif > MINUTE) {
+        return `${(dif / MINUTE).toFixed(0)} minutes ago`;
+      }
+
+      if (dif < MINUTE) {
+        return `${(dif / 1000).toFixed(0)} seconds ago`;
       }
     },
-
-    getUserListImg: function (url) {
-      return url ? url : 'img/test/user_icon.png';
+    getUserListImg(url) {
+      return url || 'img/test/user_icon.png';
+    },
+    getUserImg(url) {
+      return url || 'img/test/user_icon.png';
+    },
+    getEventListImg(url) {
+      return url || 'img/test/profile-card-bg.jpg';
     },
 
-    getUserImg: function (url) {
-      return url ? url : 'img/test/user_icon.png';
-    },
-
-    getEventListImg: function (url) {
-      return url ? url : 'img/test/profile-card-bg.jpg';
-    },
-
-    getMeetingStatusIconStyle: function (status) {
-      if (status == 'DECLINED') {
+    getMeetingStatusIconStyle(status) {
+      if (status === 'DECLINED') {
         return 'meeting-status-icon_declined';
-      } else if (status == "INVITED") {
+      } else if (status === 'INVITED') {
         return 'meeting-status-icon_invited';
-      } else {
-        return 'meeting-status-icon_accepted';
       }
-    },
 
-    getTime: function (date) {
-      let currentDate = new Date(date);
+      return 'meeting-status-icon_accepted';
+    },
+    getTime(date) {
+      const currentDate = new Date(date);
 
       let hours = currentDate.getHours();
 
-      hours = hours < 10 ? '0' + hours : hours;
+      hours = hours < 10 ? `0${hours}` : hours;
 
       let minutes = currentDate.getMinutes();
 
-      minutes = minutes < 10 ? '0' + minutes : minutes;
+      minutes = minutes < 10 ? `0${minutes}` : minutes;
 
-      return hours + ":" + minutes;
+      return `${hours}:${minutes}`;
     },
-
-    getGoogleMapsSrc: function ([lat, lng]) {
-      return "https://www.google.com.ua/maps/@"+lat+","+lng+",12z";
-    }
-  }
+    getGoogleMapsSrc([lat, lng]) {
+      return `https://www.google.com.ua/maps/@${lat},${lng},12z`;
+    },
+  };
 }]);

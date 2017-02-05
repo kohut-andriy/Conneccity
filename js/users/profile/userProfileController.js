@@ -1,72 +1,62 @@
 userProfileModule.controller('userProfileController', ['$scope', 'getUserData', '$stateParams', 'formatter', '$cookies',
-  function ($scope, getUserData, $stateParams, formatter, $cookies) {
-
-    getUserData.get($stateParams.id).then(function (result) {
+  function userProfileController($scope, getUserData, $stateParams, formatter, $cookies) {
+    getUserData.get($stateParams.id).then((result) => {
       $scope.user = result.data;
-      console.log($scope.user);
 
-
-
-      getUserData.getEvents($scope.user.id).then(function (result) {
-        $scope.events = result.data;
-        console.log($scope.events);
+      getUserData.getEvents($scope.user.id).then((eventData) => {
+        $scope.events = eventData.data;
       });
     });
 
-
-    getUserData.getChatId($stateParams.id).then(function (data) {
-      console.log(data);
-     $scope.chatId = data.data.id;
+    getUserData.getChatId($stateParams.id).then((data) => {
+      $scope.chatId = data.data.id;
     });
-    
-    $scope.getFilteredEventsList = function (type) {
 
-      getUserData.getEvents($scope.user.id, type).then(function (data) {
-        
+    $scope.getFilteredEventsList = function getFilteredEventsList(type) {
+      getUserData.getEvents($scope.user.id, type).then((data) => {
         $scope.events = data.data;
       });
     };
 
-    $scope.getEventImg = function (url) {
+    $scope.getEventImg = function getEventImg(url) {
       return formatter.getEventListImg(url);
     };
 
-    $scope.parseDate = function (date) {
+    $scope.parseDate = function parseDate(date) {
       return formatter.formatDate(date);
     };
 
     $scope.aboutBox = false;
 
-    $scope.toggleAbout = function () {
+    $scope.toggleAbout = function toggleAbout() {
       $scope.aboutBox = !$scope.aboutBox;
     };
 
-    $scope.getAge = function (date) {
+    $scope.getAge = function getAge(date) {
       return formatter.getAge(date);
     };
 
-    $scope.getAddress = function (lat, lng) {
-
+    $scope.getAddress = function getAddress(lat, lng) {
       return formatter.getAddress(lat, lng);
     };
 
-    $scope.getFormattedDistance = function (distance) {
+    $scope.getFormattedDistance = function getFormattedDistance(distance) {
       return formatter.getDistance(distance);
     };
 
-    $scope.lastSeenFormatted = function (date) {
+    $scope.lastSeenFormatted = function lastSeenFormatted(date) {
       return formatter.getLastSeenTime(date);
     };
 
-    $scope.getUserImgUrl = function (url) {
+    $scope.getUserImgUrl = function getUserImgUrl(url) {
       return formatter.getUserImg(url);
     };
 
-    $scope.$watch(function () {
+    $scope.$watch(() => {
       $scope.$broadcast('scrollRebuild');
     });
 
-    $scope.setUser = function () {
+    $scope.setUser = function setUser() {
       $cookies.userId = $scope.user.id;
-    }
+    };
   }]);

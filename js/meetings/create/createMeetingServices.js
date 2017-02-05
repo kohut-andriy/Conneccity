@@ -1,18 +1,18 @@
-createMeetingModule.factory('createMeeting',  ['$http', function ($http) {
+createMeetingModule.factory('createMeeting', ['$http', function createMeeting($http) {
   return {
-    create: function (data) {
+    create(data) {
       return $http({
-        url: GOOGLE_IP + "meetings/",
-        method: "POST",
-        data: data
+        url: `${GOOGLE_IP}meetings/`,
+        method: 'POST',
+        data,
       });
     },
-    update: function (data, id) {
+    update(data, id) {
       return $http({
-        url: GOOGLE_IP + "meetings/" + id,
-        method: "PUT",
-        data: data
+        url: `${GOOGLE_IP}meetings/${id}`,
+        method: 'PUT',
+        data,
       });
-    }
-  }
+    },
+  };
 }]);

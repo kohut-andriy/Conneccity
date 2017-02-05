@@ -1,1 +1,1 @@
-var mapModule = angular.module('conneccityMap', ['ngResource', 'ui.router']);
+const mapModule = angular.module('conneccityMap', ['ngResource', 'ui.router']);

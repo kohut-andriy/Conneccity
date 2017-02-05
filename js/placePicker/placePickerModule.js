@@ -1,1 +1,1 @@
-var placePicker = angular.module('placePicker', ['conneccityMap']);
+const placePicker = angular.module('placePicker', ['conneccityMap']);

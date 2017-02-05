@@ -1,25 +1,21 @@
 userProfileModule.controller('signedUserProfile', ['$scope', 'getUserData', 'formatter', '$cookies',
-  function ($scope, getUserData, formatter, $cookies) {
-    console.log('relodad');
+  function signedUserProfile($scope, getUserData, formatter, $cookies) {
     $scope.user = $cookies.getObject('currentUser');
 
-    getUserData.getEvents($scope.user.id).then(function (result) {
+    getUserData.getEvents($scope.user.id).then((result) => {
       $scope.events = result.data;
-      console.log($scope.events);
     });
 
-    $scope.getEventImg = function (url) {
+    $scope.getEventImg = function getEventImg(url) {
       return formatter.getEventListImg(url);
     };
 
-    $scope.parseDate = function (date) {
+    $scope.parseDate = function parseDate(date) {
       return formatter.formatDate(date);
     };
 
-    $scope.getFilteredEventsList = function (type) {
-
-      getUserData.getEvents($scope.user.id, type).then(function (data) {
-
+    $scope.getFilteredEventsList = function getFilteredEventsList(type) {
+      getUserData.getEvents($scope.user.id, type).then((data) => {
         $scope.events = data.data;
       });
     };
@@ -28,27 +24,27 @@ userProfileModule.controller('signedUserProfile', ['$scope', 'getUserData', 'for
 
     $scope.aboutBox = false;
 
-    $scope.toggleAbout = function () {
+    $scope.toggleAbout = function toggleAbout() {
       $scope.aboutBox = !$scope.aboutBox;
     };
 
-    $scope.lastSeenFormatted = function (date) {
+    $scope.lastSeenFormatted = function lastSeenFormatted(date) {
       return formatter.getLastSeenTime(date);
     };
 
-    $scope.getAge = function (date) {
+    $scope.getAge = function getAge(date) {
       return formatter.getAge(date);
     };
 
-    $scope.getAddress = function (lat, lng) {
+    $scope.getAddress = function getAddress(lat, lng) {
       return formatter.getAddress(lat, lng);
     };
 
-    $scope.getUserImgUrl = function (url) {
+    $scope.getUserImgUrl = function getUserImgUrl(url) {
       return formatter.getUserImg(url);
     };
 
-    $scope.$watch(function () {
+    $scope.$watch(() => {
       $scope.$broadcast('scrollRebuild');
     });
   }]);

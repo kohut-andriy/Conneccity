@@ -1,1 +1,1 @@
-var dataFormatterModule = angular.module('dataFormatter', []);
+const dataFormatterModule = angular.module('dataFormatter', []);

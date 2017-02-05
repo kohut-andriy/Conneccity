@@ -1,33 +1,31 @@
-app.factory('getSignedUserInfo', ['$http', function ($http) {
-
+app.factory('getSignedUserInfo', ['$http', function getSignedUserInfo($http) {
   return {
-    get: function () {
+    get() {
       return $http({
-        url: GOOGLE_IP + "profile",
-        method: "GET"
+        url: GOOGLE_IP + 'profile',
+        method: 'GET',
       });
     },
-    getInterests: function () {
+    getInterests() {
       return $http({
-        url: GOOGLE_IP + "ponches",
-        method: "GET"
+        url: GOOGLE_IP + 'ponches',
+        method: 'GET',
       });
     },
-    putPonches: function (data) {
-      console.log(data);
+    putPonches(data) {
       return $http({
-        url: GOOGLE_IP + "profile/ponches",
-        method: "PUT",
+        url: GOOGLE_IP + 'profile/ponches',
+        method: 'PUT',
         data: {
-          "ponches" : data
-        }
+          ponches: data,
+        },
       });
     },
-    getCounter : function () {
+    getCounter() {
       return $http({
-        url: GOOGLE_IP + "profile/counters",
-        method: "GET"
-      })
-    }
+        url: GOOGLE_IP + 'profile/counters',
+        method: 'GET',
+      });
+    },
   };
 }]);

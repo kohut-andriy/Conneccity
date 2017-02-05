@@ -1,11 +1,10 @@
-usersModule.factory('getUsers', ['$http', function ($http) {
-
+usersModule.factory('getUsers', ['$http', function getUsers($http) {
   return {
-    get: function () {
+    get() {
       return $http({
-        url: GOOGLE_IP + "users?count=50",
-        method: "GET"
+        url: `${GOOGLE_IP}users?count=50`,
+        method: 'GET',
       });
-    }
+    },
   };
 }]);

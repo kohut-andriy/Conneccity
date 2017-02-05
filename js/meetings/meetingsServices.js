@@ -1,11 +1,10 @@
-meetingsModule.factory('getMeetings', ['$http', function ($http) {
-
+meetingsModule.factory('getMeetings', ['$http', function getMeetings($http) {
   return {
-    get: function (type = "") {
+    get(type = '') {
       return $http({
-        url: GOOGLE_IP + "meetings/" + type,
-        method: "GET"
+        url: `${GOOGLE_IP}meetings/${type}`,
+        method: 'GET',
       });
-    }
+    },
   };
 }]);
