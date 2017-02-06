@@ -1,75 +1,79 @@
-<img src="img/empty-list.png" alt="" class="empty-list-bg" ng-if="meetings.length < 1">
+<img src="img/empty-list.png" alt="" class="empty-list-bg" ng-if="meetingVm.meetings.length < 1">
 <div class="meetings" ng-scrollbar rebuild-on-resize rebuild-on="rebuild:me">
-    <header class="controls controls_mt">
-        <span class="controls__text">Meetings</span>
-        <p class="controls__divider controls__divider_2"><span class="line"></span></p>
-        <div class="fast-filter">
-            <input id="recommended" type="radio" name="filter" class="fast-filter__radio" checked>
-            <label for="recommended" class="fast-filter__label" ng-click="getFilteredMeetings()">Upcoming</label>
+  <header class="controls controls_mt">
+    <span class="controls__text">Meetings</span>
+    <p class="controls__divider controls__divider_2"><span class="line"></span></p>
+    <div class="fast-filter">
+      <input id="recommended" type="radio" name="filter" class="fast-filter__radio" checked>
+      <label for="recommended" class="fast-filter__label" ng-click="meetingVm.getFilteredMeetings()">Upcoming</label>
 
-            <input id="upcoming" type="radio" name="filter" class="fast-filter__radio">
-            <label for="upcoming" class="fast-filter__label" ng-click="getFilteredMeetings('invites')">Invite</label>
+      <input id="upcoming" type="radio" name="filter" class="fast-filter__radio">
+      <label
+        for="upcoming"
+        class="fast-filter__label"
+        ng-click="meetingVm.getFilteredMeetings('invites')"
+      >Invite</label>
 
-            <input id="my" type="radio" name="filter" class="fast-filter__radio">
-            <label for="my" class="fast-filter__label" ng-click="getFilteredMeetings('past')">Past</label>
-        </div>
-        <p class="controls__divider controls__divider_2"><span class="line"></span></p>
-        <div class="controls__container">
-       <!--     <div class="controls__button">Create meeting</div>-->
-        </div>
-        <!--<div class="controls__container">
-            <div class="controls__icon search-icon-b"></div>
-        </div>
-        <div class="controls__container">
-            <div class="controls__icon filter-icon-b"></div>
-        </div>-->
-    </header>
-    <ul class="meetings__list">
-        <li class="meeting-card" ng-repeat="meeting in meetings">
-            <a href="" class="meeting-card__link" ui-sref="app.meetings.id({ id: meeting.id })">
-                <div class="meeting-card__members">
-                    <div class="meeting-card__fullinfo" ng-if="meeting.selfState == '1'">
-                        <div class="avatar">
-                            <img ng-src="{{meeting.creator.photos.photo200px}}" alt="" class="avatar__img">
-                        </div>
-                        <div class="meeting-card__info">
-                            <p class="meeting-card__name">{{ meeting.creator.name }} {{ meeting.creator.surname
-                                }}</p>
-                            <p class="meeting-card__invite">invite you</p>
-                        </div>
-                    </div>
-                    <div class="meeting-card__distance fl-r">
-                        {{ getDistance(meeting.distance) }}
-                    </div>
-                    <div class="user-preview user-preview_dark" ng-if="meeting.selfState != '1'"
-                         ng-repeat="member in meeting.members | limitTo : 3">
-                        <div class="avatar avatar_block">
-                            <img ng-src="{{ member.photos.photo200px }}" alt="" class="avatar__img">
-                            <div class="meeting-status-icon" ng-class="getStatusStile(member.state)"></div>
-                        </div>
-                        <p class="user-preview__name">{{ member.name }}</p>
-                    </div>
-                    <div class="users-previews-list__counter"
-                         ng-if="meeting.memberCount > 4 && meeting.selfState != '1'">
-                        +{{ meeting.memberCount - 3 }}
-                    </div>
-                </div>
-                <div class="location-info-box location-info-box_static">
-                    <p class="location-info-box__time profile-card-clock-icon-b profile-card-clock-icon-b_gray">
-                        {{ getTime(meeting.startAt) }}</p>
-                    <p class="location-info-box__place profile-card-pin-icon-b profile-card-pin-icon-b_gray">
-                        {{ getAddress(meeting.latitude, meeting.longitude) }}
-                    </p>
-                </div>
-            </a>
-            <div class="meeting-card__buttons cf" ng-if="meeting.selfState == '1'">
-                <div class="meeting-card__button meeting-card__button_decline decline-icon-b fl-l"
-                     ng-click="decline(meeting.id)">Decline
-                </div>
-                <div class="meeting-card__button meeting-card__button_accept accept-icon-b"
-                     ng-click="accept(meeting.id)">Accept
-                </div>
+      <input id="my" type="radio" name="filter" class="fast-filter__radio">
+      <label for="my" class="fast-filter__label" ng-click="meetingVm.getFilteredMeetings('past')">Past</label>
+    </div>
+    <p class="controls__divider controls__divider_2"><span class="line"></span></p>
+    <div class="controls__container">
+      <!--     <div class="controls__button">Create meeting</div>-->
+    </div>
+    <!--<div class="controls__container">
+        <div class="controls__icon search-icon-b"></div>
+    </div>
+    <div class="controls__container">
+        <div class="controls__icon filter-icon-b"></div>
+    </div>-->
+  </header>
+  <ul class="meetings__list">
+    <li class="meeting-card" ng-repeat="meeting in meetingVm.meetings">
+      <a href="" class="meeting-card__link" ui-sref="app.meetings.id({ id: meeting.id })">
+        <div class="meeting-card__members">
+          <div class="meeting-card__fullinfo" ng-if="meeting.selfState == '1'">
+            <div class="avatar">
+              <img ng-src="{{meeting.creator.photos.photo200px}}" alt="" class="avatar__img">
             </div>
-        </li>
-    </ul>
+            <div class="meeting-card__info">
+              <p class="meeting-card__name">{{ meeting.creator.name }} {{ meeting.creator.surname
+                }}</p>
+              <p class="meeting-card__invite">invite you</p>
+            </div>
+          </div>
+          <div class="meeting-card__distance fl-r">
+            {{ meetingVm.getDistance(meeting.distance) }}
+          </div>
+          <div class="user-preview user-preview_dark" ng-if="meeting.selfState != '1'"
+               ng-repeat="member in meeting.members | limitTo : 3">
+            <div class="avatar avatar_block">
+              <img ng-src="{{ member.photos.photo200px }}" alt="" class="avatar__img">
+              <div class="meeting-status-icon" ng-class="getStatusStile(member.state)"></div>
+            </div>
+            <p class="user-preview__name">{{ member.name }}</p>
+          </div>
+          <div class="users-previews-list__counter"
+               ng-if="meeting.memberCount > 4 && meeting.selfState != '1'">
+            +{{ meeting.memberCount - 3 }}
+          </div>
+        </div>
+        <div class="location-info-box location-info-box_static">
+          <p class="location-info-box__time profile-card-clock-icon-b profile-card-clock-icon-b_gray">
+            {{ meetingVm.getTime(meeting.startAt) }}</p>
+          <p class="location-info-box__place profile-card-pin-icon-b profile-card-pin-icon-b_gray">
+            {{ meetingVm.getAddress(meeting.latitude, meeting.longitude) }}
+          </p>
+        </div>
+      </a>
+      <div class="meeting-card__buttons cf" ng-if="meeting.selfState == '1'">
+        <div class="meeting-card__button meeting-card__button_decline decline-icon-b fl-l"
+             ng-click="meetingVm.decline(meeting.id)">Decline
+        </div>
+        <div class="meeting-card__button meeting-card__button_accept accept-icon-b"
+             ng-click="meetingVm.accept(meeting.id)">Accept
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

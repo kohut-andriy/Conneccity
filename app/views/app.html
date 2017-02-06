@@ -1,49 +1,49 @@
 <div class="menu fl-l">
-    <header class="menu__header">
-        <div class="user cf">
-            <a ui-sref="app.profile" class="user__link fl-l">
-                <img ng-src="{{ appVm.getUserImgUrl(appVm.user.photos.photo200px) }}" alt="" class="user__img">
-                <div class="user__name">
-                    <p>{{ appVm.user.name }}</p>
-                    <p>{{ appVm.user.surname }}</p>
-                </div>
-            </a>
-            <a ui-sref="authorization" class="logout-icon fl-r" ng-click="logout()"></a>
+  <header class="menu__header">
+    <div class="user cf">
+      <a ui-sref="app.profile" class="user__link fl-l">
+        <img ng-src="{{ app.getUserImgUrl(app.user.photos.photo200px) }}" alt="" class="user__img">
+        <div class="user__name">
+          <p>{{ app.user.name }}</p>
+          <p>{{ app.user.surname }}</p>
         </div>
-        <div class="ponches">
-            <div class="ponches__item ponches__item_mul" ng-repeat="ponch in appVm.user.ponches">
-                <a href="" class="ponches__link favorite ponch__link_icon-b">{{ ponch.name }}</a>
-            </div>
+      </a>
+      <a ui-sref="authorization" class="logout-icon fl-r" ng-click="logout()"></a>
+    </div>
+    <div class="ponches">
+      <div class="ponches__item ponches__item_mul" ng-repeat="ponch in app.user.ponches">
+        <a href="" class="ponches__link favorite ponch__link_icon-b">{{ ponch.name }}</a>
+      </div>
 
-            <p class="ponches__item ponches__item_mul">
-                <a href="" class="ponches__link ponches__link_change ponch__link_change-b"
-                   ng-click="appVm.show = true">Edit</a>
-            </p>
-        </div>
-    </header>
-    <nav class="menu__navigation">
-        <ul class="menu__list">
-            <li class="menu__item"><a href="" class="menu__link menu__link_map-icon" ui-sref="app">Map</a></li>
-            <li class="menu__item"><a href="" class="menu__link menu__link_mess-icon" ui-sref="app.chat">Messages<span
-                    class="menu__message" ng-if="appVm.getCounter()">{{ appVm.getCounter() }}</span></a></li>
-            <li class="menu__item"><a href="" class="menu__link menu__link_people-icon" ui-sref="app.users">People</a>
-            </li>
-            <li class="menu__item"><a href="" class="menu__link menu__link_meet-icon"
-                                      ui-sref="app.meetings">Meetings</a></li>
-            <li class="menu__item"><a href="" class="menu__link menu__link_event-icon" ui-sref="app.events">Events</a>
-            </li>
-        </ul>
-    </nav>
-    <footer class="menu__footer">
-        <div class="logo">
-            <div class="logo__text logo_icon-b">Conneccity</div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2016 Copyright Conneccity, Inc.</p>
-            <p>All rights reserved.</p>
-        </div>
-    </footer>
+      <p class="ponches__item ponches__item_mul">
+        <a href="" class="ponches__link ponches__link_change ponch__link_change-b"
+           ng-click="app.show = true">Edit</a>
+      </p>
+    </div>
+  </header>
+  <nav class="menu__navigation">
+    <ul class="menu__list">
+      <li class="menu__item"><a href="" class="menu__link menu__link_map-icon" ui-sref="app">Map</a></li>
+      <li class="menu__item"><a href="" class="menu__link menu__link_mess-icon" ui-sref="app.chat">Messages<span
+      class="menu__message" ng-if="app.getCounter()">{{ app.getCounter() }}</span></a></li>
+      <li class="menu__item"><a href="" class="menu__link menu__link_people-icon" ui-sref="app.users">People</a>
+      </li>
+      <li class="menu__item"><a href="" class="menu__link menu__link_meet-icon"
+                                ui-sref="app.meetings">Meetings</a></li>
+      <li class="menu__item"><a href="" class="menu__link menu__link_event-icon" ui-sref="app.events">Events</a>
+      </li>
+    </ul>
+  </nav>
+  <footer class="menu__footer">
+    <div class="logo">
+      <div class="logo__text logo_icon-b">Conneccity</div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2016 Copyright Conneccity, Inc.</p>
+      <p>All rights reserved.</p>
+    </div>
+  </footer>
 </div>
-<ponch-picker my="appVm.ponchesList" related="appVm.related" ng-if="appVm.show" hide-func="appVm.hidePicker()"
-              submit-func="appVm.submitPonches(ponches)"></ponch-picker>
+<ponch-picker my="app.ponchesList" related="app.related" ng-if="app.show" hide-func="app.hidePicker()"
+              submit-func="app.submitPonches(ponches)"></ponch-picker>
 <ui-view [ name="content" ] class="main"></ui-view>

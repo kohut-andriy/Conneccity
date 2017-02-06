@@ -12,5 +12,6 @@ function ponchPicker() {
     },
     templateUrl: 'views/ponchPicker.html',
     controller: 'PonchPickerController',
+    controllerAs: 'ponchPickerVm',
   };
 }

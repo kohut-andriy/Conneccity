@@ -30,13 +30,13 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
     url: '/signIn',
     templateUrl: 'views/signin.html',
     controller: 'SignInController',
-    controllerAs: 'signInVm',
+    controllerAs: 'user',
   })
   .state('registration', {
     url: '/signUp',
     templateUrl: 'views/signup.html',
     controller: 'SignUpController',
-    controllerAs: 'signUpVm',
+    controllerAs: 'visitor',
   })
   .state('app', {
     url: '/',
@@ -44,10 +44,12 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       '': {
         templateUrl: 'views/app.html',
         controller: 'AppController',
-        controllerAs: 'appVm',
+        controllerAs: 'app',
       },
       'content@app': {
         templateUrl: 'views/map.html',
+        controller: 'MapCreateController',
+        controllerAs: 'mapVm',
       },
     },
   })
@@ -87,6 +89,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/events.html',
         controller: 'EventsController',
+        controllerAs: 'eventVm',
       },
     },
   })
@@ -96,6 +99,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/createEvent.html',
         controller: 'CreateEventController',
+        controllerAs: 'eventVm',
       },
     },
   })
@@ -105,6 +109,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/createEvent.html',
         controller: 'CreateEventController',
+        controllerAs: 'eventVm',
       },
     },
   })
@@ -114,6 +119,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/eventProfile.html',
         controller: 'EventProfileController',
+        controllerAs: 'eventVm',
       },
     },
   })
@@ -123,6 +129,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/meetings.html',
         controller: 'MeetingsController',
+        controllerAs: 'meetingVm',
       },
     },
   })
@@ -132,6 +139,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/createMeeting.html',
         controller: 'CreateMeetingController',
+        controllerAs: 'meetingVm',
       },
     },
   })
@@ -141,6 +149,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/createMeeting.html',
         controller: 'CreateMeetingController',
+        controllerAs: 'meetingVm',
       },
     },
   })
@@ -150,6 +159,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/meetingProfile.html',
         controller: 'MeetingProfileController',
+        controllerAs: 'meetingVm',
       },
     },
   })
@@ -159,6 +169,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/chatList.html',
         controller: 'ChatListController',
+        controllerAs: 'chatListVm',
       },
     },
   })
@@ -168,6 +179,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'chat@app.chat': {
         templateUrl: 'views/chat.html',
         controller: 'ChatController',
+        controllerAs: 'chatVm',
       },
     },
   });

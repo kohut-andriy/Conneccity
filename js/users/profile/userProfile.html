@@ -1,126 +1,126 @@
 <div class="profile" ng-scrollbar rebuild-on-resize rebuild-on="scrollRebuild">
-    <header class="profile__header">
-        <img class="profile__bg" src="img/test/user-profile-bg.jpg" alt="">
-        <div class="profile__controls">
-            <!--<div class="profile__control settings-icon" ng-show="isProfile"></div>-->
-            <!--<div class="profile__control menu-icon"></div>-->
-        </div>
-    </header>
-
-    <div class="profile__main">
-
-        <div class="profile__preview">
-            <p class="profile__last-seen" ng-show="!userVm.user.online">
-                {{ userVm.lastSeenFormatted(userVm.user.lastSeen) }}
-            </p>
-            <img
-                 ng-src="{{ userVm.getUserImgUrl(userVm.user.photos.photo200px) || 'img/test/user_icon.png' }}"
-                 alt=""
-                 class="profile__img profile__img_round">
-            <div class="profile__status" ng-show="userVm.user.online"></div>
-            <p class="profile__address profile-address-icon-b">
-                {{ userVm.getAddress(userVm.user.latitude, userVm.user.longitude) }}
-                <span
-                    ng-show="!userVm.isProfile">({{ userVm.getFormattedDistance(userVm.user.distance) }} away)</span>
-            </p>
-        </div>
+  <header class="profile__header">
+    <img class="profile__bg" src="img/test/user-profile-bg.jpg" alt="">
+    <div class="profile__controls">
+      <!--<div class="profile__control settings-icon" ng-show="isProfile"></div>-->
+      <!--<div class="profile__control menu-icon"></div>-->
     </div>
-    <p class="profile__name">{{ userVm.user.name + ' ' + userVm.user.surname }}</p>
-    <div class="profile__share" ng-show="!userVm.isProfile">
-        <a ui-sref="app.chat.id({ id: chatId })" class="profile__menu"><i class="profile-settings-type-2-icon"></i></a>
-        <a ui-sref="app.meetingCreate" class="profile__invite" ng-click="userVm.setUser()">Invite to meeting</a>
-    </div>
-    <div class="profile__ponches" ng-show="userVm.user.ponches.length > 0">
-        <div class="ponches">
-            <div class="ponches__item ponches__item_mul" ng-repeat="ponch in userVm.user.ponches">
-                <a href="" class="ponches__link ponch__link_icon-b" ng-class="{'favorite': ponch.matches}">
-                    {{ ponch.name }}</a>
-            </div>
+  </header>
 
-            <!--<p class="ponches__item ponches__item_mul" ng-show="isProfile">
-                <a href="" class="ponches__link ponches__link_change ponch__link_change-b">Edit</a>
-            </p>-->
+  <div class="profile__main">
+
+    <div class="profile__preview">
+      <p class="profile__last-seen" ng-show="!userVm.user.online">
+        {{ userVm.lastSeenFormatted(userVm.user.lastSeen) }}
+      </p>
+      <img
+      ng-src="{{ userVm.getUserImgUrl(userVm.user.photos.photo200px) || 'img/test/user_icon.png' }}"
+      alt=""
+      class="profile__img profile__img_round">
+      <div class="profile__status" ng-show="userVm.user.online"></div>
+      <p class="profile__address profile-address-icon-b">
+        {{ userVm.getAddress(userVm.user.latitude, userVm.user.longitude) }}
+        <span
+        ng-show="!userVm.isProfile">({{ userVm.getFormattedDistance(userVm.user.distance) }} away)</span>
+      </p>
+    </div>
+  </div>
+  <p class="profile__name">{{ userVm.user.name + ' ' + userVm.user.surname }}</p>
+  <div class="profile__share" ng-show="!userVm.isProfile">
+    <a ui-sref="app.chat.id({ id: chatId })" class="profile__menu"><i class="profile-settings-type-2-icon"></i></a>
+    <a ui-sref="app.meetingCreate" class="profile__invite" ng-click="userVm.setUser()">Invite to meeting</a>
+  </div>
+  <div class="profile__ponches" ng-show="userVm.user.ponches.length > 0">
+    <div class="ponches">
+      <div class="ponches__item ponches__item_mul" ng-repeat="ponch in userVm.user.ponches">
+        <a href="" class="ponches__link ponch__link_icon-b" ng-class="{'favorite': ponch.matches}">
+          {{ ponch.name }}</a>
+      </div>
+
+      <!--<p class="ponches__item ponches__item_mul" ng-show="isProfile">
+          <a href="" class="ponches__link ponches__link_change ponch__link_change-b">Edit</a>
+      </p>-->
+    </div>
+  </div>
+
+  <div class="profile__data">
+    <div class="profile__filter">
+      <div class="controls">
+        <p class="controls__text_small profile-calendar-icon-b">Events
+          <span class="controls__counter">{{ userVm.events.length || 0 }}</span>
+        </p>
+        <p class="controls__divider controls__divider_1"><span class="line"></span></p>
+        <div class="fast-filter">
+
+          <input id="common" type="radio" name="filter" class="fast-filter__radio">
+          <label for="common" class="fast-filter__label"
+                 ng-click="userVm.getFilteredEventsList('common')">Common</label>
+
+          <input id="upcoming" type="radio" name="filter" class="fast-filter__radio" checked>
+          <label for="upcoming" class="fast-filter__label"
+                 ng-click="userVm.getFilteredEventsList()">Upcoming</label>
+
+          <!--<input id="past" type="radio" name="filter" class="fast-filter__radio">
+          <label for="past" class="fast-filter__label">Past</label>-->
         </div>
-    </div>
-
-    <div class="profile__data">
-        <div class="profile__filter">
-            <div class="controls">
-                <p class="controls__text_small profile-calendar-icon-b">Events
-                    <span class="controls__counter">{{ userVm.events.length || 0 }}</span>
-                </p>
-                <p class="controls__divider controls__divider_1"><span class="line"></span></p>
-                <div class="fast-filter">
-
-                    <input id="common" type="radio" name="filter" class="fast-filter__radio">
-                    <label for="common" class="fast-filter__label"
-                           ng-click="userVm.getFilteredEventsList('common')">Common</label>
-
-                    <input id="upcoming" type="radio" name="filter" class="fast-filter__radio" checked>
-                    <label for="upcoming" class="fast-filter__label"
-                           ng-click="userVm.getFilteredEventsList()">Upcoming</label>
-
-                    <!--<input id="past" type="radio" name="filter" class="fast-filter__radio">
-                    <label for="past" class="fast-filter__label">Past</label>-->
-                </div>
-            </div>
-            <ul class="profile__events">
-                <li class="event-card" ng-repeat="event in events">
-                    <a ui-sref="app.events.id({id: event.id})" class="event-card__link">
-                        <img ng-src="{{ userVm.getEventImg(event.photos.photo400px) }}" alt="" class="event-card__img">
-                        <div class="location-info-box">
-                            <p class="location-info-box__time profile-card-clock-icon-b"> {{ userVm.parseDate(event.startAt) }}
-                            <span class="location-info-box__people-count profile-card-people-icon-b fl-r">
+      </div>
+      <ul class="profile__events">
+        <li class="event-card" ng-repeat="event in events">
+          <a ui-sref="app.events.id({id: event.id})" class="event-card__link">
+            <img ng-src="{{ userVm.getEventImg(event.photos.photo400px) }}" alt="" class="event-card__img">
+            <div class="location-info-box">
+              <p class="location-info-box__time profile-card-clock-icon-b"> {{ userVm.parseDate(event.startAt) }}
+                <span class="location-info-box__people-count profile-card-people-icon-b fl-r">
                                 {{ userVm.event.memberCount }}
                             </span>
-                            </p>
-                            <p class="location-info-box__place profile-card-pin-icon-b">
-                                {{ userVm.getAddress(event.latitude, event.longitude) }}
-                            </p>
-                        </div>
-                        <div class="short-info-box">
-                            <p class="short-info-box__distance fl-r">
-                                {{ userVm.getFormattedDistance(event.distance) }}
-                            </p>
-                            <p class="short-info-box__name">{{ event.name + ' ' + event.surname }}</p>
-                            <div class="ponches-wrapper" ng-show="event.ponches.length > 0">
-                                <ul class="ponches">
-                                    <li class="ponches__item">
-                                        <p
-                                                class="ponches__link ponch__link_icon-b"
-                                                ng-class="{'favorite': ponch.matches}"
-                                                ng-repeat="ponch in event.ponches | limitTo: 2">
-                                            {{ ponch.name }}
-                                        </p>
-                                    </li>
-                                </ul>
-                                <div class="ponches__counter" ng-show="event.ponches.length > 2">
-                                    <p class="ponches__link ponches__link_round"
-                                       ng-class="{'favorite' : event.ponches[2].matches}">
-                                        +{{ event.ponches.length - 2 }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="profile__info fl-r">
-            <div class="profile__about-button">
-                <div class="profile__text profile__text profile-about-icon-b" ng-click="userVm.toggleAbout()">
-                    About
+              </p>
+              <p class="location-info-box__place profile-card-pin-icon-b">
+                {{ userVm.getAddress(event.latitude, event.longitude) }}
+              </p>
+            </div>
+            <div class="short-info-box">
+              <p class="short-info-box__distance fl-r">
+                {{ userVm.getFormattedDistance(event.distance) }}
+              </p>
+              <p class="short-info-box__name">{{ event.name + ' ' + event.surname }}</p>
+              <div class="ponches-wrapper" ng-show="event.ponches.length > 0">
+                <ul class="ponches">
+                  <li class="ponches__item">
+                    <p
+                    class="ponches__link ponch__link_icon-b"
+                    ng-class="{'favorite': ponch.matches}"
+                    ng-repeat="ponch in event.ponches | limitTo: 2">
+                      {{ ponch.name }}
+                    </p>
+                  </li>
+                </ul>
+                <div class="ponches__counter" ng-show="event.ponches.length > 2">
+                  <p class="ponches__link ponches__link_round"
+                     ng-class="{'favorite' : event.ponches[2].matches}">
+                    +{{ event.ponches.length - 2 }}
+                  </p>
                 </div>
+              </div>
             </div>
-            <div class="profile__user-info" ng-show="userVm.aboutBox">
-                <p class="profile__birthday profile-birthday-icon-b">{{ userVm.user.dateBirthday }}
-                    <span class="profile__years-count">( {{ userVm.getAge(userVm.user.dateBirthday)}} years)</span>
-                </p>
-                <p class="profile__phone profile-phone-icon-b" ng-show="userVm.user.mobilePhone">
-                    {{ userVm.user.mobilePhone }}
-                </p>
-            </div>
-        </div>
+
+          </a>
+        </li>
+      </ul>
     </div>
+    <div class="profile__info fl-r">
+      <div class="profile__about-button">
+        <div class="profile__text profile__text profile-about-icon-b" ng-click="userVm.toggleAbout()">
+          About
+        </div>
+      </div>
+      <div class="profile__user-info" ng-show="userVm.aboutBox">
+        <p class="profile__birthday profile-birthday-icon-b">{{ userVm.user.dateBirthday }}
+          <span class="profile__years-count">( {{ userVm.getAge(userVm.user.dateBirthday)}} years)</span>
+        </p>
+        <p class="profile__phone profile-phone-icon-b" ng-show="userVm.user.mobilePhone">
+          {{ userVm.user.mobilePhone }}
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

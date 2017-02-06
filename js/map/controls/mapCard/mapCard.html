@@ -1,51 +1,54 @@
 <div class="card">
-    <div class="card__prev-button" ng-show="cardInfo.length > 1" ng-class="{ 'active' : cardCounter == 0}"
-         ng-click="getPreviousCard()"></div>
-    <div class="card__content">
-        <header class="card__header" ng-class="{'favorite' : cardInfo[cardCounter].ponches[0].matches}">
-            <p class="card__place place-icon-b">{{
-                getAddress(cardInfo[cardCounter].latitude,cardInfo[cardCounter].longitude) }}</p>
-            <p class="card__event-date date-icon-b" ng-show="cardInfo[cardCounter].startAt">{{
-                parseDate(cardInfo[cardCounter].startAt) }}</p>
-            <span class="card__close-button close-but-icon fl-r" ng-click="toggleCard()"></span>
-        </header>
-        <div class="card__info">
-            <div class="card__preview">
-                <img ng-src="{{cardInfo[cardCounter].photos.photo100px}}" alt="" class="card__img">
-                <span ng-show="cardInfo[cardCounter].online" class="card__preview-status"></span>
-            </div>
-            <main class="card__main">
-                <span class="card__event-type">{{ cardInfo[cardCounter].eventtype }}</span>
-                <p class="card__members-count people-icon-b" ng-show="cardInfo[cardCounter].memberCount">
-                    {{cardInfo[cardCounter].memberCount}}</p>
-                <a ui-sref="app.users.id({ id: cardInfo[cardCounter].id} )" class="card__event-name" ng-show="cardInfo[cardCounter].name">{{cardInfo[cardCounter].name}}
-                    {{cardInfo[cardCounter].surname}}</a>
-                <p class="card__message" ng-show="cardInfo[cardCounter].message">
-                    {{cardInfo[cardCounter].description.name}}</p>
-                <p class="card__members" ng-show="cardInfo[cardCounter].members">
+  <div class="card__prev-button" ng-show="mapVm.cardInfo.length > 1" ng-class="{ 'active' : mapVm.cardCounter == 0}"
+       ng-click="getPreviousCard()"></div>
+  <div class="card__content">
+    <header class="card__header" ng-class="{'favorite' : mapVm.cardInfo[cardCounter].ponches[0].matches}">
+      <p class="card__place place-icon-b">{{
+        mapVm.getAddress(mapVm.cardInfo[cardCounter].latitude, mapVm.cardInfo[cardCounter].longitude) }}</p>
+      <p class="card__event-date date-icon-b" ng-show="mapVm.cardInfo[cardCounter].startAt">{{
+        parseDate(mapVm.cardInfo[cardCounter].startAt) }}</p>
+      <span class="card__close-button close-but-icon fl-r" ng-click="toggleCard()"></span>
+    </header>
+    <div class="card__info">
+      <div class="card__preview">
+        <img ng-src="{{mapVm.cardInfo[cardCounter].photos.photo100px}}" alt="" class="card__img">
+        <span ng-show="mapVm.cardInfo[cardCounter].online" class="card__preview-status"></span>
+      </div>
+      <main class="card__main">
+        <span class="card__event-type">{{ mapVm.cardInfo[cardCounter].eventtype }}</span>
+        <p class="card__members-count people-icon-b" ng-show="mapVm.cardInfo[cardCounter].memberCount">
+          {{ mapVm.cardInfo[cardCounter].memberCount }}</p>
+        <a ui-sref="app.users.id({ id: cardInfo[cardCounter].id} )" class="card__event-name"
+           ng-show="cardInfo[cardCounter].name">{{cardInfo[cardCounter].name}}
+          {{cardInfo[cardCounter].surname}}</a>
+        <p class="card__message" ng-show="mapVm.cardInfo[cardCounter].message">
+          {{ mapVm.cardInfo[cardCounter].description.name }}</p>
+        <p class="card__members" ng-show="mapVm.cardInfo[cardCounter].members">
                     <span class="card__member-name"
-                          ng-repeat="member in cardInfo[cardCounter].members">{{member.name}}</span>
-                </p>
-                <div class="ponches-wrapper" ng-show="cardInfo[cardCounter].ponches.length>0">
-                    <ul class="ponches">
-                        <li class="ponches__item" ng-repeat="ponch in cardInfo[cardCounter].ponches | limitTo: 3">
-                            <a href="" class="ponches__link ponch__link_icon-b" ng-class="{'favorite':ponch.matches}">
-                                {{ponch.name}}
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="ponches__counter" ng-show="cardInfo[cardCounter].ponches.length>3">
-                        <a href="" class="ponches__link ponches__link_round"
-                           ng-class="{'favorite': cardInfo[cardCounter].ponches[3].matches}">
-                            +{{cardInfo[cardCounter].ponches.length-3}}
-                        </a>
-                    </div>
-                </div>
-            </main>
-            <span class="card__distance fl-r">{{ getFormattedDistance(cardInfo[cardCounter].distance)}}</span>
+                          ng-repeat="member in mapVm.cardInfo[cardCounter].members">{{member.name}}</span>
+        </p>
+        <div class="ponches-wrapper" ng-show="mapVm.cardInfo[cardCounter].ponches.length>0">
+          <ul class="ponches">
+            <li class="ponches__item" ng-repeat="ponch in mapVm.cardInfo[cardCounter].ponches | limitTo: 3">
+              <a href="" class="ponches__link ponch__link_icon-b" ng-class="{'favorite': ponch.matches}">
+                {{ ponch.name }}
+              </a>
+            </li>
+          </ul>
+          <div class="ponches__counter" ng-show="mapVm.cardInfo[cardCounter].ponches.length>3">
+            <a href="" class="ponches__link ponches__link_round"
+               ng-class="{'favorite': mapVm.cardInfo[cardCounter].ponches[3].matches}">
+              +{{ mapVm.cardInfo[cardCounter].ponches.length - 3 }}
+            </a>
+          </div>
         </div>
-        <footer class="card__counter" ng-show="cardInfo.length > 1">{{ cardCounter+1 }} / {{ cardInfo.length }}</footer>
+      </main>
+      <span class="card__distance fl-r">{{ mapVm.getFormattedDistance(mapVm.cardInfo[cardCounter].distance) }}</span>
     </div>
-    <div class="card__next-button" ng-show="cardInfo.length > 1"
-         ng-class="{ 'active' : cardCounter == cardInfo.length-1}" ng-click="getNextCard()"></div>
+    <footer class="card__counter" ng-show="mapVm.cardInfo.length > 1">
+      {{ mapVm.cardCounter + 1 }} / {{ mapVm.cardInfo.length }}
+    </footer>
+  </div>
+  <div class="card__next-button" ng-show="mapVm.cardInfo.length > 1"
+       ng-class="{ 'active' : mapVm.cardCounter == cardInfo.length - 1 }" ng-click="mapVm.getNextCard()"></div>
 </div>

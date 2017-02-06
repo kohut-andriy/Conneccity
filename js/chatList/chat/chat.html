@@ -1,44 +1,58 @@
 <div class="chat__header">
-    <div class="avatar">
-        <img ng-src="{{ chat.user.photos.photo200px || chat.event.photos.photo200px || 'img/test/meeting_icon.png' }}" alt=""
-             class="avatar__img avatar__img_big">
-        <div class="avatar__status avatar__status_big" ng-show="chat.user.online"></div>
+  <div class="avatar">
+    <img
+      ng-src="{{
+        chatVm.chat.user.photos.photo200px
+        || chatVm.chat.event.photos.photo200px
+        || 'img/test/meeting_icon.png'
+      }}"
+      alt=""
+      class="avatar__img avatar__img_big"
+    >
+    <div class="avatar__status avatar__status_big" ng-show="chatVm.chat.user.online"></div>
+  </div>
+  <div class="chat__info">
+    <p class="chat__name">
+      {{ chatVm.chat.event.name || chatVm.chat.user.name + " " + chatVm.chat.user.surname }}
+    </p>
+    <p
+      class="chat__last-seen"
+      ng-show="!chatVm.chat.user.online && !chatVm.chat.event && !chatVm.chat.meeting"
+    >{{ chatVm.getLastSeenTime(chatVm.chat.user.lastSeen) }}</p>
+    <div class="chat-list__name chat-list__user" ng-repeat="user in chatVm.chat.meeting.members | limitTo : 3">
+      {{ user.name }}
     </div>
-    <div class="chat__info">
-        <p class="chat__name">{{ chat.event.name || chat.user.name + " " + chat.user.surname}}
-
-        </p>
-        <p class="chat__last-seen" ng-show="!chat.user.online && !chat.event && !chat.meeting">{{ getLastSeenTime(chat.user.lastSeen)
-            }}</p>
-        <div class="chat-list__name chat-list__user" ng-repeat="user in chat.meeting.members | limitTo : 3">{{ user.name
-            }}
-        </div>
-    </div>
+  </div>
 </div>
 <div class="chat__content fl-l">
-    <ul class="chat__messages" schroll-bottom="messages">
-        <li class="chat__message cf" ng-repeat="message in messages | orderBy:'-'"
-            ng-class="{'chat__message_reverse': checkSender(message.sender.id) }">
-            <div class="chat__text"
-                 ng-class=" !checkSender(message.sender.id)  ? 'chat__text_got' : 'chat__text_my'">
-                {{ message.message }}
-                <p class="chat__status" ng-show="getStatus(message)"></p>
-            </div>
-            <span class="chat__time">{{ getLastSeenTime(message.date) }}</span>
+  <ul class="chat__messages" schroll-bottom="messages">
+    <li class="chat__message cf" ng-repeat="message in chatVm.messages | orderBy:'-'"
+        ng-class="{'chat__message_reverse': chatVm.checkSender(message.sender.id) }">
+      <div class="chat__text"
+           ng-class=" !checkSender(message.sender.id)  ? 'chat__text_got' : 'chat__text_my'">
+        {{ message.message }}
+        <p class="chat__status" ng-show="chatVm.getStatus(message)"></p>
+      </div>
+      <span class="chat__time">{{ chatVm.getLastSeenTime(message.date) }}</span>
 
-        </li>
-    </ul>
+    </li>
+  </ul>
 </div>
 <div class="chat__footer fl-l">
-    <form ng-submit="sendMessage(message)" class="form form_full">
-        <ul class="form__list">
-            <li class="form__item">
-                <textarea name="" id="" cols="30" rows="10" class="form__textarea"
-                          placeholder="Write message here..." ng-model="message"></textarea>
-            </li>
-            <li class="form__item">
-                <input type="submit" class="form__button_submit-2 fl-r" value="Send">
-            </li>
-        </ul>
-    </form>
+  <form ng-submit="chatVm.sendMessage(message)" class="form form_full">
+    <ul class="form__list">
+      <li class="form__item">
+        <textarea
+          cols="30"
+          rows="10"
+          class="form__textarea"
+          placeholder="Write message here..."
+          ng-model="message"
+        ></textarea>
+      </li>
+      <li class="form__item">
+        <input type="submit" class="form__button_submit-2 fl-r" value="Send">
+      </li>
+    </ul>
+  </form>
 </div>

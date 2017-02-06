@@ -1,73 +1,82 @@
-<div class="event-profile cf" ng-click="rebuild()">
-    <conneccity-map class="map"></conneccity-map>
-    <div class="event-profile__scroll-container" ng-scrollbar rebuild-on-resize rebuild-on="scrollRebuild">
-        <div class="event-profile__content">
-            <header class="event-profile__header">
-                <div class="event-profile__controls">
-                    <a ui-sref="app.meetingEdit({ id : meeting.id })" class="event-profile__control settings-icon"
-                       ng-if="checkPermition(meeting.creator.id)"></a>
-                    <!--     <div class="event-profile__control menu-icon"></div>-->
-                </div>
-                <span class="event-profile__name">Meeting</span>
-                <h1 class="event-profile__event-name">{{ meeting.name }}</h1>
-
-            </header>
-
-            <p class="event-profile__text">
-                {{ meeting.description }}
-            </p>
-
-            <div class="event-profile__info-box info-box">
-                <p class="info-box__text info-place-icon-b">{{ getAddress(meeting.latitude, meeting.longitude) }}</p>
-                <p class="info-box__text info-price-icon-b" ng-show="meeting.price">{{ meeting.price }}</p>
-                <p class="info-box__text info-date-icon-b">{{ parseDate(meeting.startAt)}}</p>
-            </div>
-
-            <div class="event-profile__buttons">
-                <div class="button button_green button-icon-accept-b" ng-if="meeting.selfState == '2'"
-                     ng-click="leave(meeting.id)">
-                    Leave
-                </div>
-                <div class="button button_green button-icon-accept-b" ng-if="meeting.selfState == '1'"
-                     ng-click="join(meeting.id)">Join
-                </div>
-                <a ui-sref="app.chat.id({ id: chatId })" class=" button button_red button-icon-message-b
-                ">Message
-                </a>
-            </div>
-
-            <p class="event-profile__text">Participants</p>
-
-            <div class="event-profile__users-previews-list users-previews-list">
-                <a ui-sref="app.users.id({ id : member.id})" class="user-preview"
-                   ng-repeat="member in meeting.members | limitTo : 6">
-                    <div class="avatar avatar_block">
-                        <img ng-src="{{ getUserImg(member.photos.photo200px) }}" alt="" class="avatar__img">
-                        <div class="meeting-status-icon" ng-class="getStatusStile(member.state)"></div>
-                    </div>
-                    <p class="user-preview__name">{{ member.name }}</p>
-                </a>
-
-                <div class="users-previews-list__counter" ng-show="meeting.members.length > 6">
-                    +{{meeting.members.length - 6}}
-                </div>
-            </div>
-
-            <p class="event-profile__text">Admins</p>
-
-            <ul class="event-profile__admins-previews-list admins-previews-list">
-                <li class="admins-previews-list__item">
-                    <a ui-sref="app.users.id({ id : meeting.creator.id})" class="admins-preview">
-                        <div class="avatar">
-                            <img ng-src="{{ getUserImg(meeting.creator.photos.photo200px) }}" alt=""
-                                 class="avatar__img">
-                        </div>
-                        <div class="admins-preview__info">
-                            <p class="admins-preview__name">{{ meeting.creator.name }} {{ meeting.creator.surname }}</p>
-                            <p class="admins-preview__position">Creator</p>
-                        </div>
-                    </a></li>
-            </ul>
+<div class="event-profile cf">
+  <conneccity-map class="map"></conneccity-map>
+  <div class="event-profile__scroll-container" ng-scrollbar rebuild-on-resize rebuild-on="scrollRebuild">
+    <div class="event-profile__content">
+      <header class="event-profile__header">
+        <div class="event-profile__controls">
+          <a ui-sref="app.meetingEdit({ id : meeting.id })" class="event-profile__control settings-icon"
+             ng-if="meetingVm.checkPermition(meetingVm.meeting.creator.id)"></a>
+          <!--     <div class="event-profile__control menu-icon"></div>-->
         </div>
+        <span class="event-profile__name">Meeting</span>
+        <h1 class="event-profile__event-name">{{ meetingVm.meeting.name }}</h1>
+
+      </header>
+
+      <p class="event-profile__text">
+        {{ meetingVm.meeting.description }}
+      </p>
+
+      <div class="event-profile__info-box info-box">
+        <p class="info-box__text info-place-icon-b">
+          {{ meetingVm.getAddress(meeting.latitude, meeting.longitude) }}
+        </p>
+        <p class="info-box__text info-price-icon-b" ng-show="meetingVm.meeting.price">
+          {{ meetingVm.meeting.price }}
+        </p>
+        <p class="info-box__text info-date-icon-b">
+          {{ meetingVm.parseDate(meetingVm.meeting.startAt) }}
+        </p>
+      </div>
+
+      <div class="event-profile__buttons">
+        <div class="button button_green button-icon-accept-b" ng-if="meetingVm.meeting.selfState == '2'"
+             ng-click="meetingVm.leave(meetingVm.meeting.id)">
+          Leave
+        </div>
+        <div class="button button_green button-icon-accept-b" ng-if="meetingVm.meeting.selfState == '1'"
+             ng-click="meetingVm.join(meetingVm.meeting.id)">Join
+        </div>
+        <a ui-sref="app.chat.id({ id: chatId })" class=" button button_red button-icon-message-b">
+          Message
+        </a>
+      </div>
+
+      <p class="event-profile__text">Participants</p>
+
+      <div class="event-profile__users-previews-list users-previews-list">
+        <a ui-sref="app.users.id({ id : member.id})" class="user-preview"
+           ng-repeat="member in meetingVm.meeting.members | limitTo : 6">
+          <div class="avatar avatar_block">
+            <img ng-src="{{ meetingVm.getUserImg(member.photos.photo200px) }}" alt="" class="avatar__img">
+            <div class="meeting-status-icon" ng-class="meetingVm.getStatusStile(member.state)"></div>
+          </div>
+          <p class="user-preview__name">{{ member.name }}</p>
+        </a>
+
+        <div class="users-previews-list__counter" ng-show="meetingVm.meeting.members.length > 6">
+          +{{ meetingVm.meeting.members.length - 6 }}
+        </div>
+      </div>
+
+      <p class="event-profile__text">Admins</p>
+
+      <ul class="event-profile__admins-previews-list admins-previews-list">
+        <li class="admins-previews-list__item">
+          <a ui-sref="app.users.id({ id : meeting.creator.id})" class="admins-preview">
+            <div class="avatar">
+              <img ng-src="{{ meetingVm.getUserImg(meetingVm.meeting.creator.photos.photo200px) }}" alt=""
+                   class="avatar__img">
+            </div>
+            <div class="admins-preview__info">
+              <p class="admins-preview__name">
+                {{ meetingVm.meeting.creator.name }}
+                {{ meetingVm.meeting.creator.surname }}
+              </p>
+              <p class="admins-preview__position">Creator</p>
+            </div>
+          </a></li>
+      </ul>
     </div>
+  </div>
 </div>
