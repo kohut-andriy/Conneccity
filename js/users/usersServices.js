@@ -1,6 +1,6 @@
 angular
   .module('users')
-  .factory(getUsers);
+  .factory('getUsers', getUsers);
 
 getUsers.$inject = ['$http'];
 

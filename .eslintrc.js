@@ -15,6 +15,6 @@ module.exports = {
 		"node": true,
 	},
 	"rules": {
-		"semi": 2
+		"no-param-reassign": 0,
 	},
 };

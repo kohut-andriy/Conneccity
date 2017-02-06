@@ -1,6 +1,6 @@
 angular
   .module('chat')
-  .factory(getChat);
+  .factory('getChat', getChat);
 
 getChat.$inject = ['$http'];
 

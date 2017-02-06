@@ -1,6 +1,6 @@
 angular
   .module('meetingProfile')
-  .factory(getMeetingInfo);
+  .factory('getMeetingInfo', getMeetingInfo);
 
 getMeetingInfo.$inject = ['$http'];
 

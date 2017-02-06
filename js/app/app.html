@@ -2,22 +2,22 @@
     <header class="menu__header">
         <div class="user cf">
             <a ui-sref="app.profile" class="user__link fl-l">
-                <img ng-src="{{ getUserImgUrl(user.photos.photo200px) }}" alt="" class="user__img">
+                <img ng-src="{{ appVm.getUserImgUrl(appVm.user.photos.photo200px) }}" alt="" class="user__img">
                 <div class="user__name">
-                    <p>{{ user.name }}</p>
-                    <p>{{ user.surname }}</p>
+                    <p>{{ appVm.user.name }}</p>
+                    <p>{{ appVm.user.surname }}</p>
                 </div>
             </a>
             <a ui-sref="authorization" class="logout-icon fl-r" ng-click="logout()"></a>
         </div>
         <div class="ponches">
-            <div class="ponches__item ponches__item_mul" ng-repeat="ponch in user.ponches">
+            <div class="ponches__item ponches__item_mul" ng-repeat="ponch in appVm.user.ponches">
                 <a href="" class="ponches__link favorite ponch__link_icon-b">{{ ponch.name }}</a>
             </div>
 
             <p class="ponches__item ponches__item_mul">
                 <a href="" class="ponches__link ponches__link_change ponch__link_change-b"
-                   ng-click="show = true">Edit</a>
+                   ng-click="appVm.show = true">Edit</a>
             </p>
         </div>
     </header>
@@ -25,7 +25,7 @@
         <ul class="menu__list">
             <li class="menu__item"><a href="" class="menu__link menu__link_map-icon" ui-sref="app">Map</a></li>
             <li class="menu__item"><a href="" class="menu__link menu__link_mess-icon" ui-sref="app.chat">Messages<span
-                    class="menu__message" ng-if="getCounter()">{{ getCounter() }}</span></a></li>
+                    class="menu__message" ng-if="appVm.getCounter()">{{ appVm.getCounter() }}</span></a></li>
             <li class="menu__item"><a href="" class="menu__link menu__link_people-icon" ui-sref="app.users">People</a>
             </li>
             <li class="menu__item"><a href="" class="menu__link menu__link_meet-icon"
@@ -44,6 +44,6 @@
         </div>
     </footer>
 </div>
-<ponch-picker my="ponchesList" related="related" ng-if="show" hide-func="hidePicker()"
-              submit-func="submitPonches(ponches)"></ponch-picker>
+<ponch-picker my="appVm.ponchesList" related="appVm.related" ng-if="appVm.show" hide-func="appVm.hidePicker()"
+              submit-func="appVm.submitPonches(ponches)"></ponch-picker>
 <ui-view [ name="content" ] class="main"></ui-view>

@@ -1,6 +1,6 @@
 angular
   .module('dataFormatter')
-  .factory(formatter);
+  .factory('formatter', formatter);
 
 formatter.$inject = ['mapCreate'];
 

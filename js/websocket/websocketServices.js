@@ -1,6 +1,6 @@
 angular
   .module('websocket')
-  .service(socketFactory);
+  .service('socketFactory', socketFactory);
 
 socketFactory.$inject = ['OAuthToken', '$rootScope', '$cookies'];
 

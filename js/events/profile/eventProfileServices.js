@@ -1,6 +1,6 @@
 angular
   .module('eventProfile')
-  .factory(getEventInfo);
+  .factory('getEventInfo', getEventInfo);
 
 getEventInfo.$inject = ['$http'];
 

@@ -1,6 +1,6 @@
 angular
   .module('conneccityApp')
-  .factory(getSignedUserInfo);
+  .factory('getSignedUserInfo', getSignedUserInfo);
 
 getSignedUserInfo.$inject = ['$http'];
 
@@ -8,19 +8,19 @@ function getSignedUserInfo($http) {
   return {
     get() {
       return $http({
-        url: GOOGLE_IP + 'profile',
+        url: `${GOOGLE_IP}profile`,
         method: 'GET',
       });
     },
     getInterests() {
       return $http({
-        url: GOOGLE_IP + 'ponches',
+        url: `${GOOGLE_IP}ponches`,
         method: 'GET',
       });
     },
     putPonches(data) {
       return $http({
-        url: GOOGLE_IP + 'profile/ponches',
+        url: `${GOOGLE_IP}profile/ponches`,
         method: 'PUT',
         data: {
           ponches: data,
@@ -29,7 +29,7 @@ function getSignedUserInfo($http) {
     },
     getCounter() {
       return $http({
-        url: GOOGLE_IP + 'profile/counters',
+        url: `${GOOGLE_IP}profile/counters`,
         method: 'GET',
       });
     },

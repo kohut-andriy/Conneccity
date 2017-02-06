@@ -1,39 +1,41 @@
 angular
   .module('createEvent')
-  .controller(CreateEventController);
+  .controller('CreateEventController', CreateEventController);
 
-CreateEventController.$inject = ['$scope', 'createEvent', 'formatter', '$cookies', '$state',
+CreateEventController.$inject = ['createEvent', 'formatter', '$cookies', '$state',
   '$stateParams', 'getEventInfo'];
 
-function CreateEventController($scope, createEvent, formatter, $cookies, $state,
+function CreateEventController(createEvent, formatter, $cookies, $state,
   $stateParams, getEventInfo) {
-  $scope.user = $cookies.getObject('currentUser');
-  $scope.getMapSrc = function getMapSrc() {
-    return formatter.getGoogleMapsSrc([$scope.user.latitude,
-      $scope.user.latitude]);
-  };
+  const vm = this;
 
-  $scope.pickerVisible = false;
+  vm.user = $cookies.getObject('currentUser');
+  vm.pickerVisible = false;
+  vm.event = {};
+  vm.create = create;
+  vm.getMapSrc = getMapSrc;
 
-  $scope.event = {};
+  startup();
 
-  getEventInfo.get($stateParams.id).then((data) => {
-    const event = data.data;
-    $scope.event.name = event.name;
-    $scope.event.startAt = new Date(event.startAt);
-    $scope.event.latitude = event.latitude;
-    $scope.event.longitude = event.longitude;
-    $scope.event.description = event.description;
-    $scope.event.price = event.priceFrom;
-  });
+  function startup() {
+    getEventInfo.get($stateParams.id).then((data) => {
+      const event = data.data;
+      vm.event.name = event.name;
+      vm.event.startAt = new Date(event.startAt);
+      vm.event.latitude = event.latitude;
+      vm.event.longitude = event.longitude;
+      vm.event.description = event.description;
+      vm.event.price = event.priceFrom;
+    });
+  }
 
-  $scope.create = function create(data) {
+  function create(data) {
     if ($stateParams.id) {
       createEvent.update({
         name: data.name,
         startAt: data.startAt,
-        latitude: $scope.placePicker.lat,
-        longitude: $scope.placePicker.lng,
+        latitude: vm.placePicker.lat,
+        longitude: vm.placePicker.lng,
         description: data.description,
         priceFrom: data.price,
       }, $stateParams.id).then(() => {
@@ -43,13 +45,18 @@ function CreateEventController($scope, createEvent, formatter, $cookies, $state,
       createEvent.create({
         name: data.name,
         startAt: data.startAt,
-        latitude: $scope.placePicker.lat,
-        longitude: $scope.placePicker.lng,
+        latitude: vm.placePicker.lat,
+        longitude: vm.placePicker.lng,
         description: data.description,
         priceFrom: data.price,
       }).then(() => {
         $state.go('app.events');
       });
     }
-  };
+  }
+
+  function getMapSrc() {
+    return formatter.getGoogleMapsSrc([vm.user.latitude,
+      vm.user.latitude]);
+  }
 }

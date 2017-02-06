@@ -1,77 +1,87 @@
 angular
   .module('conneccityApp')
-  .controller(AppController);
+  .controller('AppController', AppController);
 
-AppController.$inject = ['$scope', 'getSignedUserInfo', 'OAuthToken', 'formatter', '$cookies', 'socketFactory',
+AppController.$inject = ['getSignedUserInfo', 'OAuthToken', 'formatter', '$cookies', 'socketFactory',
   '$interval', 'getUserLocation'];
 
-function AppController($scope, getSignedUserInfo, OAuthToken, formatter, $cookies, socketFactory,
+function AppController(getSignedUserInfo, OAuthToken, formatter, $cookies, socketFactory,
   $interval, getUserLocation) {
-  getUserLocation.get();
+  const vm = this;
 
-  $interval(() => {
-    getUserLocation.get();
-  }, 1000 * 60 * 5);
+  vm.logout = logout;
+  vm.scrollBuild = scrollBuild;
+  vm.getUserImgUrl = getUserImgUrl;
+  vm.getCounter = getCounter;
+  vm.submitPonches = submitPonches;
+  vm.hidePicker = hidePicker;
 
-  const getInterests = function getInterests() {
+  startup();
+
+  function startup() {
+    $interval(() => {
+      getUserLocation.get();
+    }, 1000 * 60 * 5);
+
+    getInterests();
+
+    if (!OAuthToken.isAuthenticated) {
+      socketFactory.connect();
+    }
+
+    getSignedUserInfo.getCounter().then((data) => {
+      vm.counter = new Set(data.data.unreadChatsIds);
+
+      socketFactory.counter = vm.counter;
+    });
+  }
+
+  function getInterests() {
     getSignedUserInfo.get().then((data) => {
-      $scope.user = data.data;
+      vm.user = data.data;
 
-      $cookies.putObject('currentUser', $scope.user);
+      $cookies.putObject('currentUser', vm.user);
 
-      $scope.ponchesList = [];
+      vm.ponchesList = [];
 
-      $scope.user.ponches.forEach((ponch) => {
-        $scope.ponchesList.push(ponch.name);
+      vm.user.ponches.forEach((ponch) => {
+        vm.ponchesList.push(ponch.name);
       });
     });
 
     getSignedUserInfo.getInterests().then((data) => {
-      $scope.related = [];
+      vm.related = [];
 
       data.data.forEach((ponch) => {
-        $scope.related.push(ponch.name);
+        vm.related.push(ponch.name);
       });
     });
-  };
-
-  $scope.hidePicker = function hide() {
-    $scope.show = false;
-  };
-
-  getInterests();
-
-  if (!OAuthToken.isAuthenticated) {
-    socketFactory.connect();
   }
 
-  getSignedUserInfo.getCounter().then((data) => {
+  function hidePicker() {
+    vm.show = false;
+  }
 
-    $scope.counter = new Set(data.data.unreadChatsIds);
-
-    socketFactory.counter = $scope.counter;
-  });
-
-  $scope.logout = function logout() {
+  function logout() {
     OAuthToken.removeToken();
-  };
+  }
 
-  $scope.scrollBuild = function rebuild() {
-    $scope.$broadcast('rebuild:me');
-  };
+  function scrollBuild() {
+    vm.$broadcast('rebuild:me');
+  }
 
-  $scope.getUserImgUrl = function getUrl(url) {
+  function getUserImgUrl(url) {
     return formatter.getUserImg(url);
-  };
+  }
 
-  $scope.getCounter = function getCounter() {
-    return $scope.counter ? $scope.counter.size : 0;
-  };
+  function getCounter() {
+    return vm.counter ? vm.counter.size : 0;
+  }
 
-  $scope.submitPonches = function submit(list) {
+  function submitPonches(list) {
     getSignedUserInfo.putPonches(list).then(() => {
-      $scope.show = false;
+      vm.show = false;
       getInterests();
     });
-  };
+  }
 }

@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="sign-in__block ta-c">
-                <form class="form" ng-submit="login(user)">
+                <form class="form" ng-submit="signInVm.login(user)">
                     <div class="form__list">
                         <div class="form__item"><span class="form__text">Login to Conneccity</span></div>
                         <div class="form__item">
@@ -49,8 +49,8 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="form__validation-text" ng-if="!isValid">Wrong email/password combination!</span>
-                        <span class="form__validation-text" ng-if="!conncction">No internet connection!</span>
+                        <span class="form__validation-text" ng-if="!signInVm.isValid">Wrong email/password combination!</span>
+                        <span class="form__validation-text" ng-if="!signInVm.conncction">No internet connection!</span>
                         <div class="form__item">
                             <input type="email" placeholder="E-mail" class="form__input" ng-model="user.username"
                                    required>

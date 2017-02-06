@@ -1,6 +1,6 @@
 angular
   .module('userProfile')
-  .factory('getUserData');
+  .factory('getUserData', getUserData);
 
 getUserData.$inject = ['$http'];
 

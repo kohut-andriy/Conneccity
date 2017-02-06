@@ -2,37 +2,40 @@ angular
   .module('ponchPicker')
   .controller(PonchPickerController);
 
-PonchPickerController.$inject = ['$scope'];
+function PonchPickerController() {
+  const vm = this;
 
-function PonchPickerController($scope) {
   let changed = false;
+  vm.add = addPocnch;
+  vm.delete = deletePonch;
+  vm.submit = submit;
 
-  $scope.add = function addPocnch(ponch) {
-    if ($scope.my.length < 5 && ponch) {
-      for (let i = 0; i < $scope.my.length; i += 1) {
-        if ($scope.my[i] === ponch) return;
+  function addPocnch(ponch) {
+    if (vm.my.length < 5 && ponch) {
+      for (let i = 0; i < vm.my.length; i += 1) {
+        if (vm.my[i] === ponch) return;
       }
-      $scope.my.push(ponch);
-      $scope.item = '';
+      vm.my.push(ponch);
+      vm.item = '';
     }
 
     changed = true;
-  };
+  }
 
-  $scope.delete = function deletePonch(ponch) {
-    for (let i = 0; i < $scope.my.length; i += 1) {
-      if ($scope.my[i] === ponch) {
-        $scope.my.splice(i, 1);
+  function deletePonch(ponch) {
+    for (let i = 0; i < vm.my.length; i += 1) {
+      if (vm.my[i] === ponch) {
+        vm.my.splice(i, 1);
         changed = true;
       }
     }
-  };
+  }
 
-  $scope.submit = function submit() {
+  function submit() {
     if (changed) {
-      $scope.submitFunc({ ponches: $scope.my });
+      vm.submitFunc({ ponches: vm.my });
     } else {
-      $scope.hideFunc();
+      vm.hideFunc();
     }
-  };
+  }
 }

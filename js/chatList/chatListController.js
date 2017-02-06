@@ -1,23 +1,33 @@
 angular
   .module('chatList')
-  .controller(ChatListController);
+  .controller('ChatListController', ChatListController);
 
-ChatListController.$inject = ['$scope', 'formatter', 'getChats', 'socketFactory'];
+ChatListController.$inject = ['formatter', 'getChats', 'socketFactory'];
 
-function ChatListController($scope, formatter, getChats, socketFactory) {
-  getChats.get().then((data) => {
-    $scope.chats = data.data;
-  });
+function ChatListController(formatter, getChats, socketFactory) {
+  const vm = this;
 
-  $scope.getUserImg = function getUserImg(url) {
+  vm.getUserImg = getUserImg;
+  vm.getLastSeenTime = getLastSeenTime;
+  vm.getState = getState;
+
+  startup();
+
+  function startup() {
+    getChats.get().then((data) => {
+      vm.chats = data.data;
+    });
+  }
+
+  function getUserImg(url) {
     return formatter.getUserImgUrl(url);
-  };
+  }
 
-  $scope.getLastSeenTime = function getLastSeenTime(date) {
+  function getLastSeenTime(date) {
     return formatter.getLastSeenTime(date);
-  };
+  }
 
-  $scope.getState = function getState(id) {
+  function getState(id) {
     return socketFactory.counter.has(id);
-  };
+  }
 }

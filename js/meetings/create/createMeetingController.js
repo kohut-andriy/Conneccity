@@ -1,43 +1,48 @@
 angular
   .module('createMeeting')
-  .controller(CreateMeetingController);
+  .controller('CreateMeetingController', CreateMeetingController);
 
-CreateMeetingController.$inject = ['$scope', 'createMeeting', 'formatter', '$cookies', '$state',
+CreateMeetingController.$inject = ['createMeeting', 'formatter', '$cookies', '$state',
   'getMeetingInfo', '$stateParams'];
 
-function CreateMeetingController($scope, createMeeting, formatter, $cookies, $state,
+function CreateMeetingController(createMeeting, formatter, $cookies, $state,
   getMeetingInfo, $stateParams) {
-  $scope.user = $cookies.getObject('currentUser');
-  $scope.getMapSrc = function getMapSrc() {
-    return formatter.getGoogleMapsSrc([$scope.user.latitude,
-      $scope.user.longitude]);
-  };
+  const vm = this;
 
-  $scope.meeting = {};
+  vm.user = $cookies.getObject('currentUser');
+  vm.meeting = {};
+  vm.getMapSrc = getMapSrc;
+  vm.create = create;
 
   getMeetingInfo.get($stateParams.id).then((data) => {
     const meeting = data.data;
-    $scope.meeting.invitedIds = [];
-    $scope.meeting.startAt = new Date(meeting.startAt);
-    $scope.meeting.latitude = meeting.latitude;
-    $scope.meeting.longitude = meeting.longitude;
+    vm.meeting.invitedIds = [];
+    vm.meeting.startAt = new Date(meeting.startAt);
+    vm.meeting.latitude = meeting.latitude;
+    vm.meeting.longitude = meeting.longitude;
+
     for (var member in meeting.members) {
       if (meeting.members[member].id !== $cookies.getObject('currentUser').id) {
-        $scope.meeting.invitedIds.push(meeting.members[member].id);
+        vm.meeting.invitedIds.push(meeting.members[member].id);
       }
     }
 
-    $scope.meeting.description = meeting.description;
+    vm.meeting.description = meeting.description;
   });
 
-  $scope.create = function create(data) {
+  function getMapSrc() {
+    return formatter.getGoogleMapsSrc([vm.user.latitude,
+      vm.user.longitude]);
+  }
+
+  function create(data) {
     if ($stateParams.id) {
       createMeeting.update({
         startAt: data.startAt,
-        latitude: $scope.placePicker.lat,
-        longitude: $scope.placePicker.lng,
+        latitude: vm.placePicker.lat,
+        longitude: vm.placePicker.lng,
         description: data.description,
-        invitedIds: $cookies.userId ? [$cookies.userId] : $scope.meeting.invitedIds,
+        invitedIds: $cookies.userId ? [$cookies.userId] : vm.meeting.invitedIds,
       }, $stateParams.id).then(() => {
         $cookies.userId = '';
         $state.go('app.meetings');
@@ -45,14 +50,14 @@ function CreateMeetingController($scope, createMeeting, formatter, $cookies, $st
     } else {
       createMeeting.create({
         startAt: data.startAt,
-        latitude: $scope.placePicker.lat,
-        longitude: $scope.placePicker.lng,
+        latitude: vm.placePicker.lat,
+        longitude: vm.placePicker.lng,
         description: data.description,
-        invitedIds: $cookies.userId ? [$cookies.userId] : $scope.meeting.invitedIds,
+        invitedIds: $cookies.userId ? [$cookies.userId] : vm.meeting.invitedIds,
       }).then(() => {
         $cookies.userId = '';
         $state.go('app.meetings');
       });
     }
-  };
+  }
 }

@@ -1,4 +1,4 @@
-const GOOGLE_IP = 'http://api.conneccity.net/dev/';
+const GOOGLE_IP = 'http://93.77.133.213:8080/';
 
 angular.module('conneccityApp', [
   'ngAnimate',

@@ -1,67 +1,83 @@
 angular
   .module('userProfile')
-  .controller(UserProfileController);
+  .controller('UserProfileController', UserProfileController);
 
 UserProfileController.$inject = ['$scope', 'getUserData', '$stateParams', 'formatter', '$cookies'];
 
 function UserProfileController($scope, getUserData, $stateParams, formatter, $cookies) {
-  getUserData.get($stateParams.id).then((result) => {
-    $scope.user = result.data;
+  const vm = this;
 
-    getUserData.getEvents($scope.user.id).then((eventData) => {
-      $scope.events = eventData.data;
+  vm.aboutBox = false;
+  vm.getFilteredEventsList = getFilteredEventsList;
+  vm.getEventImg = getEventImg;
+  vm.parseDate = parseDate;
+  vm.toggleAbout = toggleAbout;
+  vm.getAge = getAge;
+  vm.getAddress = getAddress;
+  vm.getFormattedDistance = getFormattedDistance;
+  vm.lastSeenFormatted = lastSeenFormatted;
+  vm.getUserImgUrl = getUserImgUrl;
+  vm.setUser = setUser;
+
+  startup();
+
+  function startup() {
+    getUserData.get($stateParams.id).then((result) => {
+      vm.user = result.data;
+
+      getUserData.getEvents(vm.user.id).then((eventData) => {
+        vm.events = eventData.data;
+      });
     });
-  });
 
-  getUserData.getChatId($stateParams.id).then((data) => {
-    $scope.chatId = data.data.id;
-  });
-
-  $scope.getFilteredEventsList = function getFilteredEventsList(type) {
-    getUserData.getEvents($scope.user.id, type).then((data) => {
-      $scope.events = data.data;
+    getUserData.getChatId($stateParams.id).then((data) => {
+      vm.chatId = data.data.id;
     });
-  };
 
-  $scope.getEventImg = function getEventImg(url) {
+    $scope.$watch(() => {
+      $scope.$broadcast('scrollRebuild');
+    });
+  }
+
+  function getFilteredEventsList(type) {
+    getUserData.getEvents(vm.user.id, type).then((data) => {
+      vm.events = data.data;
+    });
+  }
+
+  function getEventImg(url) {
     return formatter.getEventListImg(url);
-  };
+  }
 
-  $scope.parseDate = function parseDate(date) {
+  function parseDate(date) {
     return formatter.formatDate(date);
-  };
+  }
 
-  $scope.aboutBox = false;
+  function toggleAbout() {
+    vm.aboutBox = !vm.aboutBox;
+  }
 
-  $scope.toggleAbout = function toggleAbout() {
-    $scope.aboutBox = !$scope.aboutBox;
-  };
-
-  $scope.getAge = function getAge(date) {
+  function getAge(date) {
     return formatter.getAge(date);
-  };
+  }
 
-  $scope.getAddress = function getAddress(lat, lng) {
+  function getAddress(lat, lng) {
     return formatter.getAddress(lat, lng);
-  };
+  }
 
-  $scope.getFormattedDistance = function getFormattedDistance(distance) {
+  function getFormattedDistance(distance) {
     return formatter.getDistance(distance);
-  };
+  }
 
-  $scope.lastSeenFormatted = function lastSeenFormatted(date) {
+  function lastSeenFormatted(date) {
     return formatter.getLastSeenTime(date);
-  };
+  }
 
-  $scope.getUserImgUrl = function getUserImgUrl(url) {
+  function getUserImgUrl(url) {
     return formatter.getUserImg(url);
-  };
+  }
 
-  $scope.$watch(() => {
-    $scope.$broadcast('scrollRebuild');
-  });
-
-  $scope.setUser = function setUser() {
-    $cookies.userId = $scope.user.id;
-  };
+  function setUser() {
+    $cookies.userId = vm.user.id;
+  }
 }

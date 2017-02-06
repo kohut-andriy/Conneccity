@@ -10,16 +10,33 @@ appConfig.$inject = [
 ];
 
 function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider) {
+  OAuthProvider.configure({
+    baseUrl: GOOGLE_IP,
+    clientId: 'clientapp',
+    clientSecret: '123456',
+    grantPath: '/oauth/token',
+    revokePath: '/oauth/token',
+  });
+
+  OAuthTokenProvider.configure({
+    name: 'token',
+    options: {
+      secure: false,
+    },
+  });
+
   $stateProvider
   .state('authorization', {
     url: '/signIn',
     templateUrl: 'views/signin.html',
     controller: 'SignInController',
+    controllerAs: 'signInVm',
   })
   .state('registration', {
     url: '/signUp',
     templateUrl: 'views/signup.html',
     controller: 'SignUpController',
+    controllerAs: 'signUpVm',
   })
   .state('app', {
     url: '/',
@@ -27,6 +44,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       '': {
         templateUrl: 'views/app.html',
         controller: 'AppController',
+        controllerAs: 'appVm',
       },
       'content@app': {
         templateUrl: 'views/map.html',
@@ -39,6 +57,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/userProfile.html',
         controller: 'SignedUserProfileController',
+        controllerAs: 'userVm',
       },
     },
   })
@@ -48,6 +67,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/users.html',
         controller: 'UsersController',
+        controllerAs: 'userVm',
       },
     },
   })
@@ -57,6 +77,7 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
       'content@app': {
         templateUrl: 'views/userProfile.html',
         controller: 'UserProfileController',
+        controllerAs: 'userVm',
       },
     },
   })
@@ -152,19 +173,4 @@ function appConfig($stateProvider, $urlRouterProvider, OAuthProvider, OAuthToken
   });
 
   $urlRouterProvider.otherwise('/');
-
-  OAuthProvider.configure({
-    baseUrl: GOOGLE_IP,
-    clientId: 'clientapp',
-    clientSecret: '123456',
-    grantPath: '/oauth/token',
-    revokePath: '/oauth/token',
-  });
-
-  OAuthTokenProvider.configure({
-    name: 'token',
-    options: {
-      secure: false,
-    },
-  });
 }

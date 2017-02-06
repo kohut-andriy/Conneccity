@@ -1,61 +1,75 @@
 angular
   .module('eventProfile')
-  .controller(EventProfileController);
+  .controller('EventProfileController', EventProfileController);
 
 EventProfileController.$inject = ['$scope', 'getEventInfo', '$stateParams', 'formatter', '$cookies'];
 
 function EventProfileController($scope, getEventInfo, $stateParams, formatter, $cookies) {
-  getEventInfo.get($stateParams.id).then((response) => {
-    $scope.event = response.data;
-  });
+  const vm = this;
 
-  getEventInfo.getMembers($stateParams.id).then((response) => {
-    $scope.members = response.data;
-  });
+  vm.join = join;
+  vm.leave = leave;
+  vm.getAddress = getAddress;
+  vm.parseDate = parseDate;
+  vm.getUserImg = getUserImg;
+  vm.toggleMember = toggleMember;
+  vm.checkPermition = checkPermition;
 
-  $scope.getAddress = function getAddress(lat, lng) {
+  startup();
+
+  function startup() {
+    getEventInfo.get($stateParams.id).then((response) => {
+      vm.event = response.data;
+    });
+
+    getEventInfo.getMembers($stateParams.id).then((response) => {
+      vm.members = response.data;
+    });
+
+    getEventInfo.sendMessage($stateParams.id).then((data) => {
+      vm.chatId = data.data.id;
+    });
+
+    $scope.$watch(() => {
+      $scope.$broadcast('scrollRebuild');
+    });
+  }
+
+  function getAddress(lat, lng) {
     return formatter.getAddress(lat, lng);
-  };
+  }
 
-  $scope.parseDate = function parseDate(date) {
+  function parseDate(date) {
     return formatter.formatDate(date);
-  };
+  }
 
-  $scope.getUserImg = function getUserImg(url) {
+  function getUserImg(url) {
     return formatter.getUserImg(url);
-  };
+  }
 
-  $scope.$watch(() => {
-    $scope.$broadcast('scrollRebuild');
-  });
-
-  $scope.join = function join(id) {
+  function join(id) {
     getEventInfo.join(id).success(() => {
-      $scope.toggleMember();
+      vm.toggleMember();
     });
-  };
+  }
 
-  $scope.leave = function leave(id) {
+  function leave(id) {
     getEventInfo.leave(id).success(() => {
-      $scope.toggleMember();
+      vm.toggleMember();
     });
-  };
+  }
 
-  $scope.toggleMember = function toggleMember() {
-    if ($scope.event.isMember) {
-      $scope.event.isMember = false;
-      $scope.members.shift();
+  function toggleMember() {
+    if (vm.event.isMember) {
+      vm.event.isMember = false;
+      vm.members.shift();
     } else {
-      $scope.members.unshift($cookies.getObject('currentUser'));
-      $scope.event.isMember = true;
+      vm.members.unshift($cookies.getObject('currentUser'));
+      vm.event.isMember = true;
     }
-  };
+  }
 
-  $scope.checkPermition = function checkPermition(id) {
+  function checkPermition(id) {
     return $cookies.getObject('currentUser').id === id;
-  };
-
-  getEventInfo.sendMessage($stateParams.id).then((data) => {
-    $scope.chatId = data.data.id;
-  });
+  }
 }

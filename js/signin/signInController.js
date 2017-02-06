@@ -2,32 +2,35 @@ angular
   .module('signIn')
   .controller('SignInController', SignInController);
 
-SignInController.$inject = ['$scope', '$http', '$state', 'OAuth', '$timeout'];
+SignInController.$inject = ['$state', 'OAuth', '$timeout'];
 
-function SignInController($scope, $http, $state, OAuth, $timeout) {
-  $scope.isValid = true;
-  $scope.conncction = true;
+function SignInController($state, OAuth, $timeout) {
+  const vm = this;
 
-  $scope.login = function login(user) {
-    $scope.encoded = btoa('clientapp:123456');
+  vm.isValid = true;
+  vm.conncction = true;
+  vm.login = login;
+
+  function login(user) {
+    vm.encoded = btoa('clientapp:123456');
 
     OAuth.getAccessToken(user, {
       headers: {
-        Authorization: `Basic ${$scope.encoded}`,
+        Authorization: `Basic ${vm.encoded}`,
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
       },
     }).then(() => {
       $state.go('app');
     }, (err) => {
       if (err.status === '401') {
-        $scope.isValid = false;
+        vm.isValid = false;
       } else {
-        $scope.conncction = false;
+        vm.conncction = false;
       }
       $timeout(() => {
-        $scope.isValid = true;
-        $scope.conncction = true;
+        vm.isValid = true;
+        vm.conncction = true;
       }, 5000);
     });
-  };
+  }
 }

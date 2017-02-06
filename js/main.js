@@ -19,6 +19,7 @@
 // map
   //= map/mapModule.js
   //= map/mapDirective.js
+  //= map/mapMarkerDirective.js
   //= map/mapController.js
   //= map/mapServices.js
 

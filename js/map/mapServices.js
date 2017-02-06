@@ -2,8 +2,8 @@
 
 angular
   .module('conneccityMap')
-  .service(mapCreate)
-  .factory(getMapInfo);
+  .service('mapCreate', mapCreate)
+  .factory('getMapInfo', getMapInfo);
 
 mapCreate.$inject = ['$rootScope', '$cookies'];
 
@@ -83,7 +83,7 @@ function mapCreate($rootScope, $cookies) {
 
   // markerClusterer calculator
   const calculator = (markers) => {
-    for (let marker in markers) {
+    for (const marker in markers) {
       if (self.markersMap.get(markers[marker]).hasPonchesMatches) {
         return { text: markers.length, index: 2 };
       }
@@ -132,7 +132,6 @@ function mapCreate($rootScope, $cookies) {
       instance += 1;
 
       if (instance === 2) {
-
         canvas.width = 400;
         canvas.height = 600;
 
@@ -152,7 +151,6 @@ function mapCreate($rootScope, $cookies) {
       instance += 1;
 
       if (instance === 2) {
-
         canvas.width = 400;
         canvas.height = 400;
 

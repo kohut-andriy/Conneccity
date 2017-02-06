@@ -1,6 +1,6 @@
 angular
   .module('createEvent')
-  .factory(createEvent);
+  .factory('createEvent', createEvent);
 
 createEvent.$inject = ['$http'];
 

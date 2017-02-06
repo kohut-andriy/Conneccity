@@ -1,6 +1,6 @@
 angular
   .module('signUp')
-  .factory(addUser);
+  .factory('addUser', addUser);
 
 addUser.$inject = ['$http'];
 

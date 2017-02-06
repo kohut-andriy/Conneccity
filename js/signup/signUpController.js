@@ -1,12 +1,16 @@
 angular
   .module('signUp')
-  .controller(SignUpController);
+  .controller('SignUpController', SignUpController);
 
-SignUpController.$inject = ['$scope', 'addUser', 'OAuthToken', '$state', '$cookies', 'getUserLocation'];
+SignUpController.$inject = ['addUser', 'OAuthToken', '$state', '$cookies', 'getUserLocation'];
 
-function SignUpController($scope, addUser, OAuthToken, $state, $cookies, getUserLocation) {
-  $scope.signUp = function signUp(user) {
-    $scope.userInfo = {
+function SignUpController(addUser, OAuthToken, $state, $cookies, getUserLocation) {
+  const vm = this;
+
+  vm.signUp = signUp;
+
+  function signUp(user) {
+    vm.userInfo = {
       email: user.email,
       name: user.firstName,
       surname: user.lastName,
@@ -16,12 +20,12 @@ function SignUpController($scope, addUser, OAuthToken, $state, $cookies, getUser
       passwordConfirm: user.passwordConfirm,
     };
 
-    addUser.create($scope.userInfo).then((data) => {
+    addUser.create(vm.userInfo).then((data) => {
       OAuthToken.setToken(data.data);
       $cookies.putObject(user);
       getUserLocation.get();
     }).then(() => {
       $state.go('app');
     });
-  };
+  }
 }

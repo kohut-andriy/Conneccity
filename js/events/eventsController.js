@@ -1,41 +1,54 @@
 angular
   .module('events')
-  .controller(EventsController);
+  .controller('EventsController', EventsController);
 
 EventsController.$inject = ['$scope', 'getEvents', 'formatter', '$cookies'];
 
 function EventsController($scope, getEvents, formatter, $cookies) {
-  getEvents.get().then((response) => {
-    $scope.events = response.data;
-  });
+  const vm = this;
 
-  $scope.getCurrentUserId = function getCurrentUserId() {
-    return $cookies.getObject('currentUser').id;
-  };
+  vm.getCurrentUserId = getCurrentUserId;
+  vm.getFilteredEvents = getFilteredEvents;
+  vm.getFormattedDistance = getFormattedDistance;
+  vm.parseDate = parseDate;
+  vm.getAddress = getAddress;
+  vm.getEventImg = getEventImg;
 
-  $scope.getFilteredEvents = function getFilteredEvents(type) {
-    getEvents.get(type).then((response) => {
-      $scope.events = response.data;
+  startup();
+
+  function startup() {
+    getEvents.get().then((response) => {
+      vm.events = response.data;
     });
-  };
 
-  $scope.getFormattedDistance = function getFormattedDistance(distance) {
+    $scope.$watch(() => {
+      $scope.$broadcast('rebuild:me');
+    });
+  }
+
+  function getFilteredEvents(type) {
+    getEvents.get(type).then((response) => {
+      vm.events = response.data;
+    });
+  }
+
+  function getCurrentUserId() {
+    return $cookies.getObject('currentUser').id;
+  }
+
+  function getFormattedDistance(distance) {
     return formatter.getDistance(distance);
-  };
+  }
 
-  $scope.parseDate = function parseDate(date) {
+  function parseDate(date) {
     return formatter.formatDate(date);
-  };
+  }
 
-  $scope.getAddress = function getAddress(lat, lng) {
+  function getAddress(lat, lng) {
     return formatter.getAddress(lat, lng);
-  };
+  }
 
-  $scope.getEventImg = function getEventImg(url) {
+  function getEventImg(url) {
     return formatter.getEventListImg(url);
-  };
-
-  $scope.$watch(() => {
-    $scope.$broadcast('rebuild:me');
-  });
+  }
 }

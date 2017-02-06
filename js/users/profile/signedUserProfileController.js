@@ -1,55 +1,67 @@
 angular
   .module('userProfile')
-  .controller(SignedUserProfileController);
+  .controller('SignedUserProfileController', SignedUserProfileController);
 
 SignedUserProfileController.$inject = ['$scope', 'getUserData', 'formatter', '$cookies'];
 
 function SignedUserProfileController($scope, getUserData, formatter, $cookies) {
-  $scope.user = $cookies.getObject('currentUser');
+  const vm = this;
 
-  getUserData.getEvents($scope.user.id).then((result) => {
-    $scope.events = result.data;
-  });
+  vm.user = $cookies.getObject('currentUser');
+  vm.isProfile = true;
+  vm.aboutBox = false;
+  vm.getEventImg = getEventImg;
+  vm.parseDate = parseDate;
+  vm.getFilteredEventsList = getFilteredEventsList;
+  vm.toggleAbout = toggleAbout;
+  vm.lastSeenFormatted = lastSeenFormatted;
+  vm.getAge = getAge;
+  vm.getAddress = getAddress;
+  vm.getUserImgUrl = getUserImgUrl;
 
-  $scope.getEventImg = function getEventImg(url) {
-    return formatter.getEventListImg(url);
-  };
+  startup();
 
-  $scope.parseDate = function parseDate(date) {
-    return formatter.formatDate(date);
-  };
-
-  $scope.getFilteredEventsList = function getFilteredEventsList(type) {
-    getUserData.getEvents($scope.user.id, type).then((data) => {
-      $scope.events = data.data;
+  function startup() {
+    getUserData.getEvents(vm.user.id).then((result) => {
+      vm.events = result.data;
     });
-  };
 
-  $scope.isProfile = true;
+    $scope.$watch(() => {
+      $scope.$broadcast('scrollRebuild');
+    });
+  }
 
-  $scope.aboutBox = false;
+  function getEventImg(url) {
+    return formatter.getEventListImg(url);
+  }
 
-  $scope.toggleAbout = function toggleAbout() {
-    $scope.aboutBox = !$scope.aboutBox;
-  };
+  function parseDate(date) {
+    return formatter.formatDate(date);
+  }
 
-  $scope.lastSeenFormatted = function lastSeenFormatted(date) {
+  function getFilteredEventsList(type) {
+    getUserData.getEvents(vm.user.id, type).then((data) => {
+      vm.events = data.data;
+    });
+  }
+
+  function toggleAbout() {
+    vm.aboutBox = !$scope.aboutBox;
+  }
+
+  function lastSeenFormatted(date) {
     return formatter.getLastSeenTime(date);
-  };
+  }
 
-  $scope.getAge = function getAge(date) {
+  function getAge(date) {
     return formatter.getAge(date);
-  };
+  }
 
-  $scope.getAddress = function getAddress(lat, lng) {
+  function getAddress(lat, lng) {
     return formatter.getAddress(lat, lng);
-  };
+  }
 
-  $scope.getUserImgUrl = function getUserImgUrl(url) {
+  function getUserImgUrl(url) {
     return formatter.getUserImg(url);
-  };
-
-  $scope.$watch(() => {
-    $scope.$broadcast('scrollRebuild');
-  });
+  }
 }

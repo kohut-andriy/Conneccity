@@ -1,55 +1,66 @@
 angular
   .module('meetingProfile')
-  .controller(MeetingProfileController);
+  .controller('MeetingProfileController', MeetingProfileController);
 
 MeetingProfileController.$inject = ['$scope', 'formatter', 'getMeetingInfo', '$stateParams', '$state',
   '$cookies', 'mapCreate'];
 
 function MeetingProfileController($scope, formatter, getMeetingInfo, $stateParams, $state,
   $cookies, mapCreate) {
-  getMeetingInfo.get($stateParams.id).then((response) => {
-    $scope.meeting = response.data;
+  const vm = this;
 
-    mapCreate.drawDefaultMarker($scope.meeting);
-  });
+  vm.getAddress = getAddress;
+  vm.parseDate = parseDate;
+  vm.getUserImg = getUserImg;
+  vm.join = join;
+  vm.leave = leave;
+  vm.getStatusStile = getStatusStile;
+  vm.checkPermition = checkPermition;
 
-  $scope.getAddress = function getAddress(lat, lng) {
+  startup();
 
+  function startup() {
+    getMeetingInfo.get($stateParams.id).then((response) => {
+      vm.meeting = response.data;
+      mapCreate.drawDefaultMarker(vm.meeting);
+    });
+
+    getMeetingInfo.sendMessage($stateParams.id).then((data) => {
+      vm.chatId = data.data.id;
+    });
+
+    $scope.$watch(() => {
+      $scope.$broadcast('scrollRebuild');
+    });
+  }
+
+  function getAddress(lat, lng) {
     return formatter.getAddress(lat, lng);
-  };
+  }
 
-  $scope.parseDate = function parseDate(date) {
-
+  function parseDate(date) {
     return formatter.formatDate(date);
-  };
+  }
 
-  $scope.getUserImg = function getUserImg(url) {
+  function getUserImg(url) {
     return formatter.getUserImg(url);
-  };
+  }
 
-  $scope.$watch(() => {
-    $scope.$broadcast('scrollRebuild');
-  });
-
-  $scope.join = function join(id) {
+  function join(id) {
     getMeetingInfo.join(id);
-  };
+  }
 
-  $scope.leave = function leave(id) {
+  function leave(id) {
     getMeetingInfo.leave(id).success(() => {
       $state.go('app.meetings');
     });
-  };
+  }
 
-  getMeetingInfo.sendMessage($stateParams.id).then((data) => {
-    $scope.chatId = data.data.id;
-  });
-
-  $scope.getStatusStile = function getStatusStile(status) {
+  function getStatusStile(status) {
     return formatter.getMeetingStatusIconStyle(status);
-  };
+  }
 
-  $scope.checkPermition = function checkPermition(id) {
+  function checkPermition(id) {
     return $cookies.getObject('currentUser').id === id;
-  };
+  }
 }

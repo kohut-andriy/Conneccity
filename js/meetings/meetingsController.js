@@ -1,48 +1,62 @@
 angular
   .module('meetings')
-  .controller(MeetingsController);
+  .controller('MeetingsController', MeetingsController);
 
 MeetingsController.$inject = ['$scope', 'getMeetings', 'formatter', 'getMeetingInfo', '$state'];
 
 function MeetingsController($scope, getMeetings, formatter, getMeetingInfo, $state) {
-  getMeetings.get().then((response) => {
-    $scope.meetings = response.data;
-  });
+  const vm = this;
 
-  $scope.getAddress = function getAddress(lat, lng) {
-    return formatter.getAddress(lat, lng);
-  };
+  vm.getAddress = getAddress;
+  vm.getDistance = getDistance;
+  vm.getTime = getTime;
+  vm.getFilteredMeetings = getFilteredMeetings;
+  vm.accept = accept;
+  vm.decline = decline;
+  vm.getStatusStile = getStatusStile;
 
-  $scope.getDistance = function getDistance(distance) {
-    return formatter.getDistance(distance);
-  };
+  startup();
 
-  $scope.getTime = function getTime(time) {
-    return formatter.formatDate(time);
-  };
-
-  $scope.getFilteredMeetings = function getFilteredMeetings(type) {
-    getMeetings.get(type).then((response) => {
-      $scope.meetings = response.data;
+  function startup() {
+    getMeetings.get().then((response) => {
+      vm.meetings = response.data;
     });
-  };
 
-  $scope.accept = function accept(id) {
+    $scope.$watch(() => {
+      $scope.$broadcast('rebuild:me');
+    });
+  }
+
+  function getAddress(lat, lng) {
+    return formatter.getAddress(lat, lng);
+  }
+
+  function getDistance(distance) {
+    return formatter.getDistance(distance);
+  }
+
+  function getTime(time) {
+    return formatter.formatDate(time);
+  }
+
+  function getFilteredMeetings(type) {
+    getMeetings.get(type).then((response) => {
+      vm.meetings = response.data;
+    });
+  }
+
+  function accept(id) {
     getMeetingInfo.join(id).then(() => {
       $state.reload();
     });
-  };
+  }
 
-  $scope.decline = function decline(id) {
+  function decline(id) {
     getMeetingInfo.leave(id);
     $state.reload();
-  };
+  }
 
-  $scope.getStatusStile = function getStatusStile(status) {
+  function getStatusStile(status) {
     return formatter.getMeetingStatusIconStyle(status);
-  };
-
-  $scope.$watch(() => {
-    $scope.$broadcast('rebuild:me');
-  });
+  }
 }
