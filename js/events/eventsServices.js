@@ -6,11 +6,13 @@ getEvents.$inject = ['$http'];
 
 function getEvents($http) {
   return {
-    get(type = '') {
-      return $http({
-        url: `${GOOGLE_IP}events/${type}`,
-        method: 'GET',
-      });
-    },
+    get,
   };
+
+  function get(type = '') {
+    return $http({
+      url: `${GOOGLE_IP}events/${type}`,
+      method: 'GET',
+    });
+  }
 }

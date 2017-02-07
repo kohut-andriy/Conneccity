@@ -261,32 +261,36 @@ getMapInfo.$inject = ['$http'];
 
 function getMapInfo($http) {
   return {
-    getAll() {
-      return $http({
-        url: `${GOOGLE_IP}map`,
-        method: 'GET',
-        params: {},
-      });
-    },
-    getFilteredInfo(param) {
-      function convertOptionsToUrl(options) {
-        let url = `${GOOGLE_IP}map?`;
+    getAll,
+    getFilteredInfo,
+  };
 
-        for (param in options) {
-          if (options[param]) {
-            url += `${param}=${options[param]}&`;
-          }
+  function getAll() {
+    return $http({
+      url: `${GOOGLE_IP}map`,
+      method: 'GET',
+      params: {},
+    });
+  }
+
+  function getFilteredInfo(param) {
+    function convertOptionsToUrl(options) {
+      let url = `${GOOGLE_IP}map?`;
+
+      for (param in options) {
+        if (options[param]) {
+          url += `${param}=${options[param]}&`;
         }
-
-        url = url.slice(0, -1);
-        return url;
       }
 
-      return $http({
-        url: convertOptionsToUrl(param),
-        method: 'GET',
-        params: {},
-      });
-    },
-  };
+      url = url.slice(0, -1);
+      return url;
+    }
+
+    return $http({
+      url: convertOptionsToUrl(param),
+      method: 'GET',
+      params: {},
+    });
+  }
 }

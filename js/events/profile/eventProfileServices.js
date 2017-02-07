@@ -6,35 +6,45 @@ getEventInfo.$inject = ['$http'];
 
 function getEventInfo($http) {
   return {
-    get(id) {
-      return $http({
-        url: `${GOOGLE_IP}events/${id}`,
-        method: 'GET',
-      });
-    },
-    getMembers(id) {
-      return $http({
-        url: `${GOOGLE_IP}events/${id}/members`,
-        method: 'GET',
-      });
-    },
-    join(id) {
-      return $http({
-        url: `${GOOGLE_IP}events/${id}/members`,
-        method: 'POST',
-      });
-    },
-    leave(id) {
-      return $http({
-        url: `${GOOGLE_IP}events/${id}/members`,
-        method: 'DELETE',
-      });
-    },
-    sendMessage(id) {
-      return $http({
-        url: `${GOOGLE_IP}events/${id}/chat`,
-        method: 'GET',
-      });
-    },
+    get,
+    getMembers,
+    join,
+    leave,
+    sendMessage,
   };
+
+  function get(id) {
+    return $http({
+      url: `${GOOGLE_IP}events/${id}`,
+      method: 'GET',
+    });
+  }
+
+  function getMembers(id) {
+    return $http({
+      url: `${GOOGLE_IP}events/${id}/members`,
+      method: 'GET',
+    });
+  }
+
+  function join(id) {
+    return $http({
+      url: `${GOOGLE_IP}events/${id}/members`,
+      method: 'POST',
+    });
+  }
+
+  function leave(id) {
+    return $http({
+      url: `${GOOGLE_IP}events/${id}/members`,
+      method: 'DELETE',
+    });
+  }
+
+  function sendMessage(id) {
+    return $http({
+      url: `${GOOGLE_IP}events/${id}/chat`,
+      method: 'GET',
+    });
+  }
 }

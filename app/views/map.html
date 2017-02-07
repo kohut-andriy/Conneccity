@@ -1,18 +1,18 @@
-<div class="map" ng-controller="MapCreateController">
-    <conneccity-map class="map"></conneccity-map>
+<div class="map">
+  <conneccity-map class="map"></conneccity-map>
 
-    <div ng-repeat="marker in markers['events']">
-        <conneccity-marker data="marker" type="event"></conneccity-marker>
-    </div>
-    <div ng-repeat="marker in markers['users']">
-        <conneccity-marker data="marker" type="user"></conneccity-marker>
-    </div>
-    <div ng-repeat="marker in markers['meetings']">
-        <conneccity-marker data="marker" type="meeting"></conneccity-marker>
-    </div>
+  <div ng-repeat="marker in mapVm.markers['events']">
+    <conneccity-marker data="marker" type="event"></conneccity-marker>
+  </div>
+  <div ng-repeat="marker in mapVm.markers['users']">
+    <conneccity-marker data="marker" type="user"></conneccity-marker>
+  </div>
+  <div ng-repeat="marker in mapVm.markers['meetings']">
+    <conneccity-marker data="marker" type="meeting"></conneccity-marker>
+  </div>
 
-    <map-filter class="map-controls_filter"></map-filter>
-    <map-user-position class="map-controls_user-pos"></map-user-position>
-    <map-resize class=" map-controls_resize"></map-resize>
-    <card class=" map-controls_card" ng-show="cardVisible"></card>
+  <map-filter class="map-controls_filter"></map-filter>
+  <map-user-position class="map-controls_user-pos"></map-user-position>
+  <map-resize class=" map-controls_resize"></map-resize>
+  <card class=" map-controls_card" ng-show="mapVm.cardVisible"></card>
 </div>

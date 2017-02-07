@@ -6,19 +6,23 @@ createMeeting.$inject = ['$http'];
 
 function createMeeting($http) {
   return {
-    create(data) {
-      return $http({
-        url: `${GOOGLE_IP}meetings/`,
-        method: 'POST',
-        data,
-      });
-    },
-    update(data, id) {
-      return $http({
-        url: `${GOOGLE_IP}meetings/${id}`,
-        method: 'PUT',
-        data,
-      });
-    },
+    create,
+    update,
   };
+
+  function create(data) {
+    return $http({
+      url: `${GOOGLE_IP}meetings/`,
+      method: 'POST',
+      data,
+    });
+  }
+
+  function update(data, id) {
+    return $http({
+      url: `${GOOGLE_IP}meetings/${id}`,
+      method: 'PUT',
+      data,
+    });
+  }
 }

@@ -1,39 +1,41 @@
 <div class="picker">
-    <div class="picker__content">
-        <header class="picker__head">
-            What are you interested?<span class="picker__close-button fl-r" ng-click="hideFunc()"></span>
-        </header>
-        <div class="picker__inner">
-            <div class="picker__row">
-                <form action="index.html" class="picker__form form" ng-submit="add()">
-                    <input type="text" id="name"
-                           class="picker__input form__input" ng-model="item">
-                    <input type="button" class="picker__button form__button form__button_submit" value="Add"
-                           ng-click="add(item)">
-                </form>
-            </div>
-            <div class="picker__row">
-                <ul class="picker__list">
-                    <li class="picker__item" ng-repeat="ponch in my">
-                        <a href="#" class="picker__link picker__link_edit" ng-click="delete(ponch)">
-                            <span class="picker__text">{{ ponch }}</span>
-                            <span class="picker__close-button picker__close-button_green"></span></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="picker__row">
-                Popular in your location:
-            </div>
-            <div class="picker__row">
-                <ul class="picker__list">
-                    <li class="picker__item" ng-repeat="ponch in related">
-                        <a href="#" class="picker__link" ng-click="add(ponch)"><span class="picker__text">{{ ponch }}</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <footer class="picker__footer">
-            <span class="picker__button" ng-click="submit()">Done</span>
-        </footer>
+  <div class="picker__content">
+    <header class="picker__head">
+      What are you interested?<span class="picker__close-button fl-r" ng-click="ponchPickerVm.hideFunc()"></span>
+    </header>
+    <div class="picker__inner">
+      <div class="picker__row">
+        <form class="picker__form form" ng-submit="ponchPickerVm.add()">
+          <input type="text" id="name"
+                 class="picker__input form__input" ng-model="item">
+          <input type="button" class="picker__button form__button form__button_submit" value="Add"
+                 ng-click="ponchPickerVm.add(ponchPickerVm.item)">
+        </form>
+      </div>
+      <div class="picker__row">
+        <ul class="picker__list">
+          <li class="picker__item" ng-repeat="ponch in ponchPickerVm.my">
+            <a href="#" class="picker__link picker__link_edit" ng-click="ponchPickerVm.delete(ponch)">
+              <span class="picker__text">{{ ponch }}</span>
+              <span class="picker__close-button picker__close-button_green"></span></a>
+          </li>
+        </ul>
+      </div>
+      <div class="picker__row">
+        Popular in your location:
+      </div>
+      <div class="picker__row">
+        <ul class="picker__list">
+          <li class="picker__item" ng-repeat="ponch in ponchPickerVm.related">
+            <a href="#" class="picker__link" ng-click="ponchPickerVm.add(ponch)">
+              <span class="picker__text">{{ ponch }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
+    <footer class="picker__footer">
+      <span class="picker__button" ng-click="ponchPickerVm.submit()">Done</span>
+    </footer>
+  </div>
 </div>

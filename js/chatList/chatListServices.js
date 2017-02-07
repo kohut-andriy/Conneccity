@@ -6,11 +6,13 @@ getChats.$inject = ['$http'];
 
 function getChats($http) {
   return {
-    get() {
-      return $http({
-        url: `${GOOGLE_IP}chats/`,
-        method: 'GET',
-      });
-    },
+    get,
   };
+
+  function get() {
+    return $http({
+      url: `${GOOGLE_IP}chats/`,
+      method: 'GET',
+    });
+  }
 }
